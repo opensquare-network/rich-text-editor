@@ -23,6 +23,12 @@ import { headingLevel3Command } from "./commands/markdown-commands/headingLevel3
 import { headingLevel4Command } from "./commands/markdown-commands/headingLevel4Command";
 import { headingLevel5Command } from "./commands/markdown-commands/headingLevel5Command";
 import { headingLevel6Command } from "./commands/markdown-commands/headingLevel6Command";
+import * as React from "react";
+import {Box, ChakraProvider, HStack, Textarea} from "@chakra-ui/react";
+import {ToolbarButton} from "../demo/toolbar-button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBold, faCode, faHeading, faItalic} from "@fortawesome/free-solid-svg-icons";
+import ReactDOM from "react-dom";
 
 export {
   // helpers
@@ -54,3 +60,62 @@ export {
   // hooks
   useTextAreaMarkdownEditor
 };
+
+export type DemoProps = {};
+
+export const Editor: React.FunctionComponent<DemoProps> = () => {
+  const { ref, commandController } = useTextAreaMarkdownEditor({
+    commandMap: {
+      bold: boldCommand,
+      italic: italicCommand,
+      code: codeCommand,
+      headingLevel1: headingLevel1Command
+    }
+  });
+
+  return (
+    <ChakraProvider>
+      <Box p={3}>
+    <HStack py={2}>
+    <ToolbarButton
+      onClick={async () => {
+    await commandController.executeCommand("bold");
+  }}
+>
+  <FontAwesomeIcon icon={faBold} />
+  </ToolbarButton>
+  <ToolbarButton
+  onClick={async () => {
+    await commandController.executeCommand("italic");
+  }}
+>
+  <FontAwesomeIcon icon={faItalic} />
+  </ToolbarButton>
+  <ToolbarButton
+  onClick={async () => {
+    await commandController.executeCommand("code");
+  }}
+>
+  <FontAwesomeIcon icon={faCode} />
+  </ToolbarButton>
+  <ToolbarButton
+  onClick={async () => {
+    await commandController.executeCommand("headingLevel1");
+  }}
+>
+  <FontAwesomeIcon icon={faHeading} />
+  </ToolbarButton>
+  </HStack>
+  <Textarea
+  ref={ref}
+  placeholder="osn markdown editor"
+  fontFamily={"monospace"}
+  />
+  </Box>
+  </ChakraProvider>
+);
+};
+
+ReactDOM.render(<Editor />, document.getElementById("root"));
+
+export default Editor;
