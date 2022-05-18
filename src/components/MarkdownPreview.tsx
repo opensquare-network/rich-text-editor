@@ -6,17 +6,6 @@ import Prism from "prismjs";
 import "github-markdown-css";
 import "prismjs/themes/prism.css";
 
-marked.setOptions({
-  highlight(code, lang) {
-    if (!lang) {
-      return code;
-    }
-
-    const language = Prism.languages[lang] ?? Prism.languages.markup;
-    return Prism.highlight(code, language, lang);
-  }
-});
-
 const MarkdownContent = styled.div``;
 
 type Props = {
@@ -36,7 +25,17 @@ function MarkdownPreview(props: Props = {}) {
     ...restProps
   } = props;
 
-  const html = marked.parse(content);
+  const html = marked.parse(content, {
+    breaks: true,
+    highlight(code, lang) {
+      if (!lang) {
+        return code;
+      }
+
+      const language = Prism.languages[lang] ?? Prism.languages.markup;
+      return Prism.highlight(code, language, lang);
+    }
+  });
 
   const cleanHtml = sanitizeHtml(html, {
     allowedTags,
