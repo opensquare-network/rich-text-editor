@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "@chakra-ui/react";
+import styles from '../src/styles/editor.module.css';
 
 export type ToolbarButtonProps = {
   onClick: () => void;
@@ -7,13 +7,12 @@ export type ToolbarButtonProps = {
 
 export const ToolbarButton: React.FC<ToolbarButtonProps> = props => {
   return (
-    <Button
-      variant={"outline"}
-      size={"sm"}
+    <button
+      className={styles.toolbarItem}
       color={"gray.600"}
       onClick={props.onClick}
     >
       {props.children}
-    </Button>
+    </button>
   );
 };
