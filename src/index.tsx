@@ -28,20 +28,22 @@ import {
   Box,
   Button,
   ChakraProvider,
-  HStack,
   Spacer,
   Textarea
 } from "@chakra-ui/react";
-import { ToolbarButton } from "../demo/toolbar-button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBold,
-  faCode,
-  faHeading,
-  faItalic
-} from "@fortawesome/free-solid-svg-icons";
+import {ToolbarButton} from "../demo/toolbar-button";
 import ReactDOM from "react-dom";
 import MarkdownPreview from "./components/MarkdownPreview";
+import styles from "./styles/editor.module.css";
+import Bold from "./icons/bold.svg";
+import Code from "./icons/code.svg";
+import Delete from "./icons/delete.svg";
+import Img from "./icons/img.svg";
+import Link from "./icons/link.svg";
+import Ol from "./icons/ol.svg";
+import Shrink from "./icons/shrink.svg";
+import Ul from "./icons/ul.svg";
+import Underline from "./icons/underline.svg";
 
 export {
   // helpers
@@ -76,13 +78,25 @@ export {
 
 export type DemoProps = {};
 
+const ToolBar: React.FC<DemoProps> = props => {
+  return (
+    <div className={styles.toolbar}>
+      {props.children}
+    </div>
+  );
+};
+
+
 export const Editor: React.FunctionComponent<DemoProps> = () => {
   const { ref, commandController } = useTextAreaMarkdownEditor({
     commandMap: {
       bold: boldCommand,
-      italic: italicCommand,
+      delete:strikethroughCommand,
       code: codeCommand,
-      headingLevel1: headingLevel1Command
+      image:imageCommand,
+      link: linkCommand,
+      ol: orderedListCommand,
+      ul: unorderedListCommand,
     }
   });
 
@@ -97,7 +111,7 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
   return (
     <ChakraProvider>
       <Box p={3}>
-        <HStack py={2}>
+        <ToolBar>
           <Button onClick={() => setEditStatus("write")}>Write</Button>
           <Button onClick={() => setEditStatus("preview")}>Preview</Button>
           <Spacer />
@@ -106,30 +120,51 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
               await commandController.executeCommand("bold");
             }}
           >
-            <FontAwesomeIcon icon={faBold} />
+            <img src={Bold} alt=""/>
           </ToolbarButton>
-          <ToolbarButton
-            onClick={async () => {
-              await commandController.executeCommand("italic");
-            }}
-          >
-            <FontAwesomeIcon icon={faItalic} />
+          {/*<ToolbarButton*/}
+          {/*  onClick={async () => {*/}
+          {/*    await commandController.executeCommand("");*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <img src={Underline} alt=""/>*/}
+          {/*</ToolbarButton>*/}
+          <ToolbarButton onClick={async () => {
+            await commandController.executeCommand("delete");
+          }}>
+            <img src={Delete} alt=""/>
           </ToolbarButton>
-          <ToolbarButton
-            onClick={async () => {
-              await commandController.executeCommand("code");
-            }}
-          >
-            <FontAwesomeIcon icon={faCode} />
+          {/*<ToolbarButton onClick={async () => {*/}
+          {/*  await commandController.executeCommand("");*/}
+          {/*}}>*/}
+          {/*  <img src={Shrink} alt=""/>*/}
+          {/*</ToolbarButton>*/}
+          <ToolbarButton onClick={async () => {
+            await commandController.executeCommand("ul");
+          }}>
+            <img src={Ul} alt=""/>
           </ToolbarButton>
-          <ToolbarButton
-            onClick={async () => {
-              await commandController.executeCommand("headingLevel1");
-            }}
-          >
-            <FontAwesomeIcon icon={faHeading} />
+          <ToolbarButton onClick={async () => {
+            await commandController.executeCommand("ol");
+          }}>
+            <img src={Ol} alt=""/>
           </ToolbarButton>
-        </HStack>
+          <ToolbarButton onClick={async () => {
+            await commandController.executeCommand("link");
+          }}>
+            <img src={Link} alt=""/>
+          </ToolbarButton>
+          <ToolbarButton onClick={async () => {
+            await commandController.executeCommand("image");
+          }}>
+            <img src={Img} alt=""/>
+          </ToolbarButton>
+          <ToolbarButton onClick={async () => {
+            await commandController.executeCommand("code");
+          }}>
+            <img src={Code} alt=""/>
+          </ToolbarButton>
+        </ToolBar>
 
         <Textarea
           ref={ref}
