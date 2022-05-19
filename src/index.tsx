@@ -29,7 +29,7 @@ import {
 } from "@chakra-ui/react";
 import {ToolbarButton} from "../demo/toolbar-button";
 import ReactDOM from "react-dom";
-import MarkdownPreview from "./components/MarkdownPreview";
+import { MarkdownPreview } from "./components/MarkdownPreview";
 import styles from "./styles/editor.module.css";
 import Bold from "./icons/bold.svg";
 import Code from "./icons/code.svg";
