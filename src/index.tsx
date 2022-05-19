@@ -18,11 +18,7 @@ import { codeBlockCommand } from "./commands/markdown-commands/codeBlockCommand"
 import { checkedListCommand } from "./commands/markdown-commands/checkedListCommand";
 import { orderedListCommand } from "./commands/markdown-commands/orderedListCommand";
 import { unorderedListCommand } from "./commands/markdown-commands/unorderedListCommand";
-import { headingLevel2Command } from "./commands/markdown-commands/headingLevel2Command";
-import { headingLevel3Command } from "./commands/markdown-commands/headingLevel3Command";
-import { headingLevel4Command } from "./commands/markdown-commands/headingLevel4Command";
-import { headingLevel5Command } from "./commands/markdown-commands/headingLevel5Command";
-import { headingLevel6Command } from "./commands/markdown-commands/headingLevel6Command";
+import {underlineCommand} from "./commands/markdown-commands/underlineCommand";
 import * as React from "react";
 import {
   Box,
@@ -66,12 +62,6 @@ export {
   orderedListCommand,
   unorderedListCommand,
   imageCommand,
-  headingLevel1Command,
-  headingLevel2Command,
-  headingLevel3Command,
-  headingLevel4Command,
-  headingLevel5Command,
-  headingLevel6Command,
   // hooks
   useTextAreaMarkdownEditor
 };
@@ -97,6 +87,7 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
       link: linkCommand,
       ol: orderedListCommand,
       ul: unorderedListCommand,
+      underline:underlineCommand,
     }
   });
 
@@ -122,13 +113,13 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
           >
             <img src={Bold} alt=""/>
           </ToolbarButton>
-          {/*<ToolbarButton*/}
-          {/*  onClick={async () => {*/}
-          {/*    await commandController.executeCommand("");*/}
-          {/*  }}*/}
-          {/*>*/}
-          {/*  <img src={Underline} alt=""/>*/}
-          {/*</ToolbarButton>*/}
+          <ToolbarButton
+            onClick={async () => {
+              await commandController.executeCommand("underline");
+            }}
+          >
+            <img src={Underline} alt=""/>
+          </ToolbarButton>
           <ToolbarButton onClick={async () => {
             await commandController.executeCommand("delete");
           }}>

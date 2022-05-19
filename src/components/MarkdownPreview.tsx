@@ -20,7 +20,9 @@ function MarkdownPreview(props: Props = {}) {
     allowedTags = sanitizeHtml.defaults.allowedTags.concat([
       "img",
       "iframe",
-      "br"
+      "br",
+      "ins",
+      "del",
     ]),
     ...restProps
   } = props;
