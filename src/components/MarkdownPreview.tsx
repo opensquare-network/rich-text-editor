@@ -9,7 +9,6 @@ import styles from "../styles/markdown-preview.module.css";
 type Props = {
   content?: string;
   allowedTags?: string[];
-  bordered?: boolean;
   style?: React.CSSProperties;
 };
 
@@ -23,7 +22,6 @@ export function MarkdownPreview(props: Props = {}) {
       "ins",
       "del"
     ]),
-    bordered = true,
     ...restProps
   } = props;
 
