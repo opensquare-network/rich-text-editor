@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from '../src/styles/editor.module.css';
+import styles from '../src/styles/editor.module.scss';
 
 export type ToolbarButtonProps = {
   onClick: () => void;

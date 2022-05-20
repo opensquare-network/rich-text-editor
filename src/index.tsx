@@ -23,7 +23,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { ToolbarButton } from "../demo/toolbar-button";
 import ReactDOM from "react-dom";
 import { MarkdownPreview } from "./components/MarkdownPreview";
-import styles from "./styles/editor.module.css";
+import styles from "./styles/editor.module.scss";
 import Bold from "./icons/bold.svg";
 import Code from "./icons/code.svg";
 import Delete from "./icons/delete.svg";
@@ -32,6 +32,7 @@ import Link from "./icons/link.svg";
 import Ol from "./icons/ol.svg";
 import Ul from "./icons/ul.svg";
 import Underline from "./icons/underline.svg";
+import {SuggestionsDropdown} from "./components/SuggestionsDropdown";
 
 export {
   // helpers
@@ -90,6 +91,7 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
   });
 
   const [mdString, setMdString] = React.useState("");
+  const [showSuggestion, setShowSuggestion] = React.useState<boolean>(false);
   const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
     "write"
   );
@@ -184,10 +186,31 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
           ref={ref}
           value={mdString}
           onChange={e => setMdString(e.target.value)}
+          onKeyUp={(e)=>{
+           if(e.key==="@"){
+             setShowSuggestion(true);
+           }
+          }}
           placeholder="Please text here..."
         />
 
         {isPreview && <MarkdownPreview content={mdString} />}
+
+        {
+          showSuggestion && <SuggestionsDropdown
+            caret={{top:100, left:200, lineHeight:24}}
+            suggestions={[{
+              preview: <span>this is mock</span>,
+              value:"",
+            },
+              {
+                preview: <span>implement dynamic load later</span>,
+                value:"",
+              }]}
+            focusIndex={0}
+            textAreaRef={ref}
+          />
+        }
       </div>
     </ChakraProvider>
   );
