@@ -1,28 +1,28 @@
 // Individual commands
-import {boldCommand} from "./commands/markdown-commands/boldCommand";
-import {italicCommand} from "./commands/markdown-commands/italicCommand";
-import {strikethroughCommand} from "./commands/markdown-commands/strikethroughCommand";
-import {linkCommand} from "./commands/markdown-commands/linkCommand";
-import {quoteCommand} from "./commands/markdown-commands/quoteCommand";
-import {imageCommand} from "./commands/markdown-commands/imageCommand";
-import {CommandController} from "./commands/command-controller";
-import type {TextController} from "./types/CommandOptions";
-import {TextAreaTextController} from "./text/textarea-text-controller";
+import { boldCommand } from "./commands/markdown-commands/boldCommand";
+import { italicCommand } from "./commands/markdown-commands/italicCommand";
+import { strikethroughCommand } from "./commands/markdown-commands/strikethroughCommand";
+import { linkCommand } from "./commands/markdown-commands/linkCommand";
+import { quoteCommand } from "./commands/markdown-commands/quoteCommand";
+import { imageCommand } from "./commands/markdown-commands/imageCommand";
+import { CommandController } from "./commands/command-controller";
+import type { TextController } from "./types/CommandOptions";
+import { TextAreaTextController } from "./text/textarea-text-controller";
 import * as textHelpers from "./helpers/textHelpers";
 import * as listHelpers from "./helpers/listHelpers";
 import * as headerHelpers from "./helpers/headerHelpers";
-import {codeCommand} from "./commands/markdown-commands/codeCommand";
-import {useTextAreaMarkdownEditor} from "./hooks/use-markdown-editor";
-import {codeBlockCommand} from "./commands/markdown-commands/codeBlockCommand";
-import {checkedListCommand} from "./commands/markdown-commands/checkedListCommand";
-import {orderedListCommand} from "./commands/markdown-commands/orderedListCommand";
-import {unorderedListCommand} from "./commands/markdown-commands/unorderedListCommand";
-import {underlineCommand} from "./commands/markdown-commands/underlineCommand";
+import { codeCommand } from "./commands/markdown-commands/codeCommand";
+import { useTextAreaMarkdownEditor } from "./hooks/use-markdown-editor";
+import { codeBlockCommand } from "./commands/markdown-commands/codeBlockCommand";
+import { checkedListCommand } from "./commands/markdown-commands/checkedListCommand";
+import { orderedListCommand } from "./commands/markdown-commands/orderedListCommand";
+import { unorderedListCommand } from "./commands/markdown-commands/unorderedListCommand";
+import { underlineCommand } from "./commands/markdown-commands/underlineCommand";
 import * as React from "react";
-import {ChakraProvider} from "@chakra-ui/react";
-import {ToolbarButton} from "../demo/toolbar-button";
+import { ChakraProvider } from "@chakra-ui/react";
+import { ToolbarButton } from "../demo/toolbar-button";
 import ReactDOM from "react-dom";
-import {MarkdownPreview} from "./components/MarkdownPreview";
+import { MarkdownPreview } from "./components/MarkdownPreview";
 import styles from "./styles/editor.module.scss";
 import Bold from "./icons/bold.svg";
 import Code from "./icons/code.svg";
@@ -32,9 +32,9 @@ import Link from "./icons/link.svg";
 import Ol from "./icons/ol.svg";
 import Ul from "./icons/ul.svg";
 import Underline from "./icons/underline.svg";
-import {SuggestionsDropdown} from "./components/SuggestionsDropdown";
-import {getCaretCoordinates} from "./util";
-import {useState} from "react";
+import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
+import { getCaretCoordinates } from "./util";
+import { useState } from "react";
 
 export {
   // helpers
@@ -79,7 +79,7 @@ const Tab: React.FC<{ onClick: () => void; className: string }> = props => {
 };
 
 export const Editor: React.FunctionComponent<DemoProps> = () => {
-  const {ref, commandController} = useTextAreaMarkdownEditor({
+  const { ref, commandController } = useTextAreaMarkdownEditor({
     commandMap: {
       bold: boldCommand,
       delete: strikethroughCommand,
@@ -93,7 +93,7 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
   });
 
   const [mdString, setMdString] = React.useState("");
-  const [caret, setCaret] = useState({left: 0, top: 0, lineHeight: 20});
+  const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
   const [showSuggestion, setShowSuggestion] = React.useState<boolean>(false);
   const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
     "write"
@@ -130,56 +130,56 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
                 await commandController.executeCommand("bold");
               }}
             >
-              <img src={Bold} alt=""/>
+              <img src={Bold} alt="" />
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("underline");
               }}
             >
-              <img src={Underline} alt=""/>
+              <img src={Underline} alt="" />
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("delete");
               }}
             >
-              <img src={Delete} alt=""/>
+              <img src={Delete} alt="" />
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("ul");
               }}
             >
-              <img src={Ul} alt=""/>
+              <img src={Ul} alt="" />
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("ol");
               }}
             >
-              <img src={Ol} alt=""/>
+              <img src={Ol} alt="" />
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("link");
               }}
             >
-              <img src={Link} alt=""/>
+              <img src={Link} alt="" />
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("image");
               }}
             >
-              <img src={Img} alt=""/>
+              <img src={Img} alt="" />
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("code");
               }}
             >
-              <img src={Code} alt=""/>
+              <img src={Code} alt="" />
             </ToolbarButton>
           </div>
         </ToolBar>
@@ -192,7 +192,6 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
           onKeyUp={(e) => {
             if (e.key === "@") {
               if (ref.current) {
-                console.log(getCaretCoordinates(ref.current));
                 setCaret(getCaretCoordinates(ref.current));
               }
               setShowSuggestion(true);
@@ -202,18 +201,18 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
           placeholder="Please text here..."
         />
 
-        {isPreview && <MarkdownPreview content={mdString}/>}
+        {isPreview && <MarkdownPreview content={mdString} />}
 
         {
           showSuggestion && <SuggestionsDropdown
             caret={caret}
             suggestions={[{
               preview: <span>this is mock</span>,
-              value: "",
+              value: ""
             },
               {
                 preview: <span>implement dynamic load later</span>,
-                value: "",
+                value: ""
               }]}
             focusIndex={0}
             textAreaRef={ref}
@@ -224,6 +223,6 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
   );
 };
 
-ReactDOM.render(<Editor/>, document.getElementById("root"));
+ReactDOM.render(<Editor />, document.getElementById("root"));
 
 export default Editor;

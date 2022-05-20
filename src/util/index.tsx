@@ -45,7 +45,7 @@ const properties = [
   "MozTabSize"
 ];
 
-export function getCaretCoordinates (
+export function getCaretCoordinates(
   element: HTMLTextAreaElement,
   append?: string
 ): CaretCoordinates {
@@ -76,7 +76,7 @@ export function getCaretCoordinates (
     style[prop] = computed[prop];
   });
 
-  if ( (window as any).mozInnerScreenX != null) {
+  if ((window as any).mozInnerScreenX != null) {
     // Firefox lies about the overflow property for textareas: https://bugzilla.mozilla.org/show_bug.cgi?id=984275
     if (element.scrollHeight > parseInt(computed.height))
       style.overflowY = "scroll";
