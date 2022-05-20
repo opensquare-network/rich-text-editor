@@ -115,7 +115,11 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
               Preview
             </Tab>
           </div>
-          <div className={styles.toolbarItems}>
+          <div
+            className={`${styles.toolbarItems} ${
+              isPreview ? styles.hidden : ""
+            }`}
+          >
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("bold");
@@ -176,10 +180,9 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
         </ToolBar>
 
         <textarea
-          className={styles.textarea}
+          className={`${styles.textarea} ${isPreview ? styles.hidden : ""}`}
           ref={ref}
           value={mdString}
-          style={{ display: !isPreview ? "block" : "none" }}
           onChange={e => setMdString(e.target.value)}
           placeholder="Please text here..."
         />

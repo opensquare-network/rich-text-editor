@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 48px;
 }
 .toolbarItems {
   display: flex;
@@ -53,4 +52,29 @@
   line-height: 24px;
   padding: 12px;
   background: #fbfcfe;
+}
+
+.hidden {
+  display: none;
+}
+
+/* mobile */
+@media screen and (max-width: 769px) {
+  .toolbar {
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .tabs {
+    gap: 0;
+  }
+  .tab {
+    flex: 1;
+    padding: 12px 0;
+  }
+
+  .toolbarItems {
+    border-top: 1px solid #e2e8f0;
+    padding: 17.25px 0;
+  }
 }
