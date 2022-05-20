@@ -4,7 +4,7 @@ import sanitizeHtml from "sanitize-html";
 import Prism from "prismjs";
 import "github-markdown-css/github-markdown-light.css";
 import "prismjs/themes/prism.css";
-import { Box } from "@chakra-ui/layout";
+import styles from "../styles/markdown-preview.module.css";
 
 type Props = {
   content?: string;
@@ -52,18 +52,11 @@ export function MarkdownPreview(props: Props = {}) {
   });
 
   return (
-    <Box
-      borderLeft={4}
-      borderStyle="solid"
-      borderColor="#e2e8f0"
-      pl="12px"
-      minH="19.25px"
-      {...restProps}
-    >
+    <div className={styles.markdownPreview} {...restProps}>
       <div
         className="markdown-body"
         dangerouslySetInnerHTML={{ __html: cleanHtml }}
       />
-    </Box>
+    </div>
   );
 }
