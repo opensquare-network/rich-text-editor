@@ -8,6 +8,7 @@ interface ClassArray extends Array<ClassValue> {
 interface ClassDictionary {
   [id: string]: string | boolean;
 }
+
 interface CaretCoordinates {
   top: number,
   left: number,
@@ -71,15 +72,15 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
     window.innerHeight || 0
   );
 
-  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0);
-  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0);
+  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
+  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 50;
 
   const style: React.CSSProperties = {};
   if (
     suggestionsAutoplace &&
     top + (textAreaRef?.current?.getBoundingClientRect()?.top ?? 0) > vh / 2
   )
-    style.bottom = (textAreaRef?.current?.offsetHeight??0) - top;
+    style.bottom = (textAreaRef?.current?.offsetHeight ?? 0) - top;
   else style.top = top;
 
   if (
