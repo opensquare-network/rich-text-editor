@@ -52,7 +52,7 @@ export function MarkdownPreview(props: Props = {}) {
   return (
     <div className={styles.markdownPreview} {...restProps}>
       <div
-        className="markdown-body"
+        className={`markdown-body ${styles.markdownBody}`}
         dangerouslySetInnerHTML={{ __html: cleanHtml }}
       />
     </div>
