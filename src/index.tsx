@@ -17,15 +17,12 @@ import { codeBlockCommand } from "./commands/markdown-commands/codeBlockCommand"
 import { checkedListCommand } from "./commands/markdown-commands/checkedListCommand";
 import { orderedListCommand } from "./commands/markdown-commands/orderedListCommand";
 import { unorderedListCommand } from "./commands/markdown-commands/unorderedListCommand";
-import {underlineCommand} from "./commands/markdown-commands/underlineCommand";
+import { underlineCommand } from "./commands/markdown-commands/underlineCommand";
 import * as React from "react";
-import {
-  ChakraProvider,
-  Textarea
-} from "@chakra-ui/react";
-import {ToolbarButton} from "../demo/toolbar-button";
+import { ChakraProvider } from "@chakra-ui/react";
+import { ToolbarButton } from "../demo/toolbar-button";
 import ReactDOM from "react-dom";
-import MarkdownPreview from "./components/MarkdownPreview";
+import { MarkdownPreview } from "./components/MarkdownPreview";
 import styles from "./styles/editor.module.css";
 import Bold from "./icons/bold.svg";
 import Code from "./icons/code.svg";
@@ -64,33 +61,31 @@ export {
 export type DemoProps = {};
 
 const ToolBar: React.FC<DemoProps> = props => {
-  return (
-    <div className={styles.toolbar}>
-      {props.children}
-    </div>
-  );
+  return <div className={styles.toolbar}>{props.children}</div>;
 };
 
-const Tab: React.FC<{ onClick: () => void, className: string }> = props => {
+const Tab: React.FC<{ onClick: () => void; className: string }> = props => {
   return (
-    <button onClick={props.onClick} className={`${styles.tab} ${props.className}`}>
+    <button
+      onClick={props.onClick}
+      className={`${styles.tab} ${props.className}`}
+    >
       {props.children}
     </button>
   );
 };
 
-
 export const Editor: React.FunctionComponent<DemoProps> = () => {
   const { ref, commandController } = useTextAreaMarkdownEditor({
     commandMap: {
       bold: boldCommand,
-      delete:strikethroughCommand,
+      delete: strikethroughCommand,
       code: codeCommand,
-      image:imageCommand,
+      image: imageCommand,
       link: linkCommand,
       ol: orderedListCommand,
       ul: unorderedListCommand,
-      underline:underlineCommand,
+      underline: underlineCommand
     }
   });
 
@@ -107,64 +102,89 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
       <div className={styles.editorWrapper}>
         <ToolBar>
           <div className={styles.tabs}>
-            <Tab className={editStatus === "write" ? styles.active :""} onClick={() => setEditStatus("write")}>Write</Tab>
-            <Tab className={editStatus === "preview" ? styles.active:""} onClick={() => setEditStatus("preview")}>Preview</Tab>
+            <Tab
+              className={editStatus === "write" ? styles.active : ""}
+              onClick={() => setEditStatus("write")}
+            >
+              Write
+            </Tab>
+            <Tab
+              className={editStatus === "preview" ? styles.active : ""}
+              onClick={() => setEditStatus("preview")}
+            >
+              Preview
+            </Tab>
           </div>
-          <div className={styles.toolbarItems}>
+          <div
+            className={`${styles.toolbarItems} ${
+              isPreview ? styles.hidden : ""
+            }`}
+          >
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("bold");
               }}
             >
-              <img src={Bold} alt=""/>
+              <img src={Bold} alt="" />
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("underline");
               }}
             >
-              <img src={Underline} alt=""/>
+              <img src={Underline} alt="" />
             </ToolbarButton>
-            <ToolbarButton onClick={async () => {
-              await commandController.executeCommand("delete");
-            }}>
-              <img src={Delete} alt=""/>
+            <ToolbarButton
+              onClick={async () => {
+                await commandController.executeCommand("delete");
+              }}
+            >
+              <img src={Delete} alt="" />
             </ToolbarButton>
-            <ToolbarButton onClick={async () => {
-              await commandController.executeCommand("ul");
-            }}>
-              <img src={Ul} alt=""/>
+            <ToolbarButton
+              onClick={async () => {
+                await commandController.executeCommand("ul");
+              }}
+            >
+              <img src={Ul} alt="" />
             </ToolbarButton>
-            <ToolbarButton onClick={async () => {
-              await commandController.executeCommand("ol");
-            }}>
-              <img src={Ol} alt=""/>
+            <ToolbarButton
+              onClick={async () => {
+                await commandController.executeCommand("ol");
+              }}
+            >
+              <img src={Ol} alt="" />
             </ToolbarButton>
-            <ToolbarButton onClick={async () => {
-              await commandController.executeCommand("link");
-            }}>
-              <img src={Link} alt=""/>
+            <ToolbarButton
+              onClick={async () => {
+                await commandController.executeCommand("link");
+              }}
+            >
+              <img src={Link} alt="" />
             </ToolbarButton>
-            <ToolbarButton onClick={async () => {
-              await commandController.executeCommand("image");
-            }}>
-              <img src={Img} alt=""/>
+            <ToolbarButton
+              onClick={async () => {
+                await commandController.executeCommand("image");
+              }}
+            >
+              <img src={Img} alt="" />
             </ToolbarButton>
-            <ToolbarButton onClick={async () => {
-              await commandController.executeCommand("code");
-            }}>
-              <img src={Code} alt=""/>
+            <ToolbarButton
+              onClick={async () => {
+                await commandController.executeCommand("code");
+              }}
+            >
+              <img src={Code} alt="" />
             </ToolbarButton>
           </div>
         </ToolBar>
 
-        <Textarea
+        <textarea
+          className={`${styles.textarea} ${isPreview ? styles.hidden : ""}`}
           ref={ref}
           value={mdString}
-          style={{ display: !isPreview ? "block" : "none" }}
           onChange={e => setMdString(e.target.value)}
-          placeholder="osn markdown editor"
-          fontFamily={"monospace"}
+          placeholder="Please text here..."
         />
 
         {isPreview && <MarkdownPreview content={mdString} />}

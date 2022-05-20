@@ -1,12 +1,10 @@
-import styled from "@emotion/styled";
 import { marked } from "marked";
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import Prism from "prismjs";
-import "github-markdown-css";
+import "github-markdown-css/github-markdown-light.css";
 import "prismjs/themes/prism.css";
-
-const MarkdownContent = styled.div``;
+import styles from "../styles/markdown-preview.module.css";
 
 type Props = {
   content?: string;
@@ -14,7 +12,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-function MarkdownPreview(props: Props = {}) {
+export function MarkdownPreview(props: Props = {}) {
   const {
     content = "",
     allowedTags = sanitizeHtml.defaults.allowedTags.concat([
@@ -22,7 +20,7 @@ function MarkdownPreview(props: Props = {}) {
       "iframe",
       "br",
       "ins",
-      "del",
+      "del"
     ]),
     ...restProps
   } = props;
@@ -52,13 +50,11 @@ function MarkdownPreview(props: Props = {}) {
   });
 
   return (
-    <MarkdownContent {...restProps} className="markdown-preview">
+    <div className={styles.markdownPreview} {...restProps}>
       <div
-        className="markdown-body"
+        className={`markdown-body ${styles.markdownBody}`}
         dangerouslySetInnerHTML={{ __html: cleanHtml }}
       />
-    </MarkdownContent>
+    </div>
   );
 }
-
-export default MarkdownPreview;
