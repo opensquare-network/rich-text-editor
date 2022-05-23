@@ -35,6 +35,7 @@ import Underline from "./icons/underline.svg";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { getCaretCoordinates } from "./util";
 import { useState } from "react";
+import { insertText } from "./util/text";
 
 export {
   // helpers
@@ -78,6 +79,15 @@ const Tab: React.FC<{ onClick: () => void; className: string }> = props => {
   );
 };
 
+const suggestions = [{
+  preview: <span>abc</span>,
+  value: "abc"
+},
+  {
+    preview: <span>edf</span>,
+    value: "edf"
+  }];
+
 export const Editor: React.FunctionComponent<DemoProps> = () => {
   const { ref, commandController } = useTextAreaMarkdownEditor({
     commandMap: {
@@ -95,12 +105,47 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
   const [mdString, setMdString] = React.useState("");
   const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
   const [showSuggestion, setShowSuggestion] = React.useState<boolean>(false);
+  const [focusIndex, setFocusIndex] = useState(0);
   const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
     "write"
   );
   const isPreview = React.useMemo(() => {
     return editStatus === "preview";
   }, [editStatus]);
+
+  const handleSuggestionSelected =(index:number) => {
+    insertText(ref?.current, suggestions[index].value);
+    setShowSuggestion(false);
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if(showSuggestion){
+      if (event.key==="ArrowDown"){
+        event.preventDefault();
+        setFocusIndex(focusIndex >= suggestions.length-1 ? 0 : focusIndex+1 );
+      }
+      if (event.key==="ArrowUp"){
+        event.preventDefault();
+        setFocusIndex(focusIndex === 0 ? suggestions.length-1 : focusIndex-1);
+      }
+      if(event.key==="Enter"){
+        event.preventDefault();
+        handleSuggestionSelected(focusIndex);
+      }
+      if (event.key === "Backspace") {
+        setShowSuggestion(false);
+      }
+    }
+  }
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "@") {
+      if (ref.current) {
+        setCaret(getCaretCoordinates(ref.current));
+      }
+      setShowSuggestion(true);
+    }
+  }
 
   return (
     <ChakraProvider>
@@ -188,34 +233,20 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
           className={`${styles.textarea} ${isPreview ? styles.hidden : ""}`}
           ref={ref}
           value={mdString}
-          onChange={e => setMdString(e.target.value)}
-          onKeyUp={(e) => {
-            if (e.key === "@") {
-              if (ref.current) {
-                setCaret(getCaretCoordinates(ref.current));
-              }
-              setShowSuggestion(true);
-
-            }
-          }}
-          placeholder="Please text here..."
+          onChange={event => setMdString(event.target.value)}
+          onKeyDown={handleKeyDown}
+          onKeyPress={handleKeyPress}
+          placeholder="Please text herevent..."
         />
 
         {isPreview && <MarkdownPreview content={mdString} />}
-
         {
           showSuggestion && <SuggestionsDropdown
             caret={caret}
-            suggestions={[{
-              preview: <span>this is mock</span>,
-              value: ""
-            },
-              {
-                preview: <span>implement dynamic load later</span>,
-                value: ""
-              }]}
-            focusIndex={0}
+            suggestions={suggestions}
+            focusIndex={focusIndex}
             textAreaRef={ref}
+            onSuggestionSelected={handleSuggestionSelected}
           />
         }
       </div>
