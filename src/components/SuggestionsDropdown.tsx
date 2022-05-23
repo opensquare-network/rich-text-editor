@@ -57,6 +57,7 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
                                                                                        }) => {
   const handleSuggestionClick = (event: React.MouseEvent) => {
     event.preventDefault();
+    // @ts-ignore
     const index = parseInt(event.currentTarget.attributes["data-index"].value);
     onSuggestionSelected(index);
   };
