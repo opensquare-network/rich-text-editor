@@ -132,17 +132,18 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
         event.preventDefault();
         handleSuggestionSelected(focusIndex);
       }
+      if (event.key === "Backspace") {
+        setShowSuggestion(false);
+      }
     }
   }
 
-  const handleKeyUp = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "@") {
       if (ref.current) {
         setCaret(getCaretCoordinates(ref.current));
       }
       setShowSuggestion(true);
-    } else if (event.key === "Backspace") {
-      setShowSuggestion(false);
     }
   }
 
@@ -232,9 +233,9 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
           className={`${styles.textarea} ${isPreview ? styles.hidden : ""}`}
           ref={ref}
           value={mdString}
-          onChange={e => setMdString(event.target.value)}
+          onChange={event => setMdString(event.target.value)}
           onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
+          onKeyPress={handleKeyPress}
           placeholder="Please text herevent..."
         />
 
