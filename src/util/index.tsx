@@ -73,6 +73,7 @@ export function getCaretCoordinates(
 
   // Transfer the element's properties to the div
   properties.forEach(function(prop) {
+    // @ts-ignore
     style[prop] = computed[prop];
   });
 

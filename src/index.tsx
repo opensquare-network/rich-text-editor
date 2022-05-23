@@ -247,6 +247,7 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
             focusIndex={focusIndex}
             textAreaRef={ref}
             onSuggestionSelected={handleSuggestionSelected}
+            suggestionsAutoplace
           />
         }
       </div>

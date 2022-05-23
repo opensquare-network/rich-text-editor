@@ -4,7 +4,7 @@ import sanitizeHtml from "sanitize-html";
 import Prism from "prismjs";
 import "github-markdown-css/github-markdown-light.css";
 import "prismjs/themes/prism.css";
-import styles from "../styles/markdown-preview.module.css";
+import styles from "../styles/markdown-preview.module.scss";
 
 type Props = {
   content?: string;
