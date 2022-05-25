@@ -1,6 +1,5 @@
-import svg from 'rollup-plugin-svg'
-import scss from 'rollup-plugin-scss'
-import json from '@rollup/plugin-json'
+import scss from "rollup-plugin-scss";
+import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
@@ -27,9 +26,8 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
-      svg(),
-      scss({output:false}),
-      json(),
+      scss({ output: false }),
+      json()
     ],
     external: ["react", "react-dom"]
   },
