@@ -1,4 +1,3 @@
-import svg from "rollup-plugin-svg";
 import scss from "rollup-plugin-scss";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
@@ -27,7 +26,6 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
-      svg(),
       scss({ output: false }),
       json()
     ],
