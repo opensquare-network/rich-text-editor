@@ -19,23 +19,27 @@ import { orderedListCommand } from "./commands/markdown-commands/orderedListComm
 import { unorderedListCommand } from "./commands/markdown-commands/unorderedListCommand";
 import { underlineCommand } from "./commands/markdown-commands/underlineCommand";
 import * as React from "react";
-import { ChakraProvider } from "@chakra-ui/react";
-import { ToolbarButton } from "../demo/toolbar-button";
-import ReactDOM from "react-dom";
 import { MarkdownPreview } from "./components/MarkdownPreview";
-import styles from "./styles/editor.module.scss";
-import Bold from "./icons/bold.svg";
-import Code from "./icons/code.svg";
-import Delete from "./icons/delete.svg";
-import Img from "./icons/img.svg";
-import Link from "./icons/link.svg";
-import Ol from "./icons/ol.svg";
-import Ul from "./icons/ul.svg";
-import Underline from "./icons/underline.svg";
+import Bold from "./icons/bold";
+import Code from "./icons/code";
+import Delete from "./icons/delete";
+import Img from "./icons/img";
+import Link from "./icons/link";
+import Ol from "./icons/ol";
+import Ul from "./icons/ul";
+import Underline from "./icons/underline";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { getCaretCoordinates } from "./util";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { insertText } from "./util/text";
+import {
+  EditorWrapper,
+  Tab,
+  TabsWrapper, Textarea,
+  ToolBar,
+  ToolbarButton,
+  ToolbarItemsWrapper
+} from "./components/EditorComponents";
 
 export {
   // helpers
@@ -64,21 +68,6 @@ export {
 
 export type DemoProps = {};
 
-const ToolBar: React.FC<DemoProps> = props => {
-  return <div className={styles.toolbar}>{props.children}</div>;
-};
-
-const Tab: React.FC<{ onClick: () => void; className: string }> = props => {
-  return (
-    <button
-      onClick={props.onClick}
-      className={`${styles.tab} ${props.className}`}
-    >
-      {props.children}
-    </button>
-  );
-};
-
 const suggestions = [{
   preview: <span>abc</span>,
   value: "abc"
@@ -89,7 +78,8 @@ const suggestions = [{
   }];
 
 export const Editor: React.FunctionComponent<DemoProps> = () => {
-  const { ref, commandController } = useTextAreaMarkdownEditor({
+  const ref = useRef<HTMLTextAreaElement>(null);
+  const { commandController } = useTextAreaMarkdownEditor(ref,{
     commandMap: {
       bold: boldCommand,
       delete: strikethroughCommand,
@@ -148,95 +138,90 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
   }
 
   return (
-    <ChakraProvider>
-      <div className={styles.editorWrapper}>
+      <EditorWrapper>
         <ToolBar>
-          <div className={styles.tabs}>
+          <TabsWrapper>
             <Tab
-              className={editStatus === "write" ? styles.active : ""}
+              active={editStatus === "write"}
               onClick={() => setEditStatus("write")}
             >
               Write
             </Tab>
             <Tab
-              className={editStatus === "preview" ? styles.active : ""}
+              active={editStatus === "preview"}
               onClick={() => setEditStatus("preview")}
             >
               Preview
             </Tab>
-          </div>
-          <div
-            className={`${styles.toolbarItems} ${
-              isPreview ? styles.hidden : ""
-            }`}
-          >
+          </TabsWrapper>
+          <ToolbarItemsWrapper hide={isPreview}>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("bold");
               }}
             >
-              <img src={Bold} alt="" />
+              <Bold/>
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("underline");
               }}
             >
-              <img src={Underline} alt="" />
+              <Underline/>
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("delete");
               }}
             >
-              <img src={Delete} alt="" />
+              <Delete/>
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("ul");
               }}
             >
-              <img src={Ul} alt="" />
+              <Ul/>
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("ol");
               }}
             >
-              <img src={Ol} alt="" />
+              <Ol/>
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("link");
               }}
             >
-              <img src={Link} alt="" />
+              <Link/>
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("image");
               }}
             >
-              <img src={Img} alt="" />
+              <Img/>
             </ToolbarButton>
             <ToolbarButton
               onClick={async () => {
                 await commandController.executeCommand("code");
               }}
             >
-              <img src={Code} alt="" />
+              <Code/>
             </ToolbarButton>
-          </div>
+          </ToolbarItemsWrapper>
         </ToolBar>
 
-        <textarea
-          className={`${styles.textarea} ${isPreview ? styles.hidden : ""}`}
+        <Textarea
+          hide={isPreview}
           ref={ref}
           value={mdString}
           onChange={event => setMdString(event.target.value)}
           onKeyDown={handleKeyDown}
           onKeyPress={handleKeyPress}
-          placeholder="Please text herevent..."
+          placeholder="Please text here..."
         />
 
         {isPreview && <MarkdownPreview content={mdString} />}
@@ -250,11 +235,8 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
             suggestionsAutoplace
           />
         }
-      </div>
-    </ChakraProvider>
+      </EditorWrapper>
   );
 };
-
-ReactDOM.render(<Editor />, document.getElementById("root"));
 
 export default Editor;

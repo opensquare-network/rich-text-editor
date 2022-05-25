@@ -1,11 +1,10 @@
-import React, { useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 import { CommandController } from "../commands/command-controller";
 import { TextAreaTextController } from "../text/textarea-text-controller";
 import { TextController } from "../types/CommandOptions";
 import { CommandMap } from "../commands/command";
 
 export type UseTextAreaMarkdownEditorResult<CommandName extends string> = {
-  ref: React.RefObject<HTMLTextAreaElement>;
   textController: TextController;
   commandController: CommandController<CommandName>;
 };
@@ -15,22 +14,21 @@ export type UseTextAreaMarkdownEditorOptions<CommandName extends string> = {
 };
 
 export function useTextAreaMarkdownEditor<CommandName extends string>(
+  ref: React.RefObject<HTMLTextAreaElement>,
   options: UseTextAreaMarkdownEditorOptions<CommandName>
 ): UseTextAreaMarkdownEditorResult<CommandName> {
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const textController = useMemo(() => {
-    return new TextAreaTextController(textAreaRef);
-  }, [textAreaRef]);
+    return new TextAreaTextController(ref);
+  }, [ref]);
 
   const commandController = useMemo(
     () => new CommandController(textController, options.commandMap),
-    [textAreaRef]
+    [ref]
   );
 
   return {
     textController,
     commandController,
-    ref: textAreaRef
   };
 }

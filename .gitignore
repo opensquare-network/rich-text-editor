@@ -8,3 +8,4 @@ demo/node_modules
 /.vscode/
 ts-build/
 dist/
+.DS_store
