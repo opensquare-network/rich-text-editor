@@ -1,4 +1,3 @@
-import scss from "rollup-plugin-scss";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -26,7 +25,6 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
-      scss({ output: false }),
       json()
     ],
     external: ["react", "react-dom"]

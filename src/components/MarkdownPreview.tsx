@@ -4,7 +4,7 @@ import sanitizeHtml from "sanitize-html";
 import Prism from "prismjs";
 import "github-markdown-css/github-markdown-light.css";
 import "prismjs/themes/prism.css";
-import styles from "../styles/markdown-preview.module.scss";
+import { MarkdownBody, MarkdownPreviewWrapper } from "./PreviewComponents";
 
 type Props = {
   content?: string;
@@ -50,11 +50,11 @@ export function MarkdownPreview(props: Props = {}) {
   });
 
   return (
-    <div className={styles.markdownPreview} {...restProps}>
-      <div
-        className={`markdown-body ${styles.markdownBody}`}
+    <MarkdownPreviewWrapper {...restProps}>
+      <MarkdownBody
+        className={`markdown-body`}
         dangerouslySetInnerHTML={{ __html: cleanHtml }}
       />
-    </div>
+    </MarkdownPreviewWrapper>
   );
 }

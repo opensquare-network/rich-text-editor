@@ -1,6 +1,38 @@
 import * as React from "react";
+import styled from "styled-components";
 
-import styles from "../styles/editor.module.scss";
+const SuggestionsWrapper = styled.ul`
+  position: absolute;
+  min-width: 180px;
+  padding: 0;
+  margin: 20px 0 0;
+  list-style: none;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #c8ccd0;
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(27, 31, 35, .15);
+
+  li {
+    padding: 4px 8px;
+    border-bottom: 1px solid #e1e4e8;
+
+    &:first-child {
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+
+    &:hover, &[aria-selected=true] {
+      color: white;
+      background-color: #0366d6;
+    }
+  }
+`
 
 interface ClassArray extends Array<ClassValue> {
 } // tslint:disable-line no-empty-interface
@@ -92,10 +124,9 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
   else style.left = left;
 
   return (
-    <ul className={styles.mdeSuggestions} style={style}>
+    <SuggestionsWrapper style={style}>
       {suggestions.map((s, i) => (
         <li
-          className={styles.mdeSuggestion}
           onClick={handleSuggestionClick}
           onMouseDown={handleMouseDown}
           key={i}
@@ -105,6 +136,6 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
           {s.preview}
         </li>
       ))}
-    </ul>
+    </SuggestionsWrapper>
   );
 };

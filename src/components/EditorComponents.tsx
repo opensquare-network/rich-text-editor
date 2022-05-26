@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 import * as React from "react";
 
 export const EditorWrapper = styled.div`
-  margin: 16px;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 12px;
@@ -19,7 +18,6 @@ export const ToolBar = styled.div`
     display: block;
     padding-left: 0;
     padding-right: 0;
-
   }
 `;
 
