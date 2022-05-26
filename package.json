@@ -1,6 +1,6 @@
 {
   "name": "@osn/rich-text-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenSquare Team React Markdown Editor",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -31,12 +31,6 @@
     "url": "https://github.com/opensquare-network/rich-text-editor.git/issues"
   },
   "devDependencies": {
-    "@chakra-ui/react": "^1.8.8",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "@fortawesome/fontawesome-svg-core": "^6.1.1",
-    "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/react-fontawesome": "^0.1.18",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.2.1",
@@ -62,9 +56,6 @@
     "react-dom": "^17.0.2",
     "rollup": "^2.71.1",
     "rollup-plugin-dts": "^4.2.1",
-    "rollup-plugin-scss": "^3.0.0",
-    "rollup-plugin-svg": "^2.0.0",
-    "sass": "^1.52.0",
     "showdown": "^1.8.6",
     "ts-node": "^8.5.4",
     "tslib": "^2.4.0",
