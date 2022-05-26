@@ -2,8 +2,6 @@ import { marked } from "marked";
 import React from "react";
 import sanitizeHtml from "sanitize-html";
 import Prism from "prismjs";
-import "github-markdown-css/github-markdown-light.css";
-import "prismjs/themes/prism.css";
 import { MarkdownBody, MarkdownPreviewWrapper } from "./PreviewComponents";
 
 type Props = {
