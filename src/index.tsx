@@ -77,6 +77,36 @@ const suggestions = [{
     value: "edf"
   }];
 
+const markdown = `
+[https://www.baidu.com/](https://www.baidu.com/)
+# heading 1
+
+## heading 2
+
+**bold text**
+
+_italic text_
+
+- bullet 1
+- bullet 2
+
+1. numbered 1
+2. numbered 2
+
+|table|example|index|
+|-|-|-|
+|table|column|1|
+|table|column|2|
+
+\`\`\`bash
+echo "hello"
+\`\`\`
+
+\`inline code\`
+
+> quote text
+`.trim();
+
 export const Editor: React.FunctionComponent<DemoProps> = () => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref,{
