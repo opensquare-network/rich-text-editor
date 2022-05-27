@@ -4,6 +4,10 @@ export const MarkdownPreviewWrapper = styled.div`
   min-height: 144px;
   background-color: #fbfcfe;
   padding: 12px;
+
+  .markdown-body {
+    background-color: inherit !important;
+  }
 `;
 
 
