@@ -66,7 +66,10 @@ export {
   useTextAreaMarkdownEditor
 };
 
-export type DemoProps = {};
+export type DemoProps = {
+  value: string,
+  onChange: (value: string) => void;
+};
 
 const suggestions = [{
   preview: <span>abc</span>,
@@ -107,7 +110,7 @@ echo "hello"
 > quote text
 `.trim();
 
-export const Editor: React.FunctionComponent<DemoProps> = () => {
+export const Editor: React.FunctionComponent<DemoProps> = ({value, onChange}) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref,{
     commandMap: {
@@ -122,7 +125,6 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
     }
   });
 
-  const [mdString, setMdString] = React.useState("");
   const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
   const [showSuggestion, setShowSuggestion] = React.useState<boolean>(false);
   const [focusIndex, setFocusIndex] = useState(0);
@@ -247,14 +249,14 @@ export const Editor: React.FunctionComponent<DemoProps> = () => {
         <Textarea
           hide={isPreview}
           ref={ref}
-          value={mdString}
-          onChange={event => setMdString(event.target.value)}
+          value={value}
+          onChange={event => onChange(event.target.value)}
           onKeyDown={handleKeyDown}
           onKeyPress={handleKeyPress}
           placeholder="Please text here..."
         />
 
-        {isPreview && <MarkdownPreview content={mdString} />}
+        {isPreview && <MarkdownPreview content={content} />}
         {
           showSuggestion && <SuggestionsDropdown
             caret={caret}
