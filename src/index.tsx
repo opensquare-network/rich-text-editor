@@ -66,51 +66,24 @@ export {
   useTextAreaMarkdownEditor
 };
 
+export interface Suggestion {
+  /**
+   * React element to be used as the preview
+   */
+  preview: React.ReactNode;
+  /**
+   * Value that is going to be used in the text in case this suggestion is selected
+   */
+  value: string;
+}
+
 export type DemoProps = {
   value: string,
   onChange: (value: string) => void;
+  suggestions?: Suggestion[],
 };
 
-const suggestions = [{
-  preview: <span>abc</span>,
-  value: "abc"
-},
-  {
-    preview: <span>edf</span>,
-    value: "edf"
-  }];
-
-const markdown = `
-[https://www.baidu.com/](https://www.baidu.com/)
-# heading 1
-
-## heading 2
-
-**bold text**
-
-_italic text_
-
-- bullet 1
-- bullet 2
-
-1. numbered 1
-2. numbered 2
-
-|table|example|index|
-|-|-|-|
-|table|column|1|
-|table|column|2|
-
-\`\`\`bash
-echo "hello"
-\`\`\`
-
-\`inline code\`
-
-> quote text
-`.trim();
-
-export const Editor: React.FunctionComponent<DemoProps> = ({value, onChange}) => {
+export const Editor: React.FunctionComponent<DemoProps> = ({value, onChange, suggestions}) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref,{
     commandMap: {
@@ -136,12 +109,14 @@ export const Editor: React.FunctionComponent<DemoProps> = ({value, onChange}) =>
   }, [editStatus]);
 
   const handleSuggestionSelected =(index:number) => {
-    insertText(ref?.current, suggestions[index].value);
-    setShowSuggestion(false);
+    if(suggestions){
+      insertText(ref?.current, suggestions[index].value);
+      setShowSuggestion(false);
+    }
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if(showSuggestion){
+    if(showSuggestion && suggestions){
       if (event.key==="ArrowDown"){
         event.preventDefault();
         setFocusIndex(focusIndex >= suggestions.length-1 ? 0 : focusIndex+1 );
@@ -256,9 +231,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({value, onChange}) =>
           placeholder="Please text here..."
         />
 
-        {isPreview && <MarkdownPreview content={content} />}
+        {isPreview && <MarkdownPreview content={value} />}
         {
-          showSuggestion && <SuggestionsDropdown
+          (showSuggestion && suggestions) && <SuggestionsDropdown
             caret={caret}
             suggestions={suggestions}
             focusIndex={focusIndex}
