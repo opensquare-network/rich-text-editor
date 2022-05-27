@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { Suggestion } from "../index";
 
 const SuggestionsWrapper = styled.ul`
   position: absolute;
@@ -45,17 +46,6 @@ interface CaretCoordinates {
   top: number,
   left: number,
   lineHeight: number
-}
-
-interface Suggestion {
-  /**
-   * React element to be used as the preview
-   */
-  preview: React.ReactNode,
-  /**
-   * Value that is going to be used in the text in case this suggestion is selected
-   */
-  value: string
 }
 
 
