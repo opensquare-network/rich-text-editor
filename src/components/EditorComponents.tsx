@@ -25,6 +25,10 @@ export const TabsWrapper = styled.div`
   display: flex;
   gap: 24px;
   height: 48px;
+  /* mobile */
+  @media screen and (max-width: 769px) {
+    border-bottom: 1px solid #E2E8F0;
+  }
 `;
 
 interface TabProps {
@@ -43,6 +47,13 @@ export const Tab = styled.button<TabProps>`
             border-bottom: 3px solid #04d2c5;
           `};
   cursor: pointer;
+  /* mobile */
+  @media screen and (max-width: 769px) {
+    margin-left: 16px;
+    margin-right: 16px;
+    width: 50%;
+    text-align: center;
+  }
 `;
 
 interface HideProps {
@@ -51,12 +62,17 @@ interface HideProps {
 
 export const ToolbarItemsWrapper = styled.div<HideProps>`
   display: flex;
+  align-items: center;
   gap: 8px;
   ${(props) =>
           props.hide &&
           css`
             display: none;
           `};
+  /* mobile */
+  @media screen and (max-width: 769px) {
+    height: 48px;
+  }
 `;
 
 export const ToolbarButton = styled.button`
