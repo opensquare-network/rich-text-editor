@@ -88,6 +88,8 @@ export const ToolbarButton = styled.button`
 export const Textarea = styled.textarea<HideProps>`
   width: 100%;
   min-height: 144px;
+  max-height: 672px;
+  resize: vertical;
   border: none;
   outline: none;
   font-size: 14px;
