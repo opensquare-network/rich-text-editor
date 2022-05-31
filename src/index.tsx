@@ -34,7 +34,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
                                                              value,
                                                              onChange,
                                                              suggestions,
-                                                             minHeight = 100
+                                                             minHeight = 144
                                                            }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
@@ -120,20 +120,23 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   return (
     <EditorWrapper>
       <EditorHeader {...{ editStatus, setEditStatus, isPreview, commandController }} />
-      <Textarea
-        hide={isPreview}
-        ref={ref}
-        value={value}
-        onChange={event => {
-          onChange(event.target.value);
-          adjustHeight();
-        }}
-        onKeyDown={handleKeyDown}
-        onKeyPress={handleKeyPress}
-        placeholder="Please text here..."
-      />
-
-      {isPreview && <MarkdownPreview content={value} />}
+      {
+        !isPreview ?
+          <Textarea
+            ref={ref}
+            value={value}
+            onChange={event => {
+              onChange(event.target.value);
+              adjustHeight();
+            }}
+            onKeyDown={handleKeyDown}
+            onKeyPress={handleKeyPress}
+            placeholder="Please text here..."
+            minHeight={minHeight}
+          />
+          :
+          <MarkdownPreview content={value} minHeight={minHeight}/>
+      }
       {
         (showSuggestion && suggestions) && <SuggestionsDropdown
           caret={caret}

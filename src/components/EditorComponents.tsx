@@ -56,11 +56,12 @@ export const Tab = styled.button<TabProps>`
   }
 `;
 
-interface HideProps {
-  hide: boolean;
+interface Props {
+  hide?: boolean;
+  minHeight?: number;
 }
 
-export const ToolbarItemsWrapper = styled.div<HideProps>`
+export const ToolbarItemsWrapper = styled.div<Props>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -85,9 +86,14 @@ export const ToolbarButton = styled.button`
   }
 `
 
-export const Textarea = styled.textarea<HideProps>`
+export const Textarea = styled.textarea<Props>`
   width: 100%;
   min-height: 144px;
+  ${(props) =>
+          props.minHeight &&
+          css`
+            min-height: ${props.minHeight}px;
+          `} ;
   max-height: 672px;
   resize: vertical;
   border: none;
