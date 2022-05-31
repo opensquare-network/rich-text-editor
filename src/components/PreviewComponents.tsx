@@ -1,6 +1,11 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const MarkdownPreviewWrapper = styled.div`
+
+interface Props {
+  minHeight?:number
+}
+
+export const MarkdownPreviewWrapper = styled.div<Props>`
   min-height: 144px;
   background-color: #fbfcfe;
   padding: 12px;
@@ -8,6 +13,12 @@ export const MarkdownPreviewWrapper = styled.div`
   .markdown-body {
     background-color: inherit !important;
   }
+
+  ${(props) =>
+          props.minHeight &&
+          css`
+            min-height: ${props.minHeight}px;
+          `};
 `;
 
 

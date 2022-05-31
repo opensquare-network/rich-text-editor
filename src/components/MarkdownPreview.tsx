@@ -8,9 +8,10 @@ type Props = {
   content?: string;
   allowedTags?: string[];
   style?: React.CSSProperties;
+  minHeight: number;
 };
 
-export function MarkdownPreview(props: Props = {}) {
+export function MarkdownPreview(props: Props = { minHeight: 144 }) {
   const {
     content = "",
     allowedTags = sanitizeHtml.defaults.allowedTags.concat([
