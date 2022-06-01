@@ -59,6 +59,7 @@ export const Tab = styled.button<TabProps>`
 interface Props {
   hide?: boolean;
   minHeight?: number;
+  height?: number;
 }
 
 export const ToolbarItemsWrapper = styled.div<Props>`
@@ -93,6 +94,11 @@ export const Textarea = styled.textarea<Props>`
           props.minHeight &&
           css`
             min-height: ${props.minHeight}px;
+          `} ;
+  ${(props) =>
+          props.height &&
+          css`
+            height: ${props.height}px;
           `} ;
   max-height: 672px;
   resize: vertical;
