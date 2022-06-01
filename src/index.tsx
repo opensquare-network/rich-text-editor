@@ -92,7 +92,6 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     if (textarea) {
       // MutationObserver is the modern way to observe element resize event
       observer = new MutationObserver((record) => {
-        console.log(height === parseInt(textarea?.style?.height));
         //no value changed && height change => user resized manually
         // @ts-ignore
         if (record[0].target.value === value) {
