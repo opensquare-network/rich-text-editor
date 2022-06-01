@@ -75,11 +75,6 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   }
 
   useEffect(() => {
-    //expand height if got default value before inputting
-    adjustHeight();
-  }, []);
-
-  useEffect(() => {
     const textarea = ref?.current;
     if (typeof window === "undefined") {
       return;
