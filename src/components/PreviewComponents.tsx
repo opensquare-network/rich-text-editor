@@ -6,6 +6,8 @@ interface Props {
 }
 
 export const MarkdownPreviewWrapper = styled.div<Props>`
+  box-sizing: border-box;
+  flex-basis: 100%;
   min-height: 144px;
   background-color: #fbfcfe;
   padding: 12px;
@@ -24,6 +26,7 @@ export const MarkdownPreviewWrapper = styled.div<Props>`
 
 export const MarkdownBody = styled.div`
   font-size: 14px;
+  font-weight: normal;
   color: #1e2134;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,9 +38,7 @@ export const MarkdownBody = styled.div`
     margin: 0;
     color: #24292f;
     background-color: #ffffff;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-    font-size: 16px;
-    line-height: 1.5;
+    font-family: Inter,serif;
     word-wrap: break-word;
   }
 
