@@ -2,12 +2,14 @@ import styled, { css } from "styled-components";
 import * as React from "react";
 
 export const EditorWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 12px;
 `;
 
 export const ToolBar = styled.div`
+  flex-basis: 100%;
   padding-left: 16px;
   padding-right: 16px;
   display: flex;
@@ -82,12 +84,14 @@ export const ToolbarButton = styled.button`
   cursor: pointer;
   width: 24px;
   height: 24px;
+
   &:hover svg path {
     fill: #1e2134;
   }
-`
+`;
 
 export const Textarea = styled.textarea<Props>`
+  box-sizing: border-box;
   width: 100%;
   min-height: 144px;
   ${(props) =>
@@ -113,4 +117,9 @@ export const Textarea = styled.textarea<Props>`
           css`
             display: none;
           `};
-`
+  font-family: Inter, sans-serif;
+
+  ::selection {
+    background-color: #E2E8F0;
+  }
+`;
