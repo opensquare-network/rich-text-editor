@@ -104,6 +104,11 @@ export const Textarea = styled.textarea<Props>`
           css`
             height: ${props.height}px;
           `} ;
+  ${(props) =>
+          props.hide &&
+          css`
+            display: none;
+          `};
   max-height: 672px;
   resize: vertical;
   border: none;
@@ -112,11 +117,6 @@ export const Textarea = styled.textarea<Props>`
   line-height: 24px;
   padding: 12px;
   background: #fbfcfe;
-  ${(props) =>
-          props.hide &&
-          css`
-            display: none;
-          `};
   font-family: Inter, sans-serif;
 
   ::selection {
