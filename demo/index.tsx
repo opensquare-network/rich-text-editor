@@ -7,20 +7,7 @@ import "./styles/style.css";
 export type DemoProps = {};
 
 const markdown = `
-[https://www.baidu.com/](https://www.baidu.com/)
-# heading 1
-**bold text** _italic text_ \`inline code\`
-- bullet 1
-1. numbered 1
 
-|table|example|index|
-|-|-|-|
-|table|column|1|
-|table|column|2|
-\`\`\`bash
-echo "hello"
-\`\`\`
-> quote text
 `.trim();
 
 const suggestions = [{

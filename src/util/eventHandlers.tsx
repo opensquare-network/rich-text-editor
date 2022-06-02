@@ -10,6 +10,9 @@ export function getHandlers({
                               setFocusIndex,
                               focusIndex,
                               setCaret,
+                              isInputtingList, setIsInputtingList,
+                              nextListPrefix, setNextListPrefix,
+                              lastPressKey, setLastPressKey
                             }) {
   const handleSuggestionSelected = (index: number) => {
     if (suggestions) {
@@ -36,6 +39,22 @@ export function getHandlers({
         setShowSuggestion(false);
       }
     }
+
+    if (event.key === "Enter") {
+      if (ref.current) {
+        if (lastPressKey === "Enter") {
+          return setIsInputtingList(false);
+        }
+        if (isInputtingList) {
+          event.preventDefault();
+          setLastPressKey("Enter");
+          insertText(ref?.current, `\n${nextListPrefix}`);
+          if (parseInt(nextListPrefix) > 0) {
+            setNextListPrefix(`${parseInt(nextListPrefix) + 1}. `);
+          }
+        }
+      }
+    }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -45,6 +64,7 @@ export function getHandlers({
       }
       setShowSuggestion(true);
     }
+    setLastPressKey(event.key);
   };
 
   return {

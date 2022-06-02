@@ -13,7 +13,7 @@ import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { useEffect, useRef, useState } from "react";
 import {
   EditorWrapper,
-  Textarea,
+  Textarea
 } from "./components/EditorComponents";
 import EditorHeader from "./components/EditorHeader";
 import { getHandlers } from "./util/eventHandlers";
@@ -56,6 +56,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
     "write"
   );
+  const [lastPressKey, setLastPressKey] = useState<string>("");
   const isPreview = React.useMemo(() => {
     return editStatus === "preview";
   }, [editStatus]);
@@ -65,14 +66,14 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const [height, setHeight] = useState(100);
   const [userResized, setUserResized] = useState(false);
 
-  const adjustHeight = ()=>{
+  const adjustHeight = () => {
     const textarea = ref?.current;
     if (textarea && !userResized) {
       textarea.style.height = `${minHeight}px`;
       textarea.style.height = `${textarea.scrollHeight}px`;
       setHeight(textarea.scrollHeight);
     }
-  }
+  };
 
   useEffect(() => {
     //expand height if got default value before inputting
@@ -109,12 +110,18 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
   }, [height, value, setHeight]);
 
+  const [isInputtingList, setIsInputtingList] = useState(false);
+  const [nextListPrefix, setNextListPrefix] = useState("");
+
   const {
     handleSuggestionSelected,
     handleKeyDown,
     handleKeyPress
   } = getHandlers({
-    ref, suggestions, setShowSuggestion, showSuggestion, setFocusIndex, focusIndex, setCaret
+    ref, suggestions, setShowSuggestion, showSuggestion, setFocusIndex, focusIndex, setCaret,
+    isInputtingList, setIsInputtingList,
+    nextListPrefix, setNextListPrefix,
+    lastPressKey, setLastPressKey,
   });
 
   return (
@@ -124,8 +131,17 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         ref={ref}
         value={value}
         onChange={event => {
-          onChange(event.target.value);
+          const value = event.target.value;
+          onChange(value);
           adjustHeight();
+          if("1. " === value.slice(value.length - 3, value.length)){
+            setIsInputtingList(true);
+            setNextListPrefix(`2. `);
+          }
+          if("- " === value || `\n- ` ===value.slice(value.length - 3, value.length)){
+            setIsInputtingList(true);
+            setNextListPrefix(`- `);
+          }
         }}
         onKeyDown={handleKeyDown}
         onKeyPress={handleKeyPress}
@@ -135,7 +151,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         hide={isPreview}
       />
       {
-        isPreview && <MarkdownPreview content={value} minHeight={minHeight}/>
+        isPreview && <MarkdownPreview content={value} minHeight={minHeight} />
       }
       {
         (showSuggestion && suggestions) && <SuggestionsDropdown
