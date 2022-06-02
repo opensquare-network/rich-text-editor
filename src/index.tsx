@@ -120,23 +120,22 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   return (
     <EditorWrapper>
       <EditorHeader {...{ editStatus, setEditStatus, isPreview, commandController }} />
+      <Textarea
+        ref={ref}
+        value={value}
+        onChange={event => {
+          onChange(event.target.value);
+          adjustHeight();
+        }}
+        onKeyDown={handleKeyDown}
+        onKeyPress={handleKeyPress}
+        placeholder="Please text here..."
+        minHeight={minHeight}
+        height={height}
+        hide={isPreview}
+      />
       {
-        !isPreview ?
-          <Textarea
-            ref={ref}
-            value={value}
-            onChange={event => {
-              onChange(event.target.value);
-              adjustHeight();
-            }}
-            onKeyDown={handleKeyDown}
-            onKeyPress={handleKeyPress}
-            placeholder="Please text here..."
-            minHeight={minHeight}
-            height={height}
-          />
-          :
-          <MarkdownPreview content={value} minHeight={minHeight}/>
+        isPreview && <MarkdownPreview content={value} minHeight={minHeight}/>
       }
       {
         (showSuggestion && suggestions) && <SuggestionsDropdown
