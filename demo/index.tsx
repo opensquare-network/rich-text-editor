@@ -2,6 +2,7 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import MarkdownEditor from "../src";
 import { useState } from "react";
+import "./styles/style.css";
 
 export type DemoProps = {};
 
