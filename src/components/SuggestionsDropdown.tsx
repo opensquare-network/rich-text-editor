@@ -5,7 +5,7 @@ import { Suggestion } from "../index";
 const SuggestionsWrapper = styled.ul`
   position: absolute;
   min-width: 180px;
-  padding: 0;
+  padding: 16px;
   margin: 20px 0 0;
   list-style: none;
   cursor: pointer;
@@ -13,10 +13,10 @@ const SuggestionsWrapper = styled.ul`
   border: 1px solid #c8ccd0;
   border-radius: 3px;
   box-shadow: 0 1px 5px rgba(27, 31, 35, .15);
+  color: #506176;
 
   li {
     padding: 4px 8px;
-    border-bottom: 1px solid #e1e4e8;
 
     &:first-child {
       border-top-left-radius: 2px;
@@ -29,11 +29,10 @@ const SuggestionsWrapper = styled.ul`
     }
 
     &:hover, &[aria-selected=true] {
-      color: white;
-      background-color: #0366d6;
+      color: #1E2134;
     }
   }
-`
+`;
 
 interface ClassArray extends Array<ClassValue> {
 } // tslint:disable-line no-empty-interface
