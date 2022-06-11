@@ -10,19 +10,13 @@ export class TextAreaTextController implements TextController {
   }
 
   replaceSelection(text: string): TextState {
-    const textArea = this.textAreaRef.current;
-    if (!textArea) {
-      throw new Error("TextAreaRef is not set");
-    }
+    const { el: textArea } = this.ensureTextArea();
     insertText(textArea, text);
     return getStateFromTextArea(textArea);
   }
 
   setSelectionRange(selection: SelectionRange): TextState {
-    const textArea = this.textAreaRef.current;
-    if (!textArea) {
-      throw new Error("TextAreaRef is not set");
-    }
+    const { el: textArea } = this.ensureTextArea();
     textArea.focus();
     textArea.selectionStart = selection.start;
     textArea.selectionEnd = selection.end;
@@ -30,21 +24,42 @@ export class TextAreaTextController implements TextController {
   }
 
   getState(): TextState {
+    const { el: textArea } = this.ensureTextArea();
+    return getStateFromTextArea(textArea);
+  }
+
+  ensureTextArea() {
     const textArea = this.textAreaRef.current;
     if (!textArea) {
       throw new Error("TextAreaRef is not set");
     }
-    return getStateFromTextArea(textArea);
+
+    return {
+      el: textArea,
+      ref: this.textAreaRef
+    };
+  }
+
+  get textArea() {
+    return this.ensureTextArea().el;
   }
 }
 
 export function getStateFromTextArea(textArea: HTMLTextAreaElement): TextState {
+  const re = /\r?\n|\r/;
+  const { value } = textArea;
+
+  const lineNumber = value.substr(0, textArea.selectionStart).split(re).length;
+  const lineText = value.split(re)[lineNumber - 1];
+
   return {
     selection: {
       start: textArea.selectionStart,
       end: textArea.selectionEnd
     },
-    text: textArea.value
+    text: value,
+    lineNumber,
+    lineText
   };
 }
 
