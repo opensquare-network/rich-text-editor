@@ -1,3 +1,4 @@
+import React from "react";
 import { SelectionRange } from "./SelectionRange";
 
 /**
@@ -12,6 +13,9 @@ export interface TextState {
    * The section of the text that is selected
    */
   selection: SelectionRange;
+
+  lineNumber: number;
+  lineText: string;
 }
 
 export interface TextController {
@@ -31,4 +35,6 @@ export interface TextController {
    * Get the current text state
    */
   getState(): TextState;
+
+  textArea: React.RefObject<HTMLTextAreaElement>["current"];
 }
