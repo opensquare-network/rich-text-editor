@@ -15,5 +15,6 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "lib": ["ES2015", "DOM"]
   }
 }
