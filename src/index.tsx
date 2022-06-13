@@ -50,7 +50,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       ul: unorderedListCommand,
       underline: underlineCommand,
 
-      newLineAndContinueMarkdownList: newLineAndContinueMarkdownListCommand,
+      newLineAndIndentContinueMarkdownList:
+        newLineAndIndentContinueMarkdownListCommand,
       newLine: newLineCommand
     }
   });
