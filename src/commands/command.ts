@@ -7,7 +7,7 @@ export interface ExecuteOptions {
 
 export interface Command {
   shouldUndo?: (options: Pick<ExecuteOptions, "initialState">) => boolean;
-  execute: (options: ExecuteOptions) => void;
+  execute: (options: ExecuteOptions) => void | Promise<void>;
   undo?: (options: ExecuteOptions) => void;
 }
 

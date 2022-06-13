@@ -7,6 +7,8 @@ import { useTextAreaMarkdownEditor } from "./hooks/use-markdown-editor";
 import { orderedListCommand } from "./commands/markdown-commands/orderedListCommand";
 import { unorderedListCommand } from "./commands/markdown-commands/unorderedListCommand";
 import { underlineCommand } from "./commands/markdown-commands/underlineCommand";
+import { newLineAndIndentContinueMarkdownListCommand } from "./commands/markdown-commands/newLineAndIndentContinueMarkdownListCommand";
+import { newLineCommand } from "./commands/markdown-commands/newLineCommand";
 import * as React from "react";
 import { MarkdownPreview } from "./components/MarkdownPreview";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
@@ -46,7 +48,11 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       link: linkCommand,
       ol: orderedListCommand,
       ul: unorderedListCommand,
-      underline: underlineCommand
+      underline: underlineCommand,
+
+      newLineAndIndentContinueMarkdownList:
+        newLineAndIndentContinueMarkdownListCommand,
+      newLine: newLineCommand
     }
   });
 
@@ -117,6 +123,13 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     ref, suggestions, setShowSuggestion, showSuggestion, setFocusIndex, focusIndex, setCaret
   });
 
+  const onEnterNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      commandController.executeCommand("newLineAndIndentContinueMarkdownList");
+    }
+  };
+
   return (
     <EditorWrapper>
       <EditorHeader {...{ editStatus, setEditStatus, isPreview, commandController }} />
@@ -127,7 +140,10 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           onChange(event.target.value);
           adjustHeight();
         }}
-        onKeyDown={handleKeyDown}
+        onKeyDown={e => {
+          handleKeyDown(e);
+          onEnterNewLine(e);
+        }}
         onKeyPress={handleKeyPress}
         placeholder="Please text here..."
         minHeight={minHeight}
