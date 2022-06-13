@@ -11,15 +11,14 @@ export const newLineAndIndentContinueMarkdownListCommand: Command = {
   execute(api) {
     const newLine = () => newLineCommand.execute(api);
 
-    const { initialState, textApi } = api;
+    const { initialState: state, textApi } = api;
     const { textArea } = textApi;
     if (!textArea) {
       return;
     }
 
-    const { lineText: line } = initialState;
+    const { lineText: line } = state;
 
-    const state = textApi.getState();
     const inList = listRE.exec(line);
 
     if (!inList) {
@@ -58,7 +57,5 @@ export const newLineAndIndentContinueMarkdownListCommand: Command = {
       if (numbered) {
       }
     }
-
-    return;
   }
 };
