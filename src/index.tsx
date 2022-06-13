@@ -7,7 +7,7 @@ import { useTextAreaMarkdownEditor } from "./hooks/use-markdown-editor";
 import { orderedListCommand } from "./commands/markdown-commands/orderedListCommand";
 import { unorderedListCommand } from "./commands/markdown-commands/unorderedListCommand";
 import { underlineCommand } from "./commands/markdown-commands/underlineCommand";
-import { newLineAndContinueMarkdownListCommand } from "./commands/markdown-commands/newLineAndContinueMarkdownListCommand";
+import { newLineAndIndentContinueMarkdownListCommand } from "./commands/markdown-commands/newLineAndIndentContinueMarkdownListCommand";
 import { newLineCommand } from "./commands/markdown-commands/newLineCommand";
 import * as React from "react";
 import { MarkdownPreview } from "./components/MarkdownPreview";
@@ -125,7 +125,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const onEnterNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      commandController.executeCommand("newLineAndContinueMarkdownList");
+      commandController.executeCommand("newLineAndIndentContinueMarkdownList");
     }
   };
 

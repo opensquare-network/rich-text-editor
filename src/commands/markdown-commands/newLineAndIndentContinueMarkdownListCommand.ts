@@ -7,7 +7,7 @@ const listRE = /^(\s*)(>[> ]*|[*+-] \[[x ]\]\s|[*+-]\s|(\d+)([.)]))(\s*)/;
 const emptyListRE = /^(\s*)(>[> ]*|[*+-] \[[x ]\]|[*+-]|(\d+)[.)])(\s*)$/;
 const unorderedListRE = /[*+-]\s/;
 
-export const newLineAndContinueMarkdownListCommand: Command = {
+export const newLineAndIndentContinueMarkdownListCommand: Command = {
   execute(api) {
     const newLine = () => newLineCommand.execute(api);
 
