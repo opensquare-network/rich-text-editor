@@ -19,6 +19,7 @@ import {
 } from "./components/EditorComponents";
 import EditorHeader from "./components/EditorHeader";
 import { getHandlers } from "./util/eventHandlers";
+import WYSIWYG from "./WYSIWYG";
 
 export interface Suggestion {
   preview: React.ReactNode;
@@ -166,5 +167,6 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     </EditorWrapper>
   );
 };
+export { WYSIWYG };
 
 export default Editor;

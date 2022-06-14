@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import MarkdownEditor from "../src";
 import { useState } from "react";
 import "./styles/style.css";
+import WYSIWYG from "../src/WYSIWYG";
 
 export type DemoProps = {};
 
@@ -34,12 +35,16 @@ const suggestions = [{
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
-  return <div style={{maxWidth:800}}> <MarkdownEditor
-    value={content}
-    onChange={(value)=>{setContent(value)}}
-    suggestions={suggestions}
-    minHeight={150}
-  />
+  return <div style={{maxWidth:800}}>
+    <br/>
+    <WYSIWYG/>
+    <br/>
+    <MarkdownEditor
+      value={content}
+      onChange={(value)=>{setContent(value)}}
+      suggestions={suggestions}
+      minHeight={150}
+    />
   </div>
 };
 
