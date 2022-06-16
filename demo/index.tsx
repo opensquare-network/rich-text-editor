@@ -37,7 +37,7 @@ const html = `<p><a href="https://www.baidu.com/">https://www.baidu.com/</a></p>
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
-  const [htmlContent, setHtmlContent] = useState(html);
+  const [htmlContent, setHtmlContent] = useState("");
   return <div style={{maxWidth:800}}>
     <br/>
     <div>
