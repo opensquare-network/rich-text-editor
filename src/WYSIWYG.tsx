@@ -8,7 +8,13 @@ import Quill, {
   StringMap,
   Sources
 } from "quill";
+// @ts-ignore
+import Mention from "quill-mention";
 import styled, { css } from "styled-components";
+import { Delta } from "framer-motion";
+
+
+Quill.register("modules/mention", Mention);
 
 export interface OptionalAttributes {
   attributes?: StringMap;
@@ -103,18 +109,19 @@ const Wrapper = styled.div<Props>`
   position: relative;
   border: 1px solid #E0E4EB;
   border-radius: 4px;
+
   .ql-formats {
     ${(props) =>
             props.isPreview &&
             css`
-            display: none !important;
-          `};
+              display: none !important;
+            `};
   }
-  
+
   .ql-editor {
     min-height: 200px;
   }
-  
+
   .ql-toolbar {
     padding-left: 210px;
   }
@@ -1041,101 +1048,6 @@ const Wrapper = styled.div<Props>`
         }
       }
     }
-
-    //.ql-bold::before {
-    //  display: block;
-    //  content: '';
-    //  width: 24px;
-    //  height: 24px;
-    //  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8 6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h5.5a3.5 3.5 0 0 0 1.852-6.47A3.5 3.5 0 0 0 12.5 6H8zm4.5 5a1.5 1.5 0 0 0 0-3H9v3h3.5zM9 13v3h4.5a1.5 1.5 0 0 0 0-3H9z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //}
-    //
-    //.ql-underline::before {
-    //  display: block;
-    //  content: '';
-    //  width: 24px;
-    //  height: 24px;
-    //  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.297 5.308a.74.74 0 0 1 .74.74v5.239a2.962 2.962 0 1 0 5.925 0V6.048a.74.74 0 0 1 1.481 0v5.239a4.443 4.443 0 1 1-8.886 0V6.048a.74.74 0 0 1 .74-.74zM6.076 17.952a.74.74 0 0 1 .74-.74h10.367a.74.74 0 1 1 0 1.48H6.816a.74.74 0 0 1-.74-.74z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //}
-    //
-    //.ql-strike::before {
-    //  display: block;
-    //  content: '';
-    //  width: 24px;
-    //  height: 24px;
-    //  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.134 13.604c.185.414.278.875.278 1.38 0 1.077-.42 1.919-1.26 2.525-.842.605-2.003.908-3.484.908-1.166 0-2.32-.24-3.465-.72a.733.733 0 0 1-.442-.681c0-.59.644-.964 1.194-.753a7.052 7.052 0 0 0 2.549.483c2.046 0 3.072-.588 3.08-1.763a1.774 1.774 0 0 0-.13-.696 2.013 2.013 0 0 0-.487-.684H4.78V12h14.44v1.604l-3.086.001zm-3.271-2.406h-4.37a3.27 3.27 0 0 1-.386-.42c-.346-.447-.52-.988-.52-1.625 0-.991.374-1.834 1.121-2.529.749-.695 1.905-1.042 3.47-1.042 1.028 0 2.018.2 2.969.6a.697.697 0 0 1 .418.648c0 .565-.62.928-1.156.753a6.422 6.422 0 0 0-2.01-.312c-1.99 0-2.983.628-2.983 1.882 0 .337.175.631.524.882.35.251.782.45 1.294.602.498.144 1.04.332 1.629.56z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //}
-    //
-    //.ql-link::before {
-    //  display: block;
-    //  content: '';
-    //  width: 24px;
-    //  height: 24px;
-    //  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11.775 7.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a2 2 0 1 1 2.83 2.83l-2.5 2.5a2 2 0 0 1-2.83 0 .75.75 0 0 0-1.06 1.06 3.5 3.5 0 0 0 4.95 0l2.5-2.5a3.5 3.5 0 0 0-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 0 1 0-2.83l2.5-2.5a1.998 1.998 0 0 1 2.83 0 .75.75 0 0 0 1.06-1.06 3.5 3.5 0 0 0-4.95 0l-2.5 2.5a3.5 3.5 0 1 0 4.95 4.95l1.25-1.25a.75.75 0 0 0-1.06-1.06l-1.25 1.25a2 2 0 0 1-2.83 0z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //}
-    //
-    //.ql-image::before {
-    //  display: block;
-    //  content: '';
-    //  width: 24px;
-    //  height: 24px;
-    //  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_5445_38250)'%3E%3Cpath d='M18 14v2h2v1.333h-2v2h-1.333v-2h-2V16h2v-2H18zm.006-8c.365 0 .66.297.66.662v6.233a3.991 3.991 0 0 0-1.332-.228V7.333H6.667v9.334l6.195-6.196a.666.666 0 0 1 .88-.056l.062.057 2.364 2.367A4.002 4.002 0 0 0 13.562 18L5.995 18a.662.662 0 0 1-.662-.662V6.662A.667.667 0 0 1 5.995 6h12.01zM9.334 8.667a1.333 1.333 0 1 1 0 2.666 1.333 1.333 0 0 1 0-2.666z' fill='%23506176'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_5445_38250'%3E%3Cpath fill='%23fff' transform='translate(4 4)' d='M0 0h16v16H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E") no-repeat center/100%;
-    //}
-    //.ql-video::before {
-    //  display: block;
-    //  content: '';
-    //  width: 24px;
-    //  height: 24px;
-    //  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M10.991 5.35h-4.99a.65.65 0 0 0-.65.65v12c0 .359.29.65.65.65h12a.65.65 0 0 0 .65-.65V9 5.999a.65.65 0 0 0-.65-.65h-7.01zm2.795 1.3h-2.438l-1.133 1.7h2.437l1.134-1.7zm1.562 0l-1.133 1.7h3.135v-1.7h-2.002zm2.002 3H6.65v7.7h10.7v-7.7zm-10.7-1.3h2.002l1.134-1.7H6.65v1.7zm3.858 2.4a.65.65 0 0 1 .65 0l3.5 2.02a.65.65 0 0 1 0 1.126l-3.5 2.02a.65.65 0 0 1-.975-.562v-4.042a.65.65 0 0 1 .325-.563zm.975 1.688v1.79l1.55-.895-1.55-.895z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //}
-    //
-    //.ql-blockquote::before {
-    //  display: block;
-    //  content: '';
-    //  width: 24px;
-    //  height: 24px;
-    //  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.055 15.547C6.37 14.817 6 13.999 6 12.674c0-2.334 1.638-4.425 4.02-5.46l.595.92c-2.223 1.202-2.658 2.763-2.831 3.747.358-.186.827-.25 1.286-.207 1.203.11 2.15 1.098 2.15 2.325a2.333 2.333 0 0 1-2.333 2.334 2.58 2.58 0 0 1-1.832-.786zm6.667 0c-.687-.73-1.055-1.548-1.055-2.873 0-2.334 1.638-4.425 4.02-5.46l.595.92c-2.223 1.202-2.658 2.763-2.831 3.747.358-.186.826-.25 1.286-.207 1.202.11 2.15 1.098 2.15 2.325a2.333 2.333 0 0 1-2.333 2.334 2.58 2.58 0 0 1-1.832-.786z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //}
-    //
-    //.ql-code-block::before {
-    //  display: block;
-    //    content: '';
-    //    width: 24px;
-    //    height: 24px;
-    //    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.72 7.22a.75.75 0 0 1 1.06 1.06L6.06 12l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25zm6.56 0a.75.75 0 1 0-1.06 1.06L17.94 12l-3.72 3.72a.75.75 0 1 0 1.06 1.06l4.25-4.25a.75.75 0 0 0 0-1.06l-4.25-4.25z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //  }
-    //
-    //  .ql-list[value="bullet"]::before {
-    //      display: block;
-    //      content: '';
-    //      width: 24px;
-    //      height: 24px;
-    //      background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3.75-1.5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zM7 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //  }
-    //  
-    //  .ql-list[value="ordered"] {
-    //    display: block;
-    //    content: '';
-    //    width: 24px;
-    //    height: 24px;
-    //    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_5445_38276)'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6.003 6.5a.5.5 0 0 0-.723-.447l-1.003.5a.5.5 0 1 0 .446.895l.28-.14V10H4.5a.5.5 0 1 0 0 1h2.006a.5.5 0 0 0 0-1h-.503V6.5zM9 7.25a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 9 7.25zm0 5a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1-.75-.75zm0 5a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1-.75-.75zm-4.076-2.93l.003-.004a.851.851 0 0 1 .144-.153A.66.66 0 0 1 5.5 14c.195 0 .306.068.374.146a.57.57 0 0 1 .128.376c0 .453-.269.682-.8 1.078l-.035.025C4.692 15.98 4 16.494 4 17.5a.5.5 0 0 0 .5.5h2.003a.5.5 0 0 0 0-1H5.146c.132-.197.351-.372.654-.597l.047-.035c.47-.35 1.156-.858 1.156-1.845 0-.365-.118-.744-.377-1.038-.268-.303-.658-.484-1.126-.484-.48 0-.84.202-1.068.392a1.855 1.855 0 0 0-.348.384l-.007.011-.002.005-.001.001-.001.001a.5.5 0 0 0 .851.525zm-.424-.265l-.427-.26.427.26z' fill='%23506176'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_5445_38276'%3E%3Cpath fill='%23fff' transform='translate(4 4)' d='M0 0h16v16H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E") no-repeat center/100%;
-    //  }
-    //
-    //  .ql-indent[value="-1"] {
-    //    display: block;
-    //    content: '';
-    //    width: 24px;
-    //    height: 24px;
-    //    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.464 6.887c0-.4.325-.726.727-.726H17.81a.726.726 0 1 1 0 1.453H6.19a.726.726 0 0 1-.726-.727zm0 10.893c0-.4.325-.726.727-.726H17.81a.726.726 0 0 1 0 1.453H6.19a.726.726 0 0 1-.726-.727zm5.81-3.63c0-.402.325-.727.726-.727h5.81a.726.726 0 1 1 0 1.453H12a.726.726 0 0 1-.726-.727zm0-3.632c0-.4.325-.726.726-.726h5.81a.726.726 0 1 1 0 1.453H12a.726.726 0 0 1-.726-.727zm-5.305 2.258a.587.587 0 0 1 0-.884l2.01-1.76a.235.235 0 0 1 .39.178v4.048c0 .202-.237.31-.39.177l-2.01-1.76z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //  }
-    //
-    //  .ql-indent[value="+1"] {
-    //    display: block;
-    //    content: '';
-    //    width: 24px;
-    //    height: 24px;
-    //    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.464 6.885c0-.4.325-.726.726-.726h11.62a.726.726 0 1 1 0 1.453H6.19a.726.726 0 0 1-.726-.727zm0 10.893c0-.401.325-.726.726-.726h11.62a.726.726 0 1 1 0 1.452H6.19a.726.726 0 0 1-.726-.726zm5.81-3.631c0-.401.325-.726.726-.726h5.81a.726.726 0 1 1 0 1.452H12a.726.726 0 0 1-.726-.726zm0-3.63c0-.402.325-.727.726-.727h5.81a.726.726 0 1 1 0 1.452H12a.726.726 0 0 1-.726-.726zm-3.41 1.373a.587.587 0 0 1 0 .883l-2.01 1.76a.235.235 0 0 1-.39-.177v-4.049c0-.201.237-.31.39-.176l2.01 1.759z' fill='%23506176'/%3E%3C/svg%3E") no-repeat center/100%;
-    //  }
   }
 
   select.ql-header {
@@ -1498,7 +1410,18 @@ icons["table"] = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xm
 </svg>
 `;
 
-export default function WYSIWYG(props: any) {
+interface EditorProps {
+  value?: string;
+  onChange?: (value: string) => void;
+  mentions?: any[];
+}
+
+const isDelta = (value: any): boolean => {
+  return value && value.ops;
+};
+
+export default function WYSIWYG(props: EditorProps) {
+  const [quill, setQuill] = useState<Quill | null>(null);
 
   const [isPreview, setIsPreview] = useState(false);
 
@@ -1512,6 +1435,33 @@ export default function WYSIWYG(props: any) {
         [{ list: "ordered" }, { list: "bullet" }],
         [{ indent: "-1" }, { indent: "+1" }]
       ]
+    },
+    mention: {
+      allowedChars: /^[A-Za-z\s]*$/,
+      mentionDenotationChars: ["@"],
+      source: function(searchTerm: any, renderList: any, mentionChar: any) {
+        const atValues: any = [
+          { id: "123123", value: "456456" }
+        ];
+
+        let values;
+        if (mentionChar === "@") {
+          values = atValues;
+        }
+        if (searchTerm.length === 0) {
+          renderList(values, searchTerm);
+        } else {
+          const matches = [];
+          for (let i = 0; i < values.length; i++) {
+            if (
+              ~values[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())
+            ) {
+              matches.push(values[i]);
+            }
+          }
+          renderList(matches, searchTerm);
+        }
+      }
     }
   }), []);
 
@@ -1520,64 +1470,17 @@ export default function WYSIWYG(props: any) {
       bounds: props.bounds,
       formats: props.formats,
       modules: defaultModules,
-      placeholder: props.placeholder,
+      placeholder: "",
       readOnly: props.readOnly,
       scrollingContainer: props.scrollingContainer,
       tabIndex: props.tabIndex,
-      theme: props.theme ?? "snow"
+      theme: "snow"
     };
   };
 
   const generation = 0;
 
   const [editingArea, setEditingArea] = React.useState<React.ReactInstance | null>(null);
-
-
-//   const onEditorChangeText = (
-//     value: string,
-//     delta: DeltaStatic,
-//     source: Sources,
-//     editor: UnprivilegedEditor,
-// ): void => {
-//     if (editor) return;
-//
-//   // We keep storing the same type of value as what the user gives us,
-//   // so that value comparisons will be more stable and predictable.
-//   const nextContents = isDelta(value)
-//     ? editor.getContents()
-//     : editor.getHTML();
-//
-//   if (nextContents !== getEditorContents()) {
-//     // Taint this `delta` object, so we can recognize whether the user
-//     // is trying to send it back as `value`, preventing a likely loop.
-//     lastDeltaChangeSet = delta;
-//
-//     value = nextContents;
-//     props?.onChange?.(value, delta, source, editor);
-//   }
-// }
-
-  // const onEditorChange = (
-  //   eventName: 'text-change' | 'selection-change',
-  //   rangeOrDelta: Range ,
-  //   oldRangeOrDelta: Range ,
-  //   source: Sources,
-  // ) => {
-  //   if (eventName === 'text-change') {
-  //     onEditorChangeText?.(
-  //       editor!.root.innerHTML,
-  //       rangeOrDelta as DeltaStatic,
-  //       source,
-  //       this.unprivilegedEditor!
-  //     );
-  //   } else if (eventName === 'selection-change') {
-  //     onEditorChangeSelection?.(
-  //       rangeOrDelta as RangeStatic,
-  //       source,
-  //       unprivilegedEditor!
-  //     );
-  //   }
-  // };
 
   const setEditorTabIndex = (editor: Quill, tabIndex: number) => {
     if (editor?.scroll?.domNode) {
@@ -1588,10 +1491,22 @@ export default function WYSIWYG(props: any) {
   const hookEditor = (editor: Quill) => {
     // Expose the editor on change events via a weaker, unprivileged proxy
     // object that does not allow accidentally modifying editor state.
-    // unprivilegedEditor = makeUnprivilegedEditor(editor);
+    // const unprivilegedEditor = makeUnprivilegedEditor(editor);
     // Using `editor-change` allows picking up silent updates, like selection
     // changes on typing.
-    // editor.on('editor-change', onEditorChange);
+    // @ts-ignore
+    editor.on("editor-change", (
+      eventName: "text-change" | "selection-change",
+      rangeOrDelta: Delta,
+      oldRangeOrDelta: Delta,
+      source: Sources
+    ) => {
+      if(eventName === "text-change"){
+        if (props?.onChange) {
+          props?.onChange(editor.root.innerHTML);
+        }
+      }
+    });
   };
 
 
@@ -1600,12 +1515,13 @@ export default function WYSIWYG(props: any) {
    configuration, have its events bound,
    */
   const createEditor = (element: Element, config: QuillOptions) => {
-    const editor = new Quill(element, config);
+    const editorInstance = new Quill(element, config);
+    setQuill(editorInstance);
     if (config.tabIndex != null) {
-      setEditorTabIndex(editor, config.tabIndex);
+      setEditorTabIndex(editorInstance, config.tabIndex);
     }
-    hookEditor(editor);
-    return editor;
+    hookEditor(editorInstance);
+    return editorInstance;
   };
 
   const properties = {
@@ -1618,7 +1534,10 @@ export default function WYSIWYG(props: any) {
   useEffect(() => {
     if (editingArea) {
       const element = ReactDOM.findDOMNode(editingArea);
-      createEditor(element as Element, getEditorConfig());
+      const editor = createEditor(element as Element, getEditorConfig());
+      if (props.value) {
+        editor.clipboard.dangerouslyPasteHTML(props.value);
+      }
     }
   }, [editingArea]);
 

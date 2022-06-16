@@ -33,11 +33,17 @@ const suggestions = [{
     value: "edf"
   }];
 
+const html = `<p><a href="https://www.baidu.com/">https://www.baidu.com/</a></p><h1>heading 1</h1><p><strong>bold text</strong><em>italic text</em><code>inline code</code></p><ul><li>bullet 1</li></ul><ol><li>numbered 1</li></ol><pre><code class="language-bash">echo "hello"</code></pre><blockquote><p>quote text</p></blockquote>`;
+
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
+  const [htmlContent, setHtmlContent] = useState(html);
   return <div style={{maxWidth:800}}>
     <br/>
-    <WYSIWYG/>
+    <div>
+      {htmlContent}
+    </div>
+    <WYSIWYG value={htmlContent} onChange={value => setHtmlContent(value)} />
     <br/>
     <MarkdownEditor
       value={content}
