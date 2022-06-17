@@ -11,7 +11,8 @@
     "lint": "pretty-quick",
     "tsc": "tsc",
     "build": "rollup -c",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
