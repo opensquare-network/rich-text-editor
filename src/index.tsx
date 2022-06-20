@@ -20,6 +20,7 @@ import {
 import EditorHeader from "./components/EditorHeader";
 import { getHandlers } from "./util/eventHandlers";
 import WYSIWYG from "./WYSIWYG";
+import UniverseEditor from "./universeEditor";
 
 export interface Suggestion {
   preview: React.ReactNode;
@@ -31,13 +32,15 @@ export type DemoProps = {
   onChange: (value: string) => void;
   suggestions?: Suggestion[],
   minHeight?: number,
+  theme?: "opensquare" | "subsquare",
 };
 
 export const Editor: React.FunctionComponent<DemoProps> = ({
                                                              value,
                                                              onChange,
                                                              suggestions,
-                                                             minHeight = 144
+                                                             minHeight = 144,
+                                                             theme= "opensquare",
                                                            }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
@@ -132,8 +135,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   };
 
   return (
-    <EditorWrapper>
-      <EditorHeader {...{ editStatus, setEditStatus, isPreview, commandController }} />
+    <EditorWrapper theme={theme}>
+      <EditorHeader {...{ theme, editStatus, setEditStatus, isPreview, commandController }} />
       <Textarea
         ref={ref}
         value={value}
@@ -150,9 +153,10 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         minHeight={minHeight}
         height={height}
         hide={isPreview}
+        theme={theme}
       />
       {
-        isPreview && <MarkdownPreview content={value} minHeight={minHeight}/>
+        isPreview && <MarkdownPreview content={value} minHeight={minHeight} theme={theme}/>
       }
       {
         (showSuggestion && suggestions) && <SuggestionsDropdown
@@ -167,6 +171,6 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     </EditorWrapper>
   );
 };
-export { WYSIWYG };
+export { WYSIWYG, UniverseEditor };
 
 export default Editor;

@@ -1,13 +1,10 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
 import MarkdownEditor from "../src";
-import { useEffect, useState } from "react";
-import "./styles/style.css";
+import { useState } from "react";
 import WYSIWYG from "../src/WYSIWYG";
 import styled from "styled-components";
 import Toggle from "../src/components/Toggle";
 import MarkdownIcon from "../src/components/MarkdownIcon";
-import UniverseEditor from "../src/universeEditor";
 
 export type DemoProps = {};
 
@@ -37,8 +34,6 @@ const suggestions = [{
     value: "edf"
   }];
 
-const html = `<p><a href="https://www.baidu.com/">https://www.baidu.com/</a></p><h1>heading 1</h1><p><strong>bold text</strong><em>italic text</em><code>inline code</code></p><ul><li>bullet 1</li></ul><ol><li>numbered 1</li></ol><pre><code class="language-bash">echo "hello"</code></pre><blockquote><p>quote text</p></blockquote>`;
-
 const ToggleWrapper = styled.div`
   display: flex;
   justify-content: end;
@@ -51,7 +46,7 @@ const ToggleWrapper = styled.div`
   border-radius: 4px;
 `;
 
-export const Demo: React.FunctionComponent<DemoProps> = () => {
+export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
   const [contentType, setContentType] = useState("markdown");
   const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
@@ -69,9 +64,28 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
     setContentType(newContentType);
   };
 
-  return <UniverseEditor/>;
+  return <div style={{ maxWidth: 800 }}>
+    {
+      contentType === "markdown" ?
+        <MarkdownEditor
+          value={content}
+          onChange={(value) => {
+            setContent(value);
+          }}
+          suggestions={suggestions}
+          minHeight={200}
+          theme={"subsquare"}
+        />
+        :
+        <WYSIWYG value={htmlContent} onChange={value => setHtmlContent(value)} />
+    }
+    <ToggleWrapper>
+      <MarkdownIcon/>
+      <Toggle size="small"
+              isOn={contentType === "markdown"}
+              onToggle={onMarkdownSwitch} />
+    </ToggleWrapper>
+  </div>;
 };
 
-ReactDOM.render(<Demo />, document.getElementById("root"));
-
-export default Demo;
+export default UniverseEditor;

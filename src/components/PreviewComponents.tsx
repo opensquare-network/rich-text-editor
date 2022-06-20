@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 interface Props {
   minHeight?:number
+  theme?: "opensquare" | "subsquare"
 }
 
 export const MarkdownPreviewWrapper = styled.div<Props>`
@@ -10,6 +11,11 @@ export const MarkdownPreviewWrapper = styled.div<Props>`
   flex-basis: 100%;
   min-height: 144px;
   background-color: #fbfcfe;
+  ${(props) =>
+          props.theme === "subsquare" &&
+          css`
+            background-color: white;
+          `};
   padding: 12px;
 
   .markdown-body {

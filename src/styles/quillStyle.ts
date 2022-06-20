@@ -7,6 +7,7 @@ export default css`
 
   ul.ql-mention-list li{
     all: unset;
+    display: block;
   }
 
   .ql-mention-list-container {

@@ -3,14 +3,13 @@ import ReactDOM from "react-dom";
 import quillStyle from "./styles/quillStyle";
 import { QuillOptionsStatic, RangeStatic, BoundsStatic, StringMap, Sources } from "quill";
 // @ts-ignore
-import Mention from "quill-mention";
-// @ts-ignore
 import ImageResize from "quill-image-resize-module";
 import styled from "styled-components";
 import { Delta } from "framer-motion";
 import * as QuillNamespace from "quill";
 import StateToggle from "./components/StateToggle";
 import overrideIcons from "./util/overrideIcons";
+import Mention from "./quillModules/mention";
 
 let Quill: any = QuillNamespace;
 
@@ -112,7 +111,8 @@ export default function WYSIWYG(props: EditorProps) {
       source: function(searchTerm: any, renderList: any, mentionChar: any) {
         console.log(123);
         const atValues: any = [
-          { id: "123123", value: "456456" }
+          { id: "123123", value: "456456" },
+          { id: "123123", value: "789798" }
         ];
 
         let values;
@@ -173,6 +173,7 @@ export default function WYSIWYG(props: EditorProps) {
       if (eventName === "text-change") {
         if (props?.onChange) {
           props?.onChange(editor.root.innerHTML);
+          console.log(editor)
         }
       }
     });

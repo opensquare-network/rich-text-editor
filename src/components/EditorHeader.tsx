@@ -10,18 +10,20 @@ import Img from "../icons/img";
 import Code from "../icons/code";
 
 
-export default function EditorHeader({ editStatus, setEditStatus, isPreview, commandController }) {
-  return <ToolBar>
-    <TabsWrapper>
+export default function EditorHeader({ theme, editStatus, setEditStatus, isPreview, commandController }) {
+  return <ToolBar theme={theme}>
+    <TabsWrapper theme={theme}>
       <Tab
         active={editStatus === "write"}
         onClick={() => setEditStatus("write")}
+        theme={theme}
       >
         Write
       </Tab>
       <Tab
         active={editStatus === "preview"}
         onClick={() => setEditStatus("preview")}
+        theme={theme}
       >
         Preview
       </Tab>
