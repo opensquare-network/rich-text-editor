@@ -9,7 +9,7 @@ export const EditorWrapper = styled.div`
   ${(props) =>
           props.theme === "subsquare" &&
           css`
-            border: 1px solid #E0E4EB;
+            border: none;
           `};
 `;
 
@@ -28,7 +28,6 @@ export const ToolBar = styled.div`
             padding-left: 0;
             padding-right: 20px;
             height: 40px;
-            border-radius: 4px;
             border-bottom: 1px solid #E0E4EB;
             position: relative;
             > div:first-child{
@@ -57,7 +56,6 @@ export const TabsWrapper = styled.div`
           css`
             position: absolute;
             left: 0;
-            top: 1px;
           `};
 `;
 
@@ -79,6 +77,12 @@ export const Tab = styled.button<TabProps>`
             line-height: 16px;
             border-bottom: none;
             color: #9DA9BB;
+            :last-child{
+              box-shadow: 1px 0 0 0  #E0E4EB;
+            }
+            :hover{
+              color: #506176;
+            }
           `};
   ${(props) =>
           props.active && props.theme === "opensquare" &&
@@ -90,6 +94,16 @@ export const Tab = styled.button<TabProps>`
           css`
             background-color: white;
             color: #1E2134;
+            border-bottom: 17px solid white;
+            :first-child{
+              box-shadow: 1px 0 0 0  #E0E4EB;
+            }
+            :last-child{
+              box-shadow: -1px 0 0 0  #E0E4EB, 1px 0 0 0  #E0E4EB;
+            }
+            :hover{
+              color: #1E2134;
+            }
           `};
   cursor: pointer;
   /* mobile */

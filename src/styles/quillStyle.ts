@@ -2,7 +2,6 @@ import { css } from "styled-components";
 
 export default css`
   position: relative;
-  border: 1px solid #E0E4EB;
   border-radius: 4px;
 
   ul.ql-mention-list li{

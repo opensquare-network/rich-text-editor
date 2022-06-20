@@ -40,15 +40,13 @@ const ToggleWrapper = styled.div`
   align-items: center;
   gap: 8px;
   height: 40px;
-  border: 1px solid #EBEEF4;
-  border-top: none;
+  border-top: 1px solid #EBEEF4;
   padding-right: 16px;
-  border-radius: 4px;
 `;
 
 export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
-  const [contentType, setContentType] = useState("markdown");
+  const [contentType, setContentType] = useState("html");
   const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
 
   const onMarkdownSwitch = () => {
@@ -64,7 +62,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
     setContentType(newContentType);
   };
 
-  return <div style={{ maxWidth: 800 }}>
+  return <div style={{ maxWidth: 800, border: "1px solid #EBEEF4", borderRadius: 4 }}>
     {
       contentType === "markdown" ?
         <MarkdownEditor
@@ -80,7 +78,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
         <WYSIWYG value={htmlContent} onChange={value => setHtmlContent(value)} />
     }
     <ToggleWrapper>
-      <MarkdownIcon/>
+      <MarkdownIcon />
       <Toggle size="small"
               isOn={contentType === "markdown"}
               onToggle={onMarkdownSwitch} />
