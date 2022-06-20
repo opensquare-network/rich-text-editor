@@ -1139,7 +1139,7 @@ export default css`
     font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     padding: 8px;
     padding-left: 200px;
-    height: 40px;
+    height: 41px;
     border-bottom: 1px solid #E0E4EB;
   }
 

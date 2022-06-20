@@ -149,7 +149,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           onEnterNewLine(e);
         }}
         onKeyPress={handleKeyPress}
-        placeholder="Please text here..."
+        placeholder=""
         minHeight={minHeight}
         height={height}
         hide={isPreview}

@@ -214,7 +214,7 @@ export default function WYSIWYG(props: EditorProps) {
       <button onClick={() => setIsPreview(false)} className={isPreview ? "" : "active"}>Write
       </button>
       <VerticalDivider />
-      <button onClick={() => setIsPreview(true)} className={isPreview ? "active" : ""}>Preview
+      <button style={{paddingLeft:11}} onClick={() => setIsPreview(true)} className={isPreview ? "active" : ""}>Preview
       </button>
       <VerticalDivider />
     </StateToggle>

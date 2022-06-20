@@ -7,6 +7,7 @@ const StateToggle = styled.div`
   button {
     all: unset;
     padding: 12px;
+    padding-bottom: 13px;
     font-size: 14px;
     line-height: 14px;
     font-weight: 500;
@@ -19,8 +20,11 @@ const StateToggle = styled.div`
 
   button.active {
     background-color: #ffffff;
-    //border: 1px solid #ffffff;
+    box-shadow: 0 1px 0 0 white;
     color: #1E2134;
+    :hover {
+      color: #1E2134;
+    }
   }
 
   button:hover {
