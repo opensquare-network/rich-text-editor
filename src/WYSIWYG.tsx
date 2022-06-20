@@ -2,20 +2,18 @@ import React, { useEffect, useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import quillStyle from "./styles/quillStyle";
 import { QuillOptionsStatic, RangeStatic, BoundsStatic, StringMap, Sources } from "quill";
-// @ts-ignore
-import ImageResize from "quill-image-resize-module";
 import styled from "styled-components";
 import { Delta } from "framer-motion";
 import * as QuillNamespace from "quill";
 import StateToggle from "./components/StateToggle";
 import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
+import ImageResize from "./quillModules/ImageResize";
 
 let Quill: any = QuillNamespace;
 
 Quill.register("modules/mention", Mention);
-
-// Quill.register("modules/ImageResize", ImageResize);
+Quill.register("modules/ImageResize", ImageResize);
 
 export interface OptionalAttributes {
   attributes?: StringMap;
@@ -133,10 +131,10 @@ export default function WYSIWYG(props: EditorProps) {
           renderList(matches, searchTerm);
         }
       }
-    }
-    // ImageResize: {
-    //   modules: ["Resize", "DisplaySize"],
-    // },
+    },
+    ImageResize: {
+      modules: ["Resize", "DisplaySize"],
+    },
   }), []);
 
   const getEditorConfig = (): QuillOptions => {
@@ -173,7 +171,6 @@ export default function WYSIWYG(props: EditorProps) {
       if (eventName === "text-change") {
         if (props?.onChange) {
           props?.onChange(editor.root.innerHTML);
-          console.log(editor)
         }
       }
     });
