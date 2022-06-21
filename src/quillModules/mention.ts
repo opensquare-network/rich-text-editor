@@ -155,9 +155,19 @@ class Mention {
       },
       this.downHandler.bind(this)
     );
+    console.log("***bind enter")
+    console.log(quill.keyboard)
+    quill.keyboard.addBinding(
+      {
+        key: "Enter"
+      },
+      this.selectHandler.bind(this)
+    );
+    console.log("bind enter***")
   }
 
   selectHandler() {
+    console.log("selectHandler")
     if (this.isOpen && !this.existingSourceExecutionToken) {
       this.selectItem();
       return false;

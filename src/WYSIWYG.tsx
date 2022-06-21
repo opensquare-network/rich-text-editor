@@ -83,7 +83,7 @@ interface EditorProps {
   value?: string;
   onChange?: (value: string) => void;
   mentions?: any[];
-  setModalInsetFunc: (func: (bounds: BoundsStatic) => void) => void;
+  setModalInsetFunc: (func: (bounds: BoundsStatic, type: string) => void) => void;
 }
 
 const isDelta = (value: any): boolean => {
@@ -118,10 +118,10 @@ export default function WYSIWYG(props: EditorProps) {
             that.quill.insertEmbed(range.index, "image", link, "user");
           });
         },
-        video: async function () {
+        video: async function() {
           const that = this;
           new Promise((resolve) => {
-            props.setModalInsetFunc(function () {
+            props.setModalInsetFunc(function() {
               //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
               return resolve;
             }, "video");
@@ -131,7 +131,7 @@ export default function WYSIWYG(props: EditorProps) {
             var range = that.quill.getSelection();
             that.quill.insertEmbed(range.index, "video", videoLink, "user");
           });
-        },
+        }
       }
     },
     mention: {
