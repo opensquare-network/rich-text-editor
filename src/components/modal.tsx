@@ -63,6 +63,7 @@ const FormWrapper = styled.div`
 `;
 
 const TextArea = styled.textarea`
+  box-sizing: border-box;
   font-family: Inter, serif;
   width: 100%;
   min-height: 66px;
