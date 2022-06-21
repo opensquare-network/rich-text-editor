@@ -30,13 +30,15 @@ export type DemoProps = {
   onChange: (value: string) => void;
   suggestions?: Suggestion[],
   minHeight?: number,
+  disabled?: boolean,
 };
 
 export const Editor: React.FunctionComponent<DemoProps> = ({
                                                              value,
                                                              onChange,
                                                              suggestions,
-                                                             minHeight = 144
+                                                             minHeight = 144,
+                                                             disabled: disabled = false,
                                                            }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
@@ -131,7 +133,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   };
 
   return (
-    <EditorWrapper>
+    <EditorWrapper disabled={disabled}>
       <EditorHeader {...{ editStatus, setEditStatus, isPreview, commandController }} />
       <Textarea
         ref={ref}
