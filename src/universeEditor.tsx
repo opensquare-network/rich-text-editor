@@ -5,6 +5,7 @@ import WYSIWYG from "../src/WYSIWYG";
 import styled from "styled-components";
 import Toggle from "../src/components/Toggle";
 import MarkdownIcon from "../src/components/MarkdownIcon";
+import InsertContentsModal from "./components/modal";
 
 export type DemoProps = {};
 
@@ -48,6 +49,9 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
   const [contentType, setContentType] = useState("html");
   const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState("image");
+  const [insetQuillContentsFunc, setInsetQuillContentsFunc] = useState(null);
 
   const onMarkdownSwitch = () => {
     if (
@@ -75,7 +79,22 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
           theme={"subsquare"}
         />
         :
-        <WYSIWYG value={htmlContent} onChange={value => setHtmlContent(value)} />
+        <>
+            <InsertContentsModal
+              showModal={showModal}
+              setShowModal={setShowModal}
+              insetQuillContentsFunc={insetQuillContentsFunc}
+              type={modalType}
+            />
+          <WYSIWYG value={htmlContent} onChange={value => setHtmlContent(value)}
+                   setModalInsetFunc={(insetFunc, type) => {
+                     setModalType(type);
+                     setShowModal(true);
+                     setInsetQuillContentsFunc(insetFunc);
+                   }}
+          />
+        </>
+
     }
     <ToggleWrapper>
       <MarkdownIcon />

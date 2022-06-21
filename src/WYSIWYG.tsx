@@ -83,6 +83,7 @@ interface EditorProps {
   value?: string;
   onChange?: (value: string) => void;
   mentions?: any[];
+  setModalInsetFunc: (func: (bounds: BoundsStatic) => void) => void;
 }
 
 const isDelta = (value: any): boolean => {
@@ -101,7 +102,25 @@ export default function WYSIWYG(props: EditorProps) {
         ["blockquote", "code-block"],
         [{ list: "ordered" }, { list: "bullet" }],
         [{ indent: "-1" }, { indent: "+1" }]
-      ]
+      ],
+      handlers: {
+        //must be an async func so you can pass img link from other component later
+        image: async function() {
+          const that = this;
+          new Promise((resolve) => {
+            props.setModalInsetFunc(function() {
+              //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
+              return resolve;
+            });
+          }).then((link) => {
+            that.quill.focus();
+            var range = that.quill.getSelection();
+            that.quill.insertEmbed(range.index, "image", link, "user");
+          });
+          // var range = this.quill.getSelection();
+          // console.log((this.quill.insertEmbed(range.index, "image", `https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white-d0c9fe2af5.png`, "user")))
+        }
+      }
     },
     mention: {
       allowedChars: /^[A-Za-z\s]*$/,
@@ -133,8 +152,8 @@ export default function WYSIWYG(props: EditorProps) {
       }
     },
     ImageResize: {
-      modules: ["Resize", "DisplaySize"],
-    },
+      modules: ["Resize", "DisplaySize"]
+    }
   }), []);
 
   const getEditorConfig = (): QuillOptions => {
@@ -211,7 +230,8 @@ export default function WYSIWYG(props: EditorProps) {
       <button onClick={() => setIsPreview(false)} className={isPreview ? "" : "active"}>Write
       </button>
       <VerticalDivider />
-      <button style={{paddingLeft:11}} onClick={() => setIsPreview(true)} className={isPreview ? "active" : ""}>Preview
+      <button style={{ paddingLeft: 11 }} onClick={() => setIsPreview(true)}
+              className={isPreview ? "active" : ""}>Preview
       </button>
       <VerticalDivider />
     </StateToggle>
