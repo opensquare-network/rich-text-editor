@@ -1,11 +1,21 @@
 import styled, { css } from "styled-components";
 import * as React from "react";
 
-export const EditorWrapper = styled.div`
+interface WrapperProps{
+  disabled?: boolean;
+}
+
+export const EditorWrapper = styled.div<WrapperProps>`
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
+  ${(p) =>
+          p.disabled &&
+          css`
+      pointer-events: none;
+            cursor: not-allowed;
+    `}
 `;
 
 export const ToolBar = styled.div`
