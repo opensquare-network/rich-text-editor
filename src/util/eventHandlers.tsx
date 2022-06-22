@@ -48,6 +48,7 @@ export function getHandlers({
         setCaret(getCaretCoordinates(ref.current));
       }
       setShowSuggestion(true);
+      setFocusIndex(0);
     }
   };
 
