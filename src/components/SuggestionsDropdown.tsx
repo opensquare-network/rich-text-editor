@@ -5,55 +5,38 @@ import { Suggestion } from "../index";
 const SuggestionsWrapper = styled.ul`
   position: absolute;
   min-width: 180px;
-  padding: 16px;
+  padding: 8px 0;
   margin: 20px 0 0;
   list-style: none;
   cursor: pointer;
   background: #fff;
-  border: 1px solid #c8ccd0;
-  border-radius: 3px;
-  box-shadow: 0 1px 5px rgba(27, 31, 35, .15);
+  box-shadow: 0px 4px 31px rgba(26, 33, 44, 0.06),
+    0px 0.751293px 8px rgba(26, 33, 44, 0.04);
   color: #506176;
 
   li {
-    padding: 4px 8px;
+    padding: 6px 16px;
 
-    &:first-child {
-      border-top-left-radius: 2px;
-      border-top-right-radius: 2px;
-    }
-
-    &:last-child {
-      border-bottom-right-radius: 2px;
-      border-bottom-left-radius: 2px;
-    }
-
-    &:hover, &[aria-selected=true] {
-      color: #1E2134;
+    &:hover,
+    &[aria-selected="true"] {
+      background-color: #f0f3f8;
     }
   }
 `;
 
-interface ClassArray extends Array<ClassValue> {
-} // tslint:disable-line no-empty-interface
+interface ClassArray extends Array<ClassValue> {} // tslint:disable-line no-empty-interface
 
 interface ClassDictionary {
   [id: string]: string | boolean;
 }
 
 interface CaretCoordinates {
-  top: number,
-  left: number,
-  lineHeight: number
+  top: number;
+  left: number;
+  lineHeight: number;
 }
 
-
-type ClassValue =
-  | string
-  | ClassDictionary
-  | ClassArray
-  | undefined
-  | null;
+type ClassValue = string | ClassDictionary | ClassArray | undefined | null;
 
 export interface SuggestionsDropdownProps {
   classes?: ClassValue;
@@ -68,14 +51,16 @@ export interface SuggestionsDropdownProps {
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
 }
 
-export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownProps> = ({
-                                                                                         suggestions,
-                                                                                         caret,
-                                                                                         onSuggestionSelected,
-                                                                                         suggestionsAutoplace,
-                                                                                         focusIndex,
-                                                                                         textAreaRef
-                                                                                       }) => {
+export const SuggestionsDropdown: React.FunctionComponent<
+  SuggestionsDropdownProps
+> = ({
+  suggestions,
+  caret,
+  onSuggestionSelected,
+  suggestionsAutoplace,
+  focusIndex,
+  textAreaRef
+}) => {
   const handleSuggestionClick = (event: React.MouseEvent) => {
     event.preventDefault();
     // @ts-ignore
