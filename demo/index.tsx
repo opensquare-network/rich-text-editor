@@ -23,29 +23,37 @@ echo "hello"
 > quote text
 `.trim();
 
-const suggestions = [{
-  preview: <span>abc</span>,
-  value: "abc"
-},
+const suggestions = [
+  {
+    preview: <span>abc</span>,
+    value: "abc"
+  },
   {
     preview: <span>edf</span>,
     value: "edf"
-  }];
+  }
+];
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
 
-
-  const loadSuggestions = (text:string) => {
-    return suggestions.filter((i) => i.value.toLowerCase().includes(text.toLowerCase()));
+  const loadSuggestions = (text: string) => {
+    return suggestions.filter(i =>
+      i.value.toLowerCase().includes(text.toLowerCase())
+    );
   };
-  return <div style={{maxWidth:800}}> <MarkdownEditor
-    value={content}
-    onChange={(value)=>{setContent(value)}}
-    loadSuggestions={loadSuggestions}
-    minHeight={150}
-  />
-  </div>
+  return (
+    <div style={{ maxWidth: 800 }}>
+      <MarkdownEditor
+        value={content}
+        onChange={value => {
+          setContent(value);
+        }}
+        loadSuggestions={loadSuggestions}
+        minHeight={150}
+      />
+    </div>
+  );
 };
 
 ReactDOM.render(<Demo />, document.getElementById("root"));

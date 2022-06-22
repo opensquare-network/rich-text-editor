@@ -7,9 +7,7 @@ import { useTextAreaMarkdownEditor } from "./hooks/use-markdown-editor";
 import { orderedListCommand } from "./commands/markdown-commands/orderedListCommand";
 import { unorderedListCommand } from "./commands/markdown-commands/unorderedListCommand";
 import { underlineCommand } from "./commands/markdown-commands/underlineCommand";
-import {
-  newLineAndIndentContinueMarkdownListCommand
-} from "./commands/markdown-commands/newLineAndIndentContinueMarkdownListCommand";
+import { newLineAndIndentContinueMarkdownListCommand } from "./commands/markdown-commands/newLineAndIndentContinueMarkdownListCommand";
 import { newLineCommand } from "./commands/markdown-commands/newLineCommand";
 import * as React from "react";
 import { MarkdownPreview } from "./components/MarkdownPreview";
@@ -27,15 +25,15 @@ export interface Suggestion {
 export type DemoProps = {
   value: string;
   onChange: (value: string) => void;
-  loadSuggestions?: (text: string) => Suggestion[],
-  minHeight?: number,
-  disabled?: boolean,
+  loadSuggestions?: (text: string) => Suggestion[];
+  minHeight?: number;
+  disabled?: boolean;
 };
 
 export interface CaretCoordinates {
-  top: number,
-  left: number,
-  lineHeight: number
+  top: number;
+  left: number;
+  lineHeight: number;
 }
 
 export interface MentionState {
@@ -54,12 +52,12 @@ export interface MentionState {
 }
 
 export const Editor: React.FunctionComponent<DemoProps> = ({
-                                                             value,
-                                                             onChange,
-                                                             loadSuggestions,
-                                                             minHeight = 144,
-                                                             disabled = false,
-                                                           }) => {
+  value,
+  onChange,
+  loadSuggestions,
+  minHeight = 144,
+  disabled = false
+}) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
@@ -72,17 +70,21 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       ul: unorderedListCommand,
       underline: underlineCommand,
 
-      newLineAndIndentContinueMarkdownList:
-      newLineAndIndentContinueMarkdownListCommand,
+      newLineAndIndentContinueMarkdownList: newLineAndIndentContinueMarkdownListCommand,
       newLine: newLineCommand
     }
   });
 
   const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
   const [focusIndex, setFocusIndex] = useState(0);
-  const [editStatus, setEditStatus] = React.useState<"write" | "preview">("write");
+  const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
+    "write"
+  );
   const [suggestions, setSuggestions] = React.useState<Suggestion[]>([]);
-  const [mentionState, setMentionState] = useState<MentionState>({ status: "inactive", suggestions: [] });
+  const [mentionState, setMentionState] = useState<MentionState>({
+    status: "inactive",
+    suggestions: []
+  });
 
   const isPreview = React.useMemo(() => {
     return editStatus === "preview";
@@ -142,8 +144,15 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     handleKeyPress,
     handleKeyUp
   } = getHandlers({
-    ref, loadSuggestions, setFocusIndex, focusIndex, setCaret, setSuggestions,
-    mentionState, setMentionState, value
+    ref,
+    loadSuggestions,
+    setFocusIndex,
+    focusIndex,
+    setCaret,
+    setSuggestions,
+    mentionState,
+    setMentionState,
+    value
   });
 
   const isEditingText = React.useMemo(() => {
@@ -188,8 +197,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         hide={isPreview}
       />
       {isPreview && <MarkdownPreview content={value} minHeight={minHeight} />}
-      {
-        (mentionState.status === "active" && suggestions.length > 0) && <SuggestionsDropdown
+      {mentionState.status === "active" && suggestions.length > 0 && (
+        <SuggestionsDropdown
           caret={caret}
           suggestions={suggestions}
           focusIndex={focusIndex}
@@ -197,7 +206,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           onSuggestionSelected={handleSuggestionSelected}
           suggestionsAutoplace
         />
-      }
+      )}
     </EditorWrapper>
   );
 };

@@ -3,16 +3,16 @@ import * as React from "react";
 import { getCaretCoordinates } from "./index";
 
 export function getHandlers({
-                              ref,
-                              loadSuggestions,
-                              setFocusIndex,
-                              focusIndex,
-                              setCaret,
-                              setSuggestions,
-                              mentionState,
-                              setMentionState,
-                              value
-                            }) {
+  ref,
+  loadSuggestions,
+  setFocusIndex,
+  focusIndex,
+  setCaret,
+  setSuggestions,
+  mentionState,
+  setMentionState,
+  value
+}) {
   const handleSuggestionSelected = (index: number) => {
     if (loadSuggestions) {
       insertText(ref?.current, loadSuggestions[index].value);
@@ -24,11 +24,15 @@ export function getHandlers({
     if (mentionState.status === "active") {
       if (event.key === "ArrowDown") {
         event.preventDefault();
-        setFocusIndex(focusIndex >= loadSuggestions.length - 1 ? 0 : focusIndex + 1);
+        setFocusIndex(
+          focusIndex >= loadSuggestions.length - 1 ? 0 : focusIndex + 1
+        );
       }
       if (event.key === "ArrowUp") {
         event.preventDefault();
-        setFocusIndex(focusIndex === 0 ? loadSuggestions.length - 1 : focusIndex - 1);
+        setFocusIndex(
+          focusIndex === 0 ? loadSuggestions.length - 1 : focusIndex - 1
+        );
       }
       if (event.key === "Enter") {
         event.preventDefault();
@@ -67,7 +71,10 @@ export function getHandlers({
         setCaret(getCaretCoordinates(ref.current));
       }
       setSuggestions(loadSuggestions(""));
-      setMentionState({ status: "active", startPosition: ref.current.selectionStart + 1 });
+      setMentionState({
+        status: "active",
+        startPosition: ref.current.selectionStart + 1
+      });
     }
     switch (mentionState.status) {
       case "loading":
@@ -90,9 +97,8 @@ export function getHandlers({
         break;
       case "inactive":
         if (
-          key !== "@" || !/\s|\(|\[|^.{0}$/.test(
-            value.charAt(ref.current.selectionStart - 1)
-          )
+          key !== "@" ||
+          !/\s|\(|\[|^.{0}$/.test(value.charAt(ref.current.selectionStart - 1))
         ) {
           return;
         }
