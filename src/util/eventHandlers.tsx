@@ -16,6 +16,10 @@ export function getHandlers({
 }) {
   const handleSuggestionSelected = (index: number) => {
     if (loadSuggestions) {
+      ref.current.setSelectionRange(
+        mentionState.startPosition,
+        ref.current.selectionStart
+      );
       insertText(ref?.current, suggestions[index].value);
       setMentionState({ ...mentionState, status: "inactive" });
       setFocusIndex(0);
