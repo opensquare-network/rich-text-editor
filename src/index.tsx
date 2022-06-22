@@ -13,10 +13,7 @@ import * as React from "react";
 import { MarkdownPreview } from "./components/MarkdownPreview";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { useEffect, useRef, useState } from "react";
-import {
-  EditorWrapper,
-  Textarea,
-} from "./components/EditorComponents";
+import { EditorWrapper, Textarea } from "./components/EditorComponents";
 import EditorHeader from "./components/EditorHeader";
 import { getHandlers } from "./util/eventHandlers";
 import WYSIWYG from "./WYSIWYG";
@@ -28,20 +25,44 @@ export interface Suggestion {
 }
 
 export type DemoProps = {
-  value: string,
+  value: string;
   onChange: (value: string) => void;
   suggestions?: Suggestion[],
   minHeight?: number,
   theme?: "opensquare" | "subsquare",
+  loadSuggestions?: (text: string) => Suggestion[];
+  disabled?: boolean;
 };
 
+export interface CaretCoordinates {
+  top: number;
+  left: number;
+  lineHeight: number;
+}
+
+export interface MentionState {
+  status: "active" | "inactive" | "loading";
+  /**
+   * Selection start by the time the mention was activated
+   */
+  startPosition?: number;
+  focusIndex?: number;
+  caret?: CaretCoordinates;
+  suggestions: Suggestion[];
+  /**
+   * The character that triggered the mention. Example: @
+   */
+  triggeredBy?: string;
+}
+
 export const Editor: React.FunctionComponent<DemoProps> = ({
-                                                             value,
-                                                             onChange,
-                                                             suggestions,
-                                                             minHeight = 144,
-                                                             theme= "opensquare",
-                                                           }) => {
+  value,
+  onChange,
+  loadSuggestions,
+  minHeight = 144,
+  theme= "opensquare",
+  disabled = false
+}) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
@@ -54,18 +75,22 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       ul: unorderedListCommand,
       underline: underlineCommand,
 
-      newLineAndIndentContinueMarkdownList:
-        newLineAndIndentContinueMarkdownListCommand,
+      newLineAndIndentContinueMarkdownList: newLineAndIndentContinueMarkdownListCommand,
       newLine: newLineCommand
     }
   });
 
   const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
-  const [showSuggestion, setShowSuggestion] = React.useState<boolean>(false);
   const [focusIndex, setFocusIndex] = useState(0);
   const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
     "write"
   );
+  const [suggestions, setSuggestions] = React.useState<Suggestion[]>([]);
+  const [mentionState, setMentionState] = useState<MentionState>({
+    status: "inactive",
+    suggestions: []
+  });
+
   const isPreview = React.useMemo(() => {
     return editStatus === "preview";
   }, [editStatus]);
@@ -75,20 +100,19 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const [height, setHeight] = useState(100);
   const [userResized, setUserResized] = useState(false);
 
-  const adjustHeight = ()=>{
+  const adjustHeight = () => {
     const textarea = ref?.current;
     if (textarea && !userResized) {
       textarea.style.height = `${minHeight}px`;
       textarea.style.height = `${textarea.scrollHeight}px`;
       setHeight(textarea.scrollHeight);
     }
-  }
+  };
 
   useEffect(() => {
     //expand height if got default value before inputting
     adjustHeight();
   }, []);
-
 
   useEffect(() => {
     const textarea = ref?.current;
@@ -102,7 +126,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
     if (textarea) {
       // MutationObserver is the modern way to observe element resize event
-      observer = new MutationObserver((record) => {
+      observer = new MutationObserver(record => {
         //no value changed && height change => user resized manually
         // @ts-ignore
         if (record[0].target.value === value) {
@@ -122,20 +146,39 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const {
     handleSuggestionSelected,
     handleKeyDown,
-    handleKeyPress
+    handleKeyPress,
+    handleKeyUp
   } = getHandlers({
-    ref, suggestions, setShowSuggestion, showSuggestion, setFocusIndex, focusIndex, setCaret
+    ref,
+    suggestions,
+    loadSuggestions,
+    setFocusIndex,
+    focusIndex,
+    setCaret,
+    setSuggestions,
+    mentionState,
+    setMentionState,
+    value
   });
+
+  const isEditingText = React.useMemo(() => {
+    return mentionState.status !== "active";
+  }, [mentionState.status]);
 
   const onEnterNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      commandController.executeCommand("newLineAndIndentContinueMarkdownList");
+
+      if (isEditingText) {
+        commandController.executeCommand(
+          "newLineAndIndentContinueMarkdownList"
+        );
+      }
     }
   };
 
   return (
-    <EditorWrapper theme={theme}>
+    <EditorWrapper theme={theme} disabled={disabled}>
       <EditorHeader {...{ theme, editStatus, setEditStatus, isPreview, commandController }} />
       <Textarea
         ref={ref}
@@ -144,9 +187,12 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           onChange(event.target.value);
           adjustHeight();
         }}
-        onKeyDown={e => {
-          handleKeyDown(e);
-          onEnterNewLine(e);
+        onKeyUp={event => {
+          handleKeyUp(event);
+        }}
+        onKeyDown={event => {
+          handleKeyDown(event);
+          onEnterNewLine(event);
         }}
         onKeyPress={handleKeyPress}
         placeholder=""
@@ -155,19 +201,17 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         hide={isPreview}
         theme={theme}
       />
-      {
-        isPreview && <MarkdownPreview content={value} minHeight={minHeight} theme={theme}/>
-      }
-      {
-        (showSuggestion && suggestions) && <SuggestionsDropdown
+      {isPreview && <MarkdownPreview content={value} minHeight={minHeight}  theme={theme} />}
+      {mentionState.status === "active" && suggestions.length > 0 && (
+        <SuggestionsDropdown
           caret={caret}
           suggestions={suggestions}
-          focusIndex={focusIndex}
+          focusIndex={focusIndex < suggestions.length ? focusIndex : 0}
           textAreaRef={ref}
           onSuggestionSelected={handleSuggestionSelected}
           suggestionsAutoplace
         />
-      }
+      )}
     </EditorWrapper>
   );
 };

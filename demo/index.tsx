@@ -28,14 +28,16 @@ echo "hello"
 > quote text
 `.trim();
 
-const suggestions = [{
-  preview: <span>abc</span>,
-  value: "abc"
-},
+const suggestions = [
+  {
+    preview: <span>abc</span>,
+    value: "abc"
+  },
   {
     preview: <span>edf</span>,
     value: "edf"
-  }];
+  }
+];
 
 const html = `<p><a href="https://www.baidu.com/">https://www.baidu.com/</a></p><h1>heading 1</h1><p><strong>bold text</strong><em>italic text</em><code>inline code</code></p><ul><li>bullet 1</li></ul><ol><li>numbered 1</li></ol><pre><code class="language-bash">echo "hello"</code></pre><blockquote><p>quote text</p></blockquote>`;
 
@@ -69,7 +71,24 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
     setContentType(newContentType);
   };
 
-  return <UniverseEditor/>;
+  const loadSuggestions = (text: string) => {
+    return suggestions.filter(i =>
+      i.value.toLowerCase().includes(text.toLowerCase())
+    );
+  };
+  return (
+    <div style={{ maxWidth: 800 }}>
+      <MarkdownEditor
+        value={content}
+        onChange={value => {
+          setContent(value);
+        }}
+        loadSuggestions={loadSuggestions}
+        minHeight={150}
+      />
+       <UniverseEditor/>
+    </div>
+  );
 };
 
 ReactDOM.render(<Demo />, document.getElementById("root"));
