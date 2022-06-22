@@ -36,7 +36,7 @@ export function getHandlers({
         event.preventDefault();
         handleSuggestionSelected(focusIndex);
       }
-      if (event.key === "Backspace") {
+      if (event.key === "Escape") {
         setShowSuggestion(false);
       }
     }
