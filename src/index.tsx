@@ -13,10 +13,7 @@ import * as React from "react";
 import { MarkdownPreview } from "./components/MarkdownPreview";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { useEffect, useRef, useState } from "react";
-import {
-  EditorWrapper,
-  Textarea,
-} from "./components/EditorComponents";
+import { EditorWrapper, Textarea } from "./components/EditorComponents";
 import EditorHeader from "./components/EditorHeader";
 import { getHandlers } from "./util/eventHandlers";
 
@@ -26,20 +23,20 @@ export interface Suggestion {
 }
 
 export type DemoProps = {
-  value: string,
+  value: string;
   onChange: (value: string) => void;
-  suggestions?: Suggestion[],
-  minHeight?: number,
-  disabled?: boolean,
+  suggestions?: Suggestion[];
+  minHeight?: number;
+  disabled?: boolean;
 };
 
 export const Editor: React.FunctionComponent<DemoProps> = ({
-                                                             value,
-                                                             onChange,
-                                                             suggestions,
-                                                             minHeight = 144,
-                                                             disabled: disabled = false,
-                                                           }) => {
+  value,
+  onChange,
+  suggestions,
+  minHeight = 144,
+  disabled: disabled = false
+}) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
@@ -73,20 +70,19 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const [height, setHeight] = useState(100);
   const [userResized, setUserResized] = useState(false);
 
-  const adjustHeight = ()=>{
+  const adjustHeight = () => {
     const textarea = ref?.current;
     if (textarea && !userResized) {
       textarea.style.height = `${minHeight}px`;
       textarea.style.height = `${textarea.scrollHeight}px`;
       setHeight(textarea.scrollHeight);
     }
-  }
+  };
 
   useEffect(() => {
     //expand height if got default value before inputting
     adjustHeight();
   }, []);
-
 
   useEffect(() => {
     const textarea = ref?.current;
@@ -100,7 +96,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
     if (textarea) {
       // MutationObserver is the modern way to observe element resize event
-      observer = new MutationObserver((record) => {
+      observer = new MutationObserver(record => {
         //no value changed && height change => user resized manually
         // @ts-ignore
         if (record[0].target.value === value) {
@@ -117,13 +113,16 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
   }, [height, value, setHeight]);
 
-  const {
-    handleSuggestionSelected,
-    handleKeyDown,
-    handleKeyPress
-  } = getHandlers({
-    ref, suggestions, setShowSuggestion, showSuggestion, setFocusIndex, focusIndex, setCaret
-  });
+  const { handleSuggestionSelected, handleKeyDown, handleKeyPress } =
+    getHandlers({
+      ref,
+      suggestions,
+      setShowSuggestion,
+      showSuggestion,
+      setFocusIndex,
+      focusIndex,
+      setCaret
+    });
 
   const onEnterNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
@@ -134,7 +133,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
 
   return (
     <EditorWrapper disabled={disabled}>
-      <EditorHeader {...{ editStatus, setEditStatus, isPreview, commandController }} />
+      <EditorHeader
+        {...{ editStatus, setEditStatus, isPreview, commandController }}
+      />
       <Textarea
         ref={ref}
         value={value}
@@ -152,11 +153,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         height={height}
         hide={isPreview}
       />
-      {
-        isPreview && <MarkdownPreview content={value} minHeight={minHeight}/>
-      }
-      {
-        (showSuggestion && suggestions) && <SuggestionsDropdown
+      {isPreview && <MarkdownPreview content={value} minHeight={minHeight} />}
+      {showSuggestion && suggestions && (
+        <SuggestionsDropdown
           caret={caret}
           suggestions={suggestions}
           focusIndex={focusIndex}
@@ -164,7 +163,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           onSuggestionSelected={handleSuggestionSelected}
           suggestionsAutoplace
         />
-      }
+      )}
     </EditorWrapper>
   );
 };
