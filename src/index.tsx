@@ -58,7 +58,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
                                                              onChange,
                                                              loadSuggestions,
                                                              minHeight = 144,
-                                                             disabled: disabled = false
+                                                             disabled = false,
                                                            }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
