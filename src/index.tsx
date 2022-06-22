@@ -7,7 +7,9 @@ import { useTextAreaMarkdownEditor } from "./hooks/use-markdown-editor";
 import { orderedListCommand } from "./commands/markdown-commands/orderedListCommand";
 import { unorderedListCommand } from "./commands/markdown-commands/unorderedListCommand";
 import { underlineCommand } from "./commands/markdown-commands/underlineCommand";
-import { newLineAndIndentContinueMarkdownListCommand } from "./commands/markdown-commands/newLineAndIndentContinueMarkdownListCommand";
+import {
+  newLineAndIndentContinueMarkdownListCommand
+} from "./commands/markdown-commands/newLineAndIndentContinueMarkdownListCommand";
 import { newLineCommand } from "./commands/markdown-commands/newLineCommand";
 import * as React from "react";
 import { MarkdownPreview } from "./components/MarkdownPreview";
@@ -25,18 +27,39 @@ export interface Suggestion {
 export type DemoProps = {
   value: string;
   onChange: (value: string) => void;
-  suggestions?: Suggestion[];
-  minHeight?: number;
-  disabled?: boolean;
+  loadSuggestions?: (text: string) => Suggestion[],
+  minHeight?: number,
+  disabled?: boolean,
 };
 
+export interface CaretCoordinates {
+  top: number,
+  left: number,
+  lineHeight: number
+}
+
+export interface MentionState {
+  status: "active" | "inactive" | "loading";
+  /**
+   * Selection start by the time the mention was activated
+   */
+  startPosition?: number;
+  focusIndex?: number;
+  caret?: CaretCoordinates;
+  suggestions: Suggestion[];
+  /**
+   * The character that triggered the mention. Example: @
+   */
+  triggeredBy?: string;
+}
+
 export const Editor: React.FunctionComponent<DemoProps> = ({
-  value,
-  onChange,
-  suggestions,
-  minHeight = 144,
-  disabled: disabled = false
-}) => {
+                                                             value,
+                                                             onChange,
+                                                             loadSuggestions,
+                                                             minHeight = 144,
+                                                             disabled: disabled = false
+                                                           }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
@@ -50,17 +73,17 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       underline: underlineCommand,
 
       newLineAndIndentContinueMarkdownList:
-        newLineAndIndentContinueMarkdownListCommand,
+      newLineAndIndentContinueMarkdownListCommand,
       newLine: newLineCommand
     }
   });
 
   const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
-  const [showSuggestion, setShowSuggestion] = React.useState<boolean>(false);
   const [focusIndex, setFocusIndex] = useState(0);
-  const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
-    "write"
-  );
+  const [editStatus, setEditStatus] = React.useState<"write" | "preview">("write");
+  const [suggestions, setSuggestions] = React.useState<Suggestion[]>([]);
+  const [mentionState, setMentionState] = useState<MentionState>({ status: "inactive", suggestions: [] });
+
   const isPreview = React.useMemo(() => {
     return editStatus === "preview";
   }, [editStatus]);
@@ -113,24 +136,15 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
   }, [height, value, setHeight]);
 
-  const { handleSuggestionSelected, handleKeyDown, handleKeyPress } =
-    getHandlers({
-      ref,
-      suggestions,
-      setShowSuggestion,
-      showSuggestion,
-      setFocusIndex,
-      focusIndex,
-      setCaret
-    });
-
-  const isEditingText = React.useMemo(() => {
-    if (showSuggestion) {
-      return false;
-    }
-
-    return true;
-  }, [showSuggestion]);
+  const {
+    handleSuggestionSelected,
+    handleKeyDown,
+    handleKeyPress,
+    handleKeyUp,
+  } = getHandlers({
+    ref, loadSuggestions, setFocusIndex, focusIndex, setCaret, setSuggestions,
+    mentionState, setMentionState, value
+  });
 
   const onEnterNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
@@ -156,9 +170,12 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           onChange(event.target.value);
           adjustHeight();
         }}
-        onKeyDown={e => {
-          handleKeyDown(e);
-          onEnterNewLine(e);
+        onKeyUp={event => {
+          handleKeyUp(event);
+        }}
+        onKeyDown={event => {
+          handleKeyDown(event);
+          onEnterNewLine(event);
         }}
         onKeyPress={handleKeyPress}
         placeholder="Please text here..."
@@ -167,8 +184,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         hide={isPreview}
       />
       {isPreview && <MarkdownPreview content={value} minHeight={minHeight} />}
-      {showSuggestion && suggestions && (
-        <SuggestionsDropdown
+      {
+        (mentionState.status === "active" && suggestions.length > 0) && <SuggestionsDropdown
           caret={caret}
           suggestions={suggestions}
           focusIndex={focusIndex}

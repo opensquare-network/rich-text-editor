@@ -34,10 +34,15 @@ const suggestions = [{
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
+
+
+  const loadSuggestions = (text:string) => {
+    return suggestions.filter((i) => i.value.toLowerCase().includes(text.toLowerCase()));
+  };
   return <div style={{maxWidth:800}}> <MarkdownEditor
     value={content}
     onChange={(value)=>{setContent(value)}}
-    suggestions={suggestions}
+    loadSuggestions={loadSuggestions}
     minHeight={150}
   />
   </div>

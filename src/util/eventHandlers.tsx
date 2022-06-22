@@ -3,58 +3,108 @@ import * as React from "react";
 import { getCaretCoordinates } from "./index";
 
 export function getHandlers({
-  ref,
-  suggestions,
-  setShowSuggestion,
-  showSuggestion,
-  setFocusIndex,
-  focusIndex,
-  setCaret
-}) {
+                              ref,
+                              loadSuggestions,
+                              setFocusIndex,
+                              focusIndex,
+                              setCaret,
+                              setSuggestions,
+                              mentionState,
+                              setMentionState,
+                              value
+                            }) {
   const handleSuggestionSelected = (index: number) => {
-    if (suggestions) {
-      insertText(ref?.current, suggestions[index].value);
-      setShowSuggestion(false);
+    if (loadSuggestions) {
+      insertText(ref?.current, loadSuggestions[index].value);
+      setMentionState({ ...mentionState, status: "inactive" });
     }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (showSuggestion && suggestions) {
+    if (mentionState.status === "active") {
       if (event.key === "ArrowDown") {
         event.preventDefault();
-        setFocusIndex(
-          focusIndex >= suggestions.length - 1 ? 0 : focusIndex + 1
-        );
+        setFocusIndex(focusIndex >= loadSuggestions.length - 1 ? 0 : focusIndex + 1);
       }
       if (event.key === "ArrowUp") {
         event.preventDefault();
-        setFocusIndex(
-          focusIndex === 0 ? suggestions.length - 1 : focusIndex - 1
-        );
+        setFocusIndex(focusIndex === 0 ? loadSuggestions.length - 1 : focusIndex - 1);
       }
       if (event.key === "Enter") {
         event.preventDefault();
         handleSuggestionSelected(focusIndex);
       }
+      if (event.key === "Backspace") {
+        if (ref.current.selectionStart <= mentionState.startPosition) {
+          setMentionState({ ...mentionState, status: "inactive" });
+        }
+      }
       if (event.key === "Escape") {
-        setShowSuggestion(false);
+        setMentionState({ ...mentionState, status: "inactive" });
       }
     }
   };
 
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const { key } = event;
+    switch (mentionState.status) {
+      case "active":
+        if (key === "Backspace") {
+          const searchText = value.substr(
+            mentionState.startPosition,
+            ref.current.selectionStart - mentionState.startPosition
+          );
+          setSuggestions(loadSuggestions(searchText));
+        }
+        break;
+    }
+  };
+
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === "@") {
+    const { key } = event;
+    if (key === "@") {
       if (ref.current) {
         setCaret(getCaretCoordinates(ref.current));
       }
-      setShowSuggestion(true);
-      setFocusIndex(0);
+      setSuggestions(loadSuggestions(""));
+      setMentionState({ status: "active", startPosition: ref.current.selectionStart + 1 });
+    }
+    switch (mentionState.status) {
+      case "loading":
+      case "active":
+        if (key === " ") {
+          setMentionState({
+            ...mentionState,
+            status: "inactive"
+          });
+          return;
+        }
+
+        const searchText =
+          value.substr(
+            mentionState.startPosition,
+            ref.current.selectionStart - mentionState.startPosition
+          ) + key;
+        // In this case, the mentions box was open but the user typed something else
+        setSuggestions(loadSuggestions(searchText));
+        break;
+      case "inactive":
+        if (
+          key !== "@" || !/\s|\(|\[|^.{0}$/.test(
+            value.charAt(ref.current.selectionStart - 1)
+          )
+        ) {
+          return;
+        }
+        loadSuggestions("~");
+        break;
     }
   };
 
   return {
     handleSuggestionSelected,
     handleKeyDown,
-    handleKeyPress
+    handleKeyPress,
+    handleKeyUp
   };
 }
