@@ -140,11 +140,15 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     handleSuggestionSelected,
     handleKeyDown,
     handleKeyPress,
-    handleKeyUp,
+    handleKeyUp
   } = getHandlers({
     ref, loadSuggestions, setFocusIndex, focusIndex, setCaret, setSuggestions,
     mentionState, setMentionState, value
   });
+
+  const isEditingText = React.useMemo(() => {
+    return mentionState.status !== "active";
+  }, [mentionState.status]);
 
   const onEnterNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
