@@ -18,6 +18,7 @@ export function getHandlers({
     if (loadSuggestions) {
       insertText(ref?.current, suggestions[index].value);
       setMentionState({ ...mentionState, status: "inactive" });
+      setFocusIndex(0);
     }
   };
 
@@ -42,10 +43,12 @@ export function getHandlers({
       if (event.key === "Backspace") {
         if (ref.current.selectionStart <= mentionState.startPosition) {
           setMentionState({ ...mentionState, status: "inactive" });
+          setFocusIndex(0);
         }
       }
       if (event.key === "Escape") {
         setMentionState({ ...mentionState, status: "inactive" });
+        setFocusIndex(0);
       }
     }
   };

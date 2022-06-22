@@ -202,7 +202,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         <SuggestionsDropdown
           caret={caret}
           suggestions={suggestions}
-          focusIndex={focusIndex}
+          focusIndex={focusIndex < suggestions.length ? focusIndex : 0}
           textAreaRef={ref}
           onSuggestionSelected={handleSuggestionSelected}
           suggestionsAutoplace
