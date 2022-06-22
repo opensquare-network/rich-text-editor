@@ -145,6 +145,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     handleKeyUp
   } = getHandlers({
     ref,
+    suggestions,
     loadSuggestions,
     setFocusIndex,
     focusIndex,

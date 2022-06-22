@@ -8,6 +8,7 @@ export function getHandlers({
   setFocusIndex,
   focusIndex,
   setCaret,
+  suggestions,
   setSuggestions,
   mentionState,
   setMentionState,
@@ -15,7 +16,7 @@ export function getHandlers({
 }) {
   const handleSuggestionSelected = (index: number) => {
     if (loadSuggestions) {
-      insertText(ref?.current, loadSuggestions[index].value);
+      insertText(ref?.current, suggestions[index].value);
       setMentionState({ ...mentionState, status: "inactive" });
     }
   };
@@ -25,13 +26,13 @@ export function getHandlers({
       if (event.key === "ArrowDown") {
         event.preventDefault();
         setFocusIndex(
-          focusIndex >= loadSuggestions.length - 1 ? 0 : focusIndex + 1
+          focusIndex >= suggestions.length - 1 ? 0 : focusIndex + 1
         );
       }
       if (event.key === "ArrowUp") {
         event.preventDefault();
         setFocusIndex(
-          focusIndex === 0 ? loadSuggestions.length - 1 : focusIndex - 1
+          focusIndex === 0 ? suggestions.length - 1 : focusIndex - 1
         );
       }
       if (event.key === "Enter") {
