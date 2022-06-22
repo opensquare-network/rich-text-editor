@@ -124,10 +124,23 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       setCaret
     });
 
+  const isEditingText = React.useMemo(() => {
+    if (showSuggestion) {
+      return false;
+    }
+
+    return true;
+  }, [showSuggestion]);
+
   const onEnterNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      commandController.executeCommand("newLineAndIndentContinueMarkdownList");
+
+      if (isEditingText) {
+        commandController.executeCommand(
+          "newLineAndIndentContinueMarkdownList"
+        );
+      }
     }
   };
 
