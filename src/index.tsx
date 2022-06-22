@@ -193,7 +193,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           onSuggestionSelected={handleSuggestionSelected}
           suggestionsAutoplace
         />
-      )}
+      }
     </EditorWrapper>
   );
 };
