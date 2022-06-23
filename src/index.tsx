@@ -157,8 +157,14 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   });
 
   const isEditingText = React.useMemo(() => {
-    return mentionState.status !== "active";
-  }, [mentionState.status]);
+    let v = mentionState.status !== "active";
+
+    if (!suggestions.length) {
+      v = true;
+    }
+
+    return v;
+  }, [mentionState.status, suggestions]);
 
   const onEnterNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
