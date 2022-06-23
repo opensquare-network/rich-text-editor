@@ -5,6 +5,9 @@ import { Suggestion } from "../index";
 const SuggestionsWrapper = styled.ul`
   position: absolute;
   min-width: 180px;
+  max-height: 110px;
+  overflow-y: scroll;
+  //todo: make arrow key can scroll the list
   padding: 8px 0;
   margin: 20px 0 0;
   list-style: none;
@@ -81,12 +84,7 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
   const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 60;
 
   const style: React.CSSProperties = {};
-  if (
-    suggestionsAutoplace &&
-    top + (textAreaRef?.current?.getBoundingClientRect()?.top ?? 0) > vh / 2
-  )
-    style.bottom = (textAreaRef?.current?.offsetHeight ?? 0) - top;
-  else style.top = top;
+  style.top = top;
 
   if (
     suggestionsAutoplace &&
