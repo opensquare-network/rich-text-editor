@@ -31,6 +31,10 @@ const suggestions = [
   {
     preview: <span>edf</span>,
     value: "[@def](def-kusama) "
+  },
+  {
+    preview: <span>edf</span>,
+    value: "[@def](def-kusama) "
   }
 ];
 
@@ -43,7 +47,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
     );
   };
   return (
-    <div style={{ maxWidth: 800, margin: 150 }}>
+    <div style={{ paddingTop: 1000, maxWidth: 800, margin: 150 }}>
       <MarkdownEditor
         value={content}
         onChange={value => {
