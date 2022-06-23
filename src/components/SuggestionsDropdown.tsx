@@ -5,9 +5,6 @@ import { Suggestion } from "../index";
 const SuggestionsWrapper = styled.ul`
   position: absolute;
   min-width: 180px;
-  max-height: 110px;
-  overflow-y: scroll;
-  //todo: make arrow key can scroll the list
   padding: 8px 0;
   margin: 20px 0 0;
   list-style: none;
