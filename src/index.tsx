@@ -101,6 +101,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       textarea.style.height = `${minHeight}px`;
       textarea.style.height = `${textarea.scrollHeight}px`;
       setHeight(textarea.scrollHeight);
+      textarea.blur();
+      textarea.focus();
     }
   };
 
