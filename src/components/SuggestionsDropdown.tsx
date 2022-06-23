@@ -72,10 +72,6 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0
   );
-  const vh = Math.max(
-    document.documentElement.clientHeight || 0,
-    window.innerHeight || 0
-  );
 
   const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 30;
   const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 60;
