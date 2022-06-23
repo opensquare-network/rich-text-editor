@@ -49,7 +49,7 @@ export interface SuggestionsDropdownProps {
    */
   focusIndex: number;
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
-  max: number;
+  max?: number;
 }
 
 export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownProps> = ({
