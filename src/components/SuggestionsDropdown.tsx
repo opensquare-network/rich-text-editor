@@ -51,9 +51,7 @@ export interface SuggestionsDropdownProps {
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
 }
 
-export const SuggestionsDropdown: React.FunctionComponent<
-  SuggestionsDropdownProps
-> = ({
+export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownProps> = ({
   suggestions,
   caret,
   onSuggestionSelected,
@@ -79,8 +77,8 @@ export const SuggestionsDropdown: React.FunctionComponent<
     window.innerHeight || 0
   );
 
-  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
-  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 50;
+  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 30;
+  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 60;
 
   const style: React.CSSProperties = {};
   if (

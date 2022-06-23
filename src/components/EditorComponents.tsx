@@ -1,25 +1,26 @@
 import styled, { css } from "styled-components";
 import * as React from "react";
 
-interface WrapperProps{
+interface WrapperProps {
   disabled?: boolean;
 }
 
 export const EditorWrapper = styled.div<WrapperProps>`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
-  ${(props) =>
-          props.theme === "subsquare" &&
-          css`
-            border: none;
-          `};
-  ${(p) =>
-          p.disabled &&
-          css`
+  ${props =>
+    props.theme === "subsquare" &&
+    css`
+      border: none;
+    `};
+  ${p =>
+    p.disabled &&
+    css`
       pointer-events: none;
-            cursor: not-allowed;
+      cursor: not-allowed;
     `}
 `;
 
@@ -30,21 +31,21 @@ export const ToolBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  ${(props) =>
-          props.theme === "subsquare" &&
-          css`
-            justify-content: end;
-            background-color: #F6F7FA;
-            padding-left: 0;
-            padding-right: 20px;
-            height: 40px;
-            border-bottom: 1px solid #E0E4EB;
-            position: relative;
-            > div:first-child{
-              gap: 0;
-              height: 40px;
-            }
-          `};
+  ${props =>
+    props.theme === "subsquare" &&
+    css`
+      justify-content: end;
+      background-color: #f6f7fa;
+      padding-left: 0;
+      padding-right: 20px;
+      height: 40px;
+      border-bottom: 1px solid #e0e4eb;
+      position: relative;
+      > div:first-child {
+        gap: 0;
+        height: 40px;
+      }
+    `};
   /* mobile */
   @media screen and (max-width: 769px) {
     display: block;
@@ -59,14 +60,14 @@ export const TabsWrapper = styled.div`
   height: 48px;
   /* mobile */
   @media screen and (max-width: 769px) {
-    border-bottom: 1px solid #E2E8F0;
+    border-bottom: 1px solid #e2e8f0;
   }
-  ${(props) =>
-          props.theme === "subsquare" &&
-          css`
-            position: absolute;
-            left: 0;
-          `};
+  ${props =>
+    props.theme === "subsquare" &&
+    css`
+      position: absolute;
+      left: 0;
+    `};
 `;
 
 interface TabProps {
@@ -80,41 +81,48 @@ export const Tab = styled.button<TabProps>`
   font-size: 14px;
   line-height: 24px;
   border-bottom: 3px solid #ffffff;
-  ${(props) =>
-          props.theme === "subsquare" &&
-          css`
-            padding: 12px;
-            line-height: 16px;
-            border-bottom: none;
-            color: #9DA9BB;
-            :last-child{
-              box-shadow: 1px 0 0 0  #E0E4EB;
-            }
-            :hover{
-              color: #506176;
-            }
-          `};
-  ${(props) =>
-          props.active && props.theme === "opensquare" &&
-          css`
-            border-bottom: 3px solid #04d2c5;
-          `};
-  ${(props) =>
-          props.active && props.theme === "subsquare" &&
-          css`
-            background-color: white;
-            color: #1E2134;
-            border-bottom: 17px solid white;
-            :first-child{
-              box-shadow: 1px 0 0 0  #E0E4EB;
-            }
-            :last-child{
-              box-shadow: -1px 0 0 0  #E0E4EB, 1px 0 0 0  #E0E4EB;
-            }
-            :hover{
-              color: #1E2134;
-            }
-          `};
+  ${props =>
+    props.theme === "subsquare" &&
+    css`
+      padding: 12px;
+      line-height: 16px;
+      border-bottom: none;
+      color: #9da9bb;
+      :last-child {
+        box-shadow: 1px 0 0 0 #e0e4eb;
+      }
+      :hover {
+        color: #506176;
+      }
+    `};
+  ${props =>
+    props.active &&
+    props.theme === "opensquare" &&
+    css`
+      border-bottom: 3px solid #04d2c5;
+    `};
+  ${props =>
+    props.active &&
+    props.theme === "subsquare" &&
+    css`
+      background-color: white;
+      color: #1e2134;
+      border-bottom: 17px solid white;
+      :first-child {
+        box-shadow: 1px 0 0 0 #e0e4eb;
+      }
+      :last-child {
+        box-shadow: -1px 0 0 0 #e0e4eb, 1px 0 0 0 #e0e4eb;
+      }
+      :hover {
+        color: #1e2134;
+      }
+    `};
+  ${props =>
+    props.active &&
+    css`
+      border-bottom: 3px solid #04d2c5;
+    `};
   cursor: pointer;
   /* mobile */
   @media screen and (max-width: 769px) {
@@ -136,11 +144,11 @@ export const ToolbarItemsWrapper = styled.div<Props>`
   display: flex;
   align-items: center;
   gap: 8px;
-  ${(props) =>
-          props.hide &&
-          css`
-            display: none;
-          `};
+  ${props =>
+    props.hide &&
+    css`
+      display: none;
+    `};
   /* mobile */
   @media screen and (max-width: 769px) {
     height: 48px;
@@ -162,21 +170,21 @@ export const Textarea = styled.textarea<Props>`
   box-sizing: border-box;
   width: 100%;
   min-height: 144px;
-  ${(props) =>
-          props.minHeight &&
-          css`
-            min-height: ${props.minHeight}px;
-          `} ;
-  ${(props) =>
-          props.height &&
-          css`
-            height: ${props.height}px;
-          `} ;
-  ${(props) =>
-          props.hide &&
-          css`
-            display: none;
-          `};
+  ${props =>
+    props.minHeight &&
+    css`
+      min-height: ${props.minHeight}px;
+    `};
+  ${props =>
+    props.height &&
+    css`
+      height: ${props.height}px;
+    `};
+  ${props =>
+    props.hide &&
+    css`
+      display: none;
+    `};
   max-height: 672px;
   resize: vertical;
   border: none;
@@ -185,14 +193,14 @@ export const Textarea = styled.textarea<Props>`
   line-height: 24px;
   padding: 12px;
   background: #fbfcfe;
-  ${(props) =>
-          props.theme === "subsquare" &&
-          css`
-            background-color: white;
-          `};
+  ${props =>
+    props.theme === "subsquare" &&
+    css`
+      background-color: white;
+    `};
   font-family: Inter, sans-serif;
 
   ::selection {
-    background-color: #E2E8F0;
+    background-color: #e2e8f0;
   }
 `;
