@@ -95,14 +95,20 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const [height, setHeight] = useState(100);
   const [userResized, setUserResized] = useState(false);
 
+  const focusToCursor = () => {
+    const textarea = ref?.current;
+    if (textarea) {
+      textarea.blur();
+      textarea.focus();
+    }
+  };
+
   const adjustHeight = () => {
     const textarea = ref?.current;
     if (textarea && !userResized) {
       textarea.style.height = `${minHeight}px`;
       textarea.style.height = `${textarea.scrollHeight}px`;
       setHeight(textarea.scrollHeight);
-      textarea.blur();
-      textarea.focus();
     }
   };
 
@@ -191,6 +197,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         onChange={event => {
           onChange(event.target.value);
           adjustHeight();
+          focusToCursor();
         }}
         onKeyUp={event => {
           handleKeyUp(event);
