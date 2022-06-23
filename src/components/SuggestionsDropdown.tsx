@@ -5,9 +5,6 @@ import { Suggestion } from "../index";
 const SuggestionsWrapper = styled.ul`
   position: absolute;
   min-width: 180px;
-  max-height: 110px;
-  overflow-y: scroll;
-  //todo: make arrow key can scroll the list
   padding: 8px 0;
   margin: 20px 0 0;
   list-style: none;
@@ -52,6 +49,7 @@ export interface SuggestionsDropdownProps {
    */
   focusIndex: number;
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
+  max?: number;
 }
 
 export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownProps> = ({
@@ -60,7 +58,8 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
   onSuggestionSelected,
   suggestionsAutoplace,
   focusIndex,
-  textAreaRef
+  textAreaRef,
+  max = 5
 }) => {
   const handleSuggestionClick = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -74,10 +73,6 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0
-  );
-  const vh = Math.max(
-    document.documentElement.clientHeight || 0,
-    window.innerHeight || 0
   );
 
   const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 30;
@@ -95,7 +90,7 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
 
   return (
     <SuggestionsWrapper style={style}>
-      {suggestions.map((s, i) => (
+      {suggestions.slice(0, max).map((s, i) => (
         <li
           onClick={handleSuggestionClick}
           onMouseDown={handleMouseDown}
