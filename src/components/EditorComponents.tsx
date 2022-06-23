@@ -1,20 +1,21 @@
 import styled, { css } from "styled-components";
 import * as React from "react";
 
-interface WrapperProps{
+interface WrapperProps {
   disabled?: boolean;
 }
 
 export const EditorWrapper = styled.div<WrapperProps>`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
-  ${(p) =>
-          p.disabled &&
-          css`
+  ${p =>
+    p.disabled &&
+    css`
       pointer-events: none;
-            cursor: not-allowed;
+      cursor: not-allowed;
     `}
 `;
 
@@ -39,7 +40,7 @@ export const TabsWrapper = styled.div`
   height: 48px;
   /* mobile */
   @media screen and (max-width: 769px) {
-    border-bottom: 1px solid #E2E8F0;
+    border-bottom: 1px solid #e2e8f0;
   }
 `;
 
@@ -53,11 +54,11 @@ export const Tab = styled.button<TabProps>`
   font-size: 14px;
   line-height: 24px;
   border-bottom: 3px solid #ffffff;
-  ${(props) =>
-          props.active &&
-          css`
-            border-bottom: 3px solid #04d2c5;
-          `};
+  ${props =>
+    props.active &&
+    css`
+      border-bottom: 3px solid #04d2c5;
+    `};
   cursor: pointer;
   /* mobile */
   @media screen and (max-width: 769px) {
@@ -78,11 +79,11 @@ export const ToolbarItemsWrapper = styled.div<Props>`
   display: flex;
   align-items: center;
   gap: 8px;
-  ${(props) =>
-          props.hide &&
-          css`
-            display: none;
-          `};
+  ${props =>
+    props.hide &&
+    css`
+      display: none;
+    `};
   /* mobile */
   @media screen and (max-width: 769px) {
     height: 48px;
@@ -104,21 +105,21 @@ export const Textarea = styled.textarea<Props>`
   box-sizing: border-box;
   width: 100%;
   min-height: 144px;
-  ${(props) =>
-          props.minHeight &&
-          css`
-            min-height: ${props.minHeight}px;
-          `} ;
-  ${(props) =>
-          props.height &&
-          css`
-            height: ${props.height}px;
-          `} ;
-  ${(props) =>
-          props.hide &&
-          css`
-            display: none;
-          `};
+  ${props =>
+    props.minHeight &&
+    css`
+      min-height: ${props.minHeight}px;
+    `};
+  ${props =>
+    props.height &&
+    css`
+      height: ${props.height}px;
+    `};
+  ${props =>
+    props.hide &&
+    css`
+      display: none;
+    `};
   max-height: 672px;
   resize: vertical;
   border: none;
@@ -130,6 +131,6 @@ export const Textarea = styled.textarea<Props>`
   font-family: Inter, sans-serif;
 
   ::selection {
-    background-color: #E2E8F0;
+    background-color: #e2e8f0;
   }
 `;
