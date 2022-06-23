@@ -17,7 +17,7 @@ export function getHandlers({
   const handleSuggestionSelected = (index: number) => {
     if (loadSuggestions) {
       ref.current.setSelectionRange(
-        mentionState.startPosition,
+        mentionState.startPosition - 1,
         ref.current.selectionStart
       );
       insertText(ref?.current, suggestions[index].value);
