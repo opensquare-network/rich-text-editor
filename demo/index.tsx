@@ -59,7 +59,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
     );
   };
   return (
-    <div style={{ paddingTop: 1000, maxWidth: 800, margin: 150 }}>
+    <div style={{ paddingTop: 30, maxWidth: 800, margin: 20 }}>
       <MarkdownEditor
         value={content}
         onChange={value => {
