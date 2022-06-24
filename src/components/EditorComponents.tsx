@@ -31,6 +31,7 @@ export const ToolBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: content-box;
   ${props =>
     props.theme === "subsquare" &&
     css`
