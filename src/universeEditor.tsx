@@ -26,14 +26,16 @@ echo "hello"
 > quote text
 `.trim();
 
-const suggestions = [{
-  preview: <span>abc</span>,
-  value: "abc"
-},
+const suggestions = [
+  {
+    preview: <span>abc</span>,
+    value: "abc"
+  },
   {
     preview: <span>edf</span>,
     value: "edf"
-  }];
+  }
+];
 
 const ToggleWrapper = styled.div`
   display: flex;
@@ -41,13 +43,13 @@ const ToggleWrapper = styled.div`
   align-items: center;
   gap: 8px;
   height: 40px;
-  border-top: 1px solid #EBEEF4;
+  border-top: 1px solid #ebeef4;
   padding-right: 16px;
 `;
 
 export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
-  const [contentType, setContentType] = useState("html");
+  const [contentType, setContentType] = useState("markdown");
   const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("image");
@@ -66,43 +68,49 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
     setContentType(newContentType);
   };
 
-  return <div style={{ maxWidth: 800, border: "1px solid #EBEEF4", borderRadius: 4 }}>
-    {
-      contentType === "markdown" ?
+  return (
+    <div
+      style={{ maxWidth: 800, border: "1px solid #EBEEF4", borderRadius: 4 }}
+    >
+      {contentType === "markdown" ? (
         <MarkdownEditor
           value={content}
-          onChange={(value) => {
+          onChange={value => {
             setContent(value);
           }}
           suggestions={suggestions}
           minHeight={200}
           theme={"subsquare"}
         />
-        :
+      ) : (
         <>
-            <InsertContentsModal
-              showModal={showModal}
-              setShowModal={setShowModal}
-              insetQuillContentsFunc={insetQuillContentsFunc}
-              type={modalType}
-            />
-          <WYSIWYG value={htmlContent} onChange={value => setHtmlContent(value)}
-                   setModalInsetFunc={(insetFunc, type) => {
-                     setModalType(type);
-                     setShowModal(true);
-                     setInsetQuillContentsFunc(insetFunc);
-                   }}
+          <InsertContentsModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            insetQuillContentsFunc={insetQuillContentsFunc}
+            type={modalType}
+          />
+          <WYSIWYG
+            value={htmlContent}
+            onChange={value => setHtmlContent(value)}
+            setModalInsetFunc={(insetFunc, type) => {
+              setModalType(type);
+              setShowModal(true);
+              setInsetQuillContentsFunc(insetFunc);
+            }}
           />
         </>
-
-    }
-    <ToggleWrapper>
-      <MarkdownIcon />
-      <Toggle size="small"
-              isOn={contentType === "markdown"}
-              onToggle={onMarkdownSwitch} />
-    </ToggleWrapper>
-  </div>;
+      )}
+      <ToggleWrapper>
+        <MarkdownIcon />
+        <Toggle
+          size="small"
+          isOn={contentType === "markdown"}
+          onToggle={onMarkdownSwitch}
+        />
+      </ToggleWrapper>
+    </div>
+  );
 };
 
 export default UniverseEditor;
