@@ -27,9 +27,9 @@ export interface Suggestion {
 export type DemoProps = {
   value: string;
   onChange: (value: string) => void;
-  suggestions?: Suggestion[],
-  minHeight?: number,
-  theme?: "opensquare" | "subsquare",
+  suggestions?: Suggestion[];
+  minHeight?: number;
+  theme?: "opensquare" | "subsquare";
   loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
 };
@@ -60,7 +60,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   onChange,
   loadSuggestions,
   minHeight = 144,
-  theme= "opensquare",
+  theme = "opensquare",
   disabled = false
 }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -193,7 +193,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
 
   return (
     <EditorWrapper theme={theme} disabled={disabled}>
-      <EditorHeader {...{ theme, editStatus, setEditStatus, isPreview, commandController }} />
+      <EditorHeader
+        {...{ theme, editStatus, setEditStatus, isPreview, commandController }}
+      />
       <Textarea
         ref={ref}
         value={value}
@@ -216,7 +218,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         hide={isPreview}
         theme={theme}
       />
-      {isPreview && <MarkdownPreview content={value} minHeight={minHeight}  theme={theme} />}
+      {isPreview && (
+        <MarkdownPreview content={value} minHeight={minHeight} theme={theme} />
+      )}
       {mentionState.status === "active" && suggestions.length > 0 && (
         <SuggestionsDropdown
           caret={caret}

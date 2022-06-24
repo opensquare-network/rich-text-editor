@@ -103,6 +103,11 @@ export const Tab = styled.button<TabProps>`
     `};
   ${props =>
     props.active &&
+    css`
+      border-bottom: 3px solid #04d2c5;
+    `};
+  ${props =>
+    props.active &&
     props.theme === "subsquare" &&
     css`
       background-color: white;
@@ -117,11 +122,6 @@ export const Tab = styled.button<TabProps>`
       :hover {
         color: #1e2134;
       }
-    `};
-  ${props =>
-    props.active &&
-    css`
-      border-bottom: 3px solid #04d2c5;
     `};
   cursor: pointer;
   /* mobile */
@@ -192,15 +192,15 @@ export const Textarea = styled.textarea<Props>`
   line-height: 24px;
   padding: 12px;
   background: #fbfcfe;
+  font-family: Inter, sans-serif;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
   ${props =>
     props.theme === "subsquare" &&
     css`
       background-color: white;
       border-bottom: none;
     `};
-  font-family: Inter, sans-serif;
-  border: none;
-  border-bottom: 1px solid #e2e8f0;
 
   :hover,
   :focus {

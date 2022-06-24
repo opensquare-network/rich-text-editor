@@ -93,15 +93,15 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
     );
   };
   return (
-    <div style={{ paddingTop: 1000, maxWidth: 800, margin: 150 }}>
-      <MarkdownEditor
-        value={content}
-        onChange={value => {
-          setContent(value);
-        }}
-        loadSuggestions={loadSuggestions}
-        minHeight={150}
-      />
+    <div style={{ paddingTop: 100, maxWidth: 800, margin: 150 }}>
+      {/*<MarkdownEditor*/}
+      {/*  value={content}*/}
+      {/*  onChange={value => {*/}
+      {/*    setContent(value);*/}
+      {/*  }}*/}
+      {/*  loadSuggestions={loadSuggestions}*/}
+      {/*  minHeight={150}*/}
+      {/*/>*/}
       <br />
       <UniverseEditor />
     </div>
