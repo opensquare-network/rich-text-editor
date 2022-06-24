@@ -35,15 +35,19 @@ function hasValidChars(text, allowedChars) {
 }
 
 function hasValidMentionCharIndex(mentionCharIndex, text, isolateChar) {
+  console.log(mentionCharIndex, text, isolateChar);
   if (mentionCharIndex > -1) {
     if (
       isolateChar &&
       !(mentionCharIndex === 0 || !!text[mentionCharIndex - 1].match(/\s/g))
     ) {
+      console.log(false, 1);
       return false;
     }
+    console.log(true);
     return true;
   }
+  console.log(false, 2);
   return false;
 }
 
