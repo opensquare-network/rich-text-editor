@@ -10,7 +10,6 @@ export const EditorWrapper = styled.div<WrapperProps>`
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
   ${p =>
     p.disabled &&
     css`
@@ -122,13 +121,19 @@ export const Textarea = styled.textarea<Props>`
     `};
   max-height: 672px;
   resize: vertical;
-  border: none;
   outline: none;
   font-size: 14px;
   line-height: 24px;
   padding: 12px;
   background: #fbfcfe;
   font-family: Inter, sans-serif;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+
+  :hover,
+  :focus {
+    border-color: #b7c0cc;
+  }
 
   ::selection {
     background-color: #e2e8f0;
