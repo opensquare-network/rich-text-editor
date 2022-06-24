@@ -49,6 +49,7 @@ export interface SuggestionsDropdownProps {
    */
   focusIndex: number;
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
+  max?: number;
 }
 
 export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownProps> = ({
@@ -57,7 +58,8 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
   onSuggestionSelected,
   suggestionsAutoplace,
   focusIndex,
-  textAreaRef
+  textAreaRef,
+  max = 5
 }) => {
   const handleSuggestionClick = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -72,21 +74,12 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0
   );
-  const vh = Math.max(
-    document.documentElement.clientHeight || 0,
-    window.innerHeight || 0
-  );
 
   const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 30;
   const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 60;
 
   const style: React.CSSProperties = {};
-  if (
-    suggestionsAutoplace &&
-    top + (textAreaRef?.current?.getBoundingClientRect()?.top ?? 0) > vh / 2
-  )
-    style.bottom = (textAreaRef?.current?.offsetHeight ?? 0) - top;
-  else style.top = top;
+  style.top = top;
 
   if (
     suggestionsAutoplace &&
@@ -97,7 +90,7 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
 
   return (
     <SuggestionsWrapper style={style}>
-      {suggestions.map((s, i) => (
+      {suggestions.slice(0, max).map((s, i) => (
         <li
           onClick={handleSuggestionClick}
           onMouseDown={handleMouseDown}

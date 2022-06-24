@@ -187,7 +187,6 @@ export const Textarea = styled.textarea<Props>`
     `};
   max-height: 672px;
   resize: vertical;
-  border: none;
   outline: none;
   font-size: 14px;
   line-height: 24px;
@@ -199,6 +198,13 @@ export const Textarea = styled.textarea<Props>`
       background-color: white;
     `};
   font-family: Inter, sans-serif;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+
+  :hover,
+  :focus {
+    border-color: #b7c0cc;
+  }
 
   ::selection {
     background-color: #e2e8f0;

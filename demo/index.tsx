@@ -34,8 +34,24 @@ const suggestions = [
     value: "[@abd](abc-polkadot) "
   },
   {
-    preview: <span>edf</span>,
-    value: "[@def](def-kusama) "
+    preview: <span>def1</span>,
+    value: "[@def1](def-kusama) "
+  },
+  {
+    preview: <span>def2</span>,
+    value: "[@def2](def-kusama) "
+  },
+  {
+    preview: <span>def3</span>,
+    value: "[@def3](def-kusama) "
+  },
+  {
+    preview: <span>def4</span>,
+    value: "[@def4](def-kusama) "
+  },
+  {
+    preview: <span>def5</span>,
+    value: "[@def5](def-kusama) "
   }
 ];
 
@@ -77,7 +93,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
     );
   };
   return (
-    <div style={{ maxWidth: 800, margin: 150 }}>
+    <div style={{ paddingTop: 1000, maxWidth: 800, margin: 150 }}>
       <MarkdownEditor
         value={content}
         onChange={value => {
