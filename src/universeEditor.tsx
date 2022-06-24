@@ -1,5 +1,5 @@
 import * as React from "react";
-import MarkdownEditor from "../src";
+import MarkdownEditor, { Suggestion } from "../src";
 import { useState } from "react";
 import WYSIWYG from "../src/WYSIWYG";
 import styled from "styled-components";
@@ -7,7 +7,14 @@ import Toggle from "../src/components/Toggle";
 import MarkdownIcon from "../src/components/MarkdownIcon";
 import InsertContentsModal from "./components/modal";
 
-export type DemoProps = {};
+export type DemoProps = {
+  value: string;
+  onChange: (value: string) => void;
+  suggestions?: Suggestion[];
+  minHeight?: number;
+  loadSuggestions?: (text: string) => Suggestion[];
+  disabled?: boolean;
+};
 
 const markdown = `
 [https://www.baidu.com/](https://www.baidu.com/)
@@ -47,7 +54,9 @@ const ToggleWrapper = styled.div`
   padding-right: 16px;
 `;
 
-export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
+export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
+  loadSuggestions
+}) => {
   const [content, setContent] = useState(markdown);
   const [contentType, setContentType] = useState("markdown");
   const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
@@ -83,7 +92,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = () => {
           onChange={value => {
             setContent(value);
           }}
-          suggestions={suggestions}
+          loadSuggestions={loadSuggestions}
           minHeight={200}
           theme={"subsquare"}
         />

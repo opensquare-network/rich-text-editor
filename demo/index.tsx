@@ -91,6 +91,14 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
   };
   return (
     <div style={{ paddingTop: 100, maxWidth: 800, margin: 150 }}>
+      <UniverseEditor
+        value={content}
+        onChange={value => {
+          setContent(value);
+        }}
+        loadSuggestions={loadSuggestions}
+      />
+      <br />
       <MarkdownEditor
         value={content}
         onChange={value => {
@@ -99,8 +107,6 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         loadSuggestions={loadSuggestions}
         minHeight={150}
       />
-      <br />
-      <UniverseEditor />
     </div>
   );
 };
