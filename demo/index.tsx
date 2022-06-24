@@ -1,12 +1,9 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import MarkdownEditor from "../src";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./styles/style.css";
-import WYSIWYG from "../src/WYSIWYG";
 import styled from "styled-components";
-import Toggle from "../src/components/Toggle";
-import MarkdownIcon from "../src/components/MarkdownIcon";
 import UniverseEditor from "../src/universeEditor";
 
 export type DemoProps = {};
@@ -94,14 +91,14 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
   };
   return (
     <div style={{ paddingTop: 100, maxWidth: 800, margin: 150 }}>
-      {/*<MarkdownEditor*/}
-      {/*  value={content}*/}
-      {/*  onChange={value => {*/}
-      {/*    setContent(value);*/}
-      {/*  }}*/}
-      {/*  loadSuggestions={loadSuggestions}*/}
-      {/*  minHeight={150}*/}
-      {/*/>*/}
+      <MarkdownEditor
+        value={content}
+        onChange={value => {
+          setContent(value);
+        }}
+        loadSuggestions={loadSuggestions}
+        minHeight={150}
+      />
       <br />
       <UniverseEditor />
     </div>

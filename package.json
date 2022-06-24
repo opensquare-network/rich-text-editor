@@ -66,10 +66,6 @@
   },
   "homepage": "https://github.com/opensquare-network/rich-text-editor.git#readme",
   "dependencies": {
-    "@types/lodash": "^4.14.182",
-    "@types/quill": "2",
-    "github-markdown-css": "^5.1.0",
-    "lodash": "^4.17.21",
     "marked": "^4.0.15",
     "prismjs": "^1.28.0",
     "quill": "^2.0.0-dev.4",
