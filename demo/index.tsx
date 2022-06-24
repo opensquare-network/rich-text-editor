@@ -63,7 +63,7 @@ const ToggleWrapper = styled.div`
   align-items: center;
   gap: 8px;
   height: 40px;
-  border: 1px solid #EBEEF4;
+  border: 1px solid #ebeef4;
   border-top: none;
   padding-right: 16px;
   border-radius: 4px;
@@ -102,7 +102,8 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         loadSuggestions={loadSuggestions}
         minHeight={150}
       />
-       <UniverseEditor/>
+      <br />
+      <UniverseEditor />
     </div>
   );
 };

@@ -196,6 +196,7 @@ export const Textarea = styled.textarea<Props>`
     props.theme === "subsquare" &&
     css`
       background-color: white;
+      border-bottom: none;
     `};
   font-family: Inter, sans-serif;
   border: none;
