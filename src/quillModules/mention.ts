@@ -137,7 +137,6 @@ class Mention {
         this.selectHandler.bind(this)
       );
     }
-    console.log(quill.keyboard);
     quill.keyboard.bindings[Keys.ENTER].unshift(
       quill.keyboard.bindings[Keys.ENTER].pop()
     );
@@ -165,7 +164,6 @@ class Mention {
   }
 
   selectHandler() {
-    console.log("select");
     if (this.isOpen && !this.existingSourceExecutionToken) {
       this.selectItem();
       return false;
@@ -185,7 +183,6 @@ class Mention {
   }
 
   upHandler() {
-    console.log("upup");
     if (this.isOpen && !this.existingSourceExecutionToken) {
       this.prevItem();
       return false;
