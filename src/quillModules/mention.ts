@@ -125,9 +125,9 @@ class Mention {
       },
       this.selectHandler.bind(this)
     );
-    quill.keyboard.bindings[Keys.TAB].unshift(
-      quill.keyboard.bindings[Keys.TAB].pop()
-    );
+    // quill.keyboard.bindings[Keys.TAB].unshift(
+    //   quill.keyboard.bindings[Keys.TAB].pop()
+    // );
 
     for (let selectKey of this.options.selectKeys) {
       quill.keyboard.addBinding(
@@ -137,9 +137,10 @@ class Mention {
         this.selectHandler.bind(this)
       );
     }
-    quill.keyboard.bindings[Keys.ENTER].unshift(
-      quill.keyboard.bindings[Keys.ENTER].pop()
-    );
+    console.log(quill.keyboard);
+    // quill.keyboard.bindings[Keys.ENTER].unshift(
+    //   quill.keyboard.bindings[Keys.ENTER].pop()
+    // );
 
     quill.keyboard.addBinding(
       {
@@ -164,6 +165,7 @@ class Mention {
   }
 
   selectHandler() {
+    console.log("select");
     if (this.isOpen && !this.existingSourceExecutionToken) {
       this.selectItem();
       return false;
@@ -183,6 +185,7 @@ class Mention {
   }
 
   upHandler() {
+    console.log("upup");
     if (this.isOpen && !this.existingSourceExecutionToken) {
       this.prevItem();
       return false;
