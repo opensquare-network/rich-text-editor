@@ -4,9 +4,20 @@ export default css`
   position: relative;
   border-radius: 4px;
 
-  ul.ql-mention-list li{
+  ul.ql-mention-list {
+    margin-left: 40px;
+    padding: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-shadow: 0px 4px 31px rgb(26 33 44 / 6%),
+      0px 0.751293px 8px rgb(26 33 44 / 4%);
+  }
+
+  ul.ql-mention-list li {
     all: unset;
     display: block;
+    min-width: 180px;
+    line-height: 36px;
   }
 
   .ql-mention-list-container {
@@ -22,17 +33,17 @@ export default css`
       font-style: normal;
       font-weight: normal;
       font-size: 14px;
-      line-height: 22px;
-      padding: 4px 16px 4px 16px;
+      line-height: 36px;
+      padding: 0 12px;
     }
   }
 
   .ql-formats {
-    ${(props) =>
-            props.isPreview &&
-            css`
-              display: none !important;
-            `};
+    ${props =>
+      props.isPreview &&
+      css`
+        display: none !important;
+      `};
   }
 
   .ql-editor {
@@ -111,7 +122,8 @@ export default css`
   .ql-editor h6 {
     margin: 0;
     padding: 0;
-    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8
+      list-9;
   }
 
   .ql-editor ol,
@@ -125,32 +137,32 @@ export default css`
   }
 
   .ql-editor ul > li::before {
-    content: '\\2022';
+    content: "\\2022";
   }
 
-  .ql-editor ul[data-checked=true],
-  .ql-editor ul[data-checked=false] {
+  .ql-editor ul[data-checked="true"],
+  .ql-editor ul[data-checked="false"] {
     pointer-events: none;
   }
 
-  .ql-editor ul[data-checked=true] > li *,
-  .ql-editor ul[data-checked=false] > li * {
+  .ql-editor ul[data-checked="true"] > li *,
+  .ql-editor ul[data-checked="false"] > li * {
     pointer-events: all;
   }
 
-  .ql-editor ul[data-checked=true] > li::before,
-  .ql-editor ul[data-checked=false] > li::before {
+  .ql-editor ul[data-checked="true"] > li::before,
+  .ql-editor ul[data-checked="false"] > li::before {
     color: #777;
     cursor: pointer;
     pointer-events: all;
   }
 
-  .ql-editor ul[data-checked=true] > li::before {
-    content: '\\2611';
+  .ql-editor ul[data-checked="true"] > li::before {
+    content: "\\2611";
   }
 
-  .ql-editor ul[data-checked=false] > li::before {
-    content: '\\2610';
+  .ql-editor ul[data-checked="false"] > li::before {
+    content: "\\2610";
   }
 
   .ql-editor li::before {
@@ -181,12 +193,13 @@ export default css`
   }
 
   .ql-editor ol li {
-    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8
+      list-9;
     counter-increment: list-0;
   }
 
   .ql-editor ol li:before {
-    content: counter(list-0, decimal) '. ';
+    content: counter(list-0, decimal) ". ";
   }
 
   .ql-editor ol li.ql-indent-1 {
@@ -194,7 +207,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-1:before {
-    content: counter(list-1, lower-alpha) '. ';
+    content: counter(list-1, lower-alpha) ". ";
   }
 
   .ql-editor ol li.ql-indent-1 {
@@ -206,7 +219,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-2:before {
-    content: counter(list-2, lower-roman) '. ';
+    content: counter(list-2, lower-roman) ". ";
   }
 
   .ql-editor ol li.ql-indent-2 {
@@ -218,7 +231,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-3:before {
-    content: counter(list-3, decimal) '. ';
+    content: counter(list-3, decimal) ". ";
   }
 
   .ql-editor ol li.ql-indent-3 {
@@ -230,7 +243,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-4:before {
-    content: counter(list-4, lower-alpha) '. ';
+    content: counter(list-4, lower-alpha) ". ";
   }
 
   .ql-editor ol li.ql-indent-4 {
@@ -242,7 +255,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-5:before {
-    content: counter(list-5, lower-roman) '. ';
+    content: counter(list-5, lower-roman) ". ";
   }
 
   .ql-editor ol li.ql-indent-5 {
@@ -254,7 +267,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-6:before {
-    content: counter(list-6, decimal) '. ';
+    content: counter(list-6, decimal) ". ";
   }
 
   .ql-editor ol li.ql-indent-6 {
@@ -266,7 +279,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-7:before {
-    content: counter(list-7, lower-alpha) '. ';
+    content: counter(list-7, lower-alpha) ". ";
   }
 
   .ql-editor ol li.ql-indent-7 {
@@ -278,7 +291,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-8:before {
-    content: counter(list-8, lower-roman) '. ';
+    content: counter(list-8, lower-roman) ". ";
   }
 
   .ql-editor ol li.ql-indent-8 {
@@ -290,7 +303,7 @@ export default css`
   }
 
   .ql-editor ol li.ql-indent-9:before {
-    content: counter(list-9, decimal) '. ';
+    content: counter(list-9, decimal) ". ";
   }
 
   .ql-editor .ql-indent-1:not(.ql-direction-rtl) {
@@ -437,7 +450,6 @@ export default css`
     padding-right: 28.5em;
   }
 
-
   .ql-editor .ql-bg-black {
     background-color: #000;
   }
@@ -544,7 +556,7 @@ export default css`
   .ql-snow.ql-toolbar:after,
   .ql-toolbar:after {
     clear: both;
-    content: '';
+    content: "";
     display: table;
   }
 
@@ -571,8 +583,8 @@ export default css`
     outline: none;
   }
 
-  .ql-snow.ql-toolbar input.ql-image[type=file],
-  .ql-toolbar input.ql-image[type=file] {
+  .ql-snow.ql-toolbar input.ql-image[type="file"],
+  .ql-toolbar input.ql-image[type="file"] {
     display: none;
   }
 
@@ -590,7 +602,7 @@ export default css`
   .ql-toolbar .ql-picker-item:hover,
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
   .ql-toolbar .ql-picker-item.ql-selected {
-    color: #1E2134;
+    color: #1e2134;
   }
 
   .ql-snow.ql-toolbar button:hover .ql-fill,
@@ -621,7 +633,7 @@ export default css`
   .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
   .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-    fill: #1E2134;
+    fill: #1e2134;
   }
 
   .ql-snow.ql-toolbar button:hover .ql-stroke,
@@ -652,7 +664,7 @@ export default css`
   .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
   .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
-    stroke: #1E2134;
+    stroke: #1e2134;
   }
 
   @media (pointer: coarse) {
@@ -674,9 +686,10 @@ export default css`
     .ql-toolbar button:hover:not(.ql-active) .ql-stroke-miter {
       stroke: #506176;
     }
-  } {
-  box-sizing: border-box;
-}
+  }
+   {
+    box-sizing: border-box;
+  }
 
   * {
     box-sizing: border-box;
@@ -712,7 +725,7 @@ export default css`
 
   .ql-formats:after {
     clear: both;
-    content: '';
+    content: "";
     display: table;
   }
 
@@ -940,18 +953,19 @@ export default css`
       stroke: #506176;
 
       :hover {
-        stroke: #1E2134;
-        color: #1E2134;
+        stroke: #1e2134;
+        color: #1e2134;
       }
     }
   }
 
-  .ql-picker.ql-header .ql-picker-label[data-label]:not([data-label=''])::before,
-  .ql-picker.ql-font .ql-picker-label[data-label]:not([data-label=''])::before,
-  .ql-picker.ql-size .ql-picker-label[data-label]:not([data-label=''])::before,
-  .ql-picker.ql-header .ql-picker-item[data-label]:not([data-label=''])::before,
-  .ql-picker.ql-font .ql-picker-item[data-label]:not([data-label=''])::before,
-  .ql-picker.ql-size .ql-picker-item[data-label]:not([data-label=''])::before {
+  .ql-picker.ql-header
+    .ql-picker-label[data-label]:not([data-label=""])::before,
+  .ql-picker.ql-font .ql-picker-label[data-label]:not([data-label=""])::before,
+  .ql-picker.ql-size .ql-picker-label[data-label]:not([data-label=""])::before,
+  .ql-picker.ql-header .ql-picker-item[data-label]:not([data-label=""])::before,
+  .ql-picker.ql-font .ql-picker-item[data-label]:not([data-label=""])::before,
+  .ql-picker.ql-size .ql-picker-item[data-label]:not([data-label=""])::before {
     content: attr(data-label);
   }
 
@@ -960,7 +974,7 @@ export default css`
       svg {
         :hover {
           path {
-            fill: #1E2134;
+            fill: #1e2134;
           }
         }
       }
@@ -977,17 +991,18 @@ export default css`
     height: 24px;
     position: relative;
     vertical-align: middle;
-    background: #F6F7FA;
+    background: #f6f7fa;
   }
 
   option {
     display: block;
   }
 
-  .ql-toolbar, .ql-formats {
+  .ql-toolbar,
+  .ql-formats {
     display: flex;
     flex-wrap: nowrap;
-    background: #F6F7FA;
+    background: #f6f7fa;
   }
 
   .ql-toolbar {
@@ -1006,37 +1021,37 @@ export default css`
   .ql-picker.ql-header .ql-picker-label::before,
   .ql-header .ql-picker-item::before {
     display: block;
-    content: 'Normal';
+    content: "Normal";
   }
 
   .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
   .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
-    content: 'Heading 1';
+    content: "Heading 1";
   }
 
   .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
   .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
-    content: 'Heading 2';
+    content: "Heading 2";
   }
 
   .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
   .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
-    content: 'Heading 3';
+    content: "Heading 3";
   }
 
   .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
   .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
-    content: 'Heading 4';
+    content: "Heading 4";
   }
 
   .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
   .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
-    content: 'Heading 5';
+    content: "Heading 5";
   }
 
   .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
   .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
-    content: 'Heading 6';
+    content: "Heading 6";
   }
 
   .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
@@ -1069,24 +1084,24 @@ export default css`
 
   .ql-picker.ql-font .ql-picker-label::before,
   .ql-picker.ql-font .ql-picker-item::before {
-    content: 'Sans Serif';
+    content: "Sans Serif";
   }
 
-  .ql-picker.ql-font .ql-picker-label[data-value=serif]::before,
-  .ql-picker.ql-font .ql-picker-item[data-value=serif]::before {
-    content: 'Serif';
+  .ql-picker.ql-font .ql-picker-label[data-value="serif"]::before,
+  .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before {
+    content: "Serif";
   }
 
-  .ql-picker.ql-font .ql-picker-label[data-value=monospace]::before,
-  .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
-    content: 'Monospace';
+  .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before,
+  .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before {
+    content: "Monospace";
   }
 
-  .ql-picker.ql-font .ql-picker-item[data-value=serif]::before {
+  .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before {
     font-family: Georgia, Times New Roman, serif;
   }
 
-  .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
+  .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before {
     font-family: Monaco, Courier New, monospace;
   }
 
@@ -1096,33 +1111,33 @@ export default css`
 
   .ql-picker.ql-size .ql-picker-label::before,
   .ql-picker.ql-size .ql-picker-item::before {
-    content: 'Normal';
+    content: "Normal";
   }
 
-  .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
-  .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
-    content: 'Small';
+  .ql-picker.ql-size .ql-picker-label[data-value="small"]::before,
+  .ql-picker.ql-size .ql-picker-item[data-value="small"]::before {
+    content: "Small";
   }
 
-  .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
-  .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
-    content: 'Large';
+  .ql-picker.ql-size .ql-picker-label[data-value="large"]::before,
+  .ql-picker.ql-size .ql-picker-item[data-value="large"]::before {
+    content: "Large";
   }
 
-  .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
-  .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
-    content: 'Huge';
+  .ql-picker.ql-size .ql-picker-label[data-value="huge"]::before,
+  .ql-picker.ql-size .ql-picker-item[data-value="huge"]::before {
+    content: "Huge";
   }
 
-  .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+  .ql-picker.ql-size .ql-picker-item[data-value="small"]::before {
     font-size: 10px;
   }
 
-  .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+  .ql-picker.ql-size .ql-picker-item[data-value="large"]::before {
     font-size: 18px;
   }
 
-  .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+  .ql-picker.ql-size .ql-picker-item[data-value="huge"]::before {
     font-size: 32px;
   }
 
@@ -1136,11 +1151,11 @@ export default css`
 
   .ql-toolbar {
     box-sizing: border-box;
-    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     padding: 8px;
     justify-content: end;
     height: 41px;
-    border-bottom: 1px solid #E0E4EB;
+    border-bottom: 1px solid #e0e4eb;
   }
 
   .ql-toolbar.ql-formats {
@@ -1188,7 +1203,7 @@ export default css`
     margin-right: 8px;
   }
 
-  .ql-tooltip input[type=text] {
+  .ql-tooltip input[type="text"] {
     display: none;
     border: 1px solid #ccc;
     font-size: 13px;
@@ -1208,13 +1223,13 @@ export default css`
 
   .ql-tooltip a.ql-action::after {
     border-right: 1px solid #ccc;
-    content: 'Edit';
+    content: "Edit";
     margin-left: 16px;
     padding-right: 8px;
   }
 
   .ql-tooltip a.ql-remove::before {
-    content: 'Remove';
+    content: "Remove";
     margin-left: 8px;
   }
 
@@ -1227,29 +1242,29 @@ export default css`
     display: none;
   }
 
-  .ql-tooltip.ql-editing input[type=text] {
+  .ql-tooltip.ql-editing input[type="text"] {
     display: inline-block;
   }
 
   .ql-tooltip.ql-editing a.ql-action::after {
     border-right: 0px;
-    content: 'Save';
+    content: "Save";
     padding-right: 0px;
   }
 
-  .ql-tooltip[data-mode=link]::before {
+  .ql-tooltip[data-mode="link"]::before {
     content: "Enter link:";
   }
 
-  .ql-tooltip[data-mode=formula]::before {
+  .ql-tooltip[data-mode="formula"]::before {
     content: "Enter formula:";
   }
 
-  .ql-tooltip[data-mode=video]::before {
+  .ql-tooltip[data-mode="video"]::before {
     content: "Enter video:";
   }
 
   a {
     color: #06c;
   }
-`
+`;
