@@ -1,8 +1,13 @@
 import styled, { css } from "styled-components";
 import * as React from "react";
 
+export interface Theme {
+  wrapper: string;
+}
+
 interface WrapperProps {
   disabled?: boolean;
+  theme: Theme;
 }
 
 export const EditorWrapper = styled.div<WrapperProps>`
@@ -10,6 +15,7 @@ export const EditorWrapper = styled.div<WrapperProps>`
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid #e2e8f0;
+  ${props => props.theme.wrapper};
   ${p =>
     p.disabled &&
     css`
@@ -25,6 +31,8 @@ export const ToolBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: content-box;
+  ${props => props.theme.toolbar};
   /* mobile */
   @media screen and (max-width: 769px) {
     display: block;
@@ -41,10 +49,12 @@ export const TabsWrapper = styled.div`
   @media screen and (max-width: 769px) {
     border-bottom: 1px solid #e2e8f0;
   }
+  ${props => props.theme.tabs};
 `;
 
 interface TabProps {
   active: boolean;
+  theme: "opensquare" | "subsquare";
 }
 
 export const Tab = styled.button<TabProps>`
@@ -53,11 +63,19 @@ export const Tab = styled.button<TabProps>`
   font-size: 14px;
   line-height: 24px;
   border-bottom: 3px solid #ffffff;
+  ${props => props.theme.tab};
+  ${props =>
+    props.active &&
+    props.theme === "opensquare" &&
+    css`
+      border-bottom: 3px solid #04d2c5;
+    `};
   ${props =>
     props.active &&
     css`
       border-bottom: 3px solid #04d2c5;
     `};
+  ${props => props.active && props.theme.tabActive};
   cursor: pointer;
   /* mobile */
   @media screen and (max-width: 769px) {
@@ -72,6 +90,7 @@ interface Props {
   hide?: boolean;
   minHeight?: number;
   height?: number;
+  theme?: "opensquare" | "subsquare";
 }
 
 export const ToolbarItemsWrapper = styled.div<Props>`
@@ -129,6 +148,7 @@ export const Textarea = styled.textarea<Props>`
   font-family: Inter, sans-serif;
   border: none;
   border-bottom: 1px solid #e2e8f0;
+  ${props => props.theme.textarea};
 
   :hover,
   :focus {

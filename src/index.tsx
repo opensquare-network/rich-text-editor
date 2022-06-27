@@ -16,6 +16,10 @@ import { useEffect, useRef, useState } from "react";
 import { EditorWrapper, Textarea } from "./components/EditorComponents";
 import EditorHeader from "./components/EditorHeader";
 import { getHandlers } from "./util/eventHandlers";
+import WYSIWYG from "./WYSIWYG";
+import UniverseEditor from "./universeEditor";
+import Opensquare from "./styles/opensquare";
+import Subsqaure from "./styles/subsqaure";
 
 export interface Suggestion {
   preview: React.ReactNode;
@@ -25,8 +29,9 @@ export interface Suggestion {
 export type DemoProps = {
   value: string;
   onChange: (value: string) => void;
-  loadSuggestions?: (text: string) => Suggestion[];
   minHeight?: number;
+  theme?: "opensquare" | "subsquare";
+  loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
 };
 
@@ -56,8 +61,10 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   onChange,
   loadSuggestions,
   minHeight = 144,
+  theme = "opensquare",
   disabled = false
 }) => {
+  const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
@@ -187,9 +194,15 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   };
 
   return (
-    <EditorWrapper disabled={disabled}>
+    <EditorWrapper theme={themeCSS} disabled={disabled}>
       <EditorHeader
-        {...{ editStatus, setEditStatus, isPreview, commandController }}
+        {...{
+          theme: themeCSS,
+          editStatus,
+          setEditStatus,
+          isPreview,
+          commandController
+        }}
       />
       <Textarea
         ref={ref}
@@ -207,12 +220,19 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           onEnterNewLine(event);
         }}
         onKeyPress={handleKeyPress}
-        placeholder="Please text here..."
+        placeholder=""
         minHeight={minHeight}
         height={height}
         hide={isPreview}
+        theme={themeCSS}
       />
-      {isPreview && <MarkdownPreview content={value} minHeight={minHeight} />}
+      {isPreview && (
+        <MarkdownPreview
+          content={value}
+          minHeight={minHeight}
+          theme={themeCSS}
+        />
+      )}
       {mentionState.status === "active" && suggestions.length > 0 && (
         <SuggestionsDropdown
           caret={caret}
@@ -226,5 +246,6 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     </EditorWrapper>
   );
 };
+export { WYSIWYG, UniverseEditor };
 
 export default Editor;

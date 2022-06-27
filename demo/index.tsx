@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import MarkdownEditor from "../src";
 import { useState } from "react";
 import "./styles/style.css";
+import styled from "styled-components";
+import UniverseEditor from "../src/universeEditor";
 
 export type DemoProps = {};
 
@@ -50,8 +52,37 @@ const suggestions = [
   }
 ];
 
+const html = `<p><a href="https://www.baidu.com/">https://www.baidu.com/</a></p><h1>heading 1</h1><p><strong>bold text</strong><em>italic text</em><code>inline code</code></p><ul><li>bullet 1</li></ul><ol><li>numbered 1</li></ol><pre><code class="language-bash">echo "hello"</code></pre><blockquote><p>quote text</p></blockquote>`;
+
+const ToggleWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  border: 1px solid #ebeef4;
+  border-top: none;
+  padding-right: 16px;
+  border-radius: 4px;
+`;
+
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
+  const [contentType, setContentType] = useState("markdown");
+  const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
+
+  const onMarkdownSwitch = () => {
+    if (
+      content &&
+      !confirm(`Togging editor will empty all typed contents, are you sure ?`)
+    ) {
+      return;
+    }
+
+    const newContentType = contentType === "html" ? "markdown" : "html";
+    setContent("");
+    setContentType(newContentType);
+  };
 
   const loadSuggestions = (text: string) => {
     return suggestions.filter(i =>
@@ -59,7 +90,15 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
     );
   };
   return (
-    <div style={{ paddingTop: 30, maxWidth: 800, margin: 20 }}>
+    <div style={{ paddingTop: 100, maxWidth: 800, margin: 150 }}>
+      <UniverseEditor
+        value={content}
+        onChange={value => {
+          setContent(value);
+        }}
+        loadSuggestions={loadSuggestions}
+      />
+      <br />
       <MarkdownEditor
         value={content}
         onChange={value => {

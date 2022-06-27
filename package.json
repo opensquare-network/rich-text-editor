@@ -68,6 +68,7 @@
   "dependencies": {
     "marked": "^4.0.15",
     "prismjs": "^1.28.0",
+    "quill": "^2.0.0-dev.4",
     "sanitize-html": "^2.7.0"
   },
   "peerDependencies": {
