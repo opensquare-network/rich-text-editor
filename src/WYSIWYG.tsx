@@ -1,13 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import quillStyle from "./styles/quillStyle";
-import {
-  QuillOptionsStatic,
-  RangeStatic,
-  BoundsStatic,
-  StringMap,
-  Sources
-} from "quill";
+import { QuillOptionsStatic, BoundsStatic, StringMap, Sources } from "quill";
 import styled from "styled-components";
 import { Delta } from "framer-motion";
 import * as QuillNamespace from "quill";
@@ -15,6 +9,7 @@ import StateToggle from "./components/StateToggle";
 import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
 import ImageResize from "./quillModules/ImageResize";
+import { Suggestion } from "./index";
 
 let Quill: any = QuillNamespace;
 
@@ -109,11 +104,8 @@ interface EditorProps {
     func: (bounds: BoundsStatic) => void,
     type: string
   ) => void;
+  loadSuggestions?: (text: string) => Suggestion[];
 }
-
-const isDelta = (value: any): boolean => {
-  return value && value.ops;
-};
 
 export default function WYSIWYG(props: EditorProps) {
   const [isPreview, setIsPreview] = useState(false);
@@ -161,7 +153,7 @@ export default function WYSIWYG(props: EditorProps) {
         }
       },
       mention: {
-        allowedChars: /^[A-Za-z\s]*$/,
+        allowedChars: /^[0-9A-Za-z\s]*$/,
         mentionDenotationChars: ["@"],
         source: function(searchTerm: any, renderList: any, mentionChar: any) {
           const atValues: any = [
