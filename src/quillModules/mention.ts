@@ -138,9 +138,9 @@ class Mention {
       );
     }
     console.log(quill.keyboard);
-    // quill.keyboard.bindings[Keys.ENTER].unshift(
-    //   quill.keyboard.bindings[Keys.ENTER].pop()
-    // );
+    quill.keyboard.bindings[Keys.ENTER].unshift(
+      quill.keyboard.bindings[Keys.ENTER].pop()
+    );
 
     quill.keyboard.addBinding(
       {
