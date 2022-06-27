@@ -32,17 +32,6 @@ echo "hello"
 > quote text
 `.trim();
 
-const suggestions = [
-  {
-    preview: <span>abc</span>,
-    value: "abc"
-  },
-  {
-    preview: <span>edf</span>,
-    value: "edf"
-  }
-];
-
 const ToggleWrapper = styled.div`
   display: flex;
   justify-content: end;

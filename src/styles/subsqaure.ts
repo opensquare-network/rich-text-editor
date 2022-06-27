@@ -3,6 +3,13 @@ import { css } from "styled-components";
 const SubSquare = {
   wrapper: css`
     border: none;
+    .mention-list {
+      font-size: 14px;
+      line-height: 20px;
+      li {
+        padding: 10px 12px;
+      }
+    }
   `,
   toolbar: css`
     justify-content: end;

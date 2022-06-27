@@ -75,8 +75,8 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
     window.innerWidth || 0
   );
 
-  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 30;
-  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 60;
+  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
+  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 45;
 
   const style: React.CSSProperties = {};
   style.top = top;
@@ -89,7 +89,7 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
   else style.left = left;
 
   return (
-    <SuggestionsWrapper style={style}>
+    <SuggestionsWrapper className="mention-list" style={style}>
       {suggestions.slice(0, max).map((s, i) => (
         <li
           onClick={handleSuggestionClick}

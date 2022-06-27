@@ -5,19 +5,13 @@ export default css`
   border-radius: 4px;
 
   ul.ql-mention-list {
-    margin-left: 40px;
+    margin-top: 0px;
+    margin-left: 20px;
     padding: 0;
     padding-top: 8px;
     padding-bottom: 8px;
     box-shadow: 0px 4px 31px rgb(26 33 44 / 6%),
       0px 0.751293px 8px rgb(26 33 44 / 4%);
-  }
-
-  ul.ql-mention-list li {
-    all: unset;
-    display: block;
-    min-width: 180px;
-    line-height: 36px;
   }
 
   .ql-mention-list-container {
@@ -30,11 +24,15 @@ export default css`
     }
 
     .ql-mention-list-item {
-      font-style: normal;
-      font-weight: normal;
+      all: unset;
+      display: block;
+      padding: 10px 12px;
+      min-width: 180px;
       font-size: 14px;
-      line-height: 36px;
-      padding: 0 12px;
+      line-height: 20px;
+      font-style: normal;
+      font-weight: 500;
+      color: #506176;
     }
   }
 
@@ -929,7 +927,7 @@ export default css`
   }
 
   .ql-color-picker .ql-picker-options {
-    padding: 3px 5px;
+    padding: 3 px 5px;
     width: 152px;
   }
 
