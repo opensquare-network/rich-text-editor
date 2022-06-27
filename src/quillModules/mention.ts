@@ -9,11 +9,11 @@ import {
 import "./blots/mention";
 
 const Keys = {
-  TAB: 9,
-  ENTER: 13,
-  ESCAPE: 27,
-  UP: 38,
-  DOWN: 40
+  TAB: "Tab",
+  ENTER: "Enter",
+  ESCAPE: "Escape",
+  UP: "ArrowUp",
+  DOWN: "ArrowDown"
 };
 
 class Mention {
@@ -138,9 +138,9 @@ class Mention {
       );
     }
     console.log(quill.keyboard);
-    // quill.keyboard.bindings[Keys.ENTER].unshift(
-    //   quill.keyboard.bindings[Keys.ENTER].pop()
-    // );
+    quill.keyboard.bindings[Keys.ENTER].unshift(
+      quill.keyboard.bindings[Keys.ENTER].pop()
+    );
 
     quill.keyboard.addBinding(
       {
