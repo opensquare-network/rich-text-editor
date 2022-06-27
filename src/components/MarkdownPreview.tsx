@@ -9,7 +9,7 @@ type Props = {
   allowedTags?: string[];
   style?: React.CSSProperties;
   minHeight: number;
-  theme?: "subsquare" | "github";
+  theme?: any;
 };
 
 export function MarkdownPreview(props: Props = { minHeight: 144 }) {

@@ -57,7 +57,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
   loadSuggestions
 }) => {
   const [content, setContent] = useState(markdown);
-  const [contentType, setContentType] = useState("html");
+  const [contentType, setContentType] = useState("markdown");
   const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("image");

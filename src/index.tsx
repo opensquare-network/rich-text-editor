@@ -18,6 +18,8 @@ import EditorHeader from "./components/EditorHeader";
 import { getHandlers } from "./util/eventHandlers";
 import WYSIWYG from "./WYSIWYG";
 import UniverseEditor from "./universeEditor";
+import Opensquare from "./styles/opensquare";
+import Subsqaure from "./styles/subsqaure";
 
 export interface Suggestion {
   preview: React.ReactNode;
@@ -62,6 +64,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   theme = "opensquare",
   disabled = false
 }) => {
+  const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
@@ -191,9 +194,15 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   };
 
   return (
-    <EditorWrapper theme={theme} disabled={disabled}>
+    <EditorWrapper theme={themeCSS} disabled={disabled}>
       <EditorHeader
-        {...{ theme, editStatus, setEditStatus, isPreview, commandController }}
+        {...{
+          theme: themeCSS,
+          editStatus,
+          setEditStatus,
+          isPreview,
+          commandController
+        }}
       />
       <Textarea
         ref={ref}
@@ -215,10 +224,14 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         minHeight={minHeight}
         height={height}
         hide={isPreview}
-        theme={theme}
+        theme={themeCSS}
       />
       {isPreview && (
-        <MarkdownPreview content={value} minHeight={minHeight} theme={theme} />
+        <MarkdownPreview
+          content={value}
+          minHeight={minHeight}
+          theme={themeCSS}
+        />
       )}
       {mentionState.status === "active" && suggestions.length > 0 && (
         <SuggestionsDropdown

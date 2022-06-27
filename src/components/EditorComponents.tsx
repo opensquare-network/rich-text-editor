@@ -1,8 +1,13 @@
 import styled, { css } from "styled-components";
 import * as React from "react";
 
+export interface Theme {
+  wrapper: string;
+}
+
 interface WrapperProps {
   disabled?: boolean;
+  theme: Theme;
 }
 
 export const EditorWrapper = styled.div<WrapperProps>`
@@ -10,12 +15,7 @@ export const EditorWrapper = styled.div<WrapperProps>`
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
-  ${props =>
-    props.theme === "subsquare" &&
-    css`
-      border: none;
-    `};
+  ${props => props.theme.wrapper};
   ${p =>
     p.disabled &&
     css`
@@ -32,21 +32,7 @@ export const ToolBar = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: content-box;
-  ${props =>
-    props.theme === "subsquare" &&
-    css`
-      justify-content: end;
-      background-color: #f6f7fa;
-      padding-left: 0;
-      padding-right: 20px;
-      height: 40px;
-      border-bottom: 1px solid #e0e4eb;
-      position: relative;
-      > div:first-child {
-        gap: 0;
-        height: 40px;
-      }
-    `};
+  ${props => props.theme.toolbar};
   /* mobile */
   @media screen and (max-width: 769px) {
     display: block;
@@ -63,12 +49,7 @@ export const TabsWrapper = styled.div`
   @media screen and (max-width: 769px) {
     border-bottom: 1px solid #e2e8f0;
   }
-  ${props =>
-    props.theme === "subsquare" &&
-    css`
-      position: absolute;
-      left: 0;
-    `};
+  ${props => props.theme.tabs};
 `;
 
 interface TabProps {
@@ -82,20 +63,7 @@ export const Tab = styled.button<TabProps>`
   font-size: 14px;
   line-height: 24px;
   border-bottom: 3px solid #ffffff;
-  ${props =>
-    props.theme === "subsquare" &&
-    css`
-      padding: 12px;
-      line-height: 16px;
-      border-bottom: none;
-      color: #9da9bb;
-      :last-child {
-        box-shadow: 1px 0 0 0 #e0e4eb;
-      }
-      :hover {
-        color: #506176;
-      }
-    `};
+  ${props => props.theme.tab};
   ${props =>
     props.active &&
     props.theme === "opensquare" &&
@@ -107,23 +75,7 @@ export const Tab = styled.button<TabProps>`
     css`
       border-bottom: 3px solid #04d2c5;
     `};
-  ${props =>
-    props.active &&
-    props.theme === "subsquare" &&
-    css`
-      background-color: white;
-      color: #1e2134;
-      border-bottom: 17px solid white;
-      :first-child {
-        box-shadow: 1px 0 0 0 #e0e4eb;
-      }
-      :last-child {
-        box-shadow: -1px 0 0 0 #e0e4eb, 1px 0 0 0 #e0e4eb;
-      }
-      :hover {
-        color: #1e2134;
-      }
-    `};
+  ${props => props.active && props.theme.tabActive};
   cursor: pointer;
   /* mobile */
   @media screen and (max-width: 769px) {
@@ -196,12 +148,7 @@ export const Textarea = styled.textarea<Props>`
   font-family: Inter, sans-serif;
   border: none;
   border-bottom: 1px solid #e2e8f0;
-  ${props =>
-    props.theme === "subsquare" &&
-    css`
-      background-color: white;
-      border-bottom: none;
-    `};
+  ${props => props.theme.textarea};
 
   :hover,
   :focus {
