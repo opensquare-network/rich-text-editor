@@ -27,7 +27,6 @@ export interface Suggestion {
 export type DemoProps = {
   value: string;
   onChange: (value: string) => void;
-  suggestions?: Suggestion[];
   minHeight?: number;
   theme?: "opensquare" | "subsquare";
   loadSuggestions?: (text: string) => Suggestion[];

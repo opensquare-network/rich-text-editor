@@ -10,7 +10,6 @@ import InsertContentsModal from "./components/modal";
 export type DemoProps = {
   value: string;
   onChange: (value: string) => void;
-  suggestions?: Suggestion[];
   minHeight?: number;
   loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
