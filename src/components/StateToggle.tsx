@@ -13,7 +13,7 @@ const StateToggle = styled.div`
     font-weight: 500;
     cursor: pointer;
     //border-radius: 4px;
-    color: #9DA9BB;
+    color: #9da9bb;
     //border: 1px solid #E0E4EB;
     border-top: none;
   }
@@ -21,14 +21,23 @@ const StateToggle = styled.div`
   button.active {
     background-color: #ffffff;
     box-shadow: 0 1px 0 0 white;
-    color: #1E2134;
+    color: #1e2134;
     :hover {
-      color: #1E2134;
+      color: #1e2134;
     }
   }
 
   button:hover {
     color: #506176;
+  }
+
+  @media screen and (max-width: 769px) {
+    position: initial;
+    button {
+      flex-basis: 50%;
+      text-align: center;
+      background-color: #f6f7fa;
+    }
   }
 `;
 
