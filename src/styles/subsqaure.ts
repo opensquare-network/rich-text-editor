@@ -7,7 +7,7 @@ const SubSquare = {
       font-size: 14px;
       line-height: 20px;
       li {
-        padding: 10px 12px;
+        padding: 12px 10px;
       }
     }
   `,
@@ -23,10 +23,15 @@ const SubSquare = {
       gap: 0;
       height: 40px;
     }
+    @media screen and (max-width: 769px) {
+      padding-top: 40px;
+      padding-left: 16px;
+    }
   `,
   tabs: css`
     position: absolute;
     left: 0;
+    top: 0;
   `,
   tab: css`
     padding: 12px;
@@ -55,6 +60,10 @@ const SubSquare = {
     :hover {
       color: #1e2134;
     }
+  `,
+  tabMobile: css`
+    margin-left: 0;
+    margin-right: 0;
   `,
   textarea: css`
     background-color: white;

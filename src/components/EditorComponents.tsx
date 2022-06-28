@@ -32,13 +32,18 @@ export const ToolBar = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: content-box;
-  ${props => props.theme.toolbar};
   /* mobile */
   @media screen and (max-width: 769px) {
     display: block;
     padding-left: 0;
     padding-right: 0;
+    ${props =>
+      props.isPreview &&
+      css`
+        padding-top: 0 !important;
+      `};
   }
+  ${props => props.theme.toolbar};
 `;
 
 export const TabsWrapper = styled.div`
@@ -48,6 +53,7 @@ export const TabsWrapper = styled.div`
   /* mobile */
   @media screen and (max-width: 769px) {
     border-bottom: 1px solid #e2e8f0;
+    width: 100%;
   }
   ${props => props.theme.tabs};
 `;
@@ -83,6 +89,7 @@ export const Tab = styled.button<TabProps>`
     margin-right: 16px;
     width: 50%;
     text-align: center;
+    ${props => props.theme.tabMobile};
   }
 `;
 
