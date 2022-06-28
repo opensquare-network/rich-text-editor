@@ -13,13 +13,15 @@ const SuggestionsWrapper = styled.ul`
   box-shadow: 0px 4px 31px rgba(26, 33, 44, 0.06),
     0px 0.751293px 8px rgba(26, 33, 44, 0.04);
   color: #506176;
+  border-radius: 4px;
+  overflow: hidden;
 
   li {
     padding: 6px 16px;
 
     &:hover,
     &[aria-selected="true"] {
-      background-color: #f0f3f8;
+      background-color: #f6f7fa;
     }
   }
 `;

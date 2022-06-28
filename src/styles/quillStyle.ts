@@ -5,13 +5,15 @@ export default css`
   border-radius: 4px;
 
   ul.ql-mention-list {
-    margin-top: 0px;
+    margin-top: 0;
     margin-left: 20px;
     padding: 0;
     padding-top: 8px;
     padding-bottom: 8px;
     box-shadow: 0px 4px 31px rgb(26 33 44 / 6%),
       0px 0.751293px 8px rgb(26 33 44 / 4%);
+    border-radius: 4px;
+    overflow: hidden;
   }
 
   .ql-mention-list-container {
@@ -19,14 +21,14 @@ export default css`
     min-width: 180px;
     cursor: pointer;
     .ql-mention-list-item.selected {
-      background-color: #f8f8f8;
+      background-color: #f6f7fa;
       color: #34373c;
     }
 
     .ql-mention-list-item {
       all: unset;
       display: block;
-      padding: 10px 12px;
+      padding: 12px 10px;
       min-width: 180px;
       font-size: 14px;
       line-height: 20px;
