@@ -156,10 +156,11 @@ export default function WYSIWYG(props: EditorProps) {
         allowedChars: /^[0-9A-Za-z\s]*$/,
         mentionDenotationChars: ["@"],
         source: function(searchTerm: any, renderList: any, mentionChar: any) {
-          const atValues: any = [
-            { id: "123123", value: "456456" },
-            { id: "123123", value: "789798" }
-          ];
+          const suggestions = props.loadSuggestions("") ?? [];
+          const atValues: any = [];
+          suggestions.map(suggestion =>
+            atValues.push({ id: suggestion.value, value: suggestion.address })
+          );
 
           let values;
           if (mentionChar === "@") {

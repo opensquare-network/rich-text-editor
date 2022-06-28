@@ -10,6 +10,8 @@ import InsertContentsModal from "./components/modal";
 export type DemoProps = {
   value: string;
   onChange: (value: string) => void;
+  contentType: "markdown" | "html";
+  setContentType: (contentType: "markdown" | "html") => void;
   minHeight?: number;
   loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
@@ -43,25 +45,27 @@ const ToggleWrapper = styled.div`
 `;
 
 export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
-  loadSuggestions
+  value,
+  onChange,
+  contentType = "markdown",
+  setContentType,
+  loadSuggestions,
+  disabled = false,
+  minHeight = 200
 }) => {
-  const [content, setContent] = useState(markdown);
-  const [contentType, setContentType] = useState("html");
-  const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("image");
   const [insetQuillContentsFunc, setInsetQuillContentsFunc] = useState(null);
 
   const onMarkdownSwitch = () => {
     if (
-      content &&
+      value &&
       !confirm(`Togging editor will empty all typed contents, are you sure ?`)
     ) {
       return;
     }
-
     const newContentType = contentType === "html" ? "markdown" : "html";
-    setContent("");
+    onChange("");
     setContentType(newContentType);
   };
 
@@ -76,13 +80,12 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
     >
       {contentType === "markdown" ? (
         <MarkdownEditor
-          value={content}
-          onChange={value => {
-            setContent(value);
-          }}
+          value={value}
+          onChange={onChange}
           loadSuggestions={loadSuggestions}
           minHeight={200}
           theme={"subsquare"}
+          disabled={disabled}
         />
       ) : (
         <>
@@ -93,13 +96,14 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
             type={modalType}
           />
           <WYSIWYG
-            value={htmlContent}
-            onChange={value => setHtmlContent(value)}
+            value={value}
+            onChange={onChange}
             setModalInsetFunc={(insetFunc, type) => {
               setModalType(type);
               setShowModal(true);
               setInsetQuillContentsFunc(insetFunc);
             }}
+            loadSuggestions={loadSuggestions}
           />
         </>
       )}

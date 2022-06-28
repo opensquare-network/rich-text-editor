@@ -28,27 +28,33 @@ echo "hello"
 const suggestions = [
   {
     preview: <span>abc</span>,
-    value: "[@abd](abc-polkadot) "
+    value: "[@abd](abc-polkadot) ",
+    address: "abc-polkadot"
   },
   {
     preview: <span>def1</span>,
-    value: "[@def1](def-kusama) "
+    value: "[@def1](def-kusama) ",
+    address: "abc-polkadot"
   },
   {
     preview: <span>def2</span>,
-    value: "[@def2](def-kusama) "
+    value: "[@def2](def-kusama) ",
+    address: "abc-polkadot"
   },
   {
     preview: <span>def3</span>,
-    value: "[@def3](def-kusama) "
+    value: "[@def3](def-kusama) ",
+    address: "abc-polkadot"
   },
   {
     preview: <span>def4</span>,
-    value: "[@def4](def-kusama) "
+    value: "[@def4](def-kusama) ",
+    address: "abc-polkadot"
   },
   {
     preview: <span>def5</span>,
-    value: "[@def5](def-kusama) "
+    value: "[@def5](def-kusama) ",
+    address: "abc-polkadot"
   }
 ];
 
@@ -69,26 +75,13 @@ const ToggleWrapper = styled.div`
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
   const [contentType, setContentType] = useState("markdown");
-  const [htmlContent, setHtmlContent] = useState(`<p>　</p>`);
-
-  const onMarkdownSwitch = () => {
-    if (
-      content &&
-      !confirm(`Togging editor will empty all typed contents, are you sure ?`)
-    ) {
-      return;
-    }
-
-    const newContentType = contentType === "html" ? "markdown" : "html";
-    setContent("");
-    setContentType(newContentType);
-  };
 
   const loadSuggestions = (text: string) => {
     return suggestions.filter(i =>
       i.value.toLowerCase().includes(text.toLowerCase())
     );
   };
+
   return (
     <div style={{ paddingTop: 100, maxWidth: 800, margin: 150 }}>
       <UniverseEditor
@@ -96,6 +89,8 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         onChange={value => {
           setContent(value);
         }}
+        contentType={contentType}
+        setContentType={setContentType}
         loadSuggestions={loadSuggestions}
       />
       <br />
