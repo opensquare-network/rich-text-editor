@@ -190,6 +190,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           "newLineAndIndentContinueMarkdownList"
         );
       }
+      focusToCursor();
     }
   };
 
@@ -210,7 +211,6 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         onChange={event => {
           onChange(event.target.value);
           adjustHeight();
-          focusToCursor();
         }}
         onKeyUp={event => {
           handleKeyUp(event);
