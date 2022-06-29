@@ -83,7 +83,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
           value={value}
           onChange={onChange}
           loadSuggestions={loadSuggestions}
-          minHeight={200}
+          minHeight={minHeight}
           theme={"subsquare"}
           disabled={disabled}
         />
@@ -104,6 +104,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
               setInsetQuillContentsFunc(insetFunc);
             }}
             loadSuggestions={loadSuggestions}
+            minHeight={minHeight}
           />
         </>
       )}

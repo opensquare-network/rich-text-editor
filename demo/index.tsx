@@ -92,6 +92,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         contentType={contentType}
         setContentType={setContentType}
         loadSuggestions={loadSuggestions}
+        minHeight={200}
       />
       <br />
       <MarkdownEditor

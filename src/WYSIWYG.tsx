@@ -105,6 +105,7 @@ interface EditorProps {
     type: string
   ) => void;
   loadSuggestions?: (text: string) => Suggestion[];
+  minHeight?: number;
 }
 
 export default function WYSIWYG(props: EditorProps) {
@@ -264,7 +265,7 @@ export default function WYSIWYG(props: EditorProps) {
   }, [editingArea]);
 
   return (
-    <Wrapper isPreview={isPreview}>
+    <Wrapper isPreview={isPreview} height={props.minHeight ?? 200}>
       <StateToggle>
         <button
           onClick={() => setIsPreview(false)}
