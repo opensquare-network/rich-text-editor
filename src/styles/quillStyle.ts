@@ -46,8 +46,10 @@ export default css`
       `};
   }
 
-  .ql-editor {
-    min-height: 200px;
+  div.ql-editor {
+    min-height: 100px;
+    height: ${props => props.height}px;
+    max-height: 300px;
   }
 
   .ql-toolbar {
