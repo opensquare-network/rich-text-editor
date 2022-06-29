@@ -89,7 +89,7 @@ const VerticalDivider = styled.div`
   background-color: #e0e4eb;
 `;
 
-const Wrapper = styled.div<{ isPreview: boolean }>`
+const Wrapper = styled.div<{ isPreview: boolean; height: number }>`
   ${quillStyle};
 `;
 
@@ -229,6 +229,7 @@ export default function WYSIWYG(props: EditorProps) {
           if (props?.onChange) {
             props?.onChange(editor.root.innerHTML);
           }
+          editor.root.style.height = `${editor.root.scrollHeight}px`;
         }
       }
     );
