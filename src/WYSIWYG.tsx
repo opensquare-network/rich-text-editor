@@ -89,7 +89,7 @@ const VerticalDivider = styled.div`
   background-color: #e0e4eb;
 `;
 
-const Wrapper = styled.div<{ isPreview: boolean }>`
+const Wrapper = styled.div<{ isPreview: boolean; height: number }>`
   ${quillStyle};
 `;
 
@@ -109,6 +109,8 @@ interface EditorProps {
 }
 
 export default function WYSIWYG(props: EditorProps) {
+  const [height, setHeight] = useState(props.minHeight ?? 200);
+  console.log(height);
   const [isPreview, setIsPreview] = useState(false);
 
   const defaultModules = useMemo(
@@ -229,6 +231,7 @@ export default function WYSIWYG(props: EditorProps) {
           if (props?.onChange) {
             props?.onChange(editor.root.innerHTML);
           }
+          editor.root.style.height = `${editor.root.scrollHeight}px`;
         }
       }
     );
@@ -265,7 +268,7 @@ export default function WYSIWYG(props: EditorProps) {
   }, [editingArea]);
 
   return (
-    <Wrapper isPreview={isPreview} height={props.minHeight ?? 200}>
+    <Wrapper isPreview={isPreview} height={height}>
       <StateToggle>
         <button
           onClick={() => setIsPreview(false)}

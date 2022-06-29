@@ -74,7 +74,7 @@ const ToggleWrapper = styled.div`
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
-  const [contentType, setContentType] = useState("markdown");
+  const [contentType, setContentType] = useState("html");
 
   const loadSuggestions = (text: string) => {
     return suggestions.filter(i =>
