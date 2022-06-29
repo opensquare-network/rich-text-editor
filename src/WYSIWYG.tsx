@@ -109,8 +109,6 @@ interface EditorProps {
 }
 
 export default function WYSIWYG(props: EditorProps) {
-  const [height, setHeight] = useState(props.minHeight ?? 200);
-  console.log(height);
   const [isPreview, setIsPreview] = useState(false);
 
   const defaultModules = useMemo(
@@ -268,7 +266,7 @@ export default function WYSIWYG(props: EditorProps) {
   }, [editingArea]);
 
   return (
-    <Wrapper isPreview={isPreview} height={height}>
+    <Wrapper isPreview={isPreview} height={props.minHeight ?? 200}>
       <StateToggle>
         <button
           onClick={() => setIsPreview(false)}
