@@ -74,8 +74,8 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
       style={{
         maxWidth: 800,
         border: "1px solid #EBEEF4",
-        borderRadius: 4,
-        overflow: "hidden"
+        borderRadius: 4
+        // overflow: "hidden"
       }}
     >
       {contentType === "markdown" ? (

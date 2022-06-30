@@ -19,6 +19,7 @@ export default css`
   .ql-mention-list-container {
     width: auto;
     min-width: 180px;
+    background-color: white;
     cursor: pointer;
     .ql-mention-list-item.selected {
       background-color: #f6f7fa;

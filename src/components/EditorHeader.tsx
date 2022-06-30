@@ -29,6 +29,7 @@ export default function EditorHeader({
           active={editStatus === "write"}
           onClick={() => setEditStatus("write")}
           theme={theme}
+          style={{ borderTopLeftRadius: 3 }}
         >
           Write
         </Tab>
