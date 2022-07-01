@@ -271,6 +271,7 @@ export default function WYSIWYG(props: EditorProps) {
         <button
           onClick={() => setIsPreview(false)}
           className={isPreview ? "" : "active"}
+          style={{ borderTopLeftRadius: 3 }}
         >
           Write
         </button>
