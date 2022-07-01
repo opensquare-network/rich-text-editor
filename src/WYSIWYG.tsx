@@ -10,6 +10,8 @@ import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
 import ImageResize from "./quillModules/ImageResize";
 import { Suggestion } from "./index";
+import { HtmlPreviewer, renderIdentityOrAddressPlugin } from "@osn/previewer";
+import IdentityOrAddr from "../src/components/IdentityOrAddr";
 
 let Quill: any = QuillNamespace;
 
@@ -285,7 +287,16 @@ export default function WYSIWYG(props: EditorProps) {
         </button>
         <VerticalDivider />
       </StateToggle>
-      <div {...properties} />
+      <div
+        style={{ display: isPreview ? "none" : "initial" }}
+        {...properties}
+      />
+      {isPreview && (
+        <HtmlPreviewer
+          content={props.value}
+          plugins={[renderIdentityOrAddressPlugin(<IdentityOrAddr />)]}
+        />
+      )}
     </Wrapper>
   );
 }

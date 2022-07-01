@@ -20,6 +20,11 @@ import WYSIWYG from "./WYSIWYG";
 import UniverseEditor from "./universeEditor";
 import Opensquare from "./styles/opensquare";
 import Subsqaure from "./styles/subsqaure";
+import {
+  MarkdownPreviewer,
+  renderIdentityOrAddressPlugin
+} from "@osn/previewer";
+import IdentityOrAddr from "../src/components/IdentityOrAddr";
 
 export interface Suggestion {
   preview: React.ReactNode;
@@ -227,10 +232,14 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         theme={themeCSS}
       />
       {isPreview && (
-        <MarkdownPreview
+        // <MarkdownPreview
+        //   content={value}
+        //   minHeight={minHeight}
+        //   theme={themeCSS}
+        // />
+        <MarkdownPreviewer
           content={value}
-          minHeight={minHeight}
-          theme={themeCSS}
+          plugins={[renderIdentityOrAddressPlugin(<IdentityOrAddr />)]} // optional
         />
       )}
       {mentionState.status === "active" && suggestions.length > 0 && (

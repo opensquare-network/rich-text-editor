@@ -9,20 +9,7 @@ import UniverseEditor from "../src/universeEditor";
 export type DemoProps = {};
 
 const markdown = `
-[https://www.baidu.com/](https://www.baidu.com/)
-# heading 1
-**bold text** _italic text_ \`inline code\`
-- bullet 1
-1. numbered 1
-
-|table|example|index|
-|-|-|-|
-|table|column|1|
-|table|column|2|
-\`\`\`bash
-echo "hello"
-\`\`\`
-> quote text
+Render identity or addr: [@displayName2](JFArxqV6rqPSwBok3zQDnj5jL6vwsZQDwYXXqb1cFygnYVt-kusama)
 `.trim();
 
 const suggestions = [
@@ -58,7 +45,9 @@ const suggestions = [
   }
 ];
 
-const html = `<p><a href="https://www.baidu.com/">https://www.baidu.com/</a></p><h1>heading 1</h1><p><strong>bold text</strong><em>italic text</em><code>inline code</code></p><ul><li>bullet 1</li></ul><ol><li>numbered 1</li></ol><pre><code class="language-bash">echo "hello"</code></pre><blockquote><p>quote text</p></blockquote>`;
+const html = `  <a href="https://google.com" osn-polka-address="Ff3u3eNGBjHyHqvPd3qEeZg51UqJa6AFJRRqJTTj29sp4ST" osn-polka-network="karura">
+    @displayName2
+  </a>`;
 
 const ToggleWrapper = styled.div`
   display: flex;
@@ -74,7 +63,7 @@ const ToggleWrapper = styled.div`
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
   const [content, setContent] = useState(markdown);
-  const [contentType, setContentType] = useState("html");
+  const [contentType, setContentType] = useState("markdown");
 
   const loadSuggestions = (text: string) => {
     return suggestions.filter(i =>
