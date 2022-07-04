@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Suggestion } from "../index";
+import { Suggestion } from "../interfaces";
 
 const SuggestionsWrapper = styled.ul`
   position: absolute;

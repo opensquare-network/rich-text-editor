@@ -1,9 +1,4 @@
-import React, {
-  ReactComponentElement,
-  useEffect,
-  useMemo,
-  useState
-} from "react";
+import React, { ReactElement, useEffect, useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import quillStyle from "./styles/quillStyle";
 import { QuillOptionsStatic, BoundsStatic, StringMap, Sources } from "quill";
@@ -14,9 +9,8 @@ import StateToggle from "./components/StateToggle";
 import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
 import ImageResize from "./quillModules/ImageResize";
-import { Suggestion } from "./index";
+import { Suggestion } from "./interfaces";
 import { HtmlPreviewer, renderIdentityOrAddressPlugin } from "@osn/previewer";
-import IdentityOrAddr from "../src/components/IdentityOrAddr";
 import PreviewWrapper from "./components/PreviewWrapper";
 
 let Quill: any = QuillNamespace;
@@ -114,7 +108,7 @@ interface EditorProps {
   ) => void;
   loadSuggestions?: (text: string) => Suggestion[];
   minHeight?: number;
-  identifier?: ReactComponentElement<any>;
+  identifier?: ReactElement;
 }
 
 export default function WYSIWYG(props: EditorProps) {

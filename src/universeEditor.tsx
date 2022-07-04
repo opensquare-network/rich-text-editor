@@ -1,6 +1,7 @@
 import * as React from "react";
-import MarkdownEditor, { Suggestion } from "../src";
-import { ReactComponentElement, useState } from "react";
+import MarkdownEditor from "./markdown";
+import { Suggestion } from "./interfaces";
+import { ReactElement, useState } from "react";
 import WYSIWYG from "../src/WYSIWYG";
 import styled from "styled-components";
 import Toggle from "../src/components/Toggle";
@@ -15,7 +16,7 @@ export type DemoProps = {
   minHeight?: number;
   loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
-  identifier?: ReactComponentElement<any>;
+  identifier?: ReactElement;
 };
 
 const markdown = `
