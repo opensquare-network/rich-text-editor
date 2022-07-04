@@ -5,6 +5,7 @@ import { useState } from "react";
 import "./styles/style.css";
 import styled from "styled-components";
 import UniverseEditor from "../src/universeEditor";
+import IdentityOrAddr from "../src/components/IdentityOrAddr";
 
 export type DemoProps = {};
 
@@ -45,9 +46,11 @@ const suggestions = [
   }
 ];
 
-const html = `  <a href="https://google.com" osn-polka-address="Ff3u3eNGBjHyHqvPd3qEeZg51UqJa6AFJRRqJTTj29sp4ST" osn-polka-network="karura">
-    @displayName2
-  </a>`;
+const html = `
+<a href="osn-address/JFArxqV6rqPSwBok3zQDnj5jL6vwsZQDwYXXqb1cFygnYVt/kusama" osn-polka-address="Ff3u3eNGBjHyHqvPd3qEeZg51UqJa6AFJRRqJTTj29sp4ST" osn-polka-network="karura">
+    @JFArx...gnYVt
+  </a>
+`;
 
 const ToggleWrapper = styled.div`
   display: flex;
@@ -73,6 +76,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
 
   return (
     <div style={{ paddingTop: 100, maxWidth: 800, margin: 150 }}>
+      {content}
       <UniverseEditor
         value={content}
         onChange={value => {
@@ -82,6 +86,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         setContentType={setContentType}
         loadSuggestions={loadSuggestions}
         minHeight={200}
+        identifier={<IdentityOrAddr />}
       />
       <br />
       <MarkdownEditor

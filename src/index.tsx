@@ -10,9 +10,8 @@ import { underlineCommand } from "./commands/markdown-commands/underlineCommand"
 import { newLineAndIndentContinueMarkdownListCommand } from "./commands/markdown-commands/newLineAndIndentContinueMarkdownListCommand";
 import { newLineCommand } from "./commands/markdown-commands/newLineCommand";
 import * as React from "react";
-import { MarkdownPreview } from "./components/MarkdownPreview";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
-import { useEffect, useRef, useState } from "react";
+import { ReactComponentElement, useEffect, useRef, useState } from "react";
 import { EditorWrapper, Textarea } from "./components/EditorComponents";
 import EditorHeader from "./components/EditorHeader";
 import { getHandlers } from "./util/eventHandlers";
@@ -25,6 +24,7 @@ import {
   renderIdentityOrAddressPlugin
 } from "@osn/previewer";
 import IdentityOrAddr from "../src/components/IdentityOrAddr";
+import PreviewWrapper from "./components/PreviewWrapper";
 
 export interface Suggestion {
   preview: React.ReactNode;
@@ -38,6 +38,7 @@ export type DemoProps = {
   theme?: "opensquare" | "subsquare";
   loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
+  identifier?: ReactComponentElement<any>;
 };
 
 export interface CaretCoordinates {
@@ -67,7 +68,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   loadSuggestions,
   minHeight = 144,
   theme = "opensquare",
-  disabled = false
+  disabled = false,
+  identifier
 }) => {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -232,15 +234,14 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         theme={themeCSS}
       />
       {isPreview && (
-        // <MarkdownPreview
-        //   content={value}
-        //   minHeight={minHeight}
-        //   theme={themeCSS}
-        // />
-        <MarkdownPreviewer
-          content={value}
-          plugins={[renderIdentityOrAddressPlugin(<IdentityOrAddr />)]} // optional
-        />
+        <PreviewWrapper>
+          <MarkdownPreviewer
+            content={value}
+            {...(identifier
+              ? { plugins: [renderIdentityOrAddressPlugin(identifier)] }
+              : {})}
+          />
+        </PreviewWrapper>
       )}
       {mentionState.status === "active" && suggestions.length > 0 && (
         <SuggestionsDropdown

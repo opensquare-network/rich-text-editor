@@ -44,10 +44,10 @@ export default function Identity({ identity, fontSize = 14, maxWidth }) {
     <Wrapper>
       {maxWidth ? (
         <Display fontSize={fontSize} maxWidth={maxWidth}>
-          {displayName}
+          @{displayName}
         </Display>
       ) : (
-        <Display fontSize={fontSize}>{displayName}</Display>
+        <Display fontSize={fontSize}>@{displayName}</Display>
       )}
     </Wrapper>
   );

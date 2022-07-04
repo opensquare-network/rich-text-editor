@@ -1,4 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  ReactComponentElement,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 import ReactDOM from "react-dom";
 import quillStyle from "./styles/quillStyle";
 import { QuillOptionsStatic, BoundsStatic, StringMap, Sources } from "quill";
@@ -12,6 +17,7 @@ import ImageResize from "./quillModules/ImageResize";
 import { Suggestion } from "./index";
 import { HtmlPreviewer, renderIdentityOrAddressPlugin } from "@osn/previewer";
 import IdentityOrAddr from "../src/components/IdentityOrAddr";
+import PreviewWrapper from "./components/PreviewWrapper";
 
 let Quill: any = QuillNamespace;
 
@@ -108,6 +114,7 @@ interface EditorProps {
   ) => void;
   loadSuggestions?: (text: string) => Suggestion[];
   minHeight?: number;
+  identifier?: ReactComponentElement<any>;
 }
 
 export default function WYSIWYG(props: EditorProps) {
@@ -292,10 +299,12 @@ export default function WYSIWYG(props: EditorProps) {
         {...properties}
       />
       {isPreview && (
-        <HtmlPreviewer
-          content={props.value}
-          plugins={[renderIdentityOrAddressPlugin(<IdentityOrAddr />)]}
-        />
+        <PreviewWrapper>
+          <HtmlPreviewer
+            content={props.value}
+            plugins={[renderIdentityOrAddressPlugin(props.identifier)]}
+          />
+        </PreviewWrapper>
       )}
     </Wrapper>
   );
