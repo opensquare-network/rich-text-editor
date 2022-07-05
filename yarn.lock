@@ -488,10 +488,10 @@
   resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-1.6.0.tgz#602afbbfcfb7e169210469b697365ef740d7e930"
   integrity sha512-DWSsg8zMHOYMYBqIQi96BQuthZrp98LCeMNcUOaffCIVYQ5yxDbNikLF+H7jEnmNNmXbtVic46iCuVWzar+MgA==
 
-"@osn/previewer@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@osn/previewer/-/previewer-0.8.1.tgz#9d8ec678ce5a610c98fb509d3c38b8fe9e441b5c"
-  integrity sha512-vb7jO3SYzshP5fuqPEo8TTXCGTK3uK3NI7CvQnWp6pohCT0ARwtzXxK6JLxLYMMw8rHznWaVQkWVlbkBN25cww==
+"@osn/previewer@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@osn/previewer/-/previewer-0.8.0.tgz#99751da51d97ca16dd9c98e7e2e00b9b17def010"
+  integrity sha512-jT8ePOuxNpQ1NsCMemBMII9XfTTnvbMAGYMpy4wzr+MyiWdGaYF2WGo7fPcQJzNhOsDb4nsSCVQ30nrZjp2POg==
   dependencies:
     marked "^4.0.17"
     sanitize-html "^2.7.0"
