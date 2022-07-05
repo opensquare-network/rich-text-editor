@@ -5,7 +5,6 @@ import { useState } from "react";
 import "./styles/style.css";
 import styled from "styled-components";
 import UniverseEditor from "../src/universeEditor";
-import IdentityOrAddr from "../src/components/IdentityOrAddr";
 
 export type DemoProps = {};
 
@@ -86,7 +85,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         setContentType={setContentType}
         loadSuggestions={loadSuggestions}
         minHeight={200}
-        identifier={<IdentityOrAddr />}
+        identifier={<div />}
       />
       <br />
       <MarkdownEditor
