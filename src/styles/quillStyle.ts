@@ -820,7 +820,7 @@ export default css`
   }
 
   .ql-editor a {
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   .ql-editor blockquote {

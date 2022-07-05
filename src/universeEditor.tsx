@@ -1,6 +1,7 @@
 import * as React from "react";
-import MarkdownEditor, { Suggestion } from "../src";
-import { useState } from "react";
+import MarkdownEditor from "./markdown";
+import { Suggestion } from "./interfaces";
+import { ReactElement, useState } from "react";
 import WYSIWYG from "../src/WYSIWYG";
 import styled from "styled-components";
 import Toggle from "../src/components/Toggle";
@@ -15,6 +16,7 @@ export type DemoProps = {
   minHeight?: number;
   loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
+  identifier?: ReactElement;
 };
 
 const markdown = `
@@ -51,7 +53,8 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
   setContentType,
   loadSuggestions,
   disabled = false,
-  minHeight = 200
+  minHeight = 200,
+  identifier
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("image");
@@ -86,6 +89,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
           minHeight={minHeight}
           theme={"subsquare"}
           disabled={disabled}
+          identifier={identifier}
         />
       ) : (
         <>
@@ -105,6 +109,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
             }}
             loadSuggestions={loadSuggestions}
             minHeight={minHeight}
+            identifier={identifier}
           />
         </>
       )}
