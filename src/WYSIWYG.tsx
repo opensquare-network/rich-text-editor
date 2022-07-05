@@ -14,7 +14,9 @@ import { HtmlPreviewer, renderIdentityOrAddressPlugin } from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
 
 let Quill: any = QuillNamespace;
-
+if(Quill.default){
+  Quill = Quill.default
+}
 Quill.register("modules/mention", Mention);
 Quill.register("modules/ImageResize", ImageResize);
 
