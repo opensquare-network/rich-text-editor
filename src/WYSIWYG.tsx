@@ -10,7 +10,7 @@ import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
 import ImageResize from "./quillModules/ImageResize";
 import {Suggestion} from "./interfaces";
-import {HtmlPreviewer, renderIdentityOrAddressPlugin} from "@osn/previewer";
+import {HtmlPreviewer, renderMentionIdentityUserPlugin} from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
 
 let Quill: any = QuillNamespace;
@@ -303,7 +303,7 @@ export default function WYSIWYG(props: EditorProps) {
         <PreviewWrapper>
           <HtmlPreviewer
             content={props.value}
-            plugins={[renderIdentityOrAddressPlugin(props.identifier)]}
+            plugins={[renderMentionIdentityUserPlugin(props.identifier,{targetElement:{tag:"span"}})]}
           />
         </PreviewWrapper>
       )}
