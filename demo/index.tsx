@@ -14,34 +14,25 @@ Render identity or addr: [@displayName2](JFArxqV6rqPSwBok3zQDnj5jL6vwsZQDwYXXqb1
 
 const suggestions = [
   {
-    preview: <span>abc</span>,
-    value: "[@abd](abc-polkadot) ",
-    address: "abc-polkadot"
+    "preview": "yoshiyuki123",
+    "value": "[@yoshiyuki123](/member/pqd2VaK94rRYCrFCcFpZa7thm4E74BoBb6RcHZUo1eQuBak) ",
+    "address": "pqd2VaK94rRYCrFCcFpZa7thm4E74BoBb6RcHZUo1eQuBak",
+    isKeyRegistered: false,
+    chain:"karura",
   },
   {
-    preview: <span>def1</span>,
-    value: "[@def1](def-kusama) ",
-    address: "abc-polkadot"
+    "preview": "OpenSquare",
+    "value": "[@Open...uare](qAeY4WkoFMYGReUrt6e4N35NrS6DAm1eGBSm8KLnPy8hdbZ-karura)",
+    "address": "qAeY4WkoFMYGReUrt6e4N35NrS6DAm1eGBSm8KLnPy8hdbZ",
+    isKeyRegistered: true,
+    chain:"karura",
   },
   {
-    preview: <span>def2</span>,
-    value: "[@def2](def-kusama) ",
-    address: "abc-polkadot"
-  },
-  {
-    preview: <span>def3</span>,
-    value: "[@def3](def-kusama) ",
-    address: "abc-polkadot"
-  },
-  {
-    preview: <span>def4</span>,
-    value: "[@def4](def-kusama) ",
-    address: "abc-polkadot"
-  },
-  {
-    preview: <span>def5</span>,
-    value: "[@def5](def-kusama) ",
-    address: "abc-polkadot"
+    "preview": "yoshiyuki456",
+    "value": "[@yoshiyuki456](/member/yoshiyuki456) ",
+    "address": "yoshiyuki456",
+    isKeyRegistered: false,
+    chain:"karura",
   }
 ];
 
@@ -64,8 +55,8 @@ const ToggleWrapper = styled.div`
 `;
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
-  const [content, setContent] = useState(markdown);
-  const [contentType, setContentType] = useState("markdown");
+  const [content, setContent] = useState(``);
+  const [contentType, setContentType] = useState("html");
 
   const loadSuggestions = (text: string) => {
     return suggestions.filter(i =>
