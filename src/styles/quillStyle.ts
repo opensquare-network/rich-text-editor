@@ -54,6 +54,8 @@ export default css`
   }
 
   .ql-toolbar {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     padding-left: 210px;
     @media screen and (max-width: 769px) {
       flex: 1;

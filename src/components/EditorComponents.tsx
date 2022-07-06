@@ -25,6 +25,8 @@ export const EditorWrapper = styled.div<WrapperProps>`
 `;
 
 export const ToolBar = styled.div`
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   flex-basis: 100%;
   padding-left: 16px;
   padding-right: 16px;
