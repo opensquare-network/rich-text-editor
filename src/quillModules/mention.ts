@@ -61,7 +61,9 @@ class Mention {
         "denotationChar",
         "link",
         "target",
-        "disabled"
+        "disabled",
+        "chain",
+        "isKeyRegistered"
       ],
       linkTarget: "_blank",
       onOpen() {

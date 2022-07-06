@@ -79,12 +79,15 @@ export default css`
    */
 
   .ql-container {
-    box-sizing: border-box;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    height: 100%;
-    margin: 0px;
     position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  span.mention {
+    color: #1f70c7;
   }
 
   .ql-container.ql-disabled .ql-tooltip {
