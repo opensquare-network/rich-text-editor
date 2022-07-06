@@ -4,6 +4,8 @@ import { ReactElement } from "react";
 export interface Suggestion {
   preview: React.ReactNode;
   value: string;
+  address: string;
+
 }
 
 export type DemoProps = {
