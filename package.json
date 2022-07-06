@@ -12,7 +12,7 @@
     "tsc": "tsc",
     "build": "rollup -c",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
