@@ -66,6 +66,11 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     return editStatus === "preview";
   }, [editStatus]);
 
+  useEffect(
+    () => setMentionState({ ...mentionState, status: "inactive" }),
+    [editStatus]
+  );
+
   let observer: MutationObserver;
 
   const [height, setHeight] = useState(100);
