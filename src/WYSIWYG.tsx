@@ -265,6 +265,9 @@ export default function WYSIWYG(props: EditorProps) {
       setEditorTabIndex(editorInstance, config.tabIndex);
     }
     hookEditor(editorInstance);
+    class SyntaxCodeBlock extends editorInstance?.options?.registry?.classes['ql-code-block']{}
+    SyntaxCodeBlock.tagName = 'PRE';
+    Quill.register(SyntaxCodeBlock);
     return editorInstance;
   };
 
