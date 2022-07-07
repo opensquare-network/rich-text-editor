@@ -8,6 +8,7 @@ const SubSquare = {
       line-height: 20px;
       li {
         padding: 12px 10px;
+        font-weight: 500;
       }
     }
   `,

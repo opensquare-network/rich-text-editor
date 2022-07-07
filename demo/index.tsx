@@ -75,7 +75,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         contentType={contentType}
         setContentType={setContentType}
         loadSuggestions={loadSuggestions}
-        minHeight={200}
+        minHeight={100}
         identifier={<h1>ID</h1>}
       />
       <br />

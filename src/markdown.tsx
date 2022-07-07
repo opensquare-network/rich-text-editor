@@ -120,6 +120,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         attributeFilter: ["style"]
       });
     }
+    if(value === ""){
+      setEditStatus("write");
+    }
   }, [height, value, setHeight]);
 
   const {
@@ -202,6 +205,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
             {...(identifier
               ? { plugins: [renderIdentityOrAddressPlugin(identifier)] }
               : {})}
+            minHeight={minHeight - 20}
           />
         </PreviewWrapper>
       )}

@@ -116,6 +116,12 @@ interface EditorProps {
 export default function WYSIWYG(props: EditorProps) {
   const [isPreview, setIsPreview] = useState(false);
 
+  useEffect(()=> {
+    if (props.value === "") {
+      setIsPreview(false);
+    }
+  }, [props.value]);
+
   const defaultModules = useMemo(
     () => ({
       toolbar: {
@@ -304,6 +310,7 @@ export default function WYSIWYG(props: EditorProps) {
           <HtmlPreviewer
             content={props.value}
             plugins={[renderMentionIdentityUserPlugin(props.identifier,{targetElement:{tag:"span"}})]}
+            minHeight={props.minHeight - 20}
           />
         </PreviewWrapper>
       )}
