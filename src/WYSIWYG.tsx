@@ -115,10 +115,14 @@ interface EditorProps {
 
 export default function WYSIWYG(props: EditorProps) {
   const [isPreview, setIsPreview] = useState(false);
+  const [quill, setQuill] = useState( null);
 
   useEffect(()=> {
     if (props.value === "") {
       setIsPreview(false);
+      if(quill){
+        quill.root.innerHTML = "";
+      }
     }
   }, [props.value]);
 
@@ -278,6 +282,7 @@ export default function WYSIWYG(props: EditorProps) {
       if (props.value) {
         editor.clipboard.dangerouslyPasteHTML(props.value);
       }
+      setQuill(editor);
     }
   }, [editingArea]);
 
