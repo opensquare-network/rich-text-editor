@@ -159,6 +159,19 @@ export default css`
     list-style-type: none;
   }
 
+  .ql-editor ol > li[data-list="bullet"] {
+    display: list-item;
+    ::before{
+      content: "•";
+      unicode-bidi: isolate;
+      font-variant-numeric: tabular-nums;
+      text-transform: none;
+      text-indent: 0px !important;
+      text-align: start !important;
+      text-align-last: start !important;
+    }
+  }
+
   .ql-editor ul > li::before {
     content: "\\2022";
   }
@@ -838,8 +851,10 @@ export default css`
 
   .ql-editor code,
   .ql-editor pre {
-    background-color: #f0f0f0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     border-radius: 3px;
+    background-color: #f0f3f8 !important;
   }
 
   .ql-editor pre {
