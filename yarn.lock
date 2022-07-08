@@ -488,10 +488,10 @@
   resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-1.6.0.tgz#602afbbfcfb7e169210469b697365ef740d7e930"
   integrity sha512-DWSsg8zMHOYMYBqIQi96BQuthZrp98LCeMNcUOaffCIVYQ5yxDbNikLF+H7jEnmNNmXbtVic46iCuVWzar+MgA==
 
-"@osn/previewer@^0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@osn/previewer/-/previewer-0.10.2.tgz#59f835159c1d1760e30e871f6afd040ba47ad269"
-  integrity sha512-FZunTZyGQ3RLDI7RYcNcMiLSCN0jtS6Qr+2bRZaismZkRSiKmw1Rh3s7zRfEB869WlnS5gg04OOvYe7B5Cl70A==
+"@osn/previewer@^0.10.3":
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/@osn/previewer/-/previewer-0.10.3.tgz#87e358762d8ede9aadcf4251b35e6487d8e133e7"
+  integrity sha512-NdVqzY4kH7I674jClSWDFoVXv4jZ5f5mpFcRmhbN8WD25UpOmYLMX97VvOgmtCl3pj/u/J5SZ8BlgWsCTcGCiQ==
   dependencies:
     marked "^4.0.17"
     prismjs "^1.28.0"

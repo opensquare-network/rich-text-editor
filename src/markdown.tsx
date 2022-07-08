@@ -23,6 +23,7 @@ import {
 } from "@osn/previewer";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { Suggestion, DemoProps, MentionState } from "./interfaces";
+import { isAddress } from "@polkadot/util-crypto";
 
 export const Editor: React.FunctionComponent<DemoProps> = ({
   value,
@@ -35,6 +36,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
 }) => {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
+  const refPreview =  useRef<HTMLDivElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
       bold: boldCommand,
@@ -171,6 +173,17 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (isPreview && refPreview.current) {
+      refPreview.current.querySelectorAll("a").forEach((block) => {
+        const [, memberId] = block.getAttribute("href")?.match(/^\/member\/([-\w]+)$/) || [];
+        if (memberId && !isAddress(memberId)) {
+          block.classList.add("disabled-link");
+        }
+      });
+    }
+  }, [refPreview, isPreview]);
+
   return (
     <EditorWrapper theme={themeCSS} disabled={disabled}>
       <EditorHeader
@@ -204,7 +217,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         theme={themeCSS}
       />
       {isPreview && (
-        <PreviewWrapper>
+        <PreviewWrapper ref={refPreview}>
           <MarkdownPreviewer
             content={value}
             {...(identifier

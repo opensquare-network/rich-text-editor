@@ -18,7 +18,9 @@ export default css`
     margin-bottom: 8px;
   }
 
-  .ql-editor >p ,   .osn-previewer > div >p:first-child{
+  .ql-editor >p ,   .osn-previewer > div >p:first-child,
+  .ql-editor >ol ,   .osn-previewer > div >ol:first-child
+  {
     margin-top: 0;
   }
 
@@ -180,12 +182,6 @@ export default css`
     display: list-item;
     ::before{
       content: "•";
-      unicode-bidi: isolate;
-      font-variant-numeric: tabular-nums;
-      text-transform: none;
-      text-indent: 0px !important;
-      text-align: start !important;
-      text-align-last: start !important;
     }
   }
 
