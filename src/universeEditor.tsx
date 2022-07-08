@@ -3,10 +3,28 @@ import MarkdownEditor from "./markdown";
 import { Suggestion } from "./interfaces";
 import { ReactElement, useState } from "react";
 import WYSIWYG from "../src/WYSIWYG";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import Toggle from "../src/components/Toggle";
 import MarkdownIcon from "../src/components/MarkdownIcon";
 import InsertContentsModal from "./components/modal";
+
+interface WrapperProps {
+  active: boolean;
+}
+
+const Wrapper = styled.div<WrapperProps>`
+  max-width: 800px;
+  border: 1px solid #e0e4eb;
+  border-radius: 4px;
+  &:hover{
+    border-color: #C2C8D5;
+  }
+  ${p =>
+          p.active &&
+          css`
+            border-color: #C2C8D5;
+    `}
+`
 
 export type DemoProps = {
   value: string;
@@ -56,7 +74,8 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
   minHeight = 200,
   identifier
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [active, setActive] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState("image");
   const [insetQuillContentsFunc, setInsetQuillContentsFunc] = useState(null);
 
@@ -72,15 +91,10 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
     setContentType(newContentType);
   };
 
+
+
   return (
-    <div
-      style={{
-        maxWidth: 800,
-        border: "1px solid #EBEEF4",
-        borderRadius: 4
-        // overflow: "hidden"
-      }}
-    >
+    <Wrapper active={active}>
       {contentType === "markdown" ? (
         <MarkdownEditor
           value={value}
@@ -90,6 +104,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
           theme={"subsquare"}
           disabled={disabled}
           identifier={identifier}
+          setActive={setActive}
         />
       ) : (
         <>
@@ -110,6 +125,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
             loadSuggestions={loadSuggestions}
             minHeight={minHeight}
             identifier={identifier}
+            setActive={setActive}
           />
         </>
       )}
@@ -121,7 +137,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
           onToggle={onMarkdownSwitch}
         />
       </ToggleWrapper>
-    </div>
+    </Wrapper>
   );
 };
 

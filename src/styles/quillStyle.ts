@@ -1182,7 +1182,7 @@ export default css`
     padding: 8px;
     justify-content: end;
     height: 41px;
-    border-bottom: 1px solid #e0e4eb;
+    border-bottom: 1px solid #e0e4eb !important;
   }
 
   .ql-toolbar.ql-formats {

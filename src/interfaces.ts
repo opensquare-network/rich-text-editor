@@ -16,6 +16,7 @@ export type DemoProps = {
   loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
   identifier?: ReactElement;
+  setActive: (active: boolean) => void;
 };
 
 export interface CaretCoordinates {

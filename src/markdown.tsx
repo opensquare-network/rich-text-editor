@@ -32,7 +32,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   minHeight = 144,
   theme = "opensquare",
   disabled = false,
-  identifier
+  identifier,
+                                                             setActive,
 }) => {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -67,6 +68,18 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const isPreview = React.useMemo(() => {
     return editStatus === "preview";
   }, [editStatus]);
+
+  useEffect(()=> {
+    if (ref.current) {
+      const textarea = ref.current;
+      textarea.onfocus = () => {
+        setActive(true);
+      }
+      textarea.onblur = () => {
+        setActive(false);
+      }
+    }
+  },[ref])
 
   useEffect(
     () => setMentionState({ ...mentionState, status: "inactive" }),
