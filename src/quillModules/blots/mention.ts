@@ -19,9 +19,12 @@ class MentionBlot extends Embed {
     denotationChar.innerHTML = data.denotationChar;
     node.appendChild(denotationChar);
     node.innerHTML += data.value;
-    if (data?.isKeyRegistered === 'true') {
+    if (data?.isKeyRegistered === "true") {
       node.setAttribute("osn-polka-address", data.id);
       node.setAttribute("osn-polka-network", data.chain);
+    }
+    if (data.address) {
+      node.setAttribute("osn-polka-address", data.address);
     }
     return MentionBlot.setDataValues(node, data);
   }
@@ -70,10 +73,10 @@ class MentionBlot extends Embed {
 
   getHoverHandler() {
     return e => {
-      const event = this.buildEvent('mention-hovered', e);
+      const event = this.buildEvent("mention-hovered", e);
       window.dispatchEvent(event);
       e.preventDefault();
-    }
+    };
   }
 
   buildEvent(name, e) {

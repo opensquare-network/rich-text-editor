@@ -56,6 +56,7 @@ class Mention {
       defaultMenuOrientation: "bottom",
       blotName: "mention",
       dataAttributes: [
+        "address",
         "id",
         "value",
         "denotationChar",
@@ -401,7 +402,6 @@ class Mention {
   renderList(mentionChar, data, searchTerm) {
     if (data && data.length > 0) {
       this.removeLoading();
-
       this.values = data;
       this.mentionList.innerHTML = "";
 

@@ -1,10 +1,16 @@
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
+import React, {
+  ReactElement,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import ReactDOM from "react-dom";
 import quillStyle from "./styles/quillStyle";
-import { QuillOptionsStatic, BoundsStatic, StringMap, Sources } from "quill";
+import * as QuillNamespace from "quill";
+import { BoundsStatic, QuillOptionsStatic, Sources, StringMap } from "quill";
 import styled from "styled-components";
 import { Delta } from "framer-motion";
-import * as QuillNamespace from "quill";
 import StateToggle from "./components/StateToggle";
 import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
@@ -12,6 +18,7 @@ import ImageResize from "./quillModules/ImageResize";
 import { Suggestion } from "./interfaces";
 import { HtmlPreviewer, renderMentionIdentityUserPlugin } from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
+import { isAddress } from "@polkadot/util-crypto";
 
 let Quill: any = QuillNamespace;
 if (Quill.default) {
@@ -118,6 +125,7 @@ interface EditorProps {
 export default function WYSIWYG(props: EditorProps) {
   const [isPreview, setIsPreview] = useState(false);
   const [quill, setQuill] = useState(null);
+  const ref = useRef();
 
   useEffect(() => {
     if (props.value === "") {
@@ -196,7 +204,8 @@ export default function WYSIWYG(props: EditorProps) {
               value: suggestion.preview,
               isKeyRegistered:
                 suggestion?.isKeyRegistered?.toString() ?? "false",
-              chain: suggestion?.chain
+              chain: suggestion?.chain,
+              address: suggestion.address
             })
           );
 
@@ -309,6 +318,20 @@ export default function WYSIWYG(props: EditorProps) {
     }
   }, [editingArea]);
 
+  useEffect(() => {
+    if (isPreview && ref.current) {
+      setTimeout(() => {
+        ref.current.querySelectorAll("span.mention").forEach(block => {
+          const p = block.parentElement;
+          const address = block.getAttribute("osn-polka-address");
+          if (isAddress(address)) {
+            p.innerHTML = `<a href="/member/${address}" target="_blank">${block.innerText}</a>`;
+          }
+        });
+      }, 10);
+    }
+  }, [isPreview, ref.current]);
+
   return (
     <Wrapper isPreview={isPreview} height={props.minHeight ?? 200}>
       <StateToggle>
@@ -334,7 +357,7 @@ export default function WYSIWYG(props: EditorProps) {
         {...properties}
       />
       {isPreview && (
-        <PreviewWrapper>
+        <PreviewWrapper ref={ref}>
           <HtmlPreviewer
             content={props.value}
             plugins={[

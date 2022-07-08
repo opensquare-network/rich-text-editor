@@ -53,7 +53,7 @@ const ToggleWrapper = styled.div`
 `;
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
-  const [content, setContent] = useState(html);
+  const [content, setContent] = useState(``);
   const [contentType, setContentType] = useState("html");
 
   const loadSuggestions = (text: string) => {
@@ -75,6 +75,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         loadSuggestions={loadSuggestions}
         minHeight={100}
         identifier={<h1>ID</h1>}
+        setQuillRef={() => {}}
       />
       <br />
       <MarkdownEditor
