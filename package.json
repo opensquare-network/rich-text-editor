@@ -1,6 +1,6 @@
 {
   "name": "@osn/rich-text-editor",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "description": "OpenSquare Team React Markdown Editor",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
