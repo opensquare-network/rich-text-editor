@@ -122,6 +122,14 @@ interface EditorProps {
   setQuillRef: any;
 }
 
+//fixme: this a for mention insert from replay button
+//find a elegant way to do this
+const prettyHTML = html => {
+  return html
+    .replaceAll(`data-osn-polka-network`, `osn-polka-network`)
+    .replaceAll(`data-osn-polka-address`, `osn-polka-address`);
+};
+
 export default function WYSIWYG(props: EditorProps) {
   const [isPreview, setIsPreview] = useState(false);
   const [quill, setQuill] = useState(null);
@@ -363,7 +371,7 @@ export default function WYSIWYG(props: EditorProps) {
       {isPreview && (
         <PreviewWrapper ref={ref}>
           <HtmlPreviewer
-            content={props.value}
+            content={prettyHTML(props.value)}
             plugins={[
               renderMentionIdentityUserPlugin(props.identifier, {
                 targetElement: { tag: "span" }
