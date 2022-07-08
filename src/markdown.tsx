@@ -24,6 +24,7 @@ import {
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { Suggestion, DemoProps, MentionState } from "./interfaces";
 import { isAddress } from "@polkadot/util-crypto";
+import { MarkdownPreview } from "./components/MarkdownPreview";
 
 export const Editor: React.FunctionComponent<DemoProps> = ({
   value,
@@ -187,13 +188,20 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
 
   useEffect(() => {
     if (isPreview && refPreview.current) {
-      refPreview.current.querySelectorAll("a").forEach(block => {
-        const [, memberId] =
-          block.getAttribute("href")?.match(/^\/member\/([-\w]+)$/) || [];
-        if (memberId && !isAddress(memberId)) {
-          block.classList.add("disabled-link");
-        }
-      });
+      // fixme : maybe we can do without setTimeout
+      // but for somehow it wont work with more than one [a]
+      // and it works with a delay
+      // something wrong with our @osn/previewer
+      setTimeout(() => {
+        refPreview.current.querySelectorAll("a").forEach(block => {
+          console.log(block);
+          const [, memberId] =
+            block.getAttribute("href")?.match(/^\/member\/([-\w]+)$/) || [];
+          if (memberId && !isAddress(memberId)) {
+            block.classList.add("disabled-link");
+          }
+        });
+      }, 10);
     }
   }, [refPreview, isPreview]);
 

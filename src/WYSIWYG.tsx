@@ -1,21 +1,21 @@
-import React, {ReactElement, useEffect, useMemo, useState} from "react";
+import React, { ReactElement, useEffect, useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import quillStyle from "./styles/quillStyle";
-import {QuillOptionsStatic, BoundsStatic, StringMap, Sources} from "quill";
+import { QuillOptionsStatic, BoundsStatic, StringMap, Sources } from "quill";
 import styled from "styled-components";
-import {Delta} from "framer-motion";
+import { Delta } from "framer-motion";
 import * as QuillNamespace from "quill";
 import StateToggle from "./components/StateToggle";
 import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
 import ImageResize from "./quillModules/ImageResize";
-import {Suggestion} from "./interfaces";
-import {HtmlPreviewer, renderMentionIdentityUserPlugin} from "@osn/previewer";
+import { Suggestion } from "./interfaces";
+import { HtmlPreviewer, renderMentionIdentityUserPlugin } from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
 
 let Quill: any = QuillNamespace;
 if (Quill.default) {
-  Quill = Quill.default
+  Quill = Quill.default;
 }
 Quill.register("modules/mention", Mention);
 Quill.register("modules/ImageResize", ImageResize);
@@ -112,50 +112,51 @@ interface EditorProps {
   minHeight?: number;
   identifier?: ReactElement;
   setActive: (active: boolean) => void;
+  setQuillRef: any;
 }
 
 export default function WYSIWYG(props: EditorProps) {
   const [isPreview, setIsPreview] = useState(false);
-  const [quill, setQuill] = useState( null);
+  const [quill, setQuill] = useState(null);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (props.value === "") {
       setIsPreview(false);
-      if(quill){
+      if (quill) {
         quill.root.innerHTML = "";
       }
     }
   }, [props.value]);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (quill) {
       const textarea = quill.root;
       textarea.onfocus = () => {
         props.setActive(true);
-      }
+      };
       textarea.onblur = () => {
         props.setActive(false);
-      }
+      };
     }
-  },[quill])
+  }, [quill]);
 
   const defaultModules = useMemo(
     () => ({
       toolbar: {
         container: [
-          [{header: [1, 2, 3, false]}],
+          [{ header: [1, 2, 3, false] }],
           ["bold", "underline", "strike"],
           ["link", "image", "video"],
           ["blockquote", "code-block"],
-          [{list: "ordered"}, {list: "bullet"}],
-          [{indent: "-1"}, {indent: "+1"}]
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ indent: "-1" }, { indent: "+1" }]
         ],
         handlers: {
           //must be an async func so you can pass img link from other component later
-          image: async function () {
+          image: async function() {
             const that = this;
             new Promise(resolve => {
-              props.setModalInsetFunc(function () {
+              props.setModalInsetFunc(function() {
                 //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
                 return resolve;
               });
@@ -165,10 +166,10 @@ export default function WYSIWYG(props: EditorProps) {
               that.quill.insertEmbed(range.index, "image", link, "user");
             });
           },
-          video: async function () {
+          video: async function() {
             const that = this;
             new Promise(resolve => {
-              props.setModalInsetFunc(function () {
+              props.setModalInsetFunc(function() {
                 //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
                 return resolve;
               }, "video");
@@ -184,15 +185,18 @@ export default function WYSIWYG(props: EditorProps) {
       mention: {
         allowedChars: /^[0-9A-Za-z\s]*$/,
         mentionDenotationChars: ["@"],
-        source: function (searchTerm: any, renderList: any, mentionChar: any) {
+        source: function(searchTerm: any, renderList: any, mentionChar: any) {
           const suggestions = props.loadSuggestions("") ?? [];
           const atValues: any = [];
           suggestions.map(suggestion =>
             atValues.push({
-              id: suggestion?.isKeyRegistered ? suggestion.address : suggestion.value,
+              id: suggestion?.isKeyRegistered
+                ? suggestion.address
+                : suggestion.value,
               value: suggestion.preview,
-              isKeyRegistered: suggestion?.isKeyRegistered?.toString() ?? "false",
-              chain: suggestion?.chain,
+              isKeyRegistered:
+                suggestion?.isKeyRegistered?.toString() ?? "false",
+              chain: suggestion?.chain
             })
           );
 
@@ -278,8 +282,10 @@ export default function WYSIWYG(props: EditorProps) {
       setEditorTabIndex(editorInstance, config.tabIndex);
     }
     hookEditor(editorInstance);
-    class SyntaxCodeBlock extends editorInstance?.options?.registry?.classes['ql-code-block']{}
-    SyntaxCodeBlock.tagName = 'PRE';
+    class SyntaxCodeBlock extends editorInstance?.options?.registry?.classes[
+      "ql-code-block"
+    ] {}
+    SyntaxCodeBlock.tagName = "PRE";
     Quill.register(SyntaxCodeBlock);
     return editorInstance;
   };
@@ -299,6 +305,7 @@ export default function WYSIWYG(props: EditorProps) {
         editor.clipboard.dangerouslyPasteHTML(props.value);
       }
       setQuill(editor);
+      props?.setQuillRef(editor);
     }
   }, [editingArea]);
 
@@ -308,29 +315,33 @@ export default function WYSIWYG(props: EditorProps) {
         <button
           onClick={() => setIsPreview(false)}
           className={isPreview ? "" : "active"}
-          style={{borderTopLeftRadius: 3}}
+          style={{ borderTopLeftRadius: 3 }}
         >
           Write
         </button>
-        <VerticalDivider/>
+        <VerticalDivider />
         <button
-          style={{paddingLeft: 11}}
+          style={{ paddingLeft: 11 }}
           onClick={() => setIsPreview(true)}
           className={isPreview ? "active" : ""}
         >
           Preview
         </button>
-        <VerticalDivider/>
+        <VerticalDivider />
       </StateToggle>
       <div
-        style={{display: isPreview ? "none" : "initial"}}
+        style={{ display: isPreview ? "none" : "initial" }}
         {...properties}
       />
       {isPreview && (
         <PreviewWrapper>
           <HtmlPreviewer
             content={props.value}
-            plugins={[renderMentionIdentityUserPlugin(props.identifier,{targetElement:{tag:"span"}})]}
+            plugins={[
+              renderMentionIdentityUserPlugin(props.identifier, {
+                targetElement: { tag: "span" }
+              })
+            ]}
             minHeight={props.minHeight - 20}
           />
         </PreviewWrapper>
