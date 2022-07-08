@@ -111,6 +111,7 @@ interface EditorProps {
   loadSuggestions?: (text: string) => Suggestion[];
   minHeight?: number;
   identifier?: ReactElement;
+  setActive: (active: boolean) => void;
 }
 
 export default function WYSIWYG(props: EditorProps) {
@@ -125,6 +126,18 @@ export default function WYSIWYG(props: EditorProps) {
       }
     }
   }, [props.value]);
+
+  useEffect(()=> {
+    if (quill) {
+      const textarea = quill.root;
+      textarea.onfocus = () => {
+        props.setActive(true);
+      }
+      textarea.onblur = () => {
+        props.setActive(false);
+      }
+    }
+  },[quill])
 
   const defaultModules = useMemo(
     () => ({
