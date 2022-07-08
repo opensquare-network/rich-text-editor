@@ -283,6 +283,7 @@ export default function WYSIWYG(props: EditorProps) {
           if (props?.onChange) {
             props?.onChange(editor.root.innerHTML);
           }
+          editor.root.style.height = `${props.minHeight}px`;
           editor.root.style.height = `${editor.root.scrollHeight}px`;
         }
       }

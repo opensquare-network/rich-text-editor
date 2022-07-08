@@ -114,6 +114,13 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   }, []);
 
   useEffect(() => {
+    //shrink height
+    if (value === "") {
+      adjustHeight();
+    }
+  }, [value]);
+
+  useEffect(() => {
     const textarea = ref?.current;
     if (typeof window === "undefined") {
       return;

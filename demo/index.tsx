@@ -65,6 +65,7 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
   return (
     <div style={{ paddingTop: 100, maxWidth: 800, margin: 150 }}>
       {content}
+      <button onClick={() => setContent("")}>reset</button>
       <UniverseEditor
         value={content}
         onChange={value => {
