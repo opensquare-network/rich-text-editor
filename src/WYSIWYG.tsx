@@ -325,7 +325,11 @@ export default function WYSIWYG(props: EditorProps) {
           const p = block.parentElement;
           const address = block.getAttribute("osn-polka-address");
           if (isAddress(address)) {
-            p.innerHTML = `<a href="/member/${address}" target="_blank">${block.innerText}</a>`;
+            const a = document.createElement("a");
+            a.href = `/member/${address}`;
+            a.target = "_blank";
+            a.innerHTML = block.innerText;
+            p.replaceChild(a, block);
           }
         });
       }, 10);
