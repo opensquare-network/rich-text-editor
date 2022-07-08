@@ -37,6 +37,7 @@ export type DemoProps = {
   loadSuggestions?: (text: string) => Suggestion[];
   disabled?: boolean;
   identifier?: ReactElement;
+  setQuillRef: any;
 };
 
 const markdown = `
@@ -74,7 +75,8 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
   loadSuggestions,
   disabled = false,
   minHeight = 200,
-  identifier
+  identifier,
+  setQuillRef
 }) => {
   const [active, setActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -126,6 +128,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
             minHeight={minHeight}
             identifier={identifier}
             setActive={setActive}
+            setQuillRef={setQuillRef}
           />
         </>
       )}
