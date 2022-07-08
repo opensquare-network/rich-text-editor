@@ -33,11 +33,11 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   theme = "opensquare",
   disabled = false,
   identifier,
-                                                             setActive,
+  setActive
 }) => {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
-  const refPreview =  useRef<HTMLDivElement>(null);
+  const refPreview = useRef<HTMLDivElement>(null);
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
       bold: boldCommand,
@@ -69,22 +69,21 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     return editStatus === "preview";
   }, [editStatus]);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (ref.current) {
       const textarea = ref.current;
       textarea.onfocus = () => {
         setActive(true);
-      }
+      };
       textarea.onblur = () => {
         setActive(false);
-      }
+      };
     }
-  },[ref])
+  }, [ref]);
 
-  useEffect(
-    () => setMentionState({ ...mentionState, status: "inactive" }),
-    [editStatus]
-  );
+  useEffect(() => setMentionState({ ...mentionState, status: "inactive" }), [
+    editStatus
+  ]);
 
   let observer: MutationObserver;
 
@@ -140,7 +139,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         attributeFilter: ["style"]
       });
     }
-    if(value === ""){
+    if (value === "") {
       setEditStatus("write");
     }
   }, [height, value, setHeight]);
@@ -188,8 +187,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
 
   useEffect(() => {
     if (isPreview && refPreview.current) {
-      refPreview.current.querySelectorAll("a").forEach((block) => {
-        const [, memberId] = block.getAttribute("href")?.match(/^\/member\/([-\w]+)$/) || [];
+      refPreview.current.querySelectorAll("a").forEach(block => {
+        const [, memberId] =
+          block.getAttribute("href")?.match(/^\/member\/([-\w]+)$/) || [];
         if (memberId && !isAddress(memberId)) {
           block.classList.add("disabled-link");
         }

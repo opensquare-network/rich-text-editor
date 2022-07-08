@@ -3,7 +3,7 @@ import MarkdownEditor from "./markdown";
 import { Suggestion } from "./interfaces";
 import { ReactElement, useState } from "react";
 import WYSIWYG from "../src/WYSIWYG";
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 import Toggle from "../src/components/Toggle";
 import MarkdownIcon from "../src/components/MarkdownIcon";
 import InsertContentsModal from "./components/modal";
@@ -16,15 +16,17 @@ const Wrapper = styled.div<WrapperProps>`
   max-width: 800px;
   border: 1px solid #e0e4eb;
   border-radius: 4px;
-  &:hover{
-    border-color: #C2C8D5;
+
+  &:hover {
+    border-color: #c2c8d5;
   }
+
   ${p =>
-          p.active &&
-          css`
-            border-color: #C2C8D5;
+    p.active &&
+    css`
+      border-color: #c2c8d5;
     `}
-`
+`;
 
 export type DemoProps = {
   value: string;
@@ -90,8 +92,6 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
     onChange("");
     setContentType(newContentType);
   };
-
-
 
   return (
     <Wrapper active={active}>

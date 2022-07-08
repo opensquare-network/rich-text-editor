@@ -13,14 +13,16 @@ export default css`
   position: relative;
   border-radius: 4px;
 
-  .ql-editor >p , .osn-previewer > div >p{
+  .ql-editor > p,
+  .osn-previewer > div > p {
     margin-top: 8px;
     margin-bottom: 8px;
   }
 
-  .ql-editor >p ,   .osn-previewer > div >p:first-child,
-  .ql-editor >ol ,   .osn-previewer > div >ol:first-child
-  {
+  .ql-editor > p,
+  .osn-previewer > div > p:first-child,
+  .ql-editor > ol,
+  .osn-previewer > div > ol:first-child {
     margin-top: 0;
   }
 
@@ -41,7 +43,8 @@ export default css`
     background-color: white;
     cursor: pointer;
     box-shadow: 0px 4px 31px rgb(26 33 44 / 6%),
-    0px 0.751293px 8px rgb(26 33 44 / 4%);
+      0px 0.751293px 8px rgb(26 33 44 / 4%);
+
     .ql-mention-list-item.selected {
       background-color: #f6f7fa;
       color: #34373c;
@@ -86,6 +89,7 @@ export default css`
       ::-webkit-scrollbar {
         display: none;
       }
+
       ${props =>
         props.isPreview &&
         css`
@@ -108,7 +112,7 @@ export default css`
     font-size: 14px;
     margin: 0;
   }
-  
+
   span.mention {
     color: #1f70c7;
   }
@@ -180,7 +184,8 @@ export default css`
 
   .ql-editor ol > li[data-list="bullet"] {
     display: list-item;
-    ::before{
+
+    ::before {
       content: "•";
     }
   }
@@ -956,7 +961,7 @@ export default css`
   }
 
   .ql-color-picker .ql-picker-options {
-    padding: 3 px 5px;
+    padding: 3px 5px;
     width: 152px;
   }
 
@@ -1363,7 +1368,7 @@ export default css`
 
     * {
       font-family: i-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-      Liberation Mono, monospace !important;
+        Liberation Mono, monospace !important;
     }
 
     margin: 8px 0;
@@ -1386,7 +1391,7 @@ export default css`
 
   code {
     font-family: i-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-    Liberation Mono, monospace !important;
+      Liberation Mono, monospace !important;
     ${no_scroll_bar};
     max-width: 100%;
     padding: 0 8px;

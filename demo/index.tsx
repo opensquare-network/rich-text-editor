@@ -14,25 +14,27 @@ Render identity or addr: [@displayName2](JFArxqV6rqPSwBok3zQDnj5jL6vwsZQDwYXXqb1
 
 const suggestions = [
   {
-    "preview": "yoshiyuki123",
-    "value": "[@yoshiyuki123](/member/pqd2VaK94rRYCrFCcFpZa7thm4E74BoBb6RcHZUo1eQuBak) ",
-    "address": "pqd2VaK94rRYCrFCcFpZa7thm4E74BoBb6RcHZUo1eQuBak",
+    preview: "yoshiyuki123",
+    value:
+      "[@yoshiyuki123](/member/pqd2VaK94rRYCrFCcFpZa7thm4E74BoBb6RcHZUo1eQuBak) ",
+    address: "pqd2VaK94rRYCrFCcFpZa7thm4E74BoBb6RcHZUo1eQuBak",
     isKeyRegistered: false,
-    chain:"karura",
+    chain: "karura"
   },
   {
-    "preview": "OpenSquare",
-    "value": "[@Open...uare](qAeY4WkoFMYGReUrt6e4N35NrS6DAm1eGBSm8KLnPy8hdbZ-karura)",
-    "address": "qAeY4WkoFMYGReUrt6e4N35NrS6DAm1eGBSm8KLnPy8hdbZ",
+    preview: "OpenSquare",
+    value:
+      "[@Open...uare](qAeY4WkoFMYGReUrt6e4N35NrS6DAm1eGBSm8KLnPy8hdbZ-karura)",
+    address: "qAeY4WkoFMYGReUrt6e4N35NrS6DAm1eGBSm8KLnPy8hdbZ",
     isKeyRegistered: true,
-    chain:"karura",
+    chain: "karura"
   },
   {
-    "preview": "yoshiyuki456",
-    "value": "[@yoshiyuki456](/member/yoshiyuki456) ",
-    "address": "yoshiyuki456",
+    preview: "yoshiyuki456",
+    value: "[@yoshiyuki456](/member/yoshiyuki456) ",
+    address: "yoshiyuki456",
     isKeyRegistered: false,
-    chain:"karura",
+    chain: "karura"
   }
 ];
 
