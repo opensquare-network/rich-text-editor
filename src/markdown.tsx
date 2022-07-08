@@ -34,7 +34,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   theme = "opensquare",
   disabled = false,
   identifier,
-  setActive
+  setActive = () => {}
 }) => {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
