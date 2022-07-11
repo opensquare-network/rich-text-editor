@@ -6,6 +6,13 @@ import "./styles/style.css";
 import styled from "styled-components";
 import UniverseEditor from "../src/universeEditor";
 
+const isBase58 = (value: string): boolean =>
+  /^[A-HJ-NP-Za-km-z1-9]*$/.test(value);
+
+const isAddress = (address: string): boolean => {
+  return [46, 47, 48].includes(address.length) && isBase58(address);
+};
+
 export type DemoProps = {};
 
 const markdown = `
@@ -53,8 +60,11 @@ const ToggleWrapper = styled.div`
 `;
 
 export const Demo: React.FunctionComponent<DemoProps> = () => {
-  const [content, setContent] = useState(``);
-  const [contentType, setContentType] = useState("html");
+  const [content, setContent] = useState(
+    `[@yoshiyuki123](/member/pqd2VaK94rRYCrFCcFpZa7thm4E74BoBb6RcHZUo1eQuBak) 
+[@yoshiyuki456](/member/yoshiyuki456) `
+  );
+  const [contentType, setContentType] = useState("markdown");
 
   const loadSuggestions = (text: string) => {
     return suggestions.filter(i =>
@@ -77,6 +87,24 @@ export const Demo: React.FunctionComponent<DemoProps> = () => {
         minHeight={100}
         identifier={<h1>ID</h1>}
         setQuillRef={() => {}}
+        previewerPlugins={[
+          {
+            name: "disable-non-address-link",
+            onRenderedHtml(el) {
+              const targets = el?.querySelectorAll?.(`a`);
+              targets?.forEach(target => {
+                const [, memberId] =
+                  target.getAttribute("href")?.match(/^\/member\/([-\w]+)$/) ||
+                  [];
+                if (memberId && !isAddress(memberId)) {
+                  target.classList.add("disabled-link");
+                } else {
+                  target.setAttribute("target", "_blank");
+                }
+              });
+            }
+          }
+        ]}
       />
       <br />
       <MarkdownEditor

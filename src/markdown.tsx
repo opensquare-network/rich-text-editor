@@ -50,8 +50,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       ul: unorderedListCommand,
       underline: underlineCommand,
 
-      newLineAndIndentContinueMarkdownList:
-        newLineAndIndentContinueMarkdownListCommand,
+      newLineAndIndentContinueMarkdownList: newLineAndIndentContinueMarkdownListCommand,
       newLine: newLineCommand
     }
   });
@@ -83,10 +82,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
   }, [ref]);
 
-  useEffect(
-    () => setMentionState({ ...mentionState, status: "inactive" }),
-    [editStatus]
-  );
+  useEffect(() => setMentionState({ ...mentionState, status: "inactive" }), [
+    editStatus
+  ]);
 
   let observer: MutationObserver;
 
