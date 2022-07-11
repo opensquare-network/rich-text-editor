@@ -7,6 +7,7 @@ import styled, { css } from "styled-components";
 import Toggle from "../src/components/Toggle";
 import MarkdownIcon from "../src/components/MarkdownIcon";
 import InsertContentsModal from "./components/modal";
+import { Plugin as PreviewerPlugin } from "@osn/previewer/dist/types";
 
 interface WrapperProps {
   active: boolean;
@@ -38,6 +39,7 @@ export type DemoProps = {
   disabled?: boolean;
   identifier?: ReactElement;
   setQuillRef: any;
+  previewerPlugins?: PreviewerPlugin[];
 };
 
 const markdown = `
@@ -76,7 +78,8 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
   disabled = false,
   minHeight = 200,
   identifier,
-  setQuillRef
+  setQuillRef,
+  previewerPlugins = []
 }) => {
   const [active, setActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -107,6 +110,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
           disabled={disabled}
           identifier={identifier}
           setActive={setActive}
+          previewerPlugins={previewerPlugins}
         />
       ) : (
         <>
@@ -129,6 +133,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
             identifier={identifier}
             setActive={setActive}
             setQuillRef={setQuillRef}
+            previewerPlugins={previewerPlugins}
           />
         </>
       )}
