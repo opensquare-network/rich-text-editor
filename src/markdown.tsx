@@ -19,7 +19,8 @@ import EditorHeader from "./components/EditorHeader";
 import PreviewWrapper from "./components/PreviewWrapper";
 import {
   MarkdownPreviewer,
-  renderIdentityOrAddressPlugin
+  renderMentionIdentityUserPlugin,
+  Plugin as PreviewerPlugin
 } from "@osn/previewer";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { Suggestion, DemoProps, MentionState } from "./interfaces";
@@ -32,7 +33,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   theme = "opensquare",
   disabled = false,
   identifier,
-  setActive = () => {}
+  setActive = () => {},
+  previewerPlugins = []
 }) => {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -229,9 +231,12 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         <PreviewWrapper ref={refPreview}>
           <MarkdownPreviewer
             content={value}
-            {...(identifier
-              ? { plugins: [renderIdentityOrAddressPlugin(identifier)] }
-              : {})}
+            plugins={
+              [
+                identifier && renderMentionIdentityUserPlugin(identifier),
+                ...previewerPlugins
+              ].filter(Boolean) as PreviewerPlugin[]
+            }
             minHeight={minHeight - 20}
           />
         </PreviewWrapper>
