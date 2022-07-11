@@ -22,7 +22,6 @@ import {
   Plugin as PreviewerPlugin
 } from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
-import { isAddress } from "@polkadot/util-crypto";
 
 let Quill: any = QuillNamespace;
 if (Quill.default) {
@@ -330,24 +329,6 @@ export default function WYSIWYG(props: EditorProps) {
       props?.setQuillRef(editor);
     }
   }, [editingArea]);
-
-  useEffect(() => {
-    if (isPreview && ref.current) {
-      setTimeout(() => {
-        ref.current.querySelectorAll("span.mention").forEach(block => {
-          const p = block.parentElement;
-          const address = block.getAttribute("osn-polka-address");
-          if (isAddress(address)) {
-            const a = document.createElement("a");
-            a.href = `/member/${address}`;
-            a.target = "_blank";
-            a.innerHTML = block.innerText;
-            p.replaceChild(a, block);
-          }
-        });
-      }, 10);
-    }
-  }, [isPreview, ref.current]);
 
   return (
     <Wrapper isPreview={isPreview} height={props.minHeight ?? 200}>
