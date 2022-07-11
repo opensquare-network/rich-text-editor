@@ -23,8 +23,6 @@ import {
 } from "@osn/previewer";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { Suggestion, DemoProps, MentionState } from "./interfaces";
-import { isAddress } from "@polkadot/util-crypto";
-import { MarkdownPreview } from "./components/MarkdownPreview";
 
 export const Editor: React.FunctionComponent<DemoProps> = ({
   value,
@@ -50,7 +48,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       ul: unorderedListCommand,
       underline: underlineCommand,
 
-      newLineAndIndentContinueMarkdownList: newLineAndIndentContinueMarkdownListCommand,
+      newLineAndIndentContinueMarkdownList:
+        newLineAndIndentContinueMarkdownListCommand,
       newLine: newLineCommand
     }
   });
@@ -82,9 +81,10 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
   }, [ref]);
 
-  useEffect(() => setMentionState({ ...mentionState, status: "inactive" }), [
-    editStatus
-  ]);
+  useEffect(
+    () => setMentionState({ ...mentionState, status: "inactive" }),
+    [editStatus]
+  );
 
   let observer: MutationObserver;
 
@@ -192,25 +192,6 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       focusToCursor();
     }
   };
-
-  useEffect(() => {
-    if (isPreview && refPreview.current) {
-      // fixme : maybe we can do without setTimeout
-      // but for somehow it wont work with more than one [a]
-      // and it works with a delay
-      // something wrong with our @osn/previewer
-      setTimeout(() => {
-        refPreview.current.querySelectorAll("a").forEach(block => {
-          console.log(block);
-          const [, memberId] =
-            block.getAttribute("href")?.match(/^\/member\/([-\w]+)$/) || [];
-          if (memberId && !isAddress(memberId)) {
-            block.classList.add("disabled-link");
-          }
-        });
-      }, 10);
-    }
-  }, [refPreview, isPreview]);
 
   return (
     <EditorWrapper theme={themeCSS} disabled={disabled}>
