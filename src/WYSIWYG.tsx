@@ -16,9 +16,12 @@ import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
 import ImageResize from "./quillModules/ImageResize";
 import { Suggestion } from "./interfaces";
-import { HtmlPreviewer, renderMentionIdentityUserPlugin } from "@osn/previewer";
+import {
+  HtmlPreviewer,
+  renderMentionIdentityUserPlugin,
+  Plugin as PreviewerPlugin
+} from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
-import { isAddress } from "@polkadot/util-crypto";
 
 let Quill: any = QuillNamespace;
 if (Quill.default) {
@@ -120,6 +123,7 @@ interface EditorProps {
   identifier?: ReactElement;
   setActive: (active: boolean) => void;
   setQuillRef: any;
+  previewerPlugins?: PreviewerPlugin[];
 }
 
 //fixme: this a for mention insert from replay button
@@ -131,6 +135,7 @@ const prettyHTML = html => {
 };
 
 export default function WYSIWYG(props: EditorProps) {
+  const { previewerPlugins = [] } = props;
   const [isPreview, setIsPreview] = useState(false);
   const [quill, setQuill] = useState(null);
   const ref = useRef();
@@ -325,24 +330,6 @@ export default function WYSIWYG(props: EditorProps) {
     }
   }, [editingArea]);
 
-  useEffect(() => {
-    if (isPreview && ref.current) {
-      setTimeout(() => {
-        ref.current.querySelectorAll("span.mention").forEach(block => {
-          const p = block.parentElement;
-          const address = block.getAttribute("osn-polka-address");
-          if (isAddress(address)) {
-            const a = document.createElement("a");
-            a.href = `/member/${address}`;
-            a.target = "_blank";
-            a.innerHTML = block.innerText;
-            p.replaceChild(a, block);
-          }
-        });
-      }, 10);
-    }
-  }, [isPreview, ref.current]);
-
   return (
     <Wrapper isPreview={isPreview} height={props.minHeight ?? 200}>
       <StateToggle>
@@ -374,7 +361,8 @@ export default function WYSIWYG(props: EditorProps) {
             plugins={[
               renderMentionIdentityUserPlugin(props.identifier, {
                 targetElement: { tag: "span" }
-              })
+              }),
+              ...previewerPlugins
             ]}
             minHeight={props.minHeight - 20}
           />
