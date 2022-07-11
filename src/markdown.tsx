@@ -19,7 +19,7 @@ import EditorHeader from "./components/EditorHeader";
 import PreviewWrapper from "./components/PreviewWrapper";
 import {
   MarkdownPreviewer,
-  renderIdentityOrAddressPlugin
+  renderMentionIdentityUserPlugin
 } from "@osn/previewer";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { Suggestion, DemoProps, MentionState } from "./interfaces";
@@ -230,7 +230,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           <MarkdownPreviewer
             content={value}
             {...(identifier
-              ? { plugins: [renderIdentityOrAddressPlugin(identifier)] }
+              ? { plugins: [renderMentionIdentityUserPlugin(identifier)] }
               : {})}
             minHeight={minHeight - 20}
           />
