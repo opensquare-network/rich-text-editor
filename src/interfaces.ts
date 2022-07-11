@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ReactElement } from "react";
+import { Plugin as PreviewerPlugin } from "@osn/previewer";
 
 export interface Suggestion {
   preview: React.ReactNode;
@@ -16,6 +17,7 @@ export type DemoProps = {
   disabled?: boolean;
   identifier?: ReactElement;
   setActive: (active: boolean) => void;
+  previewerPlugins?: PreviewerPlugin[];
 };
 
 export interface CaretCoordinates {

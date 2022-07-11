@@ -16,7 +16,11 @@ import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
 import ImageResize from "./quillModules/ImageResize";
 import { Suggestion } from "./interfaces";
-import { HtmlPreviewer, renderMentionIdentityUserPlugin } from "@osn/previewer";
+import {
+  HtmlPreviewer,
+  renderMentionIdentityUserPlugin,
+  Plugin as PreviewerPlugin
+} from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
 import { isAddress } from "@polkadot/util-crypto";
 
@@ -120,6 +124,7 @@ interface EditorProps {
   identifier?: ReactElement;
   setActive: (active: boolean) => void;
   setQuillRef: any;
+  previewerPlugins?: PreviewerPlugin[];
 }
 
 //fixme: this a for mention insert from replay button
@@ -131,6 +136,7 @@ const prettyHTML = html => {
 };
 
 export default function WYSIWYG(props: EditorProps) {
+  const { previewerPlugins = [] } = props;
   const [isPreview, setIsPreview] = useState(false);
   const [quill, setQuill] = useState(null);
   const ref = useRef();
@@ -169,10 +175,10 @@ export default function WYSIWYG(props: EditorProps) {
         ],
         handlers: {
           //must be an async func so you can pass img link from other component later
-          image: async function() {
+          image: async function () {
             const that = this;
             new Promise(resolve => {
-              props.setModalInsetFunc(function() {
+              props.setModalInsetFunc(function () {
                 //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
                 return resolve;
               });
@@ -182,10 +188,10 @@ export default function WYSIWYG(props: EditorProps) {
               that.quill.insertEmbed(range.index, "image", link, "user");
             });
           },
-          video: async function() {
+          video: async function () {
             const that = this;
             new Promise(resolve => {
-              props.setModalInsetFunc(function() {
+              props.setModalInsetFunc(function () {
                 //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
                 return resolve;
               }, "video");
@@ -201,7 +207,7 @@ export default function WYSIWYG(props: EditorProps) {
       mention: {
         allowedChars: /^[0-9A-Za-z\s]*$/,
         mentionDenotationChars: ["@"],
-        source: function(searchTerm: any, renderList: any, mentionChar: any) {
+        source: function (searchTerm: any, renderList: any, mentionChar: any) {
           const suggestions = props.loadSuggestions("") ?? [];
           const atValues: any = [];
           suggestions.map(suggestion =>
@@ -258,10 +264,8 @@ export default function WYSIWYG(props: EditorProps) {
 
   const generation = 0;
 
-  const [
-    editingArea,
-    setEditingArea
-  ] = React.useState<React.ReactInstance | null>(null);
+  const [editingArea, setEditingArea] =
+    React.useState<React.ReactInstance | null>(null);
 
   const setEditorTabIndex = (editor: Quill, tabIndex: number) => {
     if (editor?.scroll?.domNode) {
@@ -376,7 +380,8 @@ export default function WYSIWYG(props: EditorProps) {
             plugins={[
               renderMentionIdentityUserPlugin(props.identifier, {
                 targetElement: { tag: "span" }
-              })
+              }),
+              ...previewerPlugins
             ]}
             minHeight={props.minHeight - 20}
           />
