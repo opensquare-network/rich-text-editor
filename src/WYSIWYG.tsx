@@ -206,9 +206,7 @@ export default function WYSIWYG(props: EditorProps) {
           const atValues: any = [];
           suggestions.map(suggestion =>
             atValues.push({
-              id: suggestion?.isKeyRegistered
-                ? suggestion.address
-                : suggestion.value,
+              id: suggestion.address,
               value: suggestion.preview,
               isKeyRegistered:
                 suggestion?.isKeyRegistered?.toString() ?? "false",
