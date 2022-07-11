@@ -175,10 +175,10 @@ export default function WYSIWYG(props: EditorProps) {
         ],
         handlers: {
           //must be an async func so you can pass img link from other component later
-          image: async function () {
+          image: async function() {
             const that = this;
             new Promise(resolve => {
-              props.setModalInsetFunc(function () {
+              props.setModalInsetFunc(function() {
                 //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
                 return resolve;
               });
@@ -188,10 +188,10 @@ export default function WYSIWYG(props: EditorProps) {
               that.quill.insertEmbed(range.index, "image", link, "user");
             });
           },
-          video: async function () {
+          video: async function() {
             const that = this;
             new Promise(resolve => {
-              props.setModalInsetFunc(function () {
+              props.setModalInsetFunc(function() {
                 //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
                 return resolve;
               }, "video");
@@ -207,14 +207,12 @@ export default function WYSIWYG(props: EditorProps) {
       mention: {
         allowedChars: /^[0-9A-Za-z\s]*$/,
         mentionDenotationChars: ["@"],
-        source: function (searchTerm: any, renderList: any, mentionChar: any) {
+        source: function(searchTerm: any, renderList: any, mentionChar: any) {
           const suggestions = props.loadSuggestions("") ?? [];
           const atValues: any = [];
           suggestions.map(suggestion =>
             atValues.push({
-              id: suggestion?.isKeyRegistered
-                ? suggestion.address
-                : suggestion.value,
+              id: suggestion.address,
               value: suggestion.preview,
               isKeyRegistered:
                 suggestion?.isKeyRegistered?.toString() ?? "false",
@@ -264,8 +262,10 @@ export default function WYSIWYG(props: EditorProps) {
 
   const generation = 0;
 
-  const [editingArea, setEditingArea] =
-    React.useState<React.ReactInstance | null>(null);
+  const [
+    editingArea,
+    setEditingArea
+  ] = React.useState<React.ReactInstance | null>(null);
 
   const setEditorTabIndex = (editor: Quill, tabIndex: number) => {
     if (editor?.scroll?.domNode) {
