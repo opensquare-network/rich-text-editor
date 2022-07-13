@@ -23,13 +23,14 @@ export default function EditorHeader({
   commandController
 }) {
   return (
-    <ToolBar theme={theme} isPreview={isPreview}>
+    <ToolBar className="editor-toolbar" theme={theme} isPreview={isPreview}>
       <TabsWrapper theme={theme}>
         <Tab
           active={editStatus === "write"}
           onClick={() => setEditStatus("write")}
           theme={theme}
           style={{ borderTopLeftRadius: 3 }}
+          className={editStatus === "write" ? "active" : ""}
         >
           Write
         </Tab>
@@ -37,6 +38,7 @@ export default function EditorHeader({
           active={editStatus === "preview"}
           onClick={() => setEditStatus("preview")}
           theme={theme}
+          className={isPreview ? "active" : ""}
         >
           Preview
         </Tab>

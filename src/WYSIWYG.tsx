@@ -332,7 +332,7 @@ export default function WYSIWYG(props: EditorProps) {
 
   return (
     <Wrapper isPreview={isPreview} height={props.minHeight ?? 200}>
-      <StateToggle>
+      <StateToggle className="editor-toolbar-buttons">
         <button
           onClick={() => setIsPreview(false)}
           className={isPreview ? "" : "active"}
