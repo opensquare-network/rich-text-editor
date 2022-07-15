@@ -174,12 +174,12 @@ function InsertContentsModal({
   showModal,
   setShowModal,
   insetQuillContentsFunc: resolveInsertPromise,
-  type = "image",
+  type = "image"
 }) {
   const [source, setSource] = useState("remote");
   const [link, setLink] = useState("");
 
-  const onChange = (e) => {
+  const onChange = e => {
     if (source === "remote") {
       setLink(e.target.value);
     }
@@ -214,8 +214,8 @@ function InsertContentsModal({
   }
 
   return (
-    <Shade>
-      <Wrapper>
+    <Shade className="modal-shade">
+      <Wrapper className="modal">
         <Title>
           <span>Paste URL</span>
           <svg
