@@ -24,6 +24,23 @@ export default [
     external: ["react", "react-dom", "styled-components"]
   },
   {
+    input: "src/markdown.tsx",
+    output: [
+      {
+        file: "dist/cjs/markdown.js",
+        format: "cjs",
+        sourcemap: true
+      },
+      {
+        file: "dist/esm/markdown.js",
+        format: "esm",
+        sourcemap: true
+      }
+    ],
+    plugins: [commonjs(), typescript({ tsconfig: "./tsconfig.json" }), json()],
+    external: ["react", "react-dom", "styled-components"]
+  },
+  {
     input: "dist/esm/types/src/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()]
