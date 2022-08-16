@@ -17,28 +17,27 @@ const Wrapper = styled.div`
     background: #ffffff;
     border-radius: 7px;
   }
-  ${(p) =>
-  p.disabled
-    ? css`
-        background: #EBEEF4;
-        > div {
-          left: auto;
-          right: 4px;
-        }
-      `
-    : p.active
+  ${p =>
+    p.disabled
       ? css`
-        background: #6848ff;
-        > div {
-          left: auto;
-          right: 4px;
-        }
-      `
-      : null
-}
-  ${(p) =>
-  p.size === "small" &&
-  css`
+          background: #ebeef4;
+          > div {
+            left: auto;
+            right: 4px;
+          }
+        `
+      : p.active
+      ? css`
+          background: #6848ff;
+          > div {
+            left: auto;
+            right: 4px;
+          }
+        `
+      : null}
+  ${p =>
+    p.size === "small" &&
+    css`
       width: 30px;
       height: 18px;
       > div {
@@ -48,9 +47,9 @@ const Wrapper = styled.div`
         left: 3px;
         border-radius: 6px;
       }
-      ${(p) =>
-    p.active &&
-    css`
+      ${p =>
+        p.active &&
+        css`
           background: #6848ff;
           > div {
             left: auto;
@@ -62,7 +61,13 @@ const Wrapper = styled.div`
 
 export default function Toggle({ disabled, isOn, onToggle, size }) {
   return (
-    <Wrapper disabled={disabled} active={isOn} onClick={() => onToggle(!isOn)} size={size}>
+    <Wrapper
+      className={isOn ? "on" : "off"}
+      disabled={disabled}
+      active={isOn}
+      onClick={() => onToggle(!isOn)}
+      size={size}
+    >
       <div />
     </Wrapper>
   );
