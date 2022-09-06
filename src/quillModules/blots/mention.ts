@@ -19,10 +19,8 @@ class MentionBlot extends Embed {
     denotationChar.innerHTML = data.denotationChar;
     node.appendChild(denotationChar);
     node.innerHTML += data.value;
-    if (data?.isKeyRegistered === "true") {
-      node.setAttribute("osn-polka-address", data.id);
-      node.setAttribute("osn-polka-network", data.chain);
-    }
+    node.setAttribute("osn-polka-address", data.id);
+    node.setAttribute("osn-polka-network", data.chain);
     if (data.address) {
       node.setAttribute("osn-polka-address", data.address);
     }
