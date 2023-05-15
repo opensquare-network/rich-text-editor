@@ -220,9 +220,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
         }}
         onKeyPress={handleKeyPress}
         placeholder=""
-        minHeight={minHeight}
-        height={height}
-        hide={isPreview}
+        $minHeight={minHeight}
+        $height={height}
+        $hide={isPreview}
         theme={themeCSS}
       />
       {isPreview && (

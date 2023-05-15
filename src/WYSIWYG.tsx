@@ -103,7 +103,7 @@ const VerticalDivider = styled.div`
   background-color: #e0e4eb;
 `;
 
-const Wrapper = styled.div<{ isPreview: boolean; height: number }>`
+const Wrapper = styled.div<{ $isPreview: boolean; height: number }>`
   ${quillStyle};
 `;
 
@@ -331,7 +331,7 @@ export default function WYSIWYG(props: EditorProps) {
   }, [editingArea]);
 
   return (
-    <Wrapper isPreview={isPreview} height={props.minHeight ?? 200}>
+    <Wrapper $isPreview={isPreview} height={props.minHeight ?? 200}>
       <StateToggle className="editor-toolbar-buttons">
         <button
           onClick={() => setIsPreview(false)}

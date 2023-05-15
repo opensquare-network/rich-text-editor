@@ -10,7 +10,7 @@ import InsertContentsModal from "./components/modal";
 import { Plugin as PreviewerPlugin } from "@osn/previewer/dist/types";
 
 interface WrapperProps {
-  active: boolean;
+  $active: boolean;
 }
 
 const Wrapper = styled.div<WrapperProps>`
@@ -23,7 +23,7 @@ const Wrapper = styled.div<WrapperProps>`
   }
 
   ${p =>
-    p.active &&
+    p.$active &&
     css`
       border-color: #c2c8d5;
     `}
@@ -99,7 +99,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
   };
 
   return (
-    <Wrapper active={active}>
+    <Wrapper $active={active}>
       {contentType === "markdown" ? (
         <MarkdownEditor
           value={value}

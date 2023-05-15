@@ -26,7 +26,7 @@ const Wrapper = styled.div`
             right: 4px;
           }
         `
-      : p.active
+      : p.$active
       ? css`
           background: #6848ff;
           > div {
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
         border-radius: 6px;
       }
       ${p =>
-        p.active &&
+        p.$active &&
         css`
           background: #6848ff;
           > div {
@@ -64,7 +64,7 @@ export default function Toggle({ disabled, isOn, onToggle, size }) {
     <Wrapper
       className={isOn ? "on" : "off"}
       disabled={disabled}
-      active={isOn}
+      $active={isOn}
       onClick={() => onToggle(!isOn)}
       size={size}
     >
