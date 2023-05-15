@@ -9,3 +9,12 @@ demo/node_modules
 ts-build/
 dist/
 .DS_store
+
+# yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

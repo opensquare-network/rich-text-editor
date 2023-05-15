@@ -40,8 +40,8 @@
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-typescript": "^8.3.2",
-    "@types/lodash": "^4.14.182",
     "@types/jest": "^24.0.23",
+    "@types/lodash": "^4.14.182",
     "@types/marked": "^4.0.3",
     "@types/prismjs": "^1.26.0",
     "@types/range-parser": "^1.2.2",
@@ -83,5 +83,6 @@
     "@osn/previewer": "^0.10.3",
     "react": "^17.0.2",
     "styled-components": "^5.3.1"
-  }
+  },
+  "packageManager": "yarn@3.5.1"
 }
