@@ -23,10 +23,10 @@ export default function EditorHeader({
   commandController
 }) {
   return (
-    <ToolBar className="editor-toolbar" theme={theme} isPreview={isPreview}>
+    <ToolBar className="editor-toolbar" theme={theme} $isPreview={isPreview}>
       <TabsWrapper theme={theme}>
         <Tab
-          active={editStatus === "write"}
+          $active={editStatus === "write"}
           onClick={() => setEditStatus("write")}
           theme={theme}
           style={{ borderTopLeftRadius: 3 }}
@@ -35,7 +35,7 @@ export default function EditorHeader({
           Write
         </Tab>
         <Tab
-          active={editStatus === "preview"}
+          $active={editStatus === "preview"}
           onClick={() => setEditStatus("preview")}
           theme={theme}
           className={isPreview ? "active" : ""}
@@ -43,7 +43,7 @@ export default function EditorHeader({
           Preview
         </Tab>
       </TabsWrapper>
-      <ToolbarItemsWrapper hide={isPreview}>
+      <ToolbarItemsWrapper $hide={isPreview}>
         <ToolbarButton
           onClick={async () => {
             await commandController.executeCommand("bold");

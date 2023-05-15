@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import * as React from "react";
 
 export interface Theme {
   wrapper: string;
@@ -24,7 +23,7 @@ export const EditorWrapper = styled.div<WrapperProps>`
     `}
 `;
 
-export const ToolBar = styled.div`
+export const ToolBar = styled.div<{ $isPreview?: boolean }>`
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   flex-basis: 100%;
@@ -40,7 +39,7 @@ export const ToolBar = styled.div`
     padding-left: 0;
     padding-right: 0;
     ${props =>
-      props.isPreview &&
+      props.$isPreview &&
       css`
         padding-top: 0 !important;
       `};
@@ -61,8 +60,8 @@ export const TabsWrapper = styled.div`
 `;
 
 interface TabProps {
-  active: boolean;
-  theme: "opensquare" | "subsquare";
+  $active: boolean;
+  $theme: "opensquare" | "subsquare";
 }
 
 export const Tab = styled.button<TabProps>`
@@ -73,17 +72,17 @@ export const Tab = styled.button<TabProps>`
   border-bottom: 3px solid #ffffff;
   ${props => props.theme.tab};
   ${props =>
-    props.active &&
-    props.theme === "opensquare" &&
+    props.$active &&
+    props.$theme === "opensquare" &&
     css`
       border-bottom: 3px solid #04d2c5;
     `};
   ${props =>
-    props.active &&
+    props.$active &&
     css`
       border-bottom: 3px solid #04d2c5;
     `};
-  ${props => props.active && props.theme.tabActive};
+  ${props => props.$active && props.theme.tabActive};
   cursor: pointer;
   /* mobile */
   @media screen and (max-width: 769px) {
@@ -96,10 +95,10 @@ export const Tab = styled.button<TabProps>`
 `;
 
 interface Props {
-  hide?: boolean;
-  minHeight?: number;
-  height?: number;
-  theme?: "opensquare" | "subsquare";
+  $hide?: boolean;
+  $minHeight?: number;
+  $height?: number;
+  $theme?: "opensquare" | "subsquare";
 }
 
 export const ToolbarItemsWrapper = styled.div<Props>`
@@ -107,7 +106,7 @@ export const ToolbarItemsWrapper = styled.div<Props>`
   align-items: center;
   gap: 8px;
   ${props =>
-    props.hide &&
+    props.$hide &&
     css`
       display: none;
     `};
@@ -133,17 +132,17 @@ export const Textarea = styled.textarea<Props>`
   width: 100%;
   min-height: 144px;
   ${props =>
-    props.minHeight &&
+    props.$minHeight &&
     css`
-      min-height: ${props.minHeight}px;
+      min-height: ${props.$minHeight}px;
     `};
   ${props =>
-    props.height &&
+    props.$height &&
     css`
-      height: ${props.height}px;
+      height: ${props.$height}px;
     `};
   ${props =>
-    props.hide &&
+    props.$hide &&
     css`
       display: none;
     `};
