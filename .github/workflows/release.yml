@@ -20,7 +20,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        uses: borales/actions-yarn@v3.0.0
+        uses: borales/actions-yarn@v4
         with:
           cmd: install
 
