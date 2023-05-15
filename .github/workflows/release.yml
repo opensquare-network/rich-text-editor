@@ -20,9 +20,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
+        run: npm i -g yarn && yarn
 
       - name: Release changelog
         run: npx changelogithub
