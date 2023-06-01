@@ -11,10 +11,5 @@
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 6
-  },
-  "settings": {
-    "react": {
-      // "version": "detect"
-    }
   }
 }
