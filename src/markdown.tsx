@@ -2,7 +2,7 @@ import * as React from "react";
 import Opensquare from "./styles/opensquare";
 import Subsqaure from "./styles/subsqaure";
 import { useEffect, useRef, useState } from "react";
-import { useTextAreaMarkdownEditor } from "./hooks/use-markdown-editor";
+import { useTextAreaMarkdownEditor } from "./hooks/useMarkdownEditor";
 import { boldCommand } from "./commands/markdown-commands/boldCommand";
 import { strikethroughCommand } from "./commands/markdown-commands/strikethroughCommand";
 import { codeCommand } from "./commands/markdown-commands/codeCommand";
