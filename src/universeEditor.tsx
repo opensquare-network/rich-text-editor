@@ -29,7 +29,7 @@ const Wrapper = styled.div<WrapperProps>`
     `}
 `;
 
-export type DemoProps = {
+type Props = {
   value: string;
   onChange: (value: string) => void;
   contentType: "markdown" | "html";
@@ -69,7 +69,7 @@ const ToggleWrapper = styled.div`
   padding-right: 16px;
 `;
 
-export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
+export const UniverseEditor: React.FunctionComponent<Props> = ({
   value,
   onChange,
   contentType = "markdown",
