@@ -1,8 +1,7 @@
-import * as React from "react";
 import WYSIWYG from "./WYSIWYG";
 import UniverseEditor from "./universeEditor";
-import Editor from "./markdown";
+import MarkdownEditor from "./markdown";
 
 export { WYSIWYG, UniverseEditor };
 
-export default Editor;
+export default MarkdownEditor;
