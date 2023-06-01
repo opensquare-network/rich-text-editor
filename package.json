@@ -37,6 +37,7 @@
     "url": "https://github.com/opensquare-network/rich-text-editor.git/issues"
   },
   "devDependencies": {
+    "@2nthony/prettier-config": "^1.0.2",
     "@osn/eslint-config": "^1.0.1",
     "@osn/previewer": "^0.12.4",
     "@rollup/plugin-commonjs": "^22.0.0",
@@ -60,6 +61,7 @@
     "eslint": "^8.41.0",
     "framer-motion": "^6",
     "merge2": "^1.2.1",
+    "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^2.71.1",
