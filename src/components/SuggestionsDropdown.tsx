@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Suggestion } from "../interfaces";
+import { Suggestion } from "../types/suggestion";
 
 const SuggestionsWrapper = styled.ul`
   position: absolute;
@@ -26,8 +26,6 @@ const SuggestionsWrapper = styled.ul`
   }
 `;
 
-type ClassArray = Array<ClassValue>; // tslint:disable-line no-empty-interface
-
 interface ClassDictionary {
   [id: string]: string | boolean;
 }
@@ -38,10 +36,10 @@ interface CaretCoordinates {
   lineHeight: number;
 }
 
-type ClassValue = string | ClassDictionary | ClassArray | undefined | null;
+type ClassValue = string | ClassDictionary | undefined | null;
 
 export interface SuggestionsDropdownProps {
-  classes?: ClassValue;
+  classes?: ClassValue | ClassValue[];
   caret: CaretCoordinates;
   suggestions: Suggestion[];
   suggestionsAutoplace: boolean;
