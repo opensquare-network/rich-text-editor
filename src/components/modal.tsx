@@ -108,29 +108,6 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-const FileUpload = styled.input`
-  visibility: hidden;
-  position: absolute;
-`;
-
-const Label = styled.div`
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 368px;
-  border-radius: 4px;
-  background: #f8f8f8;
-
-  span {
-    font-size: 13px;
-    line-height: 16px;
-    text-align: center;
-    color: #696d73;
-  }
-`;
-
 const Hint = styled.p`
   margin: 16px 24px;
   margin-top: 0;
@@ -143,31 +120,6 @@ const Hint = styled.p`
   color: #6848ff;
   background: #f5f2ff;
   border-radius: 4px;
-`;
-
-const FileName = styled.p`
-  text-align: center;
-  width: 80%;
-  font-size: 14px;
-  color: #34373c;
-
-  span {
-    white-space: nowrap;
-    overflow: hidden;
-    vertical-align: middle;
-  }
-
-  .ellipsis {
-    display: inline-block;
-    width: calc(30% + 1.2em);
-    text-overflow: ellipsis;
-  }
-
-  .indent {
-    display: inline-flex;
-    width: calc(30% - 1.2em);
-    justify-content: flex-end;
-  }
 `;
 
 function InsertContentsModal({

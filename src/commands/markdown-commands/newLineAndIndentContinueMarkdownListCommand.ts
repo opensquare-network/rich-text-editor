@@ -54,6 +54,7 @@ export const newLineAndIndentContinueMarkdownListCommand: Command = {
       insertText(textArea, "\n" + indent + bullet + after);
 
       // TODO: re-calculate the rest numbered list
+      // eslint-disable-next-line no-empty
       if (numbered) {
       }
     }
