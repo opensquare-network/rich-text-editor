@@ -14,29 +14,36 @@ import Ol from "../icons/ol";
 import Link from "../icons/link";
 import Img from "../icons/img";
 import Code from "../icons/code";
+import { ThemeCss } from "../types";
+
+type Props = {
+  theme: ThemeCss;
+  isPreview: boolean;
+  setIsPreview: React.Dispatch<React.SetStateAction<boolean>>;
+  commandController: any;
+};
 
 export default function EditorHeader({
   theme,
-  editStatus,
-  setEditStatus,
   isPreview,
+  setIsPreview,
   commandController,
-}) {
+}: Props) {
   return (
     <ToolBar className="editor-toolbar" theme={theme} $isPreview={isPreview}>
       <TabsWrapper theme={theme}>
         <Tab
-          $active={editStatus === "write"}
-          onClick={() => setEditStatus("write")}
+          $active={!isPreview}
+          onClick={() => setIsPreview(false)}
           theme={theme}
           style={{ borderTopLeftRadius: 3 }}
-          className={editStatus === "write" ? "active" : ""}
+          className={!isPreview ? "active" : ""}
         >
           Write
         </Tab>
         <Tab
-          $active={editStatus === "preview"}
-          onClick={() => setEditStatus("preview")}
+          $active={isPreview}
+          onClick={() => setIsPreview(true)}
           theme={theme}
           className={isPreview ? "active" : ""}
         >
