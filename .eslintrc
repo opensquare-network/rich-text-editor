@@ -4,12 +4,13 @@
     "plugin:@typescript-eslint/recommended",
     "@osn"
   ],
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 6
+  },
+  "rules": {
+    "no-case-declarations": "off"
   }
 }
