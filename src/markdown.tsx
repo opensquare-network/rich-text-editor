@@ -23,9 +23,26 @@ import {
   Plugin as PreviewerPlugin,
 } from "@osn/previewer";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
-import { Suggestion, DemoProps, MentionState } from "./interfaces";
+import { Suggestion } from "./types/suggestion";
+import { MentionState } from "./types/state";
 
-export const Editor: React.FunctionComponent<DemoProps> = ({
+interface Props {
+  value: string;
+  onChange: (value: string) => void;
+  minHeight?: number;
+  theme?: "opensquare" | "subsquare";
+  loadSuggestions?: (text: string) => Suggestion[];
+  disabled?: boolean;
+  identifier?: React.ReactElement;
+  setActive: (active: boolean) => void;
+  /**
+   * @see https://github.com/opensquare-network/previewer
+   * @description \@osn/previewer component plugins
+   */
+  previewerPlugins?: PreviewerPlugin[];
+}
+
+export default function MarkdownEditor({
   value,
   onChange,
   loadSuggestions,
@@ -35,7 +52,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   identifier,
   setActive = () => {},
   previewerPlugins = [],
-}) => {
+}: Props) {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
   const refPreview = useRef<HTMLDivElement>(null);
@@ -58,18 +75,12 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
 
   const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
   const [focusIndex, setFocusIndex] = useState(0);
-  const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
-    "write",
-  );
+  const [isPreview, setIsPreview] = useState(false);
   const [suggestions, setSuggestions] = React.useState<Suggestion[]>([]);
   const [mentionState, setMentionState] = useState<MentionState>({
     status: "inactive",
     suggestions: [],
   });
-
-  const isPreview = React.useMemo(() => {
-    return editStatus === "preview";
-  }, [editStatus]);
 
   useEffect(() => {
     if (ref.current) {
@@ -83,10 +94,9 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
   }, [ref]);
 
-  useEffect(
-    () => setMentionState({ ...mentionState, status: "inactive" }),
-    [editStatus],
-  );
+  useEffect(() => {
+    setMentionState({ ...mentionState, status: "inactive" });
+  }, [isPreview]);
 
   let observer: MutationObserver;
 
@@ -150,7 +160,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       });
     }
     if (value === "") {
-      setEditStatus("write");
+      setIsPreview(false);
     }
   }, [height, value, setHeight]);
 
@@ -198,13 +208,10 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   return (
     <EditorWrapper theme={themeCSS} disabled={disabled}>
       <EditorHeader
-        {...{
-          theme: themeCSS,
-          editStatus,
-          setEditStatus,
-          isPreview,
-          commandController,
-        }}
+        theme={themeCSS}
+        isPreview={isPreview}
+        setIsPreview={setIsPreview}
+        commandController={commandController}
       />
       <Textarea
         ref={ref}
@@ -253,6 +260,4 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       )}
     </EditorWrapper>
   );
-};
-
-export default Editor;
+}
