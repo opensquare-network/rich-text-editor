@@ -1,6 +1,6 @@
 import * as React from "react";
 import MarkdownEditor from "./markdown";
-import { Suggestion } from "./interfaces";
+import { Suggestion } from "./types/suggestion";
 import { ReactElement, useState } from "react";
 import WYSIWYG from "../src/WYSIWYG";
 import styled, { css } from "styled-components";
@@ -41,23 +41,6 @@ type Props = {
   setQuillRef: any;
   previewerPlugins?: PreviewerPlugin[];
 };
-
-const markdown = `
-[https://www.baidu.com/](https://www.baidu.com/)
-# heading 1
-**bold text** _italic text_ \`inline code\`
-- bullet 1
-1. numbered 1
-
-|table|example|index|
-|-|-|-|
-|table|column|1|
-|table|column|2|
-\`\`\`bash
-echo "hello"
-\`\`\`
-> quote text
-`.trim();
 
 const ToggleWrapper = styled.div`
   display: flex;
