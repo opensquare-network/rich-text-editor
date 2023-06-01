@@ -9,7 +9,6 @@
     "dist"
   ],
   "scripts": {
-    "test": "jest",
     "dev": "vite --port 3008",
     "lint": "pretty-quick",
     "tsc": "tsc",
@@ -40,7 +39,6 @@
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-typescript": "^8.3.2",
-    "@types/jest": "^24.0.23",
     "@types/lodash": "^4.14.182",
     "@types/marked": "^4.0.3",
     "@types/prismjs": "^1.26.0",
@@ -55,7 +53,6 @@
     "bumpp": "^8.2.1",
     "cross-env": "^6.0.3",
     "framer-motion": "^6",
-    "jest": "^24.9.0",
     "merge2": "^1.2.1",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
