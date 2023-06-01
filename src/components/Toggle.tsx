@@ -59,7 +59,7 @@ const Wrapper = styled.div`
     `}
 `;
 
-export default function Toggle({ disabled, isOn, onToggle, size }) {
+export default function Toggle({ disabled = false, isOn, onToggle, size }) {
   return (
     <Wrapper
       className={isOn ? "on" : "off"}

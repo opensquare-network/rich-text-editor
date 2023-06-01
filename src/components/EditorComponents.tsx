@@ -1,12 +1,9 @@
 import styled, { css } from "styled-components";
-
-export interface Theme {
-  wrapper: string;
-}
+import { ThemeCss } from "../types";
 
 interface WrapperProps {
   disabled?: boolean;
-  theme: Theme;
+  $theme: ThemeCss;
 }
 
 export const EditorWrapper = styled.div<WrapperProps>`
@@ -14,7 +11,7 @@ export const EditorWrapper = styled.div<WrapperProps>`
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid #e2e8f0;
-  ${(props) => props.theme.wrapper};
+  ${(props) => props.$theme.wrapper};
   ${(p) =>
     p.disabled &&
     css`
@@ -23,7 +20,11 @@ export const EditorWrapper = styled.div<WrapperProps>`
     `}
 `;
 
-export const ToolBar = styled.div<{ $isPreview?: boolean }>`
+type ToolbarProps = {
+  $isPreview?: boolean;
+  $theme: ThemeCss;
+};
+export const ToolBar = styled.div<ToolbarProps>`
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   flex-basis: 100%;
@@ -44,10 +45,13 @@ export const ToolBar = styled.div<{ $isPreview?: boolean }>`
         padding-top: 0 !important;
       `};
   }
-  ${(props) => props.theme.toolbar};
+  ${(props) => props.$theme.toolbar};
 `;
 
-export const TabsWrapper = styled.div`
+type TabsWrapperProps = {
+  $theme: ThemeCss;
+};
+export const TabsWrapper = styled.div<TabsWrapperProps>`
   display: flex;
   gap: 24px;
   height: 48px;
@@ -56,12 +60,12 @@ export const TabsWrapper = styled.div`
     border-bottom: 1px solid #e2e8f0;
     width: 100%;
   }
-  ${(props) => props.theme.tabs};
+  ${(props) => props.$theme.tabs};
 `;
 
 interface TabProps {
   $active: boolean;
-  $theme: "opensquare" | "subsquare";
+  $theme: ThemeCss;
 }
 
 export const Tab = styled.button<TabProps>`
@@ -70,19 +74,18 @@ export const Tab = styled.button<TabProps>`
   font-size: 14px;
   line-height: 24px;
   border-bottom: 3px solid #ffffff;
-  ${(props) => props.theme.tab};
-  ${(props) =>
-    props.$active &&
-    props.$theme === "opensquare" &&
-    css`
-      border-bottom: 3px solid #04d2c5;
-    `};
+  ${(props) => props.$theme.tab};
   ${(props) =>
     props.$active &&
     css`
       border-bottom: 3px solid #04d2c5;
     `};
-  ${(props) => props.$active && props.theme.tabActive};
+  ${(props) =>
+    props.$active &&
+    css`
+      border-bottom: 3px solid #04d2c5;
+    `};
+  ${(props) => props.$active && props.$theme.tabActive};
   cursor: pointer;
   /* mobile */
   @media screen and (max-width: 769px) {
@@ -90,7 +93,7 @@ export const Tab = styled.button<TabProps>`
     margin-right: 16px;
     width: 50%;
     text-align: center;
-    ${(props) => props.theme.tabMobile};
+    ${(props) => props.$theme.tabMobile};
   }
 `;
 
@@ -98,7 +101,7 @@ interface Props {
   $hide?: boolean;
   $minHeight?: number;
   $height?: number;
-  $theme?: "opensquare" | "subsquare";
+  $theme?: ThemeCss;
 }
 
 export const ToolbarItemsWrapper = styled.div<Props>`
@@ -156,7 +159,7 @@ export const Textarea = styled.textarea<Props>`
   font-family: Inter, sans-serif;
   border: none;
   border-bottom: 1px solid #e2e8f0;
-  ${(props) => props.theme.textarea};
+  ${(props) => props.$theme?.textarea};
 
   :hover,
   :focus {

@@ -17,25 +17,25 @@ import Code from "../icons/code";
 import { ThemeCss } from "../types";
 
 type Props = {
-  theme: ThemeCss;
+  $theme: ThemeCss;
   isPreview: boolean;
   setIsPreview: React.Dispatch<React.SetStateAction<boolean>>;
   commandController: any;
 };
 
 export default function EditorHeader({
-  theme,
+  $theme,
   isPreview,
   setIsPreview,
   commandController,
 }: Props) {
   return (
-    <ToolBar className="editor-toolbar" theme={theme} $isPreview={isPreview}>
-      <TabsWrapper theme={theme}>
+    <ToolBar className="editor-toolbar" $theme={$theme} $isPreview={isPreview}>
+      <TabsWrapper $theme={$theme}>
         <Tab
           $active={!isPreview}
           onClick={() => setIsPreview(false)}
-          theme={theme}
+          $theme={$theme}
           style={{ borderTopLeftRadius: 3 }}
           className={!isPreview ? "active" : ""}
         >
@@ -44,7 +44,7 @@ export default function EditorHeader({
         <Tab
           $active={isPreview}
           onClick={() => setIsPreview(true)}
-          theme={theme}
+          $theme={$theme}
           className={isPreview ? "active" : ""}
         >
           Preview

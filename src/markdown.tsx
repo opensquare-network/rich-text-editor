@@ -206,9 +206,9 @@ export default function MarkdownEditor({
   };
 
   return (
-    <EditorWrapper theme={themeCSS} disabled={disabled}>
+    <EditorWrapper $theme={themeCSS} disabled={disabled}>
       <EditorHeader
-        theme={themeCSS}
+        $theme={themeCSS}
         isPreview={isPreview}
         setIsPreview={setIsPreview}
         commandController={commandController}
@@ -232,7 +232,7 @@ export default function MarkdownEditor({
         $minHeight={minHeight}
         $height={height}
         $hide={isPreview}
-        theme={themeCSS}
+        $theme={themeCSS}
       />
       {isPreview && (
         <PreviewWrapper ref={refPreview}>

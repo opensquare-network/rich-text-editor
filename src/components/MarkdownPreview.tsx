@@ -3,13 +3,14 @@ import React from "react";
 import sanitizeHtml from "sanitize-html";
 import Prism from "prismjs";
 import { MarkdownBody, MarkdownPreviewWrapper } from "./PreviewComponents";
+import { ThemeCss } from "../types";
 
 type Props = {
   content?: string;
   allowedTags?: string[];
   style?: React.CSSProperties;
   minHeight: number;
-  theme?: any;
+  $theme?: ThemeCss;
 };
 
 export function MarkdownPreview(props: Props = { minHeight: 144 }) {
