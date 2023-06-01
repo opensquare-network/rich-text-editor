@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite --port 3008",
+    "dev": "vite demo --port 3008",
     "lint": "pretty-quick",
     "tsc": "tsc",
     "build": "rollup -c",
