@@ -8,7 +8,7 @@ import {
 } from "../../helpers/textHelpers";
 
 export const underlineCommand: Command = {
-  shouldUndo: options => {
+  shouldUndo: (options) => {
     return (
       getCharactersBeforeSelection(options.initialState, 5) === "<ins>" &&
       getCharactersAfterSelection(options.initialState, 6) === "</ins>"
@@ -22,7 +22,9 @@ export const underlineCommand: Command = {
     });
     const state1 = textApi.setSelectionRange(newSelectionRange);
     // Replaces the current selection with the bold mark up
-    const state2 = textApi.replaceSelection(`<ins>${getSelectedText(state1)}</ins>`);
+    const state2 = textApi.replaceSelection(
+      `<ins>${getSelectedText(state1)}</ins>`,
+    );
     // Adjust the selection to not contain the **
     textApi.setSelectionRange({
       start: state2.selection.end - 5 - getSelectedText(state1).length,

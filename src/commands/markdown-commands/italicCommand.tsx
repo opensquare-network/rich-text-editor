@@ -8,7 +8,7 @@ import {
 } from "../../helpers/textHelpers";
 
 export const italicCommand: Command = {
-  shouldUndo: options => {
+  shouldUndo: (options) => {
     return (
       getCharactersBeforeSelection(options.initialState, 1) === "*" &&
       getCharactersAfterSelection(options.initialState, 1) === "*"

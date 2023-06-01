@@ -50,7 +50,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       ul: unorderedListCommand,
       underline: underlineCommand,
 
-      newLineAndIndentContinueMarkdownList: newLineAndIndentContinueMarkdownListCommand,
+      newLineAndIndentContinueMarkdownList:
+        newLineAndIndentContinueMarkdownListCommand,
       newLine: newLineCommand,
     },
   });
@@ -58,7 +59,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
   const [focusIndex, setFocusIndex] = useState(0);
   const [editStatus, setEditStatus] = React.useState<"write" | "preview">(
-    "write"
+    "write",
   );
   const [suggestions, setSuggestions] = React.useState<Suggestion[]>([]);
   const [mentionState, setMentionState] = useState<MentionState>({
@@ -82,9 +83,10 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
   }, [ref]);
 
-  useEffect(() => setMentionState({ ...mentionState, status: "inactive" }), [
-    editStatus,
-  ]);
+  useEffect(
+    () => setMentionState({ ...mentionState, status: "inactive" }),
+    [editStatus],
+  );
 
   let observer: MutationObserver;
 
@@ -132,7 +134,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     }
     if (textarea) {
       // MutationObserver is the modern way to observe element resize event
-      observer = new MutationObserver(record => {
+      observer = new MutationObserver((record) => {
         //no value changed && height change => user resized manually
         // @ts-ignore
         if (record[0].target.value === value) {
@@ -186,7 +188,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
 
       if (isEditingText) {
         commandController.executeCommand(
-          "newLineAndIndentContinueMarkdownList"
+          "newLineAndIndentContinueMarkdownList",
         );
       }
       focusToCursor();
@@ -207,14 +209,14 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       <Textarea
         ref={ref}
         value={value}
-        onChange={event => {
+        onChange={(event) => {
           onChange(event.target.value);
           adjustHeight();
         }}
-        onKeyUp={event => {
+        onKeyUp={(event) => {
           handleKeyUp(event);
         }}
-        onKeyDown={event => {
+        onKeyDown={(event) => {
           handleKeyDown(event);
           onEnterNewLine(event);
         }}

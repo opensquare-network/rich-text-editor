@@ -1,6 +1,6 @@
 function attachDataValues(element, data, dataAttributes) {
   const mention = element;
-  Object.keys(data).forEach(key => {
+  Object.keys(data).forEach((key) => {
     if (dataAttributes.indexOf(key) > -1) {
       mention.dataset[key] = data[key];
     } else {
@@ -26,7 +26,7 @@ function getMentionCharIndex(text, mentionDenotationChars) {
         mentionCharIndex: prev.mentionCharIndex,
       };
     },
-    { mentionChar: null, mentionCharIndex: -1 }
+    { mentionChar: null, mentionCharIndex: -1 },
   );
 }
 

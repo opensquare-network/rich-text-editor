@@ -4,7 +4,7 @@ import { getSelectedText, selectWord } from "./textHelpers";
 export function setHeader(
   initialState: TextState,
   api: TextController,
-  prefix: string
+  prefix: string,
 ) {
   // Adjust the selection to encompass the whole word if the caret is inside one
   const newSelectionRange = selectWord({

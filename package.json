@@ -12,6 +12,7 @@
     "dev": "vite demo --port 3008",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
+    "format-prettier": "prettier src --write",
     "tsc": "tsc",
     "build": "rollup -c",
     "typecheck": "tsc --noEmit",

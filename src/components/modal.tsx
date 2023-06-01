@@ -179,7 +179,7 @@ function InsertContentsModal({
   const [source, setSource] = useState("remote");
   const [link, setLink] = useState("");
 
-  const onChange = e => {
+  const onChange = (e) => {
     if (source === "remote") {
       setLink(e.target.value);
     }

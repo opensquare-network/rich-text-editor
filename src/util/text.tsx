@@ -1,4 +1,10 @@
-export function insertText(input: HTMLTextAreaElement | HTMLInputElement | any, text: string) {
+// Don't know where this code from, disable some eslint rules
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+export function insertText(
+  input: HTMLTextAreaElement | HTMLInputElement | any,
+  text: string,
+) {
   // Most of the used APIs only work with the field selected
   input.focus();
 
@@ -82,7 +88,9 @@ export function insertText(input: HTMLTextAreaElement | HTMLInputElement | any, 
   }
 }
 
-function canManipulateViaTextNodes(input: HTMLTextAreaElement | HTMLInputElement) {
+function canManipulateViaTextNodes(
+  input: HTMLTextAreaElement | HTMLInputElement,
+) {
   if (input.nodeName !== "TEXTAREA") {
     return false;
   }
@@ -94,4 +102,3 @@ function canManipulateViaTextNodes(input: HTMLTextAreaElement | HTMLInputElement
   }
   return browserSupportsTextareaTextNodes;
 }
-

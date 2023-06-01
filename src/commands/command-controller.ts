@@ -12,7 +12,7 @@ export class CommandController<CommandName extends string> {
 
   constructor(
     textController: TextController,
-    commandMap: CommandMap<CommandName>
+    commandMap: CommandMap<CommandName>,
   ) {
     this.textController = textController;
     this.commandMap = commandMap;
@@ -20,7 +20,7 @@ export class CommandController<CommandName extends string> {
 
   async executeCommand(
     commandName: CommandName,
-    context?: CommandContext
+    context?: CommandContext,
   ): Promise<void> {
     if (this.isExecuting) {
       // The simplest thing to do is to ignore commands while
@@ -35,7 +35,7 @@ export class CommandController<CommandName extends string> {
 
     if (!command) {
       throw new Error(
-        `Cannot execute command. Command not found: ${commandName}`
+        `Cannot execute command. Command not found: ${commandName}`,
       );
     }
 

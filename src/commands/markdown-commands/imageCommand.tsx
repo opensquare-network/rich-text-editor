@@ -9,7 +9,7 @@ export const imageCommand: Command = {
       selectWord({
         text: initialState.text,
         selection: initialState.selection,
-      })
+      }),
     );
     // Replaces the current selection with the image
     const imageTemplate =

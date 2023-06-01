@@ -26,7 +26,7 @@ const SuggestionsWrapper = styled.ul`
   }
 `;
 
-type ClassArray = Array<ClassValue> // tslint:disable-line no-empty-interface
+type ClassArray = Array<ClassValue>; // tslint:disable-line no-empty-interface
 
 interface ClassDictionary {
   [id: string]: string | boolean;
@@ -54,7 +54,9 @@ export interface SuggestionsDropdownProps {
   max?: number;
 }
 
-export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownProps> = ({
+export const SuggestionsDropdown: React.FunctionComponent<
+  SuggestionsDropdownProps
+> = ({
   suggestions,
   caret,
   onSuggestionSelected,
@@ -74,7 +76,7 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
 
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
-    window.innerWidth || 0
+    window.innerWidth || 0,
   );
 
   const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;

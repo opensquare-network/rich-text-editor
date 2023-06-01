@@ -20,14 +20,14 @@ export const MarkdownPreviewWrapper = styled.div<Props>`
   flex-basis: 100%;
   min-height: 144px;
   background-color: #fbfcfe;
-  ${props => props.theme && props.theme.preview};
+  ${(props) => props.theme && props.theme.preview};
   padding: 12px;
 
   .markdown-body {
     background-color: inherit !important;
   }
 
-  ${props =>
+  ${(props) =>
     props.minHeight &&
     css`
       min-height: ${props.minHeight}px;

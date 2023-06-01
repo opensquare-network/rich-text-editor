@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     background: #ffffff;
     border-radius: 7px;
   }
-  ${p =>
+  ${(p) =>
     p.disabled
       ? css`
           background: #ebeef4;
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
           }
         `
       : null}
-  ${p =>
+  ${(p) =>
     p.size === "small" &&
     css`
       width: 30px;
@@ -47,7 +47,7 @@ const Wrapper = styled.div`
         left: 3px;
         border-radius: 6px;
       }
-      ${p =>
+      ${(p) =>
         p.$active &&
         css`
           background: #6848ff;

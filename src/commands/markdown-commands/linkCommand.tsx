@@ -12,7 +12,7 @@ export const linkCommand: Command = {
     const state1 = textApi.setSelectionRange(newSelectionRange);
     // Replaces the current selection with the bold mark up
     const state2 = textApi.replaceSelection(
-      `[${getSelectedText(state1)}](url)`
+      `[${getSelectedText(state1)}](url)`,
     );
     // Adjust the selection to not contain the **
     textApi.setSelectionRange({

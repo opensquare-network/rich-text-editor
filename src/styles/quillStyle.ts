@@ -64,7 +64,7 @@ export default css`
   }
 
   .ql-formats {
-    ${props =>
+    ${(props) =>
       props.isPreview &&
       css`
         display: none !important;
@@ -73,7 +73,7 @@ export default css`
 
   div.ql-editor {
     min-height: 100px;
-    height: ${props => props.height}px;
+    height: ${(props) => props.height}px;
     max-height: 300px;
   }
 
@@ -90,7 +90,7 @@ export default css`
         display: none;
       }
 
-      ${props =>
+      ${(props) =>
         props.isPreview &&
         css`
           display: none !important;

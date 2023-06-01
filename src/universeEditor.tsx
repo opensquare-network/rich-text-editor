@@ -22,7 +22,7 @@ const Wrapper = styled.div<WrapperProps>`
     border-color: #c2c8d5;
   }
 
-  ${p =>
+  ${(p) =>
     p.$active &&
     css`
       border-color: #c2c8d5;

@@ -13,12 +13,12 @@ export function getHandlers({
   mentionState,
   setMentionState,
   value,
-}) {
+}: any) {
   const handleSuggestionSelected = (index: number) => {
     if (suggestions?.length) {
       ref.current.setSelectionRange(
         mentionState.startPosition - 1,
-        ref.current.selectionStart
+        ref.current.selectionStart,
       );
       insertText(ref?.current, suggestions[index].value);
       setMentionState({ ...mentionState, status: "inactive" });
@@ -31,13 +31,13 @@ export function getHandlers({
       if (event.key === "ArrowDown") {
         event.preventDefault();
         setFocusIndex(
-          focusIndex >= suggestions.length - 1 ? 0 : focusIndex + 1
+          focusIndex >= suggestions.length - 1 ? 0 : focusIndex + 1,
         );
       }
       if (event.key === "ArrowUp") {
         event.preventDefault();
         setFocusIndex(
-          focusIndex === 0 ? suggestions.length - 1 : focusIndex - 1
+          focusIndex === 0 ? suggestions.length - 1 : focusIndex - 1,
         );
       }
       if (event.key === "Enter") {
@@ -64,7 +64,7 @@ export function getHandlers({
         if (key === "Backspace") {
           const searchText = value.substr(
             mentionState.startPosition,
-            ref.current.selectionStart - mentionState.startPosition
+            ref.current.selectionStart - mentionState.startPosition,
           );
           setSuggestions(loadSuggestions(searchText));
         }
@@ -98,7 +98,7 @@ export function getHandlers({
         const searchText =
           value.substr(
             mentionState.startPosition,
-            ref.current.selectionStart - mentionState.startPosition
+            ref.current.selectionStart - mentionState.startPosition,
           ) + key;
         // In this case, the mentions box was open but the user typed something else
         setSuggestions(loadSuggestions(searchText));

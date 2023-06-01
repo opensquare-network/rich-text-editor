@@ -72,7 +72,7 @@ export function getStateFromTextArea(textArea: HTMLTextAreaElement): TextState {
  */
 export function insertText(
   input: HTMLTextAreaElement | HTMLInputElement,
-  text: string
+  text: string,
 ) {
   // Most of the used APIs only work with the field selected
   input.focus();
@@ -163,7 +163,7 @@ export function insertText(
  *    Copied from https://github.com/grassator/insert-text-at-cursor
  */
 function canManipulateViaTextNodes(
-  input: HTMLTextAreaElement | HTMLInputElement
+  input: HTMLTextAreaElement | HTMLInputElement,
 ) {
   if (input.nodeName !== "TEXTAREA") {
     return false;

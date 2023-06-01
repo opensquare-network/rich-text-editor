@@ -15,16 +15,15 @@ export type UseTextAreaMarkdownEditorOptions<CommandName extends string> = {
 
 export function useTextAreaMarkdownEditor<CommandName extends string>(
   ref: React.RefObject<HTMLTextAreaElement>,
-  options: UseTextAreaMarkdownEditorOptions<CommandName>
+  options: UseTextAreaMarkdownEditorOptions<CommandName>,
 ): UseTextAreaMarkdownEditorResult<CommandName> {
-
   const textController = useMemo(() => {
     return new TextAreaTextController(ref);
   }, [ref]);
 
   const commandController = useMemo(
     () => new CommandController(textController, options.commandMap),
-    [ref]
+    [ref],
   );
 
   return {

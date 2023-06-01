@@ -29,7 +29,7 @@ class MentionBlot extends Embed {
 
   static setDataValues(element, data) {
     const domNode = element;
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       domNode.dataset[key] = data[key];
     });
     return domNode;
@@ -62,7 +62,7 @@ class MentionBlot extends Embed {
   }
 
   getClickHandler() {
-    return e => {
+    return (e) => {
       const event = this.buildEvent("mention-clicked", e);
       window.dispatchEvent(event);
       e.preventDefault();
@@ -70,7 +70,7 @@ class MentionBlot extends Embed {
   }
 
   getHoverHandler() {
-    return e => {
+    return (e) => {
       const event = this.buildEvent("mention-hovered", e);
       window.dispatchEvent(event);
       e.preventDefault();

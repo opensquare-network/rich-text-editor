@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface CaretCoordinates {
-  top: number,
-  left: number,
-  lineHeight: number
+  top: number;
+  left: number;
+  lineHeight: number;
 }
 
 const properties = [
@@ -47,7 +48,7 @@ const properties = [
 
 export function getCaretCoordinates(
   element: HTMLTextAreaElement,
-  append?: string
+  append?: string,
 ): CaretCoordinates {
   if (typeof window === "undefined") {
     throw new Error("getCaretCoordinates should only be called in a browser");
@@ -72,8 +73,9 @@ export function getCaretCoordinates(
   style.visibility = "hidden"; // not 'display: none' because we want rendering
 
   // Transfer the element's properties to the div
-  properties.forEach(function(prop) {
-    // @ts-ignore
+  properties.forEach(function (prop) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore-next-line
     style[prop] = computed[prop];
   });
 

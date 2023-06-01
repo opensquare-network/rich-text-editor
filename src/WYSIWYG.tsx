@@ -56,7 +56,7 @@ interface DeltaStatic {
   map<T>(predicate: (op: DeltaOperation) => T): T[];
 
   partition(
-    predicate: (op: DeltaOperation) => boolean
+    predicate: (op: DeltaOperation) => boolean,
   ): [DeltaOperation[], DeltaOperation[]];
 
   reduce<T>(
@@ -64,9 +64,9 @@ interface DeltaStatic {
       acc: T,
       curr: DeltaOperation,
       idx: number,
-      arr: DeltaOperation[]
+      arr: DeltaOperation[],
     ) => T,
-    initial: T
+    initial: T,
   ): T;
 
   chop(): DeltaStatic;
@@ -83,7 +83,7 @@ interface DeltaStatic {
 
   eachLine(
     predicate: (line: DeltaStatic, attributes: StringMap, idx: number) => any,
-    newline?: string
+    newline?: string,
   ): DeltaStatic;
 
   transform(index: number, priority?: boolean): number;
@@ -116,7 +116,7 @@ interface EditorProps {
   mentions?: any[];
   setModalInsetFunc: (
     func: (bounds: BoundsStatic) => void,
-    type: string
+    type: string,
   ) => void;
   loadSuggestions?: (text: string) => Suggestion[];
   minHeight?: number;
@@ -128,7 +128,7 @@ interface EditorProps {
 
 //fixme: this a for mention insert from replay button
 //find a elegant way to do this
-const prettyHTML = html => {
+const prettyHTML = (html) => {
   return html
     .replaceAll("data-osn-polka-network", "osn-polka-network")
     .replaceAll("data-osn-polka-address", "osn-polka-address");
@@ -174,27 +174,27 @@ export default function WYSIWYG(props: EditorProps) {
         ],
         handlers: {
           //must be an async func so you can pass img link from other component later
-          image: async function() {
+          image: async function () {
             const that = this;
-            new Promise(resolve => {
-              props.setModalInsetFunc(function() {
+            new Promise((resolve) => {
+              props.setModalInsetFunc(function () {
                 //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
                 return resolve;
               });
-            }).then(link => {
+            }).then((link) => {
               that.quill.focus();
               const range = that.quill.getSelection();
               that.quill.insertEmbed(range.index, "image", link, "user");
             });
           },
-          video: async function() {
+          video: async function () {
             const that = this;
-            new Promise(resolve => {
-              props.setModalInsetFunc(function() {
+            new Promise((resolve) => {
+              props.setModalInsetFunc(function () {
                 //pass resolve to ImgModal component so it can be called as resolve(link) in ImgModal, see in ImgModal.txs line 84
                 return resolve;
               }, "video");
-            }).then(link => {
+            }).then((link) => {
               const videoLink = link?.replace("watch?v=", "embed/");
               that.quill.focus();
               const range = that.quill.getSelection();
@@ -206,10 +206,10 @@ export default function WYSIWYG(props: EditorProps) {
       mention: {
         allowedChars: /^[0-9A-Za-z\s]*$/,
         mentionDenotationChars: ["@"],
-        source: function(searchTerm: any, renderList: any, mentionChar: any) {
+        source: function (searchTerm: any, renderList: any, mentionChar: any) {
           const suggestions = props.loadSuggestions("") ?? [];
           const atValues: any = [];
-          suggestions.map(suggestion =>
+          suggestions.map((suggestion) =>
             atValues.push({
               id: suggestion.address,
               value: suggestion.preview,
@@ -217,7 +217,7 @@ export default function WYSIWYG(props: EditorProps) {
                 suggestion?.isKeyRegistered?.toString() ?? "false",
               chain: suggestion?.chain,
               address: suggestion.address,
-            })
+            }),
           );
 
           let values;
@@ -243,7 +243,7 @@ export default function WYSIWYG(props: EditorProps) {
         modules: ["Resize", "DisplaySize"],
       },
     }),
-    []
+    [],
   );
 
   const getEditorConfig = (): QuillOptions => {
@@ -261,10 +261,8 @@ export default function WYSIWYG(props: EditorProps) {
 
   const generation = 0;
 
-  const [
-    editingArea,
-    setEditingArea,
-  ] = React.useState<React.ReactInstance | null>(null);
+  const [editingArea, setEditingArea] =
+    React.useState<React.ReactInstance | null>(null);
 
   const setEditorTabIndex = (editor: Quill, tabIndex: number) => {
     if (editor?.scroll?.domNode) {
@@ -280,7 +278,7 @@ export default function WYSIWYG(props: EditorProps) {
         eventName: "text-change" | "selection-change",
         rangeOrDelta: Delta,
         oldRangeOrDelta: Delta,
-        source: Sources
+        source: Sources,
       ) => {
         if (eventName === "text-change") {
           if (props?.onChange) {
@@ -289,7 +287,7 @@ export default function WYSIWYG(props: EditorProps) {
           editor.root.style.height = `${props.minHeight}px`;
           editor.root.style.height = `${editor.root.scrollHeight}px`;
         }
-      }
+      },
     );
   };
 

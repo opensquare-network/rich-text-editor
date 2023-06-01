@@ -8,7 +8,7 @@ import { AlterLineFunction } from "./listHelpers";
  */
 export function getSurroundingWord(
   text: string,
-  position: number
+  position: number,
 ): SelectionRange {
   if (!text) throw Error("Argument 'text' should be truthy");
 
@@ -58,7 +58,7 @@ export function selectWord({ text, selection }: TextState): SelectionRange {
  */
 export function getBreaksNeededForEmptyLineBefore(
   text = "",
-  startPosition: number
+  startPosition: number,
 ): number {
   if (startPosition === 0) return 0;
 
@@ -90,7 +90,7 @@ export function getBreaksNeededForEmptyLineBefore(
  */
 export function getBreaksNeededForEmptyLineAfter(
   text = "",
-  startPosition: number
+  startPosition: number,
 ) {
   if (startPosition === text.length - 1) return 0;
 
@@ -119,26 +119,26 @@ export function getBreaksNeededForEmptyLineAfter(
 export function getSelectedText(textSection: TextState): string {
   return textSection.text.slice(
     textSection.selection.start,
-    textSection.selection.end
+    textSection.selection.end,
   );
 }
 export function getCharactersBeforeSelection(
   textState: TextState,
-  characters: number
+  characters: number,
 ): string {
   return textState.text.slice(
     textState.selection.start - characters,
-    textState.selection.start
+    textState.selection.start,
   );
 }
 
 export function getCharactersAfterSelection(
   textState: TextState,
-  characters: number
+  characters: number,
 ): string {
   return textState.text.slice(
     textState.selection.end,
-    textState.selection.end + characters
+    textState.selection.end + characters,
   );
 }
 
@@ -147,7 +147,7 @@ export function getCharactersAfterSelection(
  */
 export function insertBeforeEachLine(
   selectedText: string,
-  insertBefore: string | AlterLineFunction
+  insertBefore: string | AlterLineFunction,
 ): { modifiedText: string; insertionLength: number } {
   const lines = selectedText.split(/\n/);
 

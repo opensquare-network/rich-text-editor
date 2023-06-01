@@ -5,9 +5,9 @@ import { DisplaySize } from "./modules/DisplaySize";
 import { Resize } from "./modules/Resize";
 
 const knownModules = {
- DisplaySize,
+  DisplaySize,
   // Toolbar,
-  Resize, 
+  Resize,
 };
 
 /**
@@ -16,7 +16,6 @@ const knownModules = {
  * @see https://quilljs.com/blog/building-a-custom-module/
  */
 export default class ImageResize {
-
   constructor(quill, options = {}) {
     // save the quill reference and options
     this.quill = quill;
@@ -42,7 +41,8 @@ export default class ImageResize {
     // respond to clicks inside the editor
     this.quill.root.addEventListener("click", this.handleClick, false);
 
-    this.quill.root.parentNode.style.position = this.quill.root.parentNode.style.position || "relative";
+    this.quill.root.parentNode.style.position =
+      this.quill.root.parentNode.style.position || "relative";
 
     // setup modules
     this.moduleClasses = this.options.modules;
@@ -54,39 +54,37 @@ export default class ImageResize {
     this.removeModules();
 
     this.modules = this.moduleClasses.map(
-      ModuleClass => new (knownModules[ModuleClass] || ModuleClass)(this),
+      (ModuleClass) => new (knownModules[ModuleClass] || ModuleClass)(this),
     );
 
-    this.modules.forEach(
-      (module) => {
-        module.onCreate();
-      },
-    );
+    this.modules.forEach((module) => {
+      module.onCreate();
+    });
 
     this.onUpdate();
   };
 
   onUpdate = () => {
     this.repositionElements();
-    this.modules.forEach(
-      (module) => {
-        module.onUpdate();
-      },
-    );
+    this.modules.forEach((module) => {
+      module.onUpdate();
+    });
   };
 
   removeModules = () => {
-    this.modules.forEach(
-      (module) => {
-        module.onDestroy();
-      },
-    );
+    this.modules.forEach((module) => {
+      module.onDestroy();
+    });
 
     this.modules = [];
   };
 
   handleClick = (evt) => {
-    if (evt.target && evt.target.tagName && evt.target.tagName.toUpperCase() === "IMG") {
+    if (
+      evt.target &&
+      evt.target.tagName &&
+      evt.target.tagName.toUpperCase() === "IMG"
+    ) {
       if (this.img === evt.target) {
         // we are already focused on this image
         return;
@@ -177,16 +175,13 @@ export default class ImageResize {
   };
 
   setUserSelect = (value) => {
-    [
-      "userSelect",
-      "mozUserSelect",
-      "webkitUserSelect",
-      "msUserSelect",
-    ].forEach((prop) => {
-      // set on contenteditable element and <html>
-      this.quill.root.style[prop] = value;
-      document.documentElement.style[prop] = value;
-    });
+    ["userSelect", "mozUserSelect", "webkitUserSelect", "msUserSelect"].forEach(
+      (prop) => {
+        // set on contenteditable element and <html>
+        this.quill.root.style[prop] = value;
+        document.documentElement.style[prop] = value;
+      },
+    );
   };
 
   checkImage = (evt) => {

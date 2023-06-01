@@ -8,7 +8,7 @@ import {
 } from "../../helpers/textHelpers";
 
 export const boldCommand: Command = {
-  shouldUndo: options => {
+  shouldUndo: (options) => {
     return (
       getCharactersBeforeSelection(options.initialState, 2) === "**" &&
       getCharactersAfterSelection(options.initialState, 2) === "**"

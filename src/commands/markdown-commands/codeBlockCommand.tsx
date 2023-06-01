@@ -33,18 +33,18 @@ export const codeBlockCommand: Command = {
 
     const breaksBeforeCount = getBreaksNeededForEmptyLineBefore(
       state1.text,
-      state1.selection.start
+      state1.selection.start,
     );
     const breaksBefore = Array(breaksBeforeCount + 1).join("\n");
 
     const breaksAfterCount = getBreaksNeededForEmptyLineAfter(
       state1.text,
-      state1.selection.end
+      state1.selection.end,
     );
     const breaksAfter = Array(breaksAfterCount + 1).join("\n");
 
     textApi.replaceSelection(
-      `${breaksBefore}\`\`\`\n${getSelectedText(state1)}\n\`\`\`${breaksAfter}`
+      `${breaksBefore}\`\`\`\n${getSelectedText(state1)}\n\`\`\`${breaksAfter}`,
     );
 
     const selectionStart = state1.selection.start + breaksBeforeCount + 4;

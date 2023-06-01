@@ -126,10 +126,10 @@ class Mention {
       {
         key: Keys.TAB,
       },
-      this.selectHandler.bind(this)
+      this.selectHandler.bind(this),
     );
     quill.keyboard.bindings[Keys.TAB].unshift(
-      quill.keyboard.bindings[Keys.TAB].pop()
+      quill.keyboard.bindings[Keys.TAB].pop(),
     );
 
     for (const selectKey of this.options.selectKeys) {
@@ -137,32 +137,32 @@ class Mention {
         {
           key: selectKey,
         },
-        this.selectHandler.bind(this)
+        this.selectHandler.bind(this),
       );
     }
     quill.keyboard.bindings[Keys.ENTER].unshift(
-      quill.keyboard.bindings[Keys.ENTER].pop()
+      quill.keyboard.bindings[Keys.ENTER].pop(),
     );
 
     quill.keyboard.addBinding(
       {
         key: Keys.ESCAPE,
       },
-      this.escapeHandler.bind(this)
+      this.escapeHandler.bind(this),
     );
 
     quill.keyboard.addBinding(
       {
         key: Keys.UP,
       },
-      this.upHandler.bind(this)
+      this.upHandler.bind(this),
     );
 
     quill.keyboard.addBinding(
       {
         key: Keys.DOWN,
       },
-      this.downHandler.bind(this)
+      this.downHandler.bind(this),
     );
   }
 
@@ -238,12 +238,12 @@ class Mention {
     this.mentionList.childNodes[this.itemIndex].classList.add("selected");
     this.quill.root.setAttribute(
       "aria-activedescendant",
-      this.mentionList.childNodes[this.itemIndex].id
+      this.mentionList.childNodes[this.itemIndex].id,
     );
 
     if (scrollItemInView) {
-      const itemHeight = this.mentionList.childNodes[this.itemIndex]
-        .offsetHeight;
+      const itemHeight =
+        this.mentionList.childNodes[this.itemIndex].offsetHeight;
       const itemPos = this.mentionList.childNodes[this.itemIndex].offsetTop;
       const containerTop = this.mentionContainer.scrollTop;
       const containerBottom = containerTop + this.mentionContainer.offsetHeight;
@@ -262,15 +262,14 @@ class Mention {
   getItemData() {
     const { link } = this.mentionList.childNodes[this.itemIndex].dataset;
     const hasLinkValue = typeof link !== "undefined";
-    const itemTarget = this.mentionList.childNodes[this.itemIndex].dataset
-      .target;
+    const itemTarget =
+      this.mentionList.childNodes[this.itemIndex].dataset.target;
     if (hasLinkValue) {
       this.mentionList.childNodes[
         this.itemIndex
-      ].dataset.value = `<a href="${link}" target=${itemTarget ||
-        this.options.linkTarget}>${
-        this.mentionList.childNodes[this.itemIndex].dataset.value
-      }`;
+      ].dataset.value = `<a href="${link}" target=${
+        itemTarget || this.options.linkTarget
+      }>${this.mentionList.childNodes[this.itemIndex].dataset.value}`;
     }
     return this.mentionList.childNodes[this.itemIndex].dataset;
   }
@@ -287,7 +286,7 @@ class Mention {
     if (data.disabled) {
       return;
     }
-    this.options.onSelect(data, asyncData => {
+    this.options.onSelect(data, (asyncData) => {
       this.insertItem(asyncData);
     });
     this.hideMentionList();
@@ -309,7 +308,7 @@ class Mention {
       this.quill.deleteText(
         this.mentionCharPos,
         this.cursorPos - this.mentionCharPos,
-        Quill.sources.USER
+        Quill.sources.USER,
       );
     } else {
       insertAtPos = this.cursorPos;
@@ -318,7 +317,7 @@ class Mention {
       insertAtPos,
       this.options.blotName,
       render,
-      Quill.sources.USER
+      Quill.sources.USER,
     );
     if (this.options.spaceAfterInsert) {
       this.quill.insertText(insertAtPos + 1, " ", Quill.sources.USER);
@@ -391,9 +390,8 @@ class Mention {
   }
 
   removeLoading() {
-    const loadingDiv = this.mentionContainer.getElementsByClassName(
-      "ql-mention-loading"
-    );
+    const loadingDiv =
+      this.mentionContainer.getElementsByClassName("ql-mention-loading");
     if (loadingDiv.length > 0) {
       loadingDiv[0].remove();
     }
@@ -430,7 +428,7 @@ class Mention {
         }
         li.dataset.denotationChar = mentionChar;
         this.mentionList.appendChild(
-          attachDataValues(li, data[i], this.options.dataAttributes)
+          attachDataValues(li, data[i], this.options.dataAttributes),
         );
       }
       this.itemIndex = initialSelection;
@@ -587,12 +585,12 @@ class Mention {
     }
 
     if (topPos >= 0) {
-      this.options.mentionContainerClass.split(" ").forEach(className => {
+      this.options.mentionContainerClass.split(" ").forEach((className) => {
         this.mentionContainer.classList.add(`${className}-bottom`);
         this.mentionContainer.classList.remove(`${className}-top`);
       });
     } else {
-      this.options.mentionContainerClass.split(" ").forEach(className => {
+      this.options.mentionContainerClass.split(" ").forEach((className) => {
         this.mentionContainer.classList.add(`${className}-top`);
         this.mentionContainer.classList.remove(`${className}-bottom`);
       });
@@ -671,7 +669,7 @@ class Mention {
         this.mentionContainer.style.height = availableSpaceBottom - 3 + "px";
       }
 
-      this.options.mentionContainerClass.split(" ").forEach(className => {
+      this.options.mentionContainerClass.split(" ").forEach((className) => {
         this.mentionContainer.classList.add(`${className}-bottom`);
         this.mentionContainer.classList.remove(`${className}-top`);
       });
@@ -684,7 +682,7 @@ class Mention {
         topPos = 3;
       }
 
-      this.options.mentionContainerClass.split(" ").forEach(className => {
+      this.options.mentionContainerClass.split(" ").forEach((className) => {
         this.mentionContainer.classList.add(`${className}-top`);
         this.mentionContainer.classList.remove(`${className}-bottom`);
       });
@@ -699,7 +697,7 @@ class Mention {
     const startPos = Math.max(0, this.cursorPos - this.options.maxChars);
     const textBeforeCursorPos = this.quill.getText(
       startPos,
-      this.cursorPos - startPos
+      this.cursorPos - startPos,
     );
     return textBeforeCursorPos;
   }
@@ -712,21 +710,21 @@ class Mention {
       const textBeforeCursor = this.getTextBeforeCursor();
       const { mentionChar, mentionCharIndex } = getMentionCharIndex(
         textBeforeCursor,
-        this.options.mentionDenotationChars
+        this.options.mentionDenotationChars,
       );
 
       if (
         hasValidMentionCharIndex(
           mentionCharIndex,
           textBeforeCursor,
-          this.options.isolateCharacter
+          this.options.isolateCharacter,
         )
       ) {
         const mentionCharPos =
           this.cursorPos - (textBeforeCursor.length - mentionCharIndex);
         this.mentionCharPos = mentionCharPos;
         const textAfter = textBeforeCursor.substring(
-          mentionCharIndex + mentionChar.length
+          mentionCharIndex + mentionChar.length,
         );
         if (
           textAfter.length >= this.options.minChars &&
@@ -749,7 +747,7 @@ class Mention {
               this.existingSourceExecutionToken = null;
               this.renderList(mentionChar, data, searchTerm);
             },
-            mentionChar
+            mentionChar,
           );
         } else {
           if (this.existingSourceExecutionToken) {

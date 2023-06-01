@@ -18,19 +18,19 @@ export const quoteCommand: Command = {
 
     const breaksBeforeCount = getBreaksNeededForEmptyLineBefore(
       state1.text,
-      state1.selection.start
+      state1.selection.start,
     );
     const breaksBefore = Array(breaksBeforeCount + 1).join("\n");
 
     const breaksAfterCount = getBreaksNeededForEmptyLineAfter(
       state1.text,
-      state1.selection.end
+      state1.selection.end,
     );
     const breaksAfter = Array(breaksAfterCount + 1).join("\n");
 
     // Replaces the current selection with the quote mark up
     textApi.replaceSelection(
-      `${breaksBefore}> ${getSelectedText(state1)}${breaksAfter}`
+      `${breaksBefore}> ${getSelectedText(state1)}${breaksAfter}`,
     );
 
     const selectionStart = state1.selection.start + breaksBeforeCount + 2;

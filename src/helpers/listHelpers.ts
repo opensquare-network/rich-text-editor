@@ -13,7 +13,7 @@ import {
 export function makeList(
   state0: TextState,
   textController: TextController,
-  insertBefore: string | AlterLineFunction
+  insertBefore: string | AlterLineFunction,
 ) {
   // Adjust the selection to encompass the whole word if the caret is inside one
   const newSelectionRange = selectWord({
@@ -24,23 +24,23 @@ export function makeList(
 
   const breaksBeforeCount = getBreaksNeededForEmptyLineBefore(
     state1.text,
-    state1.selection.start
+    state1.selection.start,
   );
   const breaksBefore = Array(breaksBeforeCount + 1).join("\n");
 
   const breaksAfterCount = getBreaksNeededForEmptyLineAfter(
     state1.text,
-    state1.selection.end
+    state1.selection.end,
   );
   const breaksAfter = Array(breaksAfterCount + 1).join("\n");
 
   const modifiedText = insertBeforeEachLine(
     getSelectedText(state1),
-    insertBefore
+    insertBefore,
   );
 
   textController.replaceSelection(
-    `${breaksBefore}${modifiedText.modifiedText}${breaksAfter}`
+    `${breaksBefore}${modifiedText.modifiedText}${breaksAfter}`,
   );
 
   // Specifically when the text has only one line, we can exclude the "- ", for example, from the selection
