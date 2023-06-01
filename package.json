@@ -47,6 +47,7 @@
     "@types/lodash": "^4.14.182",
     "@types/marked": "^4.0.3",
     "@types/prismjs": "^1.26.0",
+    "@types/quill": "^2.0.10",
     "@types/range-parser": "^1.2.2",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",

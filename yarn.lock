@@ -709,6 +709,7 @@ __metadata:
     "@types/lodash": ^4.14.182
     "@types/marked": ^4.0.3
     "@types/prismjs": ^1.26.0
+    "@types/quill": ^2.0.10
     "@types/range-parser": ^1.2.2
     "@types/react": ^18.2.6
     "@types/react-dom": ^18.2.4
@@ -878,6 +879,16 @@ __metadata:
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
   checksum: 5b43b8b15415e1f298243165f1d44390403bb2bd42e662bca3b5b5633fdd39c938e91b7fce3a9483699db0f7a715d08cef220c121f723a634972fdf596aec980
+  languageName: node
+  linkType: hard
+
+"@types/quill@npm:^2.0.10":
+  version: 2.0.10
+  resolution: "@types/quill@npm:2.0.10"
+  dependencies:
+    parchment: ^1.1.2
+    quill-delta: ^4.0.1
+  checksum: d206a72828c6475f56537698c0af6ff3eb7ca25bf2545e6f07bf502ec1d30076b8fb3c91aca635be52d219c9d59b21baccdb29dd70d6fa0c124a82021fb52f0e
   languageName: node
   linkType: hard
 
@@ -3150,6 +3161,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.clonedeep@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.clonedeep@npm:4.5.0"
+  checksum: 92c46f094b064e876a23c97f57f81fbffd5d760bf2d8a1c61d85db6d1e488c66b0384c943abee4f6af7debf5ad4e4282e74ff83177c9e63d8ff081a4837c3489
+  languageName: node
+  linkType: hard
+
+"lodash.isequal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: da27515dc5230eb1140ba65ff8de3613649620e8656b19a6270afe4866b7bd461d9ba2ac8a48dcc57f7adac4ee80e1de9f965d89d4d81a0ad52bb3eec2609644
+  languageName: node
+  linkType: hard
+
 "lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
@@ -3582,6 +3607,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"parchment@npm:^1.1.2":
+  version: 1.1.4
+  resolution: "parchment@npm:1.1.4"
+  checksum: 47997567424d1ad8648046091a06b3a5423ed83f9dfa421d7fd93e0032e79aedd8db5499ff55327e08eebd89d8e927704a646f87d45d4bcfe63016aa5a88947d
+  languageName: node
+  linkType: hard
+
 "parent-module@npm:^1.0.0":
   version: 1.0.1
   resolution: "parent-module@npm:1.0.1"
@@ -3756,6 +3788,17 @@ __metadata:
     extend: ^3.0.2
     fast-diff: 1.2.0
   checksum: bc8d35f671290dbeb9ef7be12c025b99b9170d5344c04c508235ea5a54402012fe7d2e270cb5fee5f5a18013ce1dffa1b82d5efbc0561c304fa4e103a8e89275
+  languageName: node
+  linkType: hard
+
+"quill-delta@npm:^4.0.1":
+  version: 4.2.2
+  resolution: "quill-delta@npm:4.2.2"
+  dependencies:
+    fast-diff: 1.2.0
+    lodash.clonedeep: ^4.5.0
+    lodash.isequal: ^4.5.0
+  checksum: 6a71e3dfb46dfdc80504b5ac961c17c5ba7b576ca1240b0e212598ce5be1d510a9457531832b15ea46a0261867444faca1c1fe451b26b81b6158852e00d7422f
   languageName: node
   linkType: hard
 
