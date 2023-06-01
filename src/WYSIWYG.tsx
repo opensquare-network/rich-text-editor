@@ -15,13 +15,13 @@ import StateToggle from "./components/StateToggle";
 import overrideIcons from "./util/overrideIcons";
 import Mention from "./quillModules/mention";
 import ImageResize from "./quillModules/ImageResize";
-import { Suggestion } from "./interfaces";
 import {
   HtmlPreviewer,
   renderMentionIdentityUserPlugin,
   Plugin as PreviewerPlugin,
 } from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
+import { Suggestion } from "./types/suggestion";
 
 let Quill: any = QuillNamespace;
 if (Quill.default) {
