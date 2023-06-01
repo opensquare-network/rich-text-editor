@@ -174,7 +174,7 @@ function InsertContentsModal({
   showModal,
   setShowModal,
   insetQuillContentsFunc: resolveInsertPromise,
-  type = "image"
+  type = "image",
 }) {
   const [source, setSource] = useState("remote");
   const [link, setLink] = useState("");

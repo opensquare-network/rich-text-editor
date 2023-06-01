@@ -4,7 +4,7 @@ import {
   TabsWrapper,
   ToolBar,
   ToolbarButton,
-  ToolbarItemsWrapper
+  ToolbarItemsWrapper,
 } from "./EditorComponents";
 import Bold from "../icons/bold";
 import Underline from "../icons/underline";
@@ -20,7 +20,7 @@ export default function EditorHeader({
   editStatus,
   setEditStatus,
   isPreview,
-  commandController
+  commandController,
 }) {
   return (
     <ToolBar className="editor-toolbar" theme={theme} $isPreview={isPreview}>

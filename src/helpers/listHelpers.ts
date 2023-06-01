@@ -7,7 +7,7 @@ import {
   getBreaksNeededForEmptyLineBefore,
   getSelectedText,
   insertBeforeEachLine,
-  selectWord
+  selectWord,
 } from "./textHelpers";
 
 export function makeList(
@@ -18,7 +18,7 @@ export function makeList(
   // Adjust the selection to encompass the whole word if the caret is inside one
   const newSelectionRange = selectWord({
     text: state0.text,
-    selection: state0.selection
+    selection: state0.selection,
   });
   const state1 = textController.setSelectionRange(newSelectionRange);
 
@@ -57,6 +57,6 @@ export function makeList(
   // Adjust the selection to not contain the **
   textController.setSelectionRange({
     start: selectionStart,
-    end: selectionEnd
+    end: selectionEnd,
   });
 }

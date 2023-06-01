@@ -3,7 +3,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
 import ReactDOM from "react-dom";
 import quillStyle from "./styles/quillStyle";
@@ -19,7 +19,7 @@ import { Suggestion } from "./interfaces";
 import {
   HtmlPreviewer,
   renderMentionIdentityUserPlugin,
-  Plugin as PreviewerPlugin
+  Plugin as PreviewerPlugin,
 } from "@osn/previewer";
 import PreviewWrapper from "./components/PreviewWrapper";
 
@@ -130,8 +130,8 @@ interface EditorProps {
 //find a elegant way to do this
 const prettyHTML = html => {
   return html
-    .replaceAll(`data-osn-polka-network`, `osn-polka-network`)
-    .replaceAll(`data-osn-polka-address`, `osn-polka-address`);
+    .replaceAll("data-osn-polka-network", "osn-polka-network")
+    .replaceAll("data-osn-polka-address", "osn-polka-address");
 };
 
 export default function WYSIWYG(props: EditorProps) {
@@ -170,7 +170,7 @@ export default function WYSIWYG(props: EditorProps) {
           ["link", "image", "video"],
           ["blockquote", "code-block"],
           [{ list: "ordered" }, { list: "bullet" }],
-          [{ indent: "-1" }, { indent: "+1" }]
+          [{ indent: "-1" }, { indent: "+1" }],
         ],
         handlers: {
           //must be an async func so you can pass img link from other component later
@@ -183,7 +183,7 @@ export default function WYSIWYG(props: EditorProps) {
               });
             }).then(link => {
               that.quill.focus();
-              var range = that.quill.getSelection();
+              const range = that.quill.getSelection();
               that.quill.insertEmbed(range.index, "image", link, "user");
             });
           },
@@ -197,11 +197,11 @@ export default function WYSIWYG(props: EditorProps) {
             }).then(link => {
               const videoLink = link?.replace("watch?v=", "embed/");
               that.quill.focus();
-              var range = that.quill.getSelection();
+              const range = that.quill.getSelection();
               that.quill.insertEmbed(range.index, "video", videoLink, "user");
             });
-          }
-        }
+          },
+        },
       },
       mention: {
         allowedChars: /^[0-9A-Za-z\s]*$/,
@@ -216,7 +216,7 @@ export default function WYSIWYG(props: EditorProps) {
               isKeyRegistered:
                 suggestion?.isKeyRegistered?.toString() ?? "false",
               chain: suggestion?.chain,
-              address: suggestion.address
+              address: suggestion.address,
             })
           );
 
@@ -237,11 +237,11 @@ export default function WYSIWYG(props: EditorProps) {
             }
             renderList(matches, searchTerm);
           }
-        }
+        },
       },
       ImageResize: {
-        modules: ["Resize", "DisplaySize"]
-      }
+        modules: ["Resize", "DisplaySize"],
+      },
     }),
     []
   );
@@ -255,7 +255,7 @@ export default function WYSIWYG(props: EditorProps) {
       readOnly: props.readOnly,
       scrollingContainer: props.scrollingContainer,
       tabIndex: props.tabIndex,
-      theme: "snow"
+      theme: "snow",
     };
   };
 
@@ -263,7 +263,7 @@ export default function WYSIWYG(props: EditorProps) {
 
   const [
     editingArea,
-    setEditingArea
+    setEditingArea,
   ] = React.useState<React.ReactInstance | null>(null);
 
   const setEditorTabIndex = (editor: Quill, tabIndex: number) => {
@@ -315,7 +315,7 @@ export default function WYSIWYG(props: EditorProps) {
     key: generation,
     ref: (instance: React.ReactInstance | null) => {
       setEditingArea(instance);
-    }
+    },
   };
 
   useEffect(() => {
@@ -360,9 +360,9 @@ export default function WYSIWYG(props: EditorProps) {
             content={prettyHTML(props.value)}
             plugins={[
               renderMentionIdentityUserPlugin(props.identifier, {
-                targetElement: { tag: "span" }
+                targetElement: { tag: "span" },
               }),
-              ...previewerPlugins
+              ...previewerPlugins,
             ]}
             minHeight={props.minHeight - 20}
           />

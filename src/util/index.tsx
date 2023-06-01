@@ -42,7 +42,7 @@ const properties = [
   "wordSpacing",
 
   "tabSize",
-  "MozTabSize"
+  "MozTabSize",
 ];
 
 export function getCaretCoordinates(
@@ -102,7 +102,7 @@ export function getCaretCoordinates(
   const coordinates: CaretCoordinates = {
     top: span.offsetTop + parseInt(computed["borderTopWidth"]),
     left: span.offsetLeft + parseInt(computed["borderLeftWidth"]),
-    lineHeight: parseInt(computed["lineHeight"])
+    lineHeight: parseInt(computed["lineHeight"]),
   };
 
   document.body.removeChild(div);

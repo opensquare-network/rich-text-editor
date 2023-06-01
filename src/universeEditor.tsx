@@ -79,7 +79,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
   minHeight = 200,
   identifier,
   setQuillRef,
-  previewerPlugins = []
+  previewerPlugins = [],
 }) => {
   const [active, setActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -89,7 +89,7 @@ export const UniverseEditor: React.FunctionComponent<DemoProps> = ({
   const onMarkdownSwitch = () => {
     if (
       value &&
-      !confirm(`Togging editor will empty all typed contents, are you sure ?`)
+      !confirm("Togging editor will empty all typed contents, are you sure ?")
     ) {
       return;
     }

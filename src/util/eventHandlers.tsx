@@ -12,7 +12,7 @@ export function getHandlers({
   setSuggestions,
   mentionState,
   setMentionState,
-  value
+  value,
 }) {
   const handleSuggestionSelected = (index: number) => {
     if (suggestions?.length) {
@@ -81,7 +81,7 @@ export function getHandlers({
       setSuggestions(loadSuggestions(""));
       setMentionState({
         status: "active",
-        startPosition: ref.current.selectionStart + 1
+        startPosition: ref.current.selectionStart + 1,
       });
     }
     switch (mentionState.status) {
@@ -90,7 +90,7 @@ export function getHandlers({
         if (key === " ") {
           setMentionState({
             ...mentionState,
-            status: "inactive"
+            status: "inactive",
           });
           return;
         }
@@ -119,6 +119,6 @@ export function getHandlers({
     handleSuggestionSelected,
     handleKeyDown,
     handleKeyPress,
-    handleKeyUp
+    handleKeyUp,
   };
 }

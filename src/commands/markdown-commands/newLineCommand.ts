@@ -11,5 +11,5 @@ export const newLineCommand: Command = {
     }
 
     insertText(textArea, "\n");
-  }
+  },
 };

@@ -8,7 +8,7 @@ export class CommandController<CommandName extends string> {
   /**
    * Indicates whether there is a command currently executing
    */
-  isExecuting: boolean = false;
+  isExecuting = false;
 
   constructor(
     textController: TextController,
@@ -41,7 +41,7 @@ export class CommandController<CommandName extends string> {
 
     const executeOptions = {
       initialState: this.textController.getState(),
-      textApi: this.textController
+      textApi: this.textController,
     };
 
     if (command.shouldUndo?.(executeOptions) && command?.undo) {

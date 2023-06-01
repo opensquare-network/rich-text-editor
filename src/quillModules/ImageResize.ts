@@ -1,12 +1,14 @@
-import defaultsDeep from 'lodash/defaultsDeep';
-import DefaultOptions from './DefaultOptions';
-import { DisplaySize } from './modules/DisplaySize';
+import defaultsDeep from "lodash/defaultsDeep";
+import DefaultOptions from "./DefaultOptions";
+import { DisplaySize } from "./modules/DisplaySize";
 // import { Toolbar } from './modules/Toolbar';
-import { Resize } from './modules/Resize';
+import { Resize } from "./modules/Resize";
 
-const knownModules = { DisplaySize,
+const knownModules = {
+ DisplaySize,
   // Toolbar,
-  Resize };
+  Resize, 
+};
 
 /**
  * Custom module for quilljs to allow user to resize <img> elements
@@ -35,12 +37,12 @@ export default class ImageResize {
     }
 
     // disable native image resizing on firefox
-    document.execCommand('enableObjectResizing', false, 'false');
+    document.execCommand("enableObjectResizing", false, "false");
 
     // respond to clicks inside the editor
-    this.quill.root.addEventListener('click', this.handleClick, false);
+    this.quill.root.addEventListener("click", this.handleClick, false);
 
-    this.quill.root.parentNode.style.position = this.quill.root.parentNode.style.position || 'relative';
+    this.quill.root.parentNode.style.position = this.quill.root.parentNode.style.position || "relative";
 
     // setup modules
     this.moduleClasses = this.options.modules;
@@ -84,7 +86,7 @@ export default class ImageResize {
   };
 
   handleClick = (evt) => {
-    if (evt.target && evt.target.tagName && evt.target.tagName.toUpperCase() === 'IMG') {
+    if (evt.target && evt.target.tagName && evt.target.tagName.toUpperCase() === "IMG") {
       if (this.img === evt.target) {
         // we are already focused on this image
         return;
@@ -118,14 +120,14 @@ export default class ImageResize {
     this.quill.setSelection(null);
 
     // prevent spurious text selection
-    this.setUserSelect('none');
+    this.setUserSelect("none");
 
     // listen for the image being deleted or moved
-    document.addEventListener('keyup', this.checkImage, true);
-    this.quill.root.addEventListener('input', this.checkImage, true);
+    document.addEventListener("keyup", this.checkImage, true);
+    this.quill.root.addEventListener("input", this.checkImage, true);
 
     // Create and add the overlay
-    this.overlay = document.createElement('div');
+    this.overlay = document.createElement("div");
     Object.assign(this.overlay.style, this.options.overlayStyles);
 
     this.quill.root.parentNode.appendChild(this.overlay);
@@ -143,11 +145,11 @@ export default class ImageResize {
     this.overlay = undefined;
 
     // stop listening for image deletion or movement
-    document.removeEventListener('keyup', this.checkImage);
-    this.quill.root.removeEventListener('input', this.checkImage);
+    document.removeEventListener("keyup", this.checkImage);
+    this.quill.root.removeEventListener("input", this.checkImage);
 
     // reset user-select
-    this.setUserSelect('');
+    this.setUserSelect("");
   };
 
   repositionElements = () => {
@@ -176,10 +178,10 @@ export default class ImageResize {
 
   setUserSelect = (value) => {
     [
-      'userSelect',
-      'mozUserSelect',
-      'webkitUserSelect',
-      'msUserSelect',
+      "userSelect",
+      "mozUserSelect",
+      "webkitUserSelect",
+      "msUserSelect",
     ].forEach((prop) => {
       // set on contenteditable element and <html>
       this.quill.root.style[prop] = value;
@@ -198,5 +200,5 @@ export default class ImageResize {
 }
 
 if (window.Quill) {
-  window.Quill.register('modules/imageResize', ImageResize);
+  window.Quill.register("modules/imageResize", ImageResize);
 }

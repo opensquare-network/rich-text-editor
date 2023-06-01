@@ -20,7 +20,7 @@ import PreviewWrapper from "./components/PreviewWrapper";
 import {
   MarkdownPreviewer,
   renderMentionIdentityUserPlugin,
-  Plugin as PreviewerPlugin
+  Plugin as PreviewerPlugin,
 } from "@osn/previewer";
 import { SuggestionsDropdown } from "./components/SuggestionsDropdown";
 import { Suggestion, DemoProps, MentionState } from "./interfaces";
@@ -34,7 +34,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   disabled = false,
   identifier,
   setActive = () => {},
-  previewerPlugins = []
+  previewerPlugins = [],
 }) => {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -51,8 +51,8 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       underline: underlineCommand,
 
       newLineAndIndentContinueMarkdownList: newLineAndIndentContinueMarkdownListCommand,
-      newLine: newLineCommand
-    }
+      newLine: newLineCommand,
+    },
   });
 
   const [caret, setCaret] = useState({ left: 0, top: 0, lineHeight: 20 });
@@ -63,7 +63,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   const [suggestions, setSuggestions] = React.useState<Suggestion[]>([]);
   const [mentionState, setMentionState] = useState<MentionState>({
     status: "inactive",
-    suggestions: []
+    suggestions: [],
   });
 
   const isPreview = React.useMemo(() => {
@@ -83,7 +83,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
   }, [ref]);
 
   useEffect(() => setMentionState({ ...mentionState, status: "inactive" }), [
-    editStatus
+    editStatus,
   ]);
 
   let observer: MutationObserver;
@@ -144,7 +144,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
       window.editorObserver = observer;
       observer.observe(textarea, {
         attributes: true,
-        attributeFilter: ["style"]
+        attributeFilter: ["style"],
       });
     }
     if (value === "") {
@@ -156,7 +156,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     handleSuggestionSelected,
     handleKeyDown,
     handleKeyPress,
-    handleKeyUp
+    handleKeyUp,
   } = getHandlers({
     ref,
     suggestions,
@@ -167,7 +167,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
     setSuggestions,
     mentionState,
     setMentionState,
-    value
+    value,
   });
 
   const isEditingText = React.useMemo(() => {
@@ -201,7 +201,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
           editStatus,
           setEditStatus,
           isPreview,
-          commandController
+          commandController,
         }}
       />
       <Textarea
@@ -232,7 +232,7 @@ export const Editor: React.FunctionComponent<DemoProps> = ({
             plugins={
               [
                 identifier && renderMentionIdentityUserPlugin(identifier),
-                ...previewerPlugins
+                ...previewerPlugins,
               ].filter(Boolean) as PreviewerPlugin[]
             }
             minHeight={minHeight - 20}

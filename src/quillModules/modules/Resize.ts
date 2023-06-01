@@ -1,4 +1,4 @@
-import { BaseModule } from './BaseModule';
+import { BaseModule } from "./BaseModule";
 
 export class Resize extends BaseModule {
     onCreate = () => {
@@ -6,17 +6,17 @@ export class Resize extends BaseModule {
         this.boxes = [];
 
         // add 4 resize handles
-        this.addBox('nwse-resize'); // top left
-        this.addBox('nesw-resize'); // top right
-        this.addBox('nwse-resize'); // bottom right
-        this.addBox('nesw-resize'); // bottom left
+        this.addBox("nwse-resize"); // top left
+        this.addBox("nesw-resize"); // top right
+        this.addBox("nwse-resize"); // bottom right
+        this.addBox("nesw-resize"); // bottom left
 
         this.positionBoxes();
     };
 
     onDestroy = () => {
         // reset drag handle cursors
-        this.setCursor('');
+        this.setCursor("");
     };
 
     positionBoxes = () => {
@@ -36,7 +36,7 @@ export class Resize extends BaseModule {
 
     addBox = (cursor) => {
         // create div element for resize handle
-        const box = document.createElement('div');
+        const box = document.createElement("div");
 
         // Star with the specified styles
         Object.assign(box.style, this.options.handleStyles);
@@ -47,7 +47,7 @@ export class Resize extends BaseModule {
         box.style.height = `${this.options.handleStyles.height}px`;
 
         // listen for mousedown on each box
-        box.addEventListener('mousedown', this.handleMousedown, false);
+        box.addEventListener("mousedown", this.handleMousedown, false);
         // add drag handle to document
         this.overlay.appendChild(box);
         // keep track of drag handle
@@ -64,16 +64,16 @@ export class Resize extends BaseModule {
         // set the proper cursor everywhere
         this.setCursor(this.dragBox.style.cursor);
         // listen for movement and mouseup
-        document.addEventListener('mousemove', this.handleDrag, false);
-        document.addEventListener('mouseup', this.handleMouseup, false);
+        document.addEventListener("mousemove", this.handleDrag, false);
+        document.addEventListener("mouseup", this.handleMouseup, false);
     };
 
     handleMouseup = () => {
         // reset cursor everywhere
-        this.setCursor('');
+        this.setCursor("");
         // stop listening for movement and mouseup
-        document.removeEventListener('mousemove', this.handleDrag);
-        document.removeEventListener('mouseup', this.handleMouseup);
+        document.removeEventListener("mousemove", this.handleDrag);
+        document.removeEventListener("mouseup", this.handleMouseup);
     };
 
     handleDrag = (evt) => {

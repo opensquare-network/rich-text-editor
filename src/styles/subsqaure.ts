@@ -72,7 +72,7 @@ const SubSquare = {
   `,
   preview: css`
     background-color: white;
-  `
+  `,
 };
 
 export default SubSquare;

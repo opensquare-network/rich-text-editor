@@ -8,7 +8,7 @@ export const imageCommand: Command = {
     const state1 = textApi.setSelectionRange(
       selectWord({
         text: initialState.text,
-        selection: initialState.selection
+        selection: initialState.selection,
       })
     );
     // Replaces the current selection with the image
@@ -18,7 +18,7 @@ export const imageCommand: Command = {
     // Adjust the selection to not contain the **
     textApi.setSelectionRange({
       start: state1.selection.start + 4,
-      end: state1.selection.start + 4 + imageTemplate.length
+      end: state1.selection.start + 4 + imageTemplate.length,
     });
-  }
+  },
 };

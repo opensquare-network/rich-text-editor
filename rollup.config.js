@@ -11,16 +11,16 @@ export default [
       {
         file: pkg.main,
         format: "cjs",
-        sourcemap: true
+        sourcemap: true,
       },
       {
         file: pkg.module,
         format: "esm",
-        sourcemap: true
-      }
+        sourcemap: true,
+      },
     ],
     plugins: [commonjs(), typescript({ tsconfig: "./tsconfig.json" }), json()],
-    external: ["react", "react-dom", "styled-components"]
+    external: ["react", "react-dom", "styled-components"],
   },
   {
     input: "src/markdown.tsx",
@@ -28,20 +28,20 @@ export default [
       {
         file: "dist/cjs/markdown.js",
         format: "cjs",
-        sourcemap: true
+        sourcemap: true,
       },
       {
         file: "dist/esm/markdown.js",
         format: "esm",
-        sourcemap: true
-      }
+        sourcemap: true,
+      },
     ],
     plugins: [commonjs(), typescript({ tsconfig: "./tsconfig.json" }), json()],
-    external: ["react", "react-dom", "styled-components"]
+    external: ["react", "react-dom", "styled-components"],
   },
   {
     input: "dist/esm/types/src/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
-    plugins: [dts()]
-  }
+    plugins: [dts()],
+  },
 ];

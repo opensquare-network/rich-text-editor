@@ -26,7 +26,7 @@ const SuggestionsWrapper = styled.ul`
   }
 `;
 
-interface ClassArray extends Array<ClassValue> {} // tslint:disable-line no-empty-interface
+type ClassArray = Array<ClassValue> // tslint:disable-line no-empty-interface
 
 interface ClassDictionary {
   [id: string]: string | boolean;
@@ -61,7 +61,7 @@ export const SuggestionsDropdown: React.FunctionComponent<SuggestionsDropdownPro
   suggestionsAutoplace,
   focusIndex,
   textAreaRef,
-  max = 5
+  max = 5,
 }) => {
   const handleSuggestionClick = (event: React.MouseEvent) => {
     event.preventDefault();

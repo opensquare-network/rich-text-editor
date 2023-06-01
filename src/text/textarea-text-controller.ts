@@ -36,7 +36,7 @@ export class TextAreaTextController implements TextController {
 
     return {
       el: textArea,
-      ref: this.textAreaRef
+      ref: this.textAreaRef,
     };
   }
 
@@ -55,11 +55,11 @@ export function getStateFromTextArea(textArea: HTMLTextAreaElement): TextState {
   return {
     selection: {
       start: textArea.selectionStart,
-      end: textArea.selectionEnd
+      end: textArea.selectionEnd,
     },
     text: value,
     lineNumber,
-    lineText
+    lineText,
   };
 }
 

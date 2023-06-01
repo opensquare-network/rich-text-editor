@@ -4,7 +4,7 @@ import {
   getBreaksNeededForEmptyLineAfter,
   getBreaksNeededForEmptyLineBefore,
   getSelectedText,
-  selectWord
+  selectWord,
 } from "../../helpers/textHelpers";
 
 export const codeBlockCommand: Command = {
@@ -12,7 +12,7 @@ export const codeBlockCommand: Command = {
     // Adjust the selection to encompass the whole word if the caret is inside one
     const newSelectionRange = selectWord({
       text: initialState.text,
-      selection: initialState.selection
+      selection: initialState.selection,
     });
     const state1 = textApi.setSelectionRange(newSelectionRange);
 
@@ -26,7 +26,7 @@ export const codeBlockCommand: Command = {
 
       textApi.setSelectionRange({
         start: selectionStart,
-        end: selectionEnd
+        end: selectionEnd,
       });
       return;
     }
@@ -52,7 +52,7 @@ export const codeBlockCommand: Command = {
 
     textApi.setSelectionRange({
       start: selectionStart,
-      end: selectionEnd
+      end: selectionEnd,
     });
-  }
+  },
 };

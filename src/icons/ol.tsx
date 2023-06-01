@@ -12,5 +12,5 @@ export default function() {
         <rect width="18" height="18" fill="white" transform="translate(3 3)" />
       </clipPath>
     </defs>
-  </svg>
+  </svg>;
 }

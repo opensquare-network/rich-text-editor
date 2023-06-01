@@ -37,7 +37,7 @@ export const newLineAndIndentContinueMarkdownListCommand: Command = {
       const listPrefix = match[0];
       textApi.setSelectionRange({
         start: focusIndex - listPrefix.length - 1,
-        end: focusIndex
+        end: focusIndex,
       });
       insertText(textArea, "\n");
     } else {
@@ -57,5 +57,5 @@ export const newLineAndIndentContinueMarkdownListCommand: Command = {
       if (numbered) {
       }
     }
-  }
+  },
 };

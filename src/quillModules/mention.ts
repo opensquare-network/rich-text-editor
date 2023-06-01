@@ -4,7 +4,7 @@ import {
   attachDataValues,
   getMentionCharIndex,
   hasValidChars,
-  hasValidMentionCharIndex
+  hasValidMentionCharIndex,
 } from "./mentionUtils";
 import "./blots/mention";
 
@@ -13,7 +13,7 @@ const Keys = {
   ENTER: "Enter",
   ESCAPE: "Escape",
   UP: "ArrowUp",
-  DOWN: "ArrowDown"
+  DOWN: "ArrowDown",
 };
 
 class Mention {
@@ -64,7 +64,7 @@ class Mention {
         "target",
         "disabled",
         "chain",
-        "isKeyRegistered"
+        "isKeyRegistered",
       ],
       linkTarget: "_blank",
       onOpen() {
@@ -81,13 +81,13 @@ class Mention {
       mentionContainerClass: "ql-mention-list-container",
       mentionListClass: "ql-mention-list",
       spaceAfterInsert: true,
-      selectKeys: [Keys.ENTER]
+      selectKeys: [Keys.ENTER],
     };
 
     Object.assign(this.options, options, {
       dataAttributes: Array.isArray(options.dataAttributes)
         ? this.options.dataAttributes.concat(options.dataAttributes)
-        : this.options.dataAttributes
+        : this.options.dataAttributes,
     });
 
     //create mention container
@@ -124,7 +124,7 @@ class Mention {
 
     quill.keyboard.addBinding(
       {
-        key: Keys.TAB
+        key: Keys.TAB,
       },
       this.selectHandler.bind(this)
     );
@@ -132,10 +132,10 @@ class Mention {
       quill.keyboard.bindings[Keys.TAB].pop()
     );
 
-    for (let selectKey of this.options.selectKeys) {
+    for (const selectKey of this.options.selectKeys) {
       quill.keyboard.addBinding(
         {
-          key: selectKey
+          key: selectKey,
         },
         this.selectHandler.bind(this)
       );
@@ -146,21 +146,21 @@ class Mention {
 
     quill.keyboard.addBinding(
       {
-        key: Keys.ESCAPE
+        key: Keys.ESCAPE,
       },
       this.escapeHandler.bind(this)
     );
 
     quill.keyboard.addBinding(
       {
-        key: Keys.UP
+        key: Keys.UP,
       },
       this.upHandler.bind(this)
     );
 
     quill.keyboard.addBinding(
       {
-        key: Keys.DOWN
+        key: Keys.DOWN,
       },
       this.downHandler.bind(this)
     );
@@ -302,7 +302,7 @@ class Mention {
       render.denotationChar = "";
     }
 
-    var insertAtPos;
+    let insertAtPos;
 
     if (!programmaticInsert) {
       insertAtPos = this.mentionCharPos;
@@ -369,7 +369,7 @@ class Mention {
   }
 
   renderLoading() {
-    var renderedLoading = this.options.renderLoading();
+    const renderedLoading = this.options.renderLoading();
     if (!renderedLoading) {
       return;
     }
@@ -383,7 +383,7 @@ class Mention {
     }
 
     this.mentionList.innerHTML = "";
-    var loadingDiv = document.createElement("div");
+    const loadingDiv = document.createElement("div");
     loadingDiv.className = "ql-mention-loading";
     loadingDiv.innerHTML = this.options.renderLoading();
     this.mentionContainer.append(loadingDiv);
@@ -391,7 +391,7 @@ class Mention {
   }
 
   removeLoading() {
-    var loadingDiv = this.mentionContainer.getElementsByClassName(
+    const loadingDiv = this.mentionContainer.getElementsByClassName(
       "ql-mention-loading"
     );
     if (loadingDiv.length > 0) {
@@ -405,7 +405,7 @@ class Mention {
       this.values = data;
       this.mentionList.innerHTML = "";
 
-      var initialSelection = -1;
+      let initialSelection = -1;
 
       for (let i = 0; i < data.length; i += 1) {
         const li = document.createElement("li");
@@ -442,8 +442,8 @@ class Mention {
   }
 
   nextItem() {
-    var increment = 0;
-    var newIndex;
+    let increment = 0;
+    let newIndex;
 
     do {
       increment++;
@@ -463,8 +463,8 @@ class Mention {
   }
 
   prevItem() {
-    var decrement = 0;
-    var newIndex;
+    let decrement = 0;
+    let newIndex;
 
     do {
       decrement++;
@@ -613,7 +613,7 @@ class Mention {
       left: containerPos.left + mentionCharPos.left,
       top: containerPos.top + mentionCharPos.top,
       width: 0,
-      height: mentionCharPos.height
+      height: mentionCharPos.height,
     };
 
     //Which rectangle should it be relative to
@@ -652,7 +652,7 @@ class Mention {
       this.mentionContainer.offsetHeight <= availableSpaceBottom;
     const fitsTop = this.mentionContainer.offsetHeight <= availableSpaceTop;
 
-    var placement;
+    let placement;
 
     if (this.options.defaultMenuOrientation === "top" && fitsTop) {
       placement = "top";
@@ -736,8 +736,8 @@ class Mention {
             this.existingSourceExecutionToken.abandoned = true;
           }
           this.renderLoading();
-          var sourceRequestToken = {
-            abandoned: false
+          const sourceRequestToken = {
+            abandoned: false,
           };
           this.existingSourceExecutionToken = sourceRequestToken;
           this.options.source(
@@ -789,7 +789,7 @@ class Mention {
   }
 
   openMenu(denotationChar) {
-    var selection = this.quill.getSelection(true);
+    const selection = this.quill.getSelection(true);
     this.quill.insertText(selection.index, denotationChar);
     this.quill.blur();
     this.quill.focus();

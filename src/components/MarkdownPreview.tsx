@@ -20,7 +20,7 @@ export function MarkdownPreview(props: Props = { minHeight: 144 }) {
       "iframe",
       "br",
       "ins",
-      "del"
+      "del",
     ]),
     ...restProps
   } = props;
@@ -34,7 +34,7 @@ export function MarkdownPreview(props: Props = { minHeight: 144 }) {
 
       const language = Prism.languages[lang] ?? Prism.languages.markup;
       return Prism.highlight(code, language, lang);
-    }
+    },
   });
 
   const cleanHtml = sanitizeHtml(html, {
@@ -45,14 +45,14 @@ export function MarkdownPreview(props: Props = { minHeight: 144 }) {
       a: ["href", "rel", "target"],
       "*": ["class"],
       td: ["align"],
-      th: ["align"]
-    }
+      th: ["align"],
+    },
   });
 
   return (
     <MarkdownPreviewWrapper {...restProps}>
       <MarkdownBody
-        className={`markdown-body`}
+        className={"markdown-body"}
         dangerouslySetInnerHTML={{ __html: cleanHtml }}
       />
     </MarkdownPreviewWrapper>

@@ -6,7 +6,7 @@ const OpenSquare = {
   tab: css``,
   tabActive: css``,
   textarea: css``,
-  preview: css``
+  preview: css``,
 };
 
 export default OpenSquare;

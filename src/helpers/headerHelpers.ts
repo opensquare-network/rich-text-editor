@@ -9,7 +9,7 @@ export function setHeader(
   // Adjust the selection to encompass the whole word if the caret is inside one
   const newSelectionRange = selectWord({
     text: initialState.text,
-    selection: initialState.selection
+    selection: initialState.selection,
   });
   const state1 = api.setSelectionRange(newSelectionRange);
   // Add the prefix to the selection
@@ -17,6 +17,6 @@ export function setHeader(
   // Adjust the selection to not contain the prefix
   api.setSelectionRange({
     start: state2.selection.end - getSelectedText(state1).length,
-    end: state2.selection.end
+    end: state2.selection.end,
   });
 }

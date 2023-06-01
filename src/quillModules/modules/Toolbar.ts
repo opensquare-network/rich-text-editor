@@ -1,17 +1,17 @@
-import IconAlignLeft from 'quill/assets/icons/align-left.svg';
-import IconAlignCenter from 'quill/assets/icons/align-center.svg';
-import IconAlignRight from 'quill/assets/icons/align-right.svg';
-import { BaseModule } from './BaseModule';
+import IconAlignLeft from "quill/assets/icons/align-left.svg";
+import IconAlignCenter from "quill/assets/icons/align-center.svg";
+import IconAlignRight from "quill/assets/icons/align-right.svg";
+import { BaseModule } from "./BaseModule";
 
 const Parchment = window.Quill.imports.parchment;
-const FloatStyle = new Parchment.Attributor.Style('float', 'float');
-const MarginStyle = new Parchment.Attributor.Style('margin', 'margin');
-const DisplayStyle = new Parchment.Attributor.Style('display', 'display');
+const FloatStyle = new Parchment.Attributor.Style("float", "float");
+const MarginStyle = new Parchment.Attributor.Style("margin", "margin");
+const DisplayStyle = new Parchment.Attributor.Style("display", "display");
 
 export class Toolbar extends BaseModule {
     onCreate = () => {
 		// Setup Toolbar
-        this.toolbar = document.createElement('div');
+        this.toolbar = document.createElement("div");
         Object.assign(this.toolbar.style, this.options.toolbarStyles);
         this.overlay.appendChild(this.toolbar);
 
@@ -31,29 +31,29 @@ export class Toolbar extends BaseModule {
             {
                 icon: IconAlignLeft,
                 apply: () => {
-                    DisplayStyle.add(this.img, 'inline');
-                    FloatStyle.add(this.img, 'left');
-                    MarginStyle.add(this.img, '0 1em 1em 0');
+                    DisplayStyle.add(this.img, "inline");
+                    FloatStyle.add(this.img, "left");
+                    MarginStyle.add(this.img, "0 1em 1em 0");
                 },
-                isApplied: () => FloatStyle.value(this.img) == 'left',
+                isApplied: () => FloatStyle.value(this.img) == "left",
             },
             {
                 icon: IconAlignCenter,
                 apply: () => {
-                    DisplayStyle.add(this.img, 'block');
+                    DisplayStyle.add(this.img, "block");
                     FloatStyle.remove(this.img);
-                    MarginStyle.add(this.img, 'auto');
+                    MarginStyle.add(this.img, "auto");
                 },
-                isApplied: () => MarginStyle.value(this.img) == 'auto',
+                isApplied: () => MarginStyle.value(this.img) == "auto",
             },
             {
                 icon: IconAlignRight,
                 apply: () => {
-                    DisplayStyle.add(this.img, 'inline');
-                    FloatStyle.add(this.img, 'right');
-                    MarginStyle.add(this.img, '0 0 1em 1em');
+                    DisplayStyle.add(this.img, "inline");
+                    FloatStyle.add(this.img, "right");
+                    MarginStyle.add(this.img, "0 0 1em 1em");
                 },
-                isApplied: () => FloatStyle.value(this.img) == 'right',
+                isApplied: () => FloatStyle.value(this.img) == "right",
             },
         ];
     };
@@ -61,12 +61,12 @@ export class Toolbar extends BaseModule {
     _addToolbarButtons = () => {
 		const buttons = [];
 		this.alignments.forEach((alignment, idx) => {
-			const button = document.createElement('span');
+			const button = document.createElement("span");
 			buttons.push(button);
 			button.innerHTML = alignment.icon;
-			button.addEventListener('click', () => {
+			button.addEventListener("click", () => {
 					// deselect all buttons
-				buttons.forEach(button => button.style.filter = '');
+				buttons.forEach(button => button.style.filter = "");
 				if (alignment.isApplied()) {
 						// If applied, unapply
 					FloatStyle.remove(this.img);
@@ -82,7 +82,7 @@ export class Toolbar extends BaseModule {
 			});
 			Object.assign(button.style, this.options.toolbarButtonStyles);
 			if (idx > 0) {
-				button.style.borderLeftWidth = '0';
+				button.style.borderLeftWidth = "0";
 			}
 			Object.assign(button.children[0].style, this.options.toolbarButtonSvgStyles);
 			if (alignment.isApplied()) {
@@ -94,7 +94,7 @@ export class Toolbar extends BaseModule {
     };
 
     _selectButton = (button) => {
-		button.style.filter = 'invert(20%)';
+		button.style.filter = "invert(20%)";
     };
 
 }

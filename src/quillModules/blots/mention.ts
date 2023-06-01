@@ -80,7 +80,7 @@ class MentionBlot extends Embed {
   buildEvent(name, e) {
     const event = new Event(name, {
       bubbles: true,
-      cancelable: true
+      cancelable: true,
     });
     event.value = Object.assign({}, this.domNode.dataset);
     event.event = e;
