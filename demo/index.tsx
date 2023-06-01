@@ -58,7 +58,7 @@ const ToggleWrapper = styled.div`
   border-radius: 4px;
 `;
 
-export const Demo: React.FunctionComponent<DemoProps> = () => {
+export const Demo: React.FunctionComponent = () => {
   const [content, setContent] = useState(
     `[@yoshiyuki123](/member/pqd2VaK94rRYCrFCcFpZa7thm4E74BoBb6RcHZUo1eQuBak) 
 [@yoshiyuki456](/member/yoshiyuki456) `,
