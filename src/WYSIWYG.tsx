@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import React, {
   ReactElement,
   useEffect,
@@ -301,6 +302,7 @@ export default function WYSIWYG(props: EditorProps) {
       setEditorTabIndex(editorInstance, config.tabIndex);
     }
     hookEditor(editorInstance);
+    // eslint-disable-next-line no-unsafe-optional-chaining
     class SyntaxCodeBlock extends editorInstance?.options?.registry?.classes[
       "ql-code-block"
     ] {}
