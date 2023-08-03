@@ -52,7 +52,7 @@ type TabsWrapperProps = {
 export const TabsWrapper = styled.div<TabsWrapperProps>`
   display: flex;
   gap: 24px;
-  height: 48px;
+  height: 40px;
   /* mobile */
   @media screen and (max-width: 769px) {
     border-bottom: 1px solid #e2e8f0;
@@ -109,7 +109,7 @@ export const ToolbarItemsWrapper = styled.div<Props>`
     `};
   /* mobile */
   @media screen and (max-width: 769px) {
-    height: 48px;
+    height: 40px;
   }
 `;
 

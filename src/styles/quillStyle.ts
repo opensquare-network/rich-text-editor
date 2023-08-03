@@ -83,8 +83,7 @@ export default css`
     @media screen and (max-width: 769px) {
       flex: 1;
       overflow-x: scroll;
-      border-top: 1px solid var(--neutral400, #e0e4eb);
-      justify-content: flex-start !important;
+      border-top: 1px solid var(--neutral300, #ebeef4);
       ::-webkit-scrollbar {
         display: none;
       }

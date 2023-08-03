@@ -17,12 +17,12 @@ const SubSquare = {
     background-color: var(--neutral200, #f6f7fa);
     padding-left: 0;
     padding-right: 16px;
-    height: 40px;
-    border-bottom: 1px solid var(--neutral400, #e0e4eb);
+    height: 39px;
+    border-bottom: 1px solid var(--neutral300, #ebeef4);
     position: relative;
     > div:first-child {
       gap: 0;
-      height: 40px;
+      height: 39px;
     }
     @media screen and (max-width: 769px) {
       padding-top: 40px;
