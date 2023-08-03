@@ -31,15 +31,15 @@ const Wrapper = styled.div`
     margin-left: -171px;
     border-radius: 6px;
   }
-  background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  background: var(--neutral100, #ffffff);
   border-radius: 8px;
 `;
 const Title = styled(Flex)`
-  padding: 24px 24px 16px 24px;
+  padding: 24px 24px 0 24px;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
+  color: var(--textPrimary, #1e2134);
 
   svg {
     cursor: pointer;
@@ -57,7 +57,7 @@ const FormWrapper = styled.div`
     font-size: 13px;
     border-radius: 4px;
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid var(--neutral400, #e0e4eb);
     width: 96px;
   }
 `;
@@ -70,24 +70,27 @@ const TextArea = styled.textarea`
   font-size: 14px;
   line-height: 14px;
   padding: 12px 16px;
-  color: #34373c;
+  color: var(--textPrimary, #1e2134);
   resize: none;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid var(--neutral400, #e0e4eb);
+  background: var(--neutral100, #ffffff);
+  border-radius: 8px;
+  margin-top: 24px;
 
   &:focus,
   &:active {
-    border: 1px solid #aaa;
+    border: 1px solid var(--neutral500, #aaa);
     outline: none;
   }
 
   ::placeholder {
-    color: #d7dee8;
+    color: var(--textDisabled, #d7dee8);
     opacity: 1;
   }
 `;
 
 const SubmitButtonWrapper = styled.div`
+  margin-top: 24px;
   padding-right: 24px;
   display: flex;
   justify-content: end;
@@ -102,24 +105,30 @@ const SubmitButton = styled.button`
   font-weight: 500;
   font-size: 14px;
   line-height: 14px;
-  color: #ffffff;
-  background: var(--textPrimary, #1e2134);
-  border-radius: 4px;
+  color: var(--textPrimaryContrast, #ffffff);
+  background: var(--theme500, #1e2134);
+  border-radius: 8px;
   cursor: pointer;
+
+  &:disabled {
+    background: var(--theme300, #e0e4eb);
+    cursor: not-allowed;
+  }
 `;
 
 const Hint = styled.p`
-  margin: 16px 24px;
   margin-top: 0;
-  padding: 12px 16px;
+  padding: 0 24px;
   font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 19.6px;
-  background: #f5f2ff;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
   color: var(--textTertiary, #9da9bb);
-  border-radius: 4px;
+
+  &::before {
+    content: "•";
+    padding: 0 8px;
+  }
 `;
 
 function InsertContentsModal({
@@ -185,8 +194,6 @@ function InsertContentsModal({
           </svg>
         </Title>
 
-        {type === "video" && <Hint>Embedding Youtube video only</Hint>}
-
         <FormWrapper>
           <TextArea
             value={link}
@@ -195,8 +202,12 @@ function InsertContentsModal({
           />
         </FormWrapper>
 
+        {type === "video" && <Hint>Embedding Youtube video only</Hint>}
+
         <SubmitButtonWrapper>
-          <SubmitButton onClick={onInset}>Confirm</SubmitButton>
+          <SubmitButton disabled={!link} onClick={onInset}>
+            Confirm
+          </SubmitButton>
         </SubmitButtonWrapper>
       </Wrapper>
     </Shade>
