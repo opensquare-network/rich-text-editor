@@ -171,7 +171,7 @@ export const MarkdownBody = styled.div`
 
   th,
   td {
-    border: 1px solid #e0e4eb;
+    border: 1px solid var(--neutral400, #e0e4eb);
   }
 
   table {
@@ -184,7 +184,7 @@ export const MarkdownBody = styled.div`
 
   th {
     padding: 10px 16px;
-    background: #f6f7fa;
+    background: var(--neutral200, #f6f7fa);
     font-weight: bold;
     color: var(--textPrimary, #1e2134);
     min-width: 100px;

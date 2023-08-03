@@ -16,18 +16,18 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   --editor-radius: 8px;
   max-width: 800px;
-  border: 1px solid #e0e4eb;
+  border: 1px solid var(--neutral400, #e0e4eb);
   border-radius: var(--editor-radius);
   overflow: hidden;
 
   &:hover {
-    border-color: #c2c8d5;
+    border-color: var(--neutral500, #c2c8d5);
   }
 
   ${(p) =>
     p.$active &&
     css`
-      border-color: #c2c8d5;
+      border-color: var(--neutral500, #c2c8d5);
     `}
 `;
 
@@ -50,7 +50,8 @@ const ToggleWrapper = styled.div`
   align-items: center;
   gap: 8px;
   height: 40px;
-  border-top: 1px solid #ebeef4;
+  border-top: 1px solid var(--neutral300, #ebeef4);
+  background: var(--neutral100, #ffffff);
   padding-left: 16px;
   padding-right: 16px;
 `;

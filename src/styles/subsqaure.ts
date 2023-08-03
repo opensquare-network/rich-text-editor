@@ -14,11 +14,11 @@ const SubSquare = {
   `,
   toolbar: css`
     justify-content: end;
-    background-color: #f6f7fa;
+    background-color: var(--neutral200, #f6f7fa);
     padding-left: 0;
     padding-right: 16px;
     height: 40px;
-    border-bottom: 1px solid #e0e4eb;
+    border-bottom: 1px solid var(--neutral400, #e0e4eb);
     position: relative;
     > div:first-child {
       gap: 0;
@@ -36,27 +36,30 @@ const SubSquare = {
   `,
   tab: css`
     padding: 12px 16px;
-    line-height: 16px;
-    border-bottom: none;
-    color: var(--textTertiary, #9da9bb);
+    line-height: 14px;
+    /* border-bottom: none; */
+    color: var(--textSecondary, #506176);
 
     :last-child {
-      box-shadow: 1px 0 0 0 #e0e4eb;
+      box-shadow: 1px 0 0 0 var(--neutral300, #ebeef4);
     }
 
     :hover {
-      color: #506176;
+      color: var(--textSecondary, #506176);
     }
   `,
   tabActive: css`
-    background-color: white;
+    background-color: var(--neutral100, #ffffff);
     color: var(--textPrimary, #1e2134);
-    border-bottom: 17px solid white;
+    border-bottom-color: var(--neutral100, #ffffff);
     :first-child {
-      box-shadow: 1px 0 0 0 #e0e4eb;
+      box-shadow: 0 1px 0 0 var(--neutral100, #ffffff),
+        1px 0 0 0 var(--neutral300, #ebeef4);
     }
     :last-child {
-      box-shadow: -1px 0 0 0 #e0e4eb, 1px 0 0 0 #e0e4eb;
+      box-shadow: 0 1px 0 0 var(--neutral100, #ffffff),
+        1px 0 0 0 var(--neutral300, #ebeef4),
+        -1px 0 0 0 var(--neutral300, #ebeef4);
     }
     :hover {
       color: var(--textPrimary, #1e2134);
@@ -67,12 +70,10 @@ const SubSquare = {
     margin-right: 0;
   `,
   textarea: css`
-    background-color: white;
+    background-color: var(--neutral100, #ffffff);
     border-bottom: none;
   `,
-  preview: css`
-    background-color: white;
-  `,
+  preview: css``,
 };
 
 export default SubSquare;

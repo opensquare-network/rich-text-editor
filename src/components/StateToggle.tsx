@@ -5,30 +5,31 @@ const StateToggle = styled.div`
   display: flex;
 
   button {
-    all: unset;
-    padding: 12px;
-    padding-bottom: 13px;
+    border: 0;
+    background-color: transparent;
+    padding: 12px 16px;
+    /* padding-bottom: 13px; */
     font-size: 14px;
     line-height: 14px;
     font-weight: 500;
     cursor: pointer;
-    //border-radius: 4px;
-    color: var(--textTertiary, #9da9bb);
-    //border: 1px solid #E0E4EB;
-    border-top: none;
+    color: var(--textSecondary, #506176);
   }
 
   button.active {
-    background-color: #ffffff;
-    box-shadow: 0 1px 0 0 white;
+    background-color: var(--neutral100, #ffffff);
+    box-shadow: 0 1px 0 0 var(--neutral100, #ffffff);
     color: var(--textPrimary, #1e2134);
+    :first-child {
+      box-shadow: 1px 0 0 0 var(--neutral300, #ebeef4);
+    }
+    :last-child {
+      box-shadow: -1px 0 0 0 var(--neutral300, #ebeef4),
+        1px 0 0 0 var(--neutral300, #ebeef4);
+    }
     :hover {
       color: var(--textPrimary, #1e2134);
     }
-  }
-
-  button:hover {
-    color: #506176;
   }
 
   @media screen and (max-width: 769px) {
@@ -36,7 +37,7 @@ const StateToggle = styled.div`
     button {
       flex-basis: 50%;
       text-align: center;
-      background-color: #f6f7fa;
+      background-color: var(--neutral200, #f6f7fa);
     }
   }
 `;

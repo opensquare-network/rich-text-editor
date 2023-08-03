@@ -12,7 +12,7 @@ const SuggestionsWrapper = styled.ul`
   background: #fff;
   box-shadow: 0px 4px 31px rgba(26, 33, 44, 0.06),
     0px 0.751293px 8px rgba(26, 33, 44, 0.04);
-  color: #506176;
+  color: var(--textSecondary, #506176);
   border-radius: 4px;
   overflow: hidden;
 
@@ -21,7 +21,7 @@ const SuggestionsWrapper = styled.ul`
 
     &:hover,
     &[aria-selected="true"] {
-      background-color: #f6f7fa;
+      background-color: var(--neutral200, #f6f7fa);
     }
   }
 `;
