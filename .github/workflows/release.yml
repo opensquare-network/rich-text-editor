@@ -1,33 +1,33 @@
-name: Release
+name: CI
 
 on:
   push:
-    tags:
-      - "v*"
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Set node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Install dependencies
-        run: npm i -g yarn && yarn
-
-      - name: Release changelog
-        run: npx changelogithub
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v3
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: Publish to NPM
-        run: npm publish
+          cache-name: cache-yarn-store
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-${{ matrix.node-version }}-release-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-release-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ matrix.node-version }}-release-
+            ${{ runner.os }}-
+      - run: yarn
+      - run: npx semantic-release --branches main
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
