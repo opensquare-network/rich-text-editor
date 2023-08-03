@@ -106,6 +106,7 @@ interface Props {
 export const ToolbarItemsWrapper = styled.div<Props>`
   display: flex;
   align-items: center;
+  gap: 8px;
   ${(props) =>
     props.$hide &&
     css`
@@ -123,12 +124,12 @@ export const ToolbarButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: 100%;
+    height: 100%;
   }
 
   &:hover svg path {

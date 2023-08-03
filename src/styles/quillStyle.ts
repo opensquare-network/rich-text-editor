@@ -617,17 +617,11 @@ export default css`
     background: none;
     border: none;
     cursor: pointer;
-    display: inline-block;
-    float: left;
-    height: 24px;
-    padding: 3px 5px;
-    width: 28px;
-  }
-
-  .ql-snow.ql-toolbar button svg,
-  .ql-toolbar button svg {
-    float: left;
-    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
   }
 
   .ql-snow.ql-toolbar button:active:hover,
@@ -771,14 +765,8 @@ export default css`
   }
 
   .ql-formats {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .ql-formats:after {
-    clear: both;
-    content: "";
-    display: table;
+    display: inline-flex;
+    align-items: center;
   }
 
   .ql-stroke {
@@ -1031,8 +1019,10 @@ export default css`
   .ql-toolbar,
   .ql-formats {
     display: flex;
+    align-items: center;
     flex-wrap: nowrap;
     background: #f6f7fa;
+    gap: 8px;
   }
 
   .ql-toolbar {
@@ -1178,14 +1168,10 @@ export default css`
   .ql-toolbar {
     box-sizing: border-box;
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    padding: 8px;
     justify-content: end;
-    height: 41px;
+    height: 40px;
+    padding-right: 16px;
     border-bottom: 1px solid #e0e4eb !important;
-  }
-
-  .ql-toolbar.ql-formats {
-    margin-right: 15px;
   }
 
   .ql-toolbar.ql-picker-label {
