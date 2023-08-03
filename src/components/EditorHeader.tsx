@@ -36,7 +36,6 @@ export default function EditorHeader({
           $active={!isPreview}
           onClick={() => setIsPreview(false)}
           $theme={$theme}
-          style={{ borderTopLeftRadius: 3 }}
           className={!isPreview ? "active" : ""}
         >
           Write

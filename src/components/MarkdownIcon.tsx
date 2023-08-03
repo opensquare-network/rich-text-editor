@@ -10,7 +10,7 @@ const MarkdownIcon = () => (
   >
     <path
       d="M3.75 12.25V3.75H6.25L8.75 6.875L11.25 3.75H13.75V12.25H11.25V7.375L8.75 10.5L6.25 7.375V12.25H3.75ZM19.375 12.25L15.625 8.125H18.125V3.75H20.625V8.125H23.125L19.375 12.25Z"
-      fill="#1E2134"
+      fill="var(--textPrimary, #1e2134)"
     />
     <rect
       x="0.625"
@@ -18,7 +18,7 @@ const MarkdownIcon = () => (
       width="24.75"
       height="14.75"
       rx="1.375"
-      stroke="#1E2134"
+      stroke="var(--textPrimary, #1e2134)"
       strokeWidth="1.25"
     />
   </svg>

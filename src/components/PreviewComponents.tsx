@@ -38,7 +38,7 @@ export const MarkdownBody = styled.div`
   font-size: 14px;
   line-height: 24px;
   font-weight: normal;
-  color: #1e2134;
+  color: var(--textPrimary, #1e2134);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: transparent;
@@ -186,12 +186,12 @@ export const MarkdownBody = styled.div`
     padding: 10px 16px;
     background: #f6f7fa;
     font-weight: bold;
-    color: #1e2134;
+    color: var(--textPrimary, #1e2134);
     min-width: 100px;
   }
 
   td {
     padding: 10px 16px;
-    color: #1e2134;
+    color: var(--textPrimary, #1e2134);
   }
 `;

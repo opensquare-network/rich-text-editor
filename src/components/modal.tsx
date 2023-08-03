@@ -103,7 +103,7 @@ const SubmitButton = styled.button`
   font-size: 14px;
   line-height: 14px;
   color: #ffffff;
-  background: #1e2134;
+  background: var(--textPrimary, #1e2134);
   border-radius: 4px;
   cursor: pointer;
 `;
@@ -117,7 +117,7 @@ const Hint = styled.p`
   font-weight: normal;
   font-size: 14px;
   line-height: 19.6px;
-  color: #6848ff;
+  color: var(--theme500, #6848ff);
   background: #f5f2ff;
   border-radius: 4px;
 `;

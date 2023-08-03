@@ -25,8 +25,6 @@ type ToolbarProps = {
   $theme: ThemeCss;
 };
 export const ToolBar = styled.div<ToolbarProps>`
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
   flex-basis: 100%;
   padding-left: 16px;
   padding-right: 16px;
@@ -69,11 +67,12 @@ interface TabProps {
 }
 
 export const Tab = styled.button<TabProps>`
-  all: unset;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  border-bottom: 3px solid #ffffff;
+  border: none;
+  background-color: transparent;
+  border-bottom: 3px solid transparent;
   ${(props) => props.$theme.tab};
   ${(props) =>
     props.$active &&
@@ -122,11 +121,19 @@ export const ToolbarItemsWrapper = styled.div<Props>`
 export const ToolbarButton = styled.button`
   all: unset;
   cursor: pointer;
-  width: 24px;
-  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 
   &:hover svg path {
-    fill: #1e2134;
+    fill: var(--textPrimary, #1e2134);
   }
 `;
 
@@ -154,7 +161,7 @@ export const Textarea = styled.textarea<Props>`
   outline: none;
   font-size: 14px;
   line-height: 24px;
-  padding: 12px;
+  padding: 10px 16px;
   background: #fbfcfe;
   font-family: Inter, sans-serif;
   border: none;
