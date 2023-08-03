@@ -25,8 +25,6 @@ type ToolbarProps = {
   $theme: ThemeCss;
 };
 export const ToolBar = styled.div<ToolbarProps>`
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
   flex-basis: 100%;
   padding-left: 16px;
   padding-right: 16px;
@@ -107,7 +105,6 @@ interface Props {
 export const ToolbarItemsWrapper = styled.div<Props>`
   display: flex;
   align-items: center;
-  gap: 8px;
   ${(props) =>
     props.$hide &&
     css`
@@ -122,8 +119,16 @@ export const ToolbarItemsWrapper = styled.div<Props>`
 export const ToolbarButton = styled.button`
   all: unset;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 24px;
   height: 24px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 
   &:hover svg path {
     fill: var(--textPrimary, #1e2134);
