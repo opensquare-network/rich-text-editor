@@ -117,8 +117,8 @@ const Hint = styled.p`
   font-weight: normal;
   font-size: 14px;
   line-height: 19.6px;
-  color: var(--theme500, #6848ff);
   background: #f5f2ff;
+  color: var(--textTertiary, #9da9bb);
   border-radius: 4px;
 `;
 

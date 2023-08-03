@@ -38,7 +38,7 @@ const SubSquare = {
     padding: 12px 16px;
     line-height: 16px;
     border-bottom: none;
-    color: #9da9bb;
+    color: var(--textTertiary, #9da9bb);
 
     :last-child {
       box-shadow: 1px 0 0 0 #e0e4eb;

@@ -13,7 +13,7 @@ const StateToggle = styled.div`
     font-weight: 500;
     cursor: pointer;
     //border-radius: 4px;
-    color: #9da9bb;
+    color: var(--textTertiary, #9da9bb);
     //border: 1px solid #E0E4EB;
     border-top: none;
   }
