@@ -42,18 +42,25 @@ type Props = {
   identifier?: ReactElement;
   setQuillRef: any;
   previewerPlugins?: PreviewerPlugin[];
+  toggleBarLeft?: React.ReactNode;
 };
 
-const ToggleWrapper = styled.div`
+const ToggleBar = styled.div`
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  height: 40px;
-  border-top: 1px solid var(--neutral300, #ebeef4);
-  background: var(--neutral100, #ffffff);
   padding-left: 16px;
   padding-right: 16px;
+  border-top: 1px solid var(--neutral300, #ebeef4);
+  background-color: var(--neutral100, #ffffff);
+  height: 40px;
+`;
+
+const ToggleBarRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
 `;
 
 export const UniverseEditor: React.FunctionComponent<Props> = ({
@@ -67,6 +74,7 @@ export const UniverseEditor: React.FunctionComponent<Props> = ({
   identifier,
   setQuillRef,
   previewerPlugins = [],
+  toggleBarLeft,
 }) => {
   const [active, setActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -124,14 +132,18 @@ export const UniverseEditor: React.FunctionComponent<Props> = ({
           />
         </>
       )}
-      <ToggleWrapper>
-        <MarkdownIcon />
-        <Toggle
-          size="small"
-          isOn={contentType === "markdown"}
-          onToggle={onMarkdownSwitch}
-        />
-      </ToggleWrapper>
+
+      <ToggleBar>
+        {toggleBarLeft}
+        <ToggleBarRight>
+          <MarkdownIcon />
+          <Toggle
+            size="small"
+            isOn={contentType === "markdown"}
+            onToggle={onMarkdownSwitch}
+          />
+        </ToggleBarRight>
+      </ToggleBar>
     </Wrapper>
   );
 };
