@@ -79,11 +79,6 @@ export const Tab = styled.button<TabProps>`
     css`
       border-bottom: 3px solid #04d2c5;
     `};
-  ${(props) =>
-    props.$active &&
-    css`
-      border-bottom: 3px solid #04d2c5;
-    `};
   ${(props) => props.$active && props.$theme.tabActive};
   cursor: pointer;
   /* mobile */
@@ -138,6 +133,7 @@ export const ToolbarButton = styled.button`
 `;
 
 export const Textarea = styled.textarea<Props>`
+  color: var(--textPrimary, #1e2134);
   box-sizing: border-box;
   width: 100%;
   min-height: 144px;

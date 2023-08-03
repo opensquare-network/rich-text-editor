@@ -101,7 +101,7 @@ export interface QuillOptions extends QuillOptionsStatic {
 const VerticalDivider = styled.div`
   width: 1px;
   height: 40px;
-  background-color: #e0e4eb;
+  background-color: var(--neutral300, #ebeef4);
 `;
 
 const Wrapper = styled.div<{ $isPreview: boolean; height: number }>`
@@ -336,13 +336,11 @@ export default function WYSIWYG(props: EditorProps) {
         <button
           onClick={() => setIsPreview(false)}
           className={isPreview ? "" : "active"}
-          style={{ borderTopLeftRadius: 3 }}
         >
           Write
         </button>
         <VerticalDivider />
         <button
-          style={{ paddingLeft: 11 }}
           onClick={() => setIsPreview(true)}
           className={isPreview ? "active" : ""}
         >

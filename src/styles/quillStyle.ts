@@ -46,7 +46,7 @@ export default css`
       0px 0.751293px 8px rgb(26 33 44 / 4%);
 
     .ql-mention-list-item.selected {
-      background-color: #f6f7fa;
+      background-color: var(--neutral200, #f6f7fa);
       color: #34373c;
     }
 
@@ -59,7 +59,7 @@ export default css`
       line-height: 20px;
       font-style: normal;
       font-weight: 500;
-      color: #506176;
+      color: var(--textSecondary, #506176);
     }
   }
 
@@ -72,6 +72,7 @@ export default css`
   }
 
   div.ql-editor {
+    color: var(--textPrimary, #1e2134);
     min-height: 100px;
     height: ${(props) => props.height}px;
     max-height: 300px;
@@ -82,7 +83,7 @@ export default css`
     @media screen and (max-width: 769px) {
       flex: 1;
       overflow-x: scroll;
-      border-top: 1px solid #e0e4eb;
+      border-top: 1px solid var(--neutral400, #e0e4eb);
       justify-content: flex-start !important;
       ::-webkit-scrollbar {
         display: none;
@@ -709,21 +710,21 @@ export default css`
   @media (pointer: coarse) {
     .ql-snow.ql-toolbar button:hover:not(.ql-active),
     .ql-toolbar button:hover:not(.ql-active) {
-      color: #506176;
+      color: var(--textSecondary, #506176);
     }
 
     .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-fill,
     .ql-toolbar button:hover:not(.ql-active) .ql-fill,
     .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill,
     .ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill {
-      fill: #506176;
+      fill: var(--textSecondary, #506176);
     }
 
     .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke,
     .ql-toolbar button:hover:not(.ql-active) .ql-stroke,
     .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke-miter,
     .ql-toolbar button:hover:not(.ql-active) .ql-stroke-miter {
-      stroke: #506176;
+      stroke: var(--textSecondary, #506176);
     }
   }
    {
@@ -764,7 +765,7 @@ export default css`
 
   .ql-stroke {
     fill: none;
-    stroke: #506176;
+    stroke: var(--textSecondary, #506176);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2;
@@ -772,14 +773,14 @@ export default css`
 
   .ql-stroke-miter {
     fill: none;
-    stroke: #506176;
+    stroke: var(--textSecondary, #506176);
     stroke-miterlimit: 10;
     stroke-width: 2;
   }
 
   .ql-fill,
   .ql-stroke.ql-fill {
-    fill: #506176;
+    fill: var(--textSecondary, #506176);
   }
 
   .ql-empty {
@@ -853,7 +854,7 @@ export default css`
   }
 
   .ql-picker {
-    color: #506176;
+    color: var(--textSecondary, #506176);
     display: inline-block;
     float: left;
     font-size: 14px;
@@ -961,7 +962,7 @@ export default css`
     width: 18px;
 
     polygon {
-      stroke: #506176;
+      stroke: var(--textSecondary, #506176);
 
       :hover {
         stroke: var(--textPrimary, #1e2134);
@@ -994,7 +995,7 @@ export default css`
 
   select.ql-header {
     width: 98px;
-    color: #506176;
+    color: var(--textSecondary, #506176);
     display: inline-block;
     float: left;
     font-size: 14px;
@@ -1002,7 +1003,7 @@ export default css`
     height: 24px;
     position: relative;
     vertical-align: middle;
-    background: #f6f7fa;
+    background: var(--neutral200, #f6f7fa);
   }
 
   option {
@@ -1014,7 +1015,7 @@ export default css`
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-    background: #f6f7fa;
+    background: var(--neutral200, #f6f7fa);
     gap: 8px;
   }
 
@@ -1164,7 +1165,7 @@ export default css`
     justify-content: end;
     height: 40px;
     padding-right: 16px;
-    border-bottom: 1px solid #e0e4eb !important;
+    border-bottom: 1px solid var(--neutral300, #ebeef4);
   }
 
   .ql-toolbar.ql-picker-label {
@@ -1197,7 +1198,7 @@ export default css`
     background-color: #fff;
     border: 1px solid #ccc;
     box-shadow: 0px 0px 5px #ddd;
-    color: #506176;
+    color: var(--textSecondary, #506176);
     padding: 5px 12px;
     white-space: nowrap;
   }
