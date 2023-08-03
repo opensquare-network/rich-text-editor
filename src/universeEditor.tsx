@@ -51,6 +51,7 @@ const ToggleWrapper = styled.div`
   gap: 8px;
   height: 40px;
   border-top: 1px solid #ebeef4;
+  padding-left: 16px;
   padding-right: 16px;
 `;
 

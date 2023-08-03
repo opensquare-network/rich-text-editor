@@ -67,11 +67,12 @@ interface TabProps {
 }
 
 export const Tab = styled.button<TabProps>`
-  all: unset;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  border-bottom: 3px solid #ffffff;
+  border: none;
+  background-color: transparent;
+  border-bottom: 3px solid transparent;
   ${(props) => props.$theme.tab};
   ${(props) =>
     props.$active &&
@@ -159,7 +160,7 @@ export const Textarea = styled.textarea<Props>`
   outline: none;
   font-size: 14px;
   line-height: 24px;
-  padding: 12px;
+  padding: 10px 16px;
   background: #fbfcfe;
   font-family: Inter, sans-serif;
   border: none;

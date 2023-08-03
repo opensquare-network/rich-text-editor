@@ -16,7 +16,7 @@ const SubSquare = {
     justify-content: end;
     background-color: #f6f7fa;
     padding-left: 0;
-    padding-right: 20px;
+    padding-right: 16px;
     height: 40px;
     border-bottom: 1px solid #e0e4eb;
     position: relative;
@@ -35,7 +35,7 @@ const SubSquare = {
     top: 0;
   `,
   tab: css`
-    padding: 12px;
+    padding: 12px 16px;
     line-height: 16px;
     border-bottom: none;
     color: #9da9bb;
