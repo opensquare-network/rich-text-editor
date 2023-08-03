@@ -31,3 +31,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Notify update to group
+        run: node notify.mjs
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}

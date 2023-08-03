@@ -873,6 +873,7 @@ __metadata:
     quill: ^2.0.0-dev.4
     react: ^18.2.0
     react-dom: ^18.2.0
+    redaxios: ^0.5.1
     rollup: ^2.71.1
     rollup-plugin-dts: ^4.2.1
     sanitize-html: ^2.7.0
@@ -3819,6 +3820,13 @@ __metadata:
     string_decoder: ^1.1.1
     util-deprecate: ^1.0.1
   checksum: bdcbe6c22e846b6af075e32cf8f4751c2576238c5043169a1c221c92ee2878458a816a4ea33f4c67623c0b6827c8a400409bfb3cf0bf3381392d0b1dfb52ac8d
+  languageName: node
+  linkType: hard
+
+"redaxios@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "redaxios@npm:0.5.1"
+  checksum: 0ccd38610d2d0769fb72205151ee90aa2a929be66c6056b3eba0784e32e76618d5a9314bbb0d35d5d3a6197a032a411532437ade5bf0f350abbc1b631b1d0d17
   languageName: node
   linkType: hard
 
