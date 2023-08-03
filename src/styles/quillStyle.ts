@@ -605,13 +605,6 @@ export default css`
     right: 15px;
   }
 
-  .ql-snow.ql-toolbar:after,
-  .ql-toolbar:after {
-    clear: both;
-    content: "";
-    display: table;
-  }
-
   .ql-snow.ql-toolbar button,
   .ql-toolbar button {
     background: none;
