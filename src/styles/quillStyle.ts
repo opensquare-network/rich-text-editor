@@ -656,7 +656,7 @@ export default css`
   .ql-toolbar .ql-picker-item:hover,
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
   .ql-toolbar .ql-picker-item.ql-selected {
-    color: #1e2134;
+    color: var(--textPrimary, #1e2134);
   }
 
   .ql-snow.ql-toolbar button:hover .ql-fill,
@@ -687,7 +687,7 @@ export default css`
   .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
   .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-    fill: #1e2134;
+    fill: var(--textPrimary, #1e2134);
   }
 
   .ql-snow.ql-toolbar button:hover .ql-stroke,
@@ -718,7 +718,7 @@ export default css`
   .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
   .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
-    stroke: #1e2134;
+    stroke: var(--textPrimary, #1e2134);
   }
 
   @media (pointer: coarse) {
@@ -985,8 +985,8 @@ export default css`
       stroke: #506176;
 
       :hover {
-        stroke: #1e2134;
-        color: #1e2134;
+        stroke: var(--textPrimary, #1e2134);
+        color: var(--textPrimary, #1e2134);
       }
     }
   }
@@ -1006,7 +1006,7 @@ export default css`
       svg {
         :hover {
           path {
-            fill: #1e2134;
+            fill: var(--textPrimary, #1e2134);
           }
         }
       }
@@ -1040,10 +1040,6 @@ export default css`
   .ql-toolbar {
     align-items: center;
     height: 40px;
-  }
-
-  .ql-formats {
-    gap: 8px;
   }
 
   .ql-formats button {
@@ -1435,13 +1431,13 @@ export default css`
     padding: 10px 16px;
     background-color: #f0f3f8;
     font-weight: bold;
-    color: #1e2134;
+    color: var(--textPrimary, #1e2134);
     min-width: 100px;
   }
 
   td {
     padding: 10px 16px;
-    color: #1e2134;
+    color: var(--textPrimary, #1e2134);
   }
 
   hr {

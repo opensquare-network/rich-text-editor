@@ -50,7 +50,7 @@ const SubSquare = {
   `,
   tabActive: css`
     background-color: white;
-    color: #1e2134;
+    color: var(--textPrimary, #1e2134);
     border-bottom: 17px solid white;
     :first-child {
       box-shadow: 1px 0 0 0 #e0e4eb;
@@ -59,7 +59,7 @@ const SubSquare = {
       box-shadow: -1px 0 0 0 #e0e4eb, 1px 0 0 0 #e0e4eb;
     }
     :hover {
-      color: #1e2134;
+      color: var(--textPrimary, #1e2134);
     }
   `,
   tabMobile: css`

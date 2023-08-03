@@ -126,7 +126,7 @@ export const ToolbarButton = styled.button`
   height: 24px;
 
   &:hover svg path {
-    fill: #1e2134;
+    fill: var(--textPrimary, #1e2134);
   }
 `;
 

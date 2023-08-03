@@ -103,7 +103,7 @@ const SubmitButton = styled.button`
   font-size: 14px;
   line-height: 14px;
   color: #ffffff;
-  background: #1e2134;
+  background: var(--textPrimary, #1e2134);
   border-radius: 4px;
   cursor: pointer;
 `;

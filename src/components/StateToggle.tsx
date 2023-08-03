@@ -21,9 +21,9 @@ const StateToggle = styled.div`
   button.active {
     background-color: #ffffff;
     box-shadow: 0 1px 0 0 white;
-    color: #1e2134;
+    color: var(--textPrimary, #1e2134);
     :hover {
-      color: #1e2134;
+      color: var(--textPrimary, #1e2134);
     }
   }
 
