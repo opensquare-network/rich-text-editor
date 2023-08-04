@@ -55,7 +55,6 @@ export const TabsWrapper = styled.div<TabsWrapperProps>`
   height: 40px;
   /* mobile */
   @media screen and (max-width: 769px) {
-    border-bottom: 1px solid #e2e8f0;
     width: 100%;
   }
   ${(props) => props.$theme.tabs};
