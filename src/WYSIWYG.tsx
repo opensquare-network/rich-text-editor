@@ -164,7 +164,7 @@ export default function WYSIWYG(props: EditorProps) {
   }, [quill]);
 
   useEffect(() => {
-    props.onChangePreviewMode(isPreview);
+    props.onChangePreviewMode?.(isPreview);
   }, [isPreview]);
 
   const defaultModules = useMemo(
