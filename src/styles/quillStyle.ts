@@ -65,7 +65,7 @@ export default css`
 
   .ql-formats {
     ${(props) =>
-      props.isPreview &&
+      props.$isPreview &&
       css`
         display: none !important;
       `};
@@ -89,7 +89,7 @@ export default css`
       }
 
       ${(props) =>
-        props.isPreview &&
+        props.$isPreview &&
         css`
           display: none !important;
         `};
