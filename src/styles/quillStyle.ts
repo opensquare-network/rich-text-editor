@@ -79,10 +79,15 @@ export default css`
   }
 
   .ql-toolbar {
-    padding-left: 210px;
     @media screen and (max-width: 769px) {
       flex: 1;
       overflow-x: scroll;
+      padding: 8px 16px !important;
+      justify-content: flex-start !important;
+      display: flex;
+      flex-wrap: wrap !important;
+      height: auto !important;
+      gap: 4px !important;
       border-top: 1px solid var(--neutral300, #ebeef4);
       ::-webkit-scrollbar {
         display: none;
@@ -867,7 +872,6 @@ export default css`
     cursor: pointer;
     display: inline-block;
     height: 100%;
-    padding-left: 8px;
     padding-right: 22px;
     position: relative;
     width: 100%;
@@ -879,7 +883,7 @@ export default css`
   }
 
   .ql-picker-options {
-    background-color: #fff;
+    background-color: var(--neutral100, #ffffff);
     display: none;
     min-width: 100%;
     padding: 4px 8px;
