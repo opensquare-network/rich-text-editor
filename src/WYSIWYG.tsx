@@ -125,6 +125,7 @@ interface EditorProps {
   setActive: (active: boolean) => void;
   setQuillRef: any;
   previewerPlugins?: PreviewerPlugin[];
+  onChangePreviewMode?: (isPreview: boolean) => void;
 }
 
 //fixme: this a for mention insert from replay button
@@ -161,6 +162,10 @@ export default function WYSIWYG(props: EditorProps) {
       };
     }
   }, [quill]);
+
+  useEffect(() => {
+    props.onChangePreviewMode?.(isPreview);
+  }, [isPreview]);
 
   const defaultModules = useMemo(
     () => ({

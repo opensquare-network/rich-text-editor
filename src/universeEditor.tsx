@@ -43,6 +43,7 @@ type Props = {
   setQuillRef: any;
   previewerPlugins?: PreviewerPlugin[];
   toggleBarLeft?: React.ReactNode;
+  onChangePreviewMode?: (isPreview: boolean) => void;
 };
 
 const ToggleBar = styled.div`
@@ -75,6 +76,7 @@ export const UniverseEditor: React.FunctionComponent<Props> = ({
   setQuillRef,
   previewerPlugins = [],
   toggleBarLeft,
+  onChangePreviewMode = () => {},
 }) => {
   const [active, setActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -106,6 +108,7 @@ export const UniverseEditor: React.FunctionComponent<Props> = ({
           identifier={identifier}
           setActive={setActive}
           previewerPlugins={previewerPlugins}
+          onChangePreviewMode={onChangePreviewMode}
         />
       ) : (
         <>
@@ -129,6 +132,7 @@ export const UniverseEditor: React.FunctionComponent<Props> = ({
             setActive={setActive}
             setQuillRef={setQuillRef}
             previewerPlugins={previewerPlugins}
+            onChangePreviewMode={onChangePreviewMode}
           />
         </>
       )}
