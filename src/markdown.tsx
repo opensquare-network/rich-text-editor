@@ -40,6 +40,7 @@ interface Props {
    * @description \@osn/previewer component plugins
    */
   previewerPlugins?: PreviewerPlugin[];
+  onChangePreviewMode?: (isPreview: boolean) => void;
 }
 
 export default function MarkdownEditor({
@@ -52,6 +53,7 @@ export default function MarkdownEditor({
   identifier,
   setActive = () => {},
   previewerPlugins = [],
+  onChangePreviewMode = () => {},
 }: Props) {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -163,6 +165,10 @@ export default function MarkdownEditor({
       setIsPreview(false);
     }
   }, [height, value, setHeight]);
+
+  useEffect(() => {
+    onChangePreviewMode(isPreview);
+  }, [isPreview]);
 
   const {
     handleSuggestionSelected,
