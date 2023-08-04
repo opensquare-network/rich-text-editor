@@ -94,7 +94,7 @@ export const UniverseEditor: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <Wrapper $active={active}>
+    <Wrapper $active={active} className="editor-wrapper">
       {contentType === "markdown" ? (
         <MarkdownEditor
           value={value}
@@ -133,7 +133,7 @@ export const UniverseEditor: React.FunctionComponent<Props> = ({
         </>
       )}
 
-      <ToggleBar>
+      <ToggleBar className="toggle-bar-wrapper">
         {toggleBarLeft}
         <ToggleBarRight>
           <MarkdownIcon />
