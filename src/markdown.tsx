@@ -41,6 +41,7 @@ interface Props {
    */
   previewerPlugins?: PreviewerPlugin[];
   onChangePreviewMode?: (isPreview: boolean) => void;
+  setTextAreaRef?: (textarea: HTMLTextAreaElement) => void;
 }
 
 export default function MarkdownEditor({
@@ -54,6 +55,7 @@ export default function MarkdownEditor({
   setActive = () => {},
   previewerPlugins = [],
   onChangePreviewMode = () => {},
+  setTextAreaRef = () => {},
 }: Props) {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -93,6 +95,8 @@ export default function MarkdownEditor({
       textarea.onblur = () => {
         setActive(false);
       };
+
+      setTextAreaRef(textarea);
     }
   }, [ref]);
 

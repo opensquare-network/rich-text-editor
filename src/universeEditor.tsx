@@ -44,6 +44,7 @@ type Props = {
   previewerPlugins?: PreviewerPlugin[];
   toggleBarLeft?: React.ReactNode;
   onChangePreviewMode?: (isPreview: boolean) => void;
+  setTextAreaRef?: (textarea: HTMLTextAreaElement) => void;
 };
 
 const ToggleBar = styled.div`
@@ -79,6 +80,7 @@ export const UniverseEditor = React.forwardRef<HTMLDivElement, Props>(
       previewerPlugins = [],
       toggleBarLeft,
       onChangePreviewMode = () => {},
+      setTextAreaRef = () => {},
     },
     ref,
   ) => {
@@ -113,6 +115,7 @@ export const UniverseEditor = React.forwardRef<HTMLDivElement, Props>(
             setActive={setActive}
             previewerPlugins={previewerPlugins}
             onChangePreviewMode={onChangePreviewMode}
+            setTextAreaRef={setTextAreaRef}
           />
         ) : (
           <>
