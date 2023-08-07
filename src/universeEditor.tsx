@@ -64,92 +64,97 @@ const ToggleBarRight = styled.div`
   margin-left: auto;
 `;
 
-export const UniverseEditor: React.FunctionComponent<Props> = ({
-  value,
-  onChange,
-  contentType = "markdown",
-  setContentType,
-  loadSuggestions,
-  disabled = false,
-  minHeight = 200,
-  identifier,
-  setQuillRef,
-  previewerPlugins = [],
-  toggleBarLeft,
-  onChangePreviewMode = () => {},
-}) => {
-  const [active, setActive] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [modalType, setModalType] = useState("image");
-  const [insetQuillContentsFunc, setInsetQuillContentsFunc] = useState(null);
+export const UniverseEditor = React.forwardRef<HTMLDivElement, Props>(
+  (
+    {
+      value,
+      onChange,
+      contentType = "markdown",
+      setContentType,
+      loadSuggestions,
+      disabled = false,
+      minHeight = 200,
+      identifier,
+      setQuillRef,
+      previewerPlugins = [],
+      toggleBarLeft,
+      onChangePreviewMode = () => {},
+    },
+    ref,
+  ) => {
+    const [active, setActive] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [modalType, setModalType] = useState("image");
+    const [insetQuillContentsFunc, setInsetQuillContentsFunc] = useState(null);
 
-  const onMarkdownSwitch = () => {
-    if (
-      value &&
-      !confirm("Togging editor will empty all typed contents, are you sure ?")
-    ) {
-      return;
-    }
-    const newContentType = contentType === "html" ? "markdown" : "html";
-    onChange("");
-    setContentType(newContentType);
-  };
+    const onMarkdownSwitch = () => {
+      if (
+        value &&
+        !confirm("Togging editor will empty all typed contents, are you sure ?")
+      ) {
+        return;
+      }
+      const newContentType = contentType === "html" ? "markdown" : "html";
+      onChange("");
+      setContentType(newContentType);
+    };
 
-  return (
-    <Wrapper $active={active} className="editor-wrapper">
-      {contentType === "markdown" ? (
-        <MarkdownEditor
-          value={value}
-          onChange={onChange}
-          loadSuggestions={loadSuggestions}
-          minHeight={minHeight}
-          theme={"subsquare"}
-          disabled={disabled}
-          identifier={identifier}
-          setActive={setActive}
-          previewerPlugins={previewerPlugins}
-          onChangePreviewMode={onChangePreviewMode}
-        />
-      ) : (
-        <>
-          <InsertContentsModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            insetQuillContentsFunc={insetQuillContentsFunc}
-            type={modalType}
-          />
-          <WYSIWYG
+    return (
+      <Wrapper ref={ref} $active={active} className="editor-wrapper">
+        {contentType === "markdown" ? (
+          <MarkdownEditor
             value={value}
             onChange={onChange}
-            setModalInsetFunc={(insetFunc, type) => {
-              setModalType(type);
-              setShowModal(true);
-              setInsetQuillContentsFunc(insetFunc);
-            }}
             loadSuggestions={loadSuggestions}
             minHeight={minHeight}
+            theme={"subsquare"}
+            disabled={disabled}
             identifier={identifier}
             setActive={setActive}
-            setQuillRef={setQuillRef}
             previewerPlugins={previewerPlugins}
             onChangePreviewMode={onChangePreviewMode}
           />
-        </>
-      )}
+        ) : (
+          <>
+            <InsertContentsModal
+              showModal={showModal}
+              setShowModal={setShowModal}
+              insetQuillContentsFunc={insetQuillContentsFunc}
+              type={modalType}
+            />
+            <WYSIWYG
+              value={value}
+              onChange={onChange}
+              setModalInsetFunc={(insetFunc, type) => {
+                setModalType(type);
+                setShowModal(true);
+                setInsetQuillContentsFunc(insetFunc);
+              }}
+              loadSuggestions={loadSuggestions}
+              minHeight={minHeight}
+              identifier={identifier}
+              setActive={setActive}
+              setQuillRef={setQuillRef}
+              previewerPlugins={previewerPlugins}
+              onChangePreviewMode={onChangePreviewMode}
+            />
+          </>
+        )}
 
-      <ToggleBar className="toggle-bar-wrapper">
-        {toggleBarLeft}
-        <ToggleBarRight>
-          <MarkdownIcon />
-          <Toggle
-            size="small"
-            isOn={contentType === "markdown"}
-            onToggle={onMarkdownSwitch}
-          />
-        </ToggleBarRight>
-      </ToggleBar>
-    </Wrapper>
-  );
-};
+        <ToggleBar className="toggle-bar-wrapper">
+          {toggleBarLeft}
+          <ToggleBarRight>
+            <MarkdownIcon />
+            <Toggle
+              size="small"
+              isOn={contentType === "markdown"}
+              onToggle={onMarkdownSwitch}
+            />
+          </ToggleBarRight>
+        </ToggleBar>
+      </Wrapper>
+    );
+  },
+);
 
 export default UniverseEditor;
