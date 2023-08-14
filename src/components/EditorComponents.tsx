@@ -167,8 +167,4 @@ export const Textarea = styled.textarea<Props>`
   :focus {
     border-color: #b7c0cc;
   }
-
-  ::selection {
-    background-color: #e2e8f0;
-  }
 `;
