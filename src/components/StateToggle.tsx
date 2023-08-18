@@ -10,7 +10,7 @@ const StateToggle = styled.div`
     padding: 12px 16px;
     /* padding-bottom: 13px; */
     font-size: 14px;
-    line-height: 14px;
+    line-height: 1rem;
     font-weight: 500;
     cursor: pointer;
     color: var(--textSecondary, #506176);
