@@ -47,7 +47,7 @@ const Title = styled(Flex)`
 `;
 
 const FormWrapper = styled.div`
-  padding: 0 24px 12px 24px;
+  padding: 0 24px;
 
   label {
     display: flex;
@@ -117,7 +117,7 @@ const SubmitButton = styled.button`
 `;
 
 const Hint = styled.p`
-  margin-top: 0;
+  margin-top: 0 !important;
   padding: 0 24px;
   font-family: Inter, sans-serif;
   font-weight: 500;
