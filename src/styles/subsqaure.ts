@@ -36,7 +36,8 @@ const SubSquare = {
   `,
   tab: css`
     padding: 12px 16px;
-    line-height: 14px;
+    line-height: 1rem;
+    margin-right: 1px;
     /* border-bottom: none; */
     color: var(--textSecondary, #506176);
 
@@ -57,6 +58,7 @@ const SubSquare = {
         1px 0 0 0 var(--neutral300, #ebeef4);
     }
     :last-child {
+      margin-right: 0;
       box-shadow: 0 1px 0 0 var(--neutral100, #ffffff),
         1px 0 0 0 var(--neutral300, #ebeef4),
         -1px 0 0 0 var(--neutral300, #ebeef4);
