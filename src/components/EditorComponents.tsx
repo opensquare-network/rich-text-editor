@@ -25,6 +25,7 @@ type ToolbarProps = {
   $theme: ThemeCss;
 };
 export const ToolBar = styled.div<ToolbarProps>`
+  border-radius: var(--editor-radius) var(--editor-radius) 0 0;
   flex-basis: 100%;
   padding-left: 16px;
   padding-right: 16px;
@@ -44,20 +45,6 @@ export const ToolBar = styled.div<ToolbarProps>`
       `};
   }
   ${(props) => props.$theme.toolbar};
-`;
-
-type TabsWrapperProps = {
-  $theme: ThemeCss;
-};
-export const TabsWrapper = styled.div<TabsWrapperProps>`
-  display: flex;
-  gap: 24px;
-  height: 40px;
-  /* mobile */
-  @media screen and (max-width: 769px) {
-    width: 100%;
-  }
-  ${(props) => props.$theme.tabs};
 `;
 
 interface TabProps {
@@ -87,6 +74,24 @@ export const Tab = styled.button<TabProps>`
     width: 50%;
     text-align: center;
     ${(props) => props.$theme.tabMobile};
+  }
+`;
+
+type TabsWrapperProps = {
+  $theme: ThemeCss;
+};
+export const TabsWrapper = styled.div<TabsWrapperProps>`
+  display: flex;
+  gap: 24px;
+  height: 40px;
+  /* mobile */
+  @media screen and (max-width: 769px) {
+    width: 100%;
+  }
+  ${(props) => props.$theme.tabs};
+
+  ${Tab}:first-child {
+    border-radius: var(--editor-radius) 0 0 0;
   }
 `;
 

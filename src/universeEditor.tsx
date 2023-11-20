@@ -18,7 +18,6 @@ const Wrapper = styled.div<WrapperProps>`
   max-width: 800px;
   border: 1px solid var(--neutral400, #e0e4eb);
   border-radius: var(--editor-radius);
-  overflow: hidden;
 
   &:hover {
     border-color: var(--neutral500, #c2c8d5);
@@ -56,6 +55,7 @@ const ToggleBar = styled.div`
   border-top: 1px solid var(--neutral300, #ebeef4);
   background-color: var(--neutral100, #ffffff);
   height: 40px;
+  border-radius: 0 0 var(--editor-radius) var(--editor-radius);
 `;
 
 const ToggleBarRight = styled.div`
