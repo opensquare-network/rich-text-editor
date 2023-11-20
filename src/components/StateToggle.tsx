@@ -14,6 +14,10 @@ const StateToggle = styled.div`
     font-weight: 500;
     cursor: pointer;
     color: var(--textSecondary, #506176);
+
+    &:first-child {
+      border-radius: var(--editor-radius) 0 0 0;
+    }
   }
 
   button.active {

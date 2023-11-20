@@ -1163,6 +1163,7 @@ export default css`
   }
 
   .ql-toolbar {
+    border-radius: var(--editor-radius) var(--editor-radius) 0 0;
     box-sizing: border-box;
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     justify-content: end;
