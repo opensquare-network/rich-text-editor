@@ -138,7 +138,7 @@ export const ToolbarButton = styled.button`
 
 export const Textarea = styled.textarea<Props>`
   color: var(--textPrimary, #1e2134);
-  background-color: var(--fillBgInputDefault);
+  background-color: var(--fillBgInputDefault, #fbfcfe);
   box-sizing: border-box;
   width: 100%;
   min-height: 144px;
@@ -163,7 +163,6 @@ export const Textarea = styled.textarea<Props>`
   font-size: 14px;
   line-height: 24px;
   padding: 10px 16px;
-  background: #fbfcfe;
   font-family: Inter, sans-serif;
   border: none;
   border-bottom: 1px solid var(--strokeActionDefault, #e2e8f0);
