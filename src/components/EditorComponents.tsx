@@ -10,7 +10,7 @@ export const EditorWrapper = styled.div<WrapperProps>`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--strokeActionDefault, #e2e8f0);
   ${(props) => props.$theme.wrapper};
   ${(p) =>
     p.disabled &&
@@ -63,7 +63,7 @@ export const Tab = styled.button<TabProps>`
   ${(props) =>
     props.$active &&
     css`
-      border-bottom: 3px solid #04d2c5;
+      border-bottom: 3px solid var(--strokeBgBrandSecondary, #04d2c5);
     `};
   ${(props) => props.$active && props.$theme.tabActive};
   cursor: pointer;
@@ -138,6 +138,7 @@ export const ToolbarButton = styled.button`
 
 export const Textarea = styled.textarea<Props>`
   color: var(--textPrimary, #1e2134);
+  background-color: var(--fillBgInputDefault);
   box-sizing: border-box;
   width: 100%;
   min-height: 144px;
@@ -165,7 +166,7 @@ export const Textarea = styled.textarea<Props>`
   background: #fbfcfe;
   font-family: Inter, sans-serif;
   border: none;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--strokeActionDefault, #e2e8f0);
   ${(props) => props.$theme?.textarea};
 
   :hover,
