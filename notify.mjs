@@ -17,8 +17,10 @@ function main() {
 
   // quick filter semantic release commit trigger condition
   if (
-    msg.startsWith("feat: ") ||
-    msg.startsWith("fix: ") ||
+    msg.startsWith("feat:") ||
+    msg.startsWith("feat(") ||
+    msg.startsWith("fix:") ||
+    msg.startsWith("fix(") ||
     msg.includes("BREAKING CHANGE: ")
   ) {
     const data = {
