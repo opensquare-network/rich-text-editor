@@ -15,7 +15,6 @@ interface WrapperProps {
 
 const Wrapper = styled.div<WrapperProps>`
   --editor-radius: 8px;
-  max-width: 800px;
   border: 1px solid var(--neutral400, #e0e4eb);
   border-radius: var(--editor-radius);
 
