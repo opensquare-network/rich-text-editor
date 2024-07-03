@@ -2,12 +2,13 @@ import * as React from "react";
 import MarkdownEditor from "./markdown";
 import { Suggestion } from "./types/suggestion";
 import { ReactElement, useState } from "react";
-import WYSIWYG from "../src/WYSIWYG";
 import styled, { css } from "styled-components";
 import Toggle from "../src/components/Toggle";
 import MarkdownIcon from "../src/components/MarkdownIcon";
 import InsertContentsModal from "./components/modal";
 import { Plugin as PreviewerPlugin } from "@osn/previewer/dist/types";
+
+const WYSIWYG = React.lazy(() => import("../src/WYSIWYG"));
 
 interface WrapperProps {
   $active: boolean;
@@ -43,6 +44,7 @@ type Props = {
   toggleBarLeft?: React.ReactNode;
   onChangePreviewMode?: (isPreview: boolean) => void;
   setTextAreaRef?: (textarea: HTMLTextAreaElement) => void;
+  loadingSkeleton?: React.SuspenseProps["fallback"];
 };
 
 const ToggleBar = styled.div`
@@ -80,6 +82,7 @@ export const UniverseEditor = React.forwardRef<HTMLDivElement, Props>(
       toggleBarLeft,
       onChangePreviewMode = () => {},
       setTextAreaRef = () => {},
+      loadingSkeleton,
     },
     ref,
   ) => {
@@ -117,7 +120,7 @@ export const UniverseEditor = React.forwardRef<HTMLDivElement, Props>(
             setTextAreaRef={setTextAreaRef}
           />
         ) : (
-          <>
+          <React.Suspense fallback={loadingSkeleton}>
             <InsertContentsModal
               showModal={showModal}
               setShowModal={setShowModal}
@@ -140,7 +143,7 @@ export const UniverseEditor = React.forwardRef<HTMLDivElement, Props>(
               previewerPlugins={previewerPlugins}
               onChangePreviewMode={onChangePreviewMode}
             />
-          </>
+          </React.Suspense>
         )}
 
         <ToggleBar className="toggle-bar-wrapper">
