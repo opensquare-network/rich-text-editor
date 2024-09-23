@@ -61,7 +61,7 @@
     "react-dom": "^18.2.0",
     "redaxios": "^0.5.1",
     "showdown": "^1.8.6",
-    "styled-components": "^6.1.8",
+    "styled-components": "^5.3.9",
     "ts-node": "^8.5.4",
     "tslib": "^2.4.0",
     "tsup": "^8.0.1",
