@@ -9,8 +9,8 @@ import {
 export const italicCommand: Command = {
   shouldUndo: (options) => {
     return (
-      getCharactersBeforeSelection(options.initialState, 1) === "*" &&
-      getCharactersAfterSelection(options.initialState, 1) === "*"
+      getCharactersBeforeSelection(options.initialState, 1) === "_" &&
+      getCharactersAfterSelection(options.initialState, 1) === "_"
     );
   },
   execute: ({ initialState, textApi }) => {
@@ -21,8 +21,8 @@ export const italicCommand: Command = {
     });
     const state1 = textApi.setSelectionRange(newSelectionRange);
     // Replaces the current selection with the italic mark up
-    const state2 = textApi.replaceSelection(`*${getSelectedText(state1)}*`);
-    // Adjust the selection to not contain the *
+    const state2 = textApi.replaceSelection(`_${getSelectedText(state1)}_`);
+    // Adjust the selection to not contain the _
     textApi.setSelectionRange({
       start: state2.selection.end - 1 - getSelectedText(state1).length,
       end: state2.selection.end - 1,

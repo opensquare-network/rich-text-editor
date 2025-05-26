@@ -4,6 +4,7 @@ import Subsqaure from "./styles/subsqaure";
 import { useEffect, useRef, useState } from "react";
 import { useTextAreaMarkdownEditor } from "./hooks/useMarkdownEditor";
 import { boldCommand } from "./commands/markdown-commands/boldCommand";
+import { italicCommand } from "./commands/markdown-commands/italicCommand";
 import { strikethroughCommand } from "./commands/markdown-commands/strikethroughCommand";
 import { codeCommand } from "./commands/markdown-commands/codeCommand";
 import { imageCommand } from "./commands/markdown-commands/imageCommand";
@@ -52,10 +53,10 @@ export default function MarkdownEditor({
   theme = "opensquare",
   disabled = false,
   identifier,
-  setActive = () => {},
+  setActive = () => { },
   previewerPlugins = [],
-  onChangePreviewMode = () => {},
-  setTextAreaRef = () => {},
+  onChangePreviewMode = () => { },
+  setTextAreaRef = () => { },
 }: Props) {
   const themeCSS = theme === "opensquare" ? Opensquare : Subsqaure;
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -63,6 +64,7 @@ export default function MarkdownEditor({
   const { commandController } = useTextAreaMarkdownEditor(ref, {
     commandMap: {
       bold: boldCommand,
+      italic: italicCommand,
       delete: strikethroughCommand,
       code: codeCommand,
       image: imageCommand,
