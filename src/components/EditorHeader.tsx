@@ -14,6 +14,7 @@ import Ol from "../icons/ol";
 import Link from "../icons/link";
 import Img from "../icons/img";
 import Code from "../icons/code";
+import Italic from "../icons/italic";
 import { ThemeCss } from "../types";
 
 type Props = {
@@ -59,6 +60,13 @@ export default function EditorHeader({
         </ToolbarButton>
         <ToolbarButton
           onClick={async () => {
+            await commandController.executeCommand("italic");
+          }}
+        >
+          <Italic />
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={async () => {
             await commandController.executeCommand("underline");
           }}
         >
@@ -71,6 +79,7 @@ export default function EditorHeader({
         >
           <Delete />
         </ToolbarButton>
+
         <ToolbarButton
           onClick={async () => {
             await commandController.executeCommand("ul");
