@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Suggestion } from "../types/suggestion";
 
 const SuggestionsWrapper = styled.ul`
+  z-index:1;
   position: absolute;
   min-width: 180px;
   padding: 8px 0;
@@ -63,46 +64,47 @@ export const SuggestionsDropdown: React.FunctionComponent<
   textAreaRef,
   max = 5,
 }) => {
-  const handleSuggestionClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    // @ts-ignore
-    const index = parseInt(event.currentTarget.attributes["data-index"].value);
-    onSuggestionSelected(index);
+    const suggestionsRef = React.useRef<HTMLUListElement>(null);
+    const handleSuggestionClick = (event: React.MouseEvent) => {
+      event.preventDefault();
+      // @ts-ignore
+      const index = parseInt(event.currentTarget.attributes["data-index"].value);
+      onSuggestionSelected(index);
+    };
+
+    const handleMouseDown = (event: React.MouseEvent) => event.preventDefault();
+
+    const vw = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0,
+    );
+
+    const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
+    const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 45;
+
+    const style: React.CSSProperties = {};
+    style.top = top;
+
+    if (
+      suggestionsAutoplace &&
+      left + (suggestionsRef.current?.offsetWidth ?? 0) > vw / 2
+    )
+      style.right = (textAreaRef?.current?.offsetWidth ?? 0) - left;
+    else style.left = left;
+
+    return (
+      <SuggestionsWrapper ref={suggestionsRef} className="mention-list" style={style}>
+        {suggestions.slice(0, max).map((s, i) => (
+          <li
+            onClick={handleSuggestionClick}
+            onMouseDown={handleMouseDown}
+            key={i}
+            aria-selected={focusIndex === i ? "true" : "false"}
+            data-index={`${i}`}
+          >
+            {s.preview}
+          </li>
+        ))}
+      </SuggestionsWrapper>
+    );
   };
-
-  const handleMouseDown = (event: React.MouseEvent) => event.preventDefault();
-
-  const vw = Math.max(
-    document.documentElement.clientWidth || 0,
-    window.innerWidth || 0,
-  );
-
-  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
-  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 45;
-
-  const style: React.CSSProperties = {};
-  style.top = top;
-
-  if (
-    suggestionsAutoplace &&
-    left + (textAreaRef?.current?.getBoundingClientRect()?.left ?? 0) > vw / 2
-  )
-    style.right = (textAreaRef?.current?.offsetWidth ?? 0) - left;
-  else style.left = left;
-
-  return (
-    <SuggestionsWrapper className="mention-list" style={style}>
-      {suggestions.slice(0, max).map((s, i) => (
-        <li
-          onClick={handleSuggestionClick}
-          onMouseDown={handleMouseDown}
-          key={i}
-          aria-selected={focusIndex === i ? "true" : "false"}
-          data-index={`${i}`}
-        >
-          {s.preview}
-        </li>
-      ))}
-    </SuggestionsWrapper>
-  );
-};
