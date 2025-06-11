@@ -98,7 +98,13 @@ export const SuggestionsDropdown: React.FunctionComponent<
         left,
       };
     }
-  }, [caret, suggestionsRef.current, textAreaRef]);
+  }, [
+    caret.left,
+    caret.top,
+    suggestionsAutoplace,
+    suggestionsRef,
+    textAreaRef,
+  ]);
 
   return (
     <SuggestionsWrapper
