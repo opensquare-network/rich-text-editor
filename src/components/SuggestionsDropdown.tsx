@@ -74,23 +74,33 @@ export const SuggestionsDropdown: React.FunctionComponent<
 
   const handleMouseDown = (event: React.MouseEvent) => event.preventDefault();
 
-  const vw = Math.max(
-    document.documentElement.clientWidth || 0,
-    window.innerWidth || 0,
-  );
+  const vw = textAreaRef?.current?.offsetWidth || 0;
 
-  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
-  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 45;
+  const style = React.useMemo<React.CSSProperties>(() => {
+    const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
+    const right = (textAreaRef?.current?.offsetWidth ?? 0) - left;
+    const editorToolbar = suggestionsRef.current?.parentNode?.querySelector(
+      ".editor-toolbar",
+    ) as HTMLElement;
 
-  const style: React.CSSProperties = {};
-  style.top = top;
+    const top =
+      caret.top -
+      (textAreaRef?.current?.scrollTop ?? 0) +
+      (editorToolbar?.offsetHeight || 0);
 
-  if (
-    suggestionsAutoplace &&
-    left + (suggestionsRef.current?.offsetWidth ?? 0) > vw / 2
-  )
-    style.right = (textAreaRef?.current?.offsetWidth ?? 0) - left;
-  else style.left = left;
+    if (suggestionsAutoplace && left > vw / 2) {
+      return {
+        top,
+        right,
+      };
+    } else {
+      return {
+        top,
+        left,
+      };
+    }
+  }, [caret, suggestionsRef.current, textAreaRef]);
+  console.log(style);
 
   return (
     <SuggestionsWrapper
