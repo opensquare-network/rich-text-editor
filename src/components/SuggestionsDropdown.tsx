@@ -74,9 +74,8 @@ export const SuggestionsDropdown: React.FunctionComponent<
 
   const handleMouseDown = (event: React.MouseEvent) => event.preventDefault();
 
-  const vw = textAreaRef?.current?.offsetWidth || 0;
-
   const style = React.useMemo<React.CSSProperties>(() => {
+    const vw = textAreaRef?.current?.offsetWidth || 0;
     const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
     const right = (textAreaRef?.current?.offsetWidth ?? 0) - left;
     const editorToolbar = suggestionsRef.current?.parentNode?.querySelector(
