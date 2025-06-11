@@ -99,7 +99,6 @@ export const SuggestionsDropdown: React.FunctionComponent<
       };
     }
   }, [caret, suggestionsRef.current, textAreaRef]);
-  console.log(style);
 
   return (
     <SuggestionsWrapper
