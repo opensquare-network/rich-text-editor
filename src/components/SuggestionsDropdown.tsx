@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Suggestion } from "../types/suggestion";
 
 const SuggestionsWrapper = styled.ul`
+  z-index: 1;
   position: absolute;
   min-width: 180px;
   padding: 8px 0;
@@ -63,6 +64,7 @@ export const SuggestionsDropdown: React.FunctionComponent<
   textAreaRef,
   max = 5,
 }) => {
+  const suggestionsRef = React.useRef<HTMLUListElement>(null);
   const handleSuggestionClick = (event: React.MouseEvent) => {
     event.preventDefault();
     // @ts-ignore
@@ -72,26 +74,44 @@ export const SuggestionsDropdown: React.FunctionComponent<
 
   const handleMouseDown = (event: React.MouseEvent) => event.preventDefault();
 
-  const vw = Math.max(
-    document.documentElement.clientWidth || 0,
-    window.innerWidth || 0,
-  );
+  const style = React.useMemo<React.CSSProperties>(() => {
+    const vw = textAreaRef?.current?.offsetWidth || 0;
+    const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
+    const right = (textAreaRef?.current?.offsetWidth ?? 0) - left;
+    const editorToolbar = suggestionsRef.current?.parentNode?.querySelector(
+      ".editor-toolbar",
+    ) as HTMLElement;
 
-  const left = caret.left - (textAreaRef?.current?.scrollLeft ?? 0) + 20;
-  const top = caret.top - (textAreaRef?.current?.scrollTop ?? 0) + 45;
+    const top =
+      caret.top -
+      (textAreaRef?.current?.scrollTop ?? 0) +
+      (editorToolbar?.offsetHeight || 0);
 
-  const style: React.CSSProperties = {};
-  style.top = top;
-
-  if (
-    suggestionsAutoplace &&
-    left + (textAreaRef?.current?.getBoundingClientRect()?.left ?? 0) > vw / 2
-  )
-    style.right = (textAreaRef?.current?.offsetWidth ?? 0) - left;
-  else style.left = left;
+    if (suggestionsAutoplace && left > vw / 2) {
+      return {
+        top,
+        right,
+      };
+    } else {
+      return {
+        top,
+        left,
+      };
+    }
+  }, [
+    caret.left,
+    caret.top,
+    suggestionsAutoplace,
+    suggestionsRef,
+    textAreaRef,
+  ]);
 
   return (
-    <SuggestionsWrapper className="mention-list" style={style}>
+    <SuggestionsWrapper
+      ref={suggestionsRef}
+      className="mention-list"
+      style={style}
+    >
       {suggestions.slice(0, max).map((s, i) => (
         <li
           onClick={handleSuggestionClick}
